@@ -14,4 +14,7 @@
     <color name="dark_grey">#8A868F</color>
     <color name="display_color">#28003A</color>
     <color name="sky_blue">#89C8FF</color>
+    <color name="red">#E56953</color>
+    <color name="green">#3AD75D</color>
+    <color name="grey1">#BFBFCB</color>
 </resources>

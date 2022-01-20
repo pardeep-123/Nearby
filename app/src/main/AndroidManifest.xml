@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby">
         <activity
+            android:name=".ui.HomeActivity"
+            android:exported="true" />
+        <activity
             android:name=".ui.authentication.ResetPasswordActivity"
             android:exported="true" />
         <activity
