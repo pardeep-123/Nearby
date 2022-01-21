@@ -43,5 +43,11 @@
     <string name="_300m_away">300m away</string>
     <string name="starbucks">Starbucks</string>
     <string name="let_s_meet_and_talk">Let’s meet and talk.</string>
+    <string name="map">Map</string>
+    <string name="say_hello_to_these_people">Say hello to these people!</string>
+    <string name="notifications">Notifications</string>
+    <string name="brooklyn_simmons">Brooklyn Simmons</string>
+    <string name="you_are_friends">You are friends! 🎉</string>
+    <string name="today">Today</string>
 
 </resources>

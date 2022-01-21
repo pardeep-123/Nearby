@@ -6,8 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.DiscoverItemBinding
 import com.creation.nearby.model.DiscoverModel
 
-class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
-
+class FeedAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -18,6 +17,8 @@ class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerVie
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+
+
         val item = mList[position]
 
         with(holder){
@@ -27,12 +28,13 @@ class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerVie
             binding.topicName.text = item.topicName
 
         }
+
     }
 
     override fun getItemCount(): Int {
         return mList.size
     }
 
-    class ViewHolder(val binding: DiscoverItemBinding): RecyclerView.ViewHolder(binding.root)
+    class ViewHolder(val binding : DiscoverItemBinding): RecyclerView.ViewHolder(binding.root)
 
 }

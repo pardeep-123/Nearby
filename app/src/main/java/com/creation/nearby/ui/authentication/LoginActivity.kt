@@ -8,21 +8,22 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import com.creation.nearby.R
-import com.creation.nearby.ui.HomeActivity
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.sign_up
+import com.creation.nearby.databinding.ActivityLoginBinding
+import com.creation.nearby.ui.MainActivity
+
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
+    lateinit var binding: ActivityLoginBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        forgot_password.setOnClickListener(this)
-        goBack.setOnClickListener(this)
-        sign_up.setOnClickListener(this)
-        show_hide.setOnClickListener(this)
-        sign_in_login.setOnClickListener(this)
+        binding.forgotPassword.setOnClickListener(this)
+        binding.goBack.setOnClickListener(this)
+        binding.signUp.setOnClickListener(this)
+        binding.showHide.setOnClickListener(this)
+        binding.signInLogin.setOnClickListener(this)
 
 
     }
@@ -31,35 +32,35 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
 
         when(v){
 
-            forgot_password->{
+            binding.forgotPassword->{
              startActivity(Intent(this,ForgotPasswordActivity::class.java))
 
             }
-            goBack->{
+            binding.goBack->{
                finish()
             }
 
-            sign_up->{
+            binding.signUp->{
                 startActivity(Intent(this,SignUpActivity::class.java))
 
             }
 
-            show_hide->{
+            binding.showHide->{
 
-                if(show_hide.text.toString() == "Display"){
-                    password_login.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                    show_hide.text = "Hide"
-                    password_login.setSelection(password_login.length())
+                if(binding.showHide.text.toString() == "Display"){
+                    binding.passwordLogin.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    binding.showHide.text = "Hide"
+                    binding.passwordLogin.setSelection(binding.passwordLogin.length())
                 } else{
-                    password_login.transformationMethod = PasswordTransformationMethod.getInstance()
-                    show_hide.text = "Display"
-                    password_login.setSelection(password_login.length())
+                    binding.passwordLogin.transformationMethod = PasswordTransformationMethod.getInstance()
+                    binding.showHide.text = "Display"
+                    binding.passwordLogin.setSelection(binding.passwordLogin.length())
 
                 }
 
             }
-            sign_in_login->{
-                startActivity(Intent(this,HomeActivity::class.java))
+            binding.signInLogin->{
+                startActivity(Intent(this,MainActivity::class.java))
 
             }
 
@@ -76,12 +77,12 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (email_login.text.toString().isNotEmpty()){
+        if (binding.emailLogin.text.toString().isNotEmpty()){
 
-            sign_in_login.isEnabled = password_login.text.toString().isNotEmpty() && password_login.text.toString().length >= 7
+            binding.signInLogin.isEnabled = binding.passwordLogin.text.toString().isNotEmpty() && binding.passwordLogin.text.toString().length >= 7
 
         }else{
-            sign_in_login.isEnabled = false
+            binding.signInLogin.isEnabled = false
         }
     }
 

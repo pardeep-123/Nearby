@@ -6,19 +6,19 @@ import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
-import com.creation.nearby.R
-import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.show_hide
-import kotlinx.android.synthetic.main.activity_sign_up.*
+import com.creation.nearby.databinding.ActivitySignUpBinding
+
 
 class SignUpActivity : AppCompatActivity(),View.OnClickListener {
+    lateinit var binding: ActivitySignUpBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        goBack.setOnClickListener(this)
-        show_hide_signup.setOnClickListener(this)
-        show_hide_signup_confirm.setOnClickListener(this)
+        binding.goBack1.setOnClickListener(this)
+        binding.showHideSignup.setOnClickListener(this)
+        binding.showHideSignupConfirm.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -26,39 +26,39 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener {
 
         when(v){
 
-            goBack->{
+            binding.goBack1->{
                 finish()
             }
 
-            show_hide_signup->{
+            binding.showHideSignup->{
 
-                if(show_hide_signup.text.toString() == "Display"){
-                    password_signup.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                    show_hide_signup.text = "Hide"
-                    password_signup.setSelection(password_signup.length())
+                if( binding.showHideSignup.text.toString() == "Display"){
+                    binding.passwordSignup.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    binding.showHideSignup.text = "Hide"
+                    binding.passwordSignup.setSelection(binding.passwordSignup.length())
                 } else{
-                    password_signup.transformationMethod = PasswordTransformationMethod.getInstance()
-                    show_hide_signup.text = "Display"
-                    password_signup.setSelection(password_signup.length())
+                    binding.passwordSignup.transformationMethod = PasswordTransformationMethod.getInstance()
+                    binding.showHideSignup.text = "Display"
+                    binding.passwordSignup.setSelection(binding.passwordSignup.length())
 
                 }
             }
 
-            show_hide_signup_confirm->{
+            binding.showHideSignupConfirm->{
 
-                if(show_hide_signup_confirm.text.toString() == "Display"){
-                    confirm_password.transformationMethod = HideReturnsTransformationMethod.getInstance()
-                    show_hide_signup_confirm.text = "Hide"
-                    confirm_password.setSelection(confirm_password.length())
+                if( binding.showHideSignupConfirm.text.toString() == "Display"){
+                    binding.confirmPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                    binding.showHideSignupConfirm.text = "Hide"
+                    binding.confirmPassword.setSelection(binding.confirmPassword.length())
                 } else{
-                    confirm_password.transformationMethod = PasswordTransformationMethod.getInstance()
-                    show_hide_signup_confirm.text = "Display"
-                    confirm_password.setSelection(confirm_password.length())
+                    binding.confirmPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                    binding.showHideSignupConfirm.text = "Display"
+                    binding.confirmPassword.setSelection(binding.confirmPassword.length())
 
                 }
             }
 
-            already_have_an_account->{
+            binding.alreadyHaveAnAccount->{
 
                 startActivity(Intent(this,LoginActivity::class.java))
 
