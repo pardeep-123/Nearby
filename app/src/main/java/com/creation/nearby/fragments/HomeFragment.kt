@@ -21,7 +21,10 @@ class HomeFragment : Fragment() {
 
     private lateinit var discoverAdapter: DiscoverAdapter
     private lateinit var feedAdapter: FeedAdapter
-    private lateinit var notificationAdapter: NotificationAdapter
+
+    companion object{
+        lateinit var notificationAdapter: NotificationAdapter
+    }
 
     @SuppressLint("NotifyDataSetChanged")
 
@@ -76,9 +79,22 @@ class HomeFragment : Fragment() {
 
         binding.notificationRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL,false)
 
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Brooklyn Simmons","You are friends! \uD83C\uDF89","Today"))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today"))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today"))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Brooklyn Simmons","You are friends! \uD83C\uDF89","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
 
         notificationAdapter = NotificationAdapter(notificationList)
         binding.notificationRecyclerView.adapter = notificationAdapter

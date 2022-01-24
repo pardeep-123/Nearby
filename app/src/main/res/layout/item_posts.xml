@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="16dp"
+        android:background="@color/blue"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/post_main_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/sky_blue">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/post_image_view"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/user_pic_1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/post_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="Jenna"
+                android:textColor="@color/white"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="@+id/post_image_view"
+                app:layout_constraintStart_toEndOf="@+id/post_image_view"
+                app:layout_constraintTop_toTopOf="@+id/post_image_view" />
+
+            <TextView
+                android:id="@+id/post_time_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="3 mins ago"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/post_image_view"
+                app:layout_constraintTop_toBottomOf="@+id/post_image_view" />
+
+            <TextView
+                android:id="@+id/post_message_tv"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/worksans_regular"
+                android:text="Hey! I don’t know what to do in this city. Anyone able to help me get around?"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/post_time_tv"
+                app:layout_constraintTop_toBottomOf="@+id/post_time_tv" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/post_message_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginBottom="8dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/worksans_medium"
+                android:minHeight="0dp"
+                android:paddingStart="32dp"
+                android:paddingEnd="32dp"
+                android:text="Message"
+                android:textAllCaps="false"
+                android:textColor="@color/message_color"
+                android:textSize="14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_message_tv" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/post_report_iv"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:elevation="10dp"
+        android:src="@drawable/feed_icon"
+        android:tint="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/materialCardView"
+        app:layout_constraintEnd_toEndOf="@+id/materialCardView"
+        app:layout_constraintTop_toTopOf="@+id/materialCardView">
+
+    </ImageView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

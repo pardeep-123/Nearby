@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="24dp"
+    android:layout_marginStart="24dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp">
+
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/eventsPic"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riv_corner_radius="12dp">
+
+    </com.makeramen.roundedimageview.RoundedImageView>
+
+    <TextView
+        android:id="@+id/eventsName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/let_s_co_work"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/worksans_semibold"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/eventsDistance"
+        app:layout_constraintStart_toStartOf="@+id/eventsDistance" />
+
+    <TextView
+        android:id="@+id/eventsDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_5km_away_from_you"
+        android:fontFamily="@font/worksans_light"
+        android:textSize="12sp"
+        android:textColor="@color/white_events"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/eventsCheck"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/circle_check" />
+
+    <ImageView
+        android:id="@+id/eventsCross"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/eventsCheck"
+        app:layout_constraintEnd_toStartOf="@+id/eventsCheck"
+        app:layout_constraintTop_toTopOf="@+id/eventsCheck"
+        android:src="@drawable/circle_cross" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

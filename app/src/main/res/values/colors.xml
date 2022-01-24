@@ -7,6 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="white_events">#B3FFFFFF</color>
     <color name="blue">#316FDE</color>
     <color name="dark_orange">#E04428</color>
     <color name="yellow">#F3E34A</color>
@@ -16,5 +17,14 @@
     <color name="sky_blue">#89C8FF</color>
     <color name="red">#E56953</color>
     <color name="green">#3AD75D</color>
+    <color name="green1">#52D6C0</color>
     <color name="grey1">#BFBFCB</color>
+    <color name="grey2">#E1E2E8</color>
+    <color name="edittext_grey">#F5F5FA</color>
+    <color name="message_color">#270139</color>
+    <color name="toggle_grey">#E1E1E8</color>
+    <color name="red_transparent">#B3ED2C20</color>
+    <color name="black_dark_transparent">#80000100</color>
+    <color name="dark_red_transparent">#C83737</color>
+
 </resources>

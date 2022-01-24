@@ -10,6 +10,7 @@ import com.creation.nearby.databinding.ActivityWelcomeBinding
 class WelcomeActivity : AppCompatActivity(),View.OnClickListener{
 
     lateinit var binding: ActivityWelcomeBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
