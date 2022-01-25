@@ -82,5 +82,31 @@
     <string name="personal_info">Personal Info</string>
     <string name="first_name">First Name</string>
     <string name="enter_your_phone_number">Enter your phone number</string>
+    <string name="messages">Messages</string>
+    <string name="people_who_sent_you_a_new_message">People who sent you a new message</string>
+    <string name="new_friends">New Friends</string>
+    <string name="friends_you_match_with">Friends you match with</string>
+    <string name="requests">Requests</string>
+    <string name="in_app_notification">In-app notification</string>
+    <string name="people_who_wants_to_become_friends">People who wants to become friends</string>
+    <string name="receive_in_app_notification">Receive in-app notification</string>
+    <string name="tips">Tips</string>
+    <string name="get_profile_tips_and_updates">Get profile tips and updates</string>
+    <string name="for_taking_and_sending_pictures">For taking and sending pictures</string>
+    <string name="voice">Voice</string>
+    <string name="for_calling_and_video_calling">For calling and video calling</string>
+    <string name="set_your_filter">Set Your Filter</string>
+    <string name="both">Both</string>
+    <string name="all">All</string>
+    <string name="online">Online</string>
+    <string name="age">Age</string>
+    <string name="apply">Apply</string>
+    <string name="reset_filter">Reset Filter</string>
+    <string name="new_1">New</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="your_first_name">Your First Name</string>
+    <string name="your_last_name">Your Last Name</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="enter_first_name">Enter First Name</string>
 
 </resources>

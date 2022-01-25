@@ -19,7 +19,7 @@ class AddEventActivity : AppCompatActivity(),View.OnClickListener {
         binding = ActivityAddEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        imagePickerDialog = BottomSheetDialog(this)
+        imagePickerDialog = BottomSheetDialog(this,R.style.CustomBottomSheetDialogTheme)
         dialogBinding = ImagePickerBottomSheetBinding.inflate(layoutInflater,null,false)
         imagePickerDialog.setContentView(dialogBinding.root)
         imagePickerDialog.setCancelable(true)

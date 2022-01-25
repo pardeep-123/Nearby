@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White">
-        <activity android:name=".ui.NotificationsActivity"></activity>
+        <activity android:name=".ui.EditProfileActivity"></activity>
+        <activity android:name=".ui.AlertActivity" />
+        <activity android:name=".ui.NotificationsActivity" />
         <activity android:name=".ui.PersonalInfoActivity" />
         <activity android:name=".ui.SettingsActivity" />
         <activity android:name=".ui.SideBarMenuActivity" />

@@ -1,7 +1,9 @@
 package com.creation.nearby.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
@@ -10,7 +12,7 @@ import com.creation.nearby.databinding.ActivityNotificationsBinding
 import com.creation.nearby.fragments.HomeFragment
 import com.creation.nearby.model.NotificationModel
 
-class NotificationsActivity : AppCompatActivity() {
+class NotificationsActivity : AppCompatActivity(),View.OnClickListener {
 
     lateinit var binding: ActivityNotificationsBinding
 
@@ -24,8 +26,9 @@ class NotificationsActivity : AppCompatActivity() {
         binding = ActivityNotificationsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //notification recycler view
+        binding.settings.setOnClickListener(this)
 
+        //notification recycler view
         binding.notificationRecyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL,false)
 
         notificationList.add(NotificationModel(R.drawable.user_pic_2,"Brooklyn Simmons","You are friends! \uD83C\uDF89","Today",false))
@@ -52,5 +55,13 @@ class NotificationsActivity : AppCompatActivity() {
         //notification recycler view
 
 
+    }
+
+    override fun onClick(v: View?) {
+       when(v){
+           binding.settings->{
+               startActivity(Intent(this,AlertActivity::class.java))
+           }
+       }
     }
 }
