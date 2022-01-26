@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         binding.chatImageView.setOnClickListener(this)
         binding.settingsImageView.setOnClickListener(this)
+        binding.userProfileIv.setOnClickListener(this)
         binding.filterImageView.setOnClickListener(this)
 
         dialogBinding.closeDialog.setOnClickListener(this)
@@ -78,6 +79,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.settingsImageView -> {
 
                 startActivity(Intent(this, SideBarMenuActivity::class.java))
+
+            }
+            binding.userProfileIv -> {
+
+                startActivity(Intent(this, EditProfileActivity::class.java))
 
             }
             binding.filterImageView -> {
