@@ -15,9 +15,9 @@ class SideBarMenuActivity : AppCompatActivity(),View.OnClickListener {
         binding = ActivitySideBarMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         binding.notificationLayout.setOnClickListener(this)
         binding.settingsLayout.setOnClickListener(this)
+        binding.myProfileLayout.setOnClickListener(this)
 
     }
 
@@ -31,6 +31,9 @@ class SideBarMenuActivity : AppCompatActivity(),View.OnClickListener {
 
             binding.settingsLayout->{
                 startActivity(Intent(this,SettingsActivity::class.java))
+            }
+            binding.myProfileLayout->{
+                startActivity(Intent(this,MyProfileActivity::class.java))
             }
 
         }

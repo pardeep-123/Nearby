@@ -122,5 +122,7 @@
     <string name="men">Men</string>
     <string name="women">Women</string>
     <string name="enter_interested">Enter Interested</string>
+    <string name="logan_wills">Logan\nWills</string>
+    <string name="interested_in">Interested in</string>
 
 </resources>

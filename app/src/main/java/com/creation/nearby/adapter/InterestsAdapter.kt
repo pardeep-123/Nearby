@@ -26,35 +26,43 @@ class InterestsAdapter(private val mList: ArrayList<InterestedModel>) : Recycler
 
             with(mList[position]){
 
-                interest.text = interestName
 
-                if (isSelected){
+                if (isProfile){
 
-                    interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.sky_blue)
-                    interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.white))
+                    interest.text = interestName
 
                 }else{
-                    interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.edittext_grey)
-                    interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.black))
 
-                }
-
-                holder.itemView.setOnClickListener{
-
+                    interest.text = interestName
                     if (isSelected){
 
-                        isSelected = false
-                        interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.edittext_grey)
-                        interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.black))
-
-                    }else{
-
-                        isSelected = true
                         interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.sky_blue)
                         interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.white))
 
+                    }else{
+                        interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.edittext_grey)
+                        interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.black))
 
                     }
+
+                    holder.itemView.setOnClickListener{
+
+                        if (isSelected){
+
+                            isSelected = false
+                            interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.edittext_grey)
+                            interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.black))
+
+                        }else{
+
+                            isSelected = true
+                            interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.sky_blue)
+                            interest.setTextColor(ContextCompat.getColor(holder.itemView.context,R.color.white))
+
+
+                        }
+                    }
+
                 }
 
             }

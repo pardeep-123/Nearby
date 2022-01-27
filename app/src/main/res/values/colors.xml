@@ -29,6 +29,8 @@
     <color name="dark_red_transparent">#C83737</color>
     <color name="track_active">#8A868F</color>
     <color name="track_inactive">#E1E2E8</color>
+    <color name="transparent_white">#4DFFFFFF</color>
+    <color name="transparent_white1">#B3FFFFFF</color>
 
 
 </resources>

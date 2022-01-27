@@ -10,7 +10,6 @@ import com.creation.nearby.databinding.ItemActivitiesBinding
 import com.creation.nearby.fragments.*
 import com.creation.nearby.model.ActivitiesModel
 
-
 class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adapter<ActivityAdapter.ViewHolder>() {
 
 
@@ -89,6 +88,14 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
                         fragment.replace(R.id.selection_frame_layout,FeedFragment())
                         fragment.commit()
                     }
+
+                    if (activityName == "Swipe"){
+
+                        val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
+                        fragment.replace(R.id.selection_frame_layout,SwipeCardFragment())
+                        fragment.commit()
+                    }
+
 
 
 

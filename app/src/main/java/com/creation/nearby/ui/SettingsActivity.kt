@@ -17,7 +17,6 @@ class SettingsActivity : AppCompatActivity(),View.OnClickListener {
 
         binding.userInfoLayout.setOnClickListener(this)
         binding.changePasswordActivity.setOnClickListener(this)
-
     }
 
     override fun onClick(v: View?) {

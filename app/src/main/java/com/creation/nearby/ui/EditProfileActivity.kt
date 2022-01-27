@@ -80,12 +80,12 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
             binding.zodiacTv.text = name.substring(22,name.length-1)
         })
 
-        interestsList.add(InterestedModel("Travel",false))
-        interestsList.add(InterestedModel("Chatting",false))
-        interestsList.add(InterestedModel("Athlete",true))
-        interestsList.add(InterestedModel("Music",false))
-        interestsList.add(InterestedModel("House Parties",true))
-        interestsList.add(InterestedModel("Astrology",true))
+        interestsList.add(InterestedModel("Travel",false,false))
+        interestsList.add(InterestedModel("Chatting",false,false))
+        interestsList.add(InterestedModel("Athlete",true,false))
+        interestsList.add(InterestedModel("Music",false,false))
+        interestsList.add(InterestedModel("House Parties",true,false))
+        interestsList.add(InterestedModel("Astrology",true,false))
 
 
         interestsAdapter = InterestsAdapter(interestsList)

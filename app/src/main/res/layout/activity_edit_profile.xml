@@ -10,7 +10,7 @@
         android:id="@+id/imageView9"
         android:layout_width="18dp"
         android:layout_height="18dp"
-        android:tint="@color/black"
+        app:tint="@color/black"
         android:layout_marginTop="24dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"

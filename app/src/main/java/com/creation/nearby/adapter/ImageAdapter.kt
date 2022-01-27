@@ -20,36 +20,40 @@ class ImageAdapter(var context: Context,var items: ArrayList<ImageModel>, var on
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        val model = if (items.size == position)
-            ImageModel()
-        else
-            items[position]
+            val model = if (items.size == position)
+                ImageModel()
+            else
+                items[position]
 
-        with(model)
-        {
-            with(holder.binding) {
-                if (imageUri == null) {
-                    layoutAdd.visibility = View.VISIBLE
-                    plusImage.visibility = View.VISIBLE
-                    layoutCard.visibility = View.GONE
+            with(model)
+            {
+                with(holder.binding) {
 
-                    layoutAdd.setOnClickListener {
-                        onActionListener.notify(model, position,it)
-                    }
+                        if (imageUri == null) {
+                            layoutAdd.visibility = View.VISIBLE
+                            plusImage.visibility = View.VISIBLE
+                            layoutCard.visibility = View.GONE
 
-                } else {
-                    layoutAdd.visibility = View.GONE
-                    plusImage.visibility = View.GONE
-                    layoutCard.visibility = View.VISIBLE
-                    layoutImage.setImageURI(imageUri)
+                            layoutAdd.setOnClickListener {
+                                onActionListener.notify(model, position, it)
+                            }
 
-                    closeImage.setOnClickListener {
+                        } else {
+                            layoutAdd.visibility = View.GONE
+                            plusImage.visibility = View.GONE
+                            layoutCard.visibility = View.VISIBLE
+                            layoutImage.setImageURI(imageUri)
 
-                        onActionListener.notify(model, position,it)
-                    }
-                }
+                            closeImage.setOnClickListener {
+
+                                onActionListener.notify(model, position, it)
+                            }
+                        }
             }
+
         }
+
+
 
     }
 
