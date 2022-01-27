@@ -26,14 +26,15 @@ class InterestsAdapter(private val mList: ArrayList<InterestedModel>) : Recycler
 
             with(mList[position]){
 
+                interest.text = interestName
 
                 if (isProfile){
 
-                    interest.text = interestName
-
+                    interest.background = holder.itemView.resources.getDrawable(R.drawable.round_background_with_transparent)
+                    interest.setTextColor(holder.itemView.resources.getColorStateList(R.color.white))
                 }else{
 
-                    interest.text = interestName
+
                     if (isSelected){
 
                         interest.backgroundTintList = holder.itemView.resources.getColorStateList(R.color.sky_blue)

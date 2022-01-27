@@ -38,18 +38,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         filterDialog.setCancelable(true)
         filterDialog.setCanceledOnTouchOutside(true)
 
-
         binding.sectionRecyclerView.layoutManager = LinearLayoutManager(
             this,
             RecyclerView.HORIZONTAL, false
         )
 
-        list.add(ActivitiesModel(R.drawable.user_icon, "Home"))
+        list.add(ActivitiesModel(R.drawable.home, "Home"))
         list.add(ActivitiesModel(R.drawable.user_icon, "Swipe"))
         list.add(ActivitiesModel(R.drawable.map_icon, "Map"))
         list.add(ActivitiesModel(R.drawable.event_icon, "Events"))
-        list.add(ActivitiesModel(R.drawable.event_icon, "Feed"))
-        list.add(ActivitiesModel(R.drawable.feed_icon, "Friends"))
+        list.add(ActivitiesModel(R.drawable.feed_icon, "Feed"))
+        list.add(ActivitiesModel(R.drawable.both_icon, "Friends"))
 
         adapter = ActivityAdapter(list)
         binding.sectionRecyclerView.adapter = adapter

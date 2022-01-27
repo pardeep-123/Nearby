@@ -48,7 +48,8 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Music",isSelected = false,isProfile = true))
+        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
+        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
 
         interestsAdapter = InterestsAdapter(interestsList)
@@ -58,24 +59,21 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsAdapter.notifyDataSetChanged()
 
 
-        gallaryList.add(GallaryModel(R.drawable.user_pic_1))
-        gallaryList.add(GallaryModel(R.drawable.user_pic_1))
-        gallaryList.add(GallaryModel(R.drawable.user_pic_1))
-        gallaryList.add(GallaryModel(R.drawable.user_pic_1))
-        gallaryList.add(GallaryModel(R.drawable.user_pic_1))
-
+        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
 
         binding.cameraIv.setOnClickListener(this)
         binding.editProfileIv.setOnClickListener(this)
 
     }
 
-
     private fun initAdapter() {
 
         val onActionListener = object : OnActionListener<ImageModel> {
             override fun notify(model: ImageModel, position: Int,view: View) {
-
 
             }
         }
@@ -89,6 +87,8 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         when(v){
 
             binding.cameraIv->{
+
+                optionsDialog()
 
             }binding.editProfileIv->{
 

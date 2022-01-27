@@ -31,6 +31,7 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
                 binding.activityName.text = activityName
 
 
+
                 if (activityName == "Home"){
 
                         binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.blue)
@@ -38,8 +39,8 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
 
                 }else{
 
-                    binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.dark_grey)
-                    binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.dark_grey))
+                    binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.black_dark_transparent)
+                    binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.black_dark_transparent))
 
                 }
 
@@ -49,27 +50,24 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
 
                         binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.blue)
                         binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.blue))
-
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.selection_frame_layout,HomeFragment())
                         fragment.commit()
-
-                    }else{
-
-                  //      binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.dark_grey)
-                  //      binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.dark_grey))
-
                     }
+
 
                     if (activityName == "Map"){
 
+                        binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.green1)
+                        binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.green1))
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.complete_frame_layout,MapFragment())
                         fragment.commit()
                     }
-
                     if (activityName == "Events"){
 
+                        binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.sky_blue)
+                        binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.sky_blue))
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.selection_frame_layout,EventsFragment())
                         fragment.commit()
@@ -77,6 +75,8 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
 
                     if (activityName == "Friends"){
 
+                        binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.red)
+                        binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.red))
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.selection_frame_layout,FriendsFragment())
                         fragment.commit()
@@ -84,28 +84,22 @@ class ActivityAdapter(val mList: ArrayList<ActivitiesModel>) : RecyclerView.Adap
 
                     if (activityName == "Feed"){
 
+                        binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.blue)
+                        binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.blue))
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.selection_frame_layout,FeedFragment())
                         fragment.commit()
                     }
 
                     if (activityName == "Swipe"){
-
+                        binding.activityPic.imageTintList = itemView.resources.getColorStateList(R.color.blue)
+                        binding.activityName.setTextColor(itemView.resources.getColorStateList(R.color.blue))
                         val fragment = (itemView.context as FragmentActivity).supportFragmentManager.beginTransaction()
                         fragment.replace(R.id.selection_frame_layout,SwipeCardFragment())
                         fragment.commit()
                     }
-
-
-
-
-
                 }
-
             }
-
-
-
         }
 
     }

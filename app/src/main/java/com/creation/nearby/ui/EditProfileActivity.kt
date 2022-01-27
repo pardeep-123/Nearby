@@ -34,8 +34,7 @@ import com.permissionx.guolindev.PermissionX
 
 class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
-
-        private var images = ArrayList<ImageModel>()
+    private var images = ArrayList<ImageModel>()
     private lateinit var imageAdapter: ImageAdapter
 
     private val popupList  = ArrayList<PopupModel>()
