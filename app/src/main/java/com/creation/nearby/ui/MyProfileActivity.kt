@@ -54,7 +54,6 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
-
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 

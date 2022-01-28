@@ -59,7 +59,6 @@
     <string name="search">Search...</string>
     <string name="type_here">Type here...</string>
     <string name="details">Details</string>
-    <string name="discount">Discount</string>
     <string name="time">Time</string>
     <string name="select_time">Select Time</string>
     <string name="location">Location</string>
@@ -124,5 +123,16 @@
     <string name="enter_interested">Enter Interested</string>
     <string name="logan_wills">Logan\nWills</string>
     <string name="interested_in">Interested in</string>
+    <string name="report">Report</string>
+    <string name="discount">Discount</string>
+    <string name="alert">Alert</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="block">Block</string>
+    <string name="bio">Bio</string>
+    <string name="zodiac_sign">Zodiac Sign</string>
+    <string name="interests">Interests</string>
+    <string name="gallary">Gallary</string>
+    <string name="send">Send</string>
 
 </resources>

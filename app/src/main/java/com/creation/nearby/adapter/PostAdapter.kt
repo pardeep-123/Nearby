@@ -7,10 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.databinding.ItemPostsBinding
+import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.PostModel
 
-class PostAdapter(private val mList: ArrayList<PostModel>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
+class PostAdapter(private val mList: ArrayList<PostModel>,var onActionListener: OnActionListener<PostModel>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -21,6 +22,8 @@ class PostAdapter(private val mList: ArrayList<PostModel>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        var model:PostModel = mList[position]
+
         with(holder){
 
             with(mList[position]){
@@ -30,6 +33,10 @@ class PostAdapter(private val mList: ArrayList<PostModel>) : RecyclerView.Adapte
                 binding.postTimeTv.text = postTime
                 binding.postMessageTv.text = postMessage
                 binding.postMainLayout.setBackgroundColor(itemView.resources.getColor(backgroundColor))
+
+                binding.postReportIv.setOnClickListener{
+                    onActionListener.notify(model,position,holder.itemView)
+                }
 
             }
         }

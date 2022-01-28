@@ -102,18 +102,16 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
-
     <ImageView
         android:id="@+id/post_report_iv"
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:elevation="10dp"
-        android:src="@drawable/feed_icon"
-        android:tint="@color/black"
+        android:src="@drawable/report_icon"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView"
         app:layout_constraintTop_toTopOf="@+id/materialCardView">
-
     </ImageView>
 
 
