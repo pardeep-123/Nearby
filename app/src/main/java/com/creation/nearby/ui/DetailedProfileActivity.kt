@@ -1,15 +1,19 @@
 package com.creation.nearby.ui
 
+import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
 import com.creation.nearby.adapter.InterestsAdapter
+import com.creation.nearby.adapter.OtherProfileInterestAdapter
 import com.creation.nearby.databinding.ActivityDetailedProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
@@ -24,7 +28,7 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding: ActivityDetailedProfileBinding
 
     private  var interestsList = ArrayList<InterestedModel>()
-    private lateinit var  interestsAdapter: InterestsAdapter
+    private lateinit var  interestsAdapter: OtherProfileInterestAdapter
 
     private var gallaryList = ArrayList<GallaryModel>()
     private lateinit var gallaryAdapter: GallaryAdapter
@@ -32,7 +36,7 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailedProfileBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_detailed_profile)
+        setContentView(binding.root)
 
         interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
@@ -40,12 +44,10 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
-        interestsAdapter = InterestsAdapter(interestsList)
+        interestsAdapter = OtherProfileInterestAdapter(interestsList)
         binding.interestRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.interestRecyclerView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
-
-
 
         gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
         gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
@@ -57,12 +59,13 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         binding.goBack.setOnClickListener(this)
         binding.blockTv.setOnClickListener(this)
+        binding.chat.setOnClickListener(this)
     }
 
     private fun initAdapter() {
 
-        val onActionListener = object : OnActionListener<ImageModel> {
-            override fun notify(model: ImageModel, position: Int, view: View) {
+        val onActionListener = object : OnActionListener<GallaryModel> {
+            override fun notify(model: GallaryModel, position: Int, view: View) {
 
             }
         }
@@ -79,6 +82,9 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
             }
             binding.blockTv->{
                 optionsDialog()
+            }
+            binding.chat->{
+                startActivity(Intent(this,OngoingChatActivity::class.java))
             }
         }
     }

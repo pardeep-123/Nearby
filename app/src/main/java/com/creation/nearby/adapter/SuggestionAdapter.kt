@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.databinding.ItemPostsBinding
 import com.creation.nearby.databinding.SuggestionsItemBinding
+import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.PostModel
 import com.creation.nearby.model.SuggestionsModel
 
-class SuggestionAdapter(private val mList: ArrayList<SuggestionsModel>) : RecyclerView.Adapter<SuggestionAdapter.ViewHolder>() {
+class SuggestionAdapter(private val mList: ArrayList<SuggestionsModel>,val onActionListener: OnActionListener<SuggestionsModel>) : RecyclerView.Adapter<SuggestionAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -22,11 +23,19 @@ class SuggestionAdapter(private val mList: ArrayList<SuggestionsModel>) : Recycl
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
+        var model: SuggestionsModel = mList[position]
+
         with(holder){
 
             with(mList[position]){
 
                 binding.suggestion.text = suggestion
+
+                binding.suggestion.setOnClickListener{
+
+                    onActionListener.notify(model,position,itemView)
+                }
+
 
             }
         }

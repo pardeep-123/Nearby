@@ -12,9 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White">
+        <activity android:name=".ui.OngoingChatActivity"></activity>
+        <activity android:name=".ui.SwipeUserProfileActivity" />
+        <activity
+            android:name=".ui.FullPictureActivity"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+        <activity android:name=".ui.ContactUsActivity" />
+        <activity android:name=".ui.FeedBackActivity" />
+        <activity android:name=".ui.SearchActivity" />
         <activity
             android:name=".ui.DetailedProfileActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
         <activity
             android:name=".ui.EventDetailsActivity"
             android:exported="true"

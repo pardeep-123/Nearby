@@ -1,11 +1,19 @@
 package com.creation.nearby.ui.authentication
 
+import android.app.Dialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import android.view.Window
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
+import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivitySignUpBinding
 
 
@@ -19,6 +27,7 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener {
         binding.goBack1.setOnClickListener(this)
         binding.showHideSignup.setOnClickListener(this)
         binding.showHideSignupConfirm.setOnClickListener(this)
+        binding.signUpBtn.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -27,7 +36,7 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener {
         when(v){
 
             binding.goBack1->{
-                finish()
+                onBackPressed()
             }
 
             binding.showHideSignup->{
@@ -63,10 +72,34 @@ class SignUpActivity : AppCompatActivity(),View.OnClickListener {
                 startActivity(Intent(this,LoginActivity::class.java))
 
             }
+            binding.signUpBtn->{
 
+                confirmationDialog()
+            }
+        }
+    }
 
+    private fun confirmationDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(this,
+                android.R.color.transparent
+            )
+        )
+        dialog.setContentView(R.layout.send_verification_dialog)
 
+        val ok: AppCompatButton? = dialog.findViewById(R.id.ok)
+
+        ok?.setOnClickListener {
+            dialog.dismiss()
         }
 
+
+        dialog.show()
     }
+
+
 }

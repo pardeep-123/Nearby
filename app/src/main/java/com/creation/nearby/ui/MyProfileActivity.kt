@@ -9,8 +9,11 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -27,6 +30,7 @@ import com.creation.nearby.utils.ToastUtils
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
 import com.permissionx.guolindev.PermissionX
 
 class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
@@ -51,18 +55,17 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
-
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
 
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
+        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
+        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
+        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
+        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
 
         binding.cameraIv.setOnClickListener(this)
         binding.editProfileIv.setOnClickListener(this)
@@ -71,8 +74,17 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun initAdapter() {
 
-        val onActionListener = object : OnActionListener<ImageModel> {
-            override fun notify(model: ImageModel, position: Int,view: View) {
+        val onActionListener = object : OnActionListener<GallaryModel> {
+            override fun notify(model: GallaryModel, position: Int,view: View) {
+
+                val intent  = Intent(this@MyProfileActivity,FullPictureActivity::class.java)
+
+                val transitionName: String = getString(R.string.open_with_animation)
+                val viewImage: MaterialCardView = view.findViewById(R.id.layoutCard)
+
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@MyProfileActivity,viewImage,transitionName)
+                ActivityCompat.startActivity(this@MyProfileActivity,intent,options.toBundle())
+
 
             }
         }

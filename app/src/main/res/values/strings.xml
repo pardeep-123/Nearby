@@ -134,5 +134,18 @@
     <string name="interests">Interests</string>
     <string name="gallary">Gallary</string>
     <string name="send">Send</string>
+    <string name="search_1">Search</string>
+    <string name="feedback">Feedback</string>
+    <string name="upload_pic">Upload Pic</string>
+    <string name="message">Message</string>
+    <string name="write_here">Write here...</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="submit">Submit</string>
+    <string name="history">History</string>
+    <string name="we_have">We have sent a verification\nE-mail on your E-mail. Please\ncheck and verify.</string>
+    <string name="ok">Ok</string>
+    <string name="open_with_animation">Animation</string>
+    <string name="it_is_empty_here">It is empty here...</string>
+    <string name="enter_your_email">Enter your Email</string>
 
 </resources>

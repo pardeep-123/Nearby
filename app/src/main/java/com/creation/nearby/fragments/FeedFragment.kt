@@ -33,9 +33,10 @@ class FeedFragment : Fragment() {
 
     private lateinit var postAdapter: PostAdapter
     private lateinit var suggestionAdapter: SuggestionAdapter
+    private  var suggestionList = ArrayList<SuggestionsModel>()
 
     private  var postList = ArrayList<PostModel>()
-    private  var suggestionList = ArrayList<SuggestionsModel>()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,11 +62,11 @@ class FeedFragment : Fragment() {
         suggestionList.add(SuggestionsModel("What’s up today?"))
         suggestionList.add(SuggestionsModel("Want to chat?"))
 
-        suggestionAdapter = SuggestionAdapter(suggestionList)
-        binding.suggestionRecView.adapter = suggestionAdapter
-        suggestionAdapter.notifyDataSetChanged()
+        suggestionAdapter()
 
     }
+
+
 
     private fun initAdapter() {
 
@@ -80,6 +81,23 @@ class FeedFragment : Fragment() {
         postAdapter.notifyDataSetChanged()
 
     }
+
+
+    private fun suggestionAdapter() {
+
+        val onActionListener = object : OnActionListener<SuggestionsModel> {
+            override fun notify(model: SuggestionsModel, position: Int, view: View) {
+
+                binding.peopleEditText.setText(model.suggestion)
+
+            }
+        }
+
+        suggestionAdapter = SuggestionAdapter(suggestionList,onActionListener)
+        binding.suggestionRecView.adapter = suggestionAdapter
+        suggestionAdapter.notifyDataSetChanged()
+    }
+
 
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this.requireContext(), R.style.CustomBottomSheetDialogTheme)

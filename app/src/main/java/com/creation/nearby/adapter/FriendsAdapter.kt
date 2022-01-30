@@ -1,6 +1,7 @@
 package com.creation.nearby.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.databinding.ItemFriendsBinding
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.FriendsModel
+import com.creation.nearby.ui.DetailedProfileActivity
 
 class FriendsAdapter(private val mList: ArrayList<FriendsModel>) : RecyclerView.Adapter<FriendsAdapter.ViewHolder>() {
 
@@ -28,14 +30,22 @@ class FriendsAdapter(private val mList: ArrayList<FriendsModel>) : RecyclerView.
                 binding.friendsImage.setImageResource(friendsPic)
                 binding.friendsName.text = friendsName
 
-                if (isActive){
+              //  if (isActive){
 
-                    binding.friendsActive.visibility = View.VISIBLE
+              //      binding.friendsActive.visibility = View.VISIBLE
 
-                }else{
+              //  }else{
                     binding.friendsActive.visibility = View.GONE
 
+
+                    binding.friendsImage.setOnClickListener{
+                        itemView.context.startActivity(Intent(itemView.context,DetailedProfileActivity::class.java))
+              //      }
+
+
                 }
+
+
 
             }
         }

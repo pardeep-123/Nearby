@@ -8,6 +8,16 @@ import com.creation.nearby.databinding.ActivityAlertBinding
 class AlertActivity : AppCompatActivity(),View.OnClickListener {
 
     private lateinit var binding: ActivityAlertBinding
+
+    private var isMessageClicked = false
+    private var isFriendClicked = false
+    private var isRequestClicked = false
+    private var isTipsClicked = false
+    private var isCameraClicked = false
+    private var isLocationClicked = false
+    private var isNotificationClicked = false
+    private var isVoiceClicked = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAlertBinding.inflate(layoutInflater)
@@ -21,6 +31,8 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
         binding.locationLayout.setOnClickListener(this)
         binding.cameraLayout.setOnClickListener(this)
         binding.voiceLayout.setOnClickListener(this)
+        binding.goback1.setOnClickListener(this)
+
 
 
     }
@@ -29,31 +41,103 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
 
         when(v){
             binding.messageLayout->{
-                binding.messageCheckBox.isChecked = !binding.messageCheckBox.isChecked
+
+                if (!isMessageClicked){
+                    isMessageClicked = true
+                    binding.emptyCheckBox1.visibility = View.GONE
+                    binding.checkedCheckBox1.visibility = View.VISIBLE
+                }else{
+                    isMessageClicked = false
+                    binding.emptyCheckBox1.visibility = View.VISIBLE
+                    binding.checkedCheckBox1.visibility = View.GONE
+                }
+
+
+
             }
             binding.newFriendLayout->{
-                binding.newFriendCheckBox.isChecked = !binding.newFriendCheckBox.isChecked
+                if (!isFriendClicked){
+                    isFriendClicked = true
+                    binding.emptyCheckBox2.visibility = View.GONE
+                    binding.checkedCheckBox2.visibility = View.VISIBLE
+                }else{
+                    isFriendClicked = false
+                    binding.emptyCheckBox2.visibility = View.VISIBLE
+                    binding.checkedCheckBox2.visibility = View.GONE
+                }
             }
             binding.requestsLayout->{
-                binding.requestCheckBox.isChecked = !binding.requestCheckBox.isChecked
+                if (!isRequestClicked){
+                    isRequestClicked = true
+                    binding.emptyCheckBox3.visibility = View.GONE
+                    binding.checkedCheckBox3.visibility = View.VISIBLE
+                }else{
+                    isRequestClicked = false
+                    binding.emptyCheckBox3.visibility = View.VISIBLE
+                    binding.checkedCheckBox3.visibility = View.GONE
+                }
             }
             binding.inAppNotificationLayout->{
-                binding.inAppNotificationCheckBox.isChecked = !binding.inAppNotificationCheckBox.isChecked
+                if (!isNotificationClicked){
+                    isNotificationClicked = true
+                    binding.emptyCheckBox4.visibility = View.GONE
+                    binding.checkedCheckBox4.visibility = View.VISIBLE
+                }else{
+                    isNotificationClicked = false
+                    binding.emptyCheckBox4.visibility = View.VISIBLE
+                    binding.checkedCheckBox4.visibility = View.GONE
+                }
             }
             binding.tipsLayout->{
-                binding.tipsCheckBox.isChecked = !binding.tipsCheckBox.isChecked
+                if (!isTipsClicked){
+                    isTipsClicked = true
+                    binding.emptyCheckBox5.visibility = View.GONE
+                    binding.checkedCheckBox5.visibility = View.VISIBLE
+                }else{
+                    isTipsClicked = false
+                    binding.emptyCheckBox5.visibility = View.VISIBLE
+                    binding.checkedCheckBox5.visibility = View.GONE
+                }
             }
             binding.locationLayout->{
-                binding.locationCheckBox.isChecked = !binding.locationCheckBox.isChecked
+                if (!isLocationClicked){
+                    isLocationClicked = true
+                    binding.emptyCheckBox6.visibility = View.GONE
+                    binding.checkedCheckBox6.visibility = View.VISIBLE
+                }else{
+                    isLocationClicked = false
+                    binding.emptyCheckBox6.visibility = View.VISIBLE
+                    binding.checkedCheckBox6.visibility = View.GONE
+                }
             }
             binding.cameraLayout->{
-                binding.cameraCheckBox.isChecked = !binding.cameraCheckBox.isChecked
+                if (!isCameraClicked){
+                    isCameraClicked = true
+                    binding.emptyCheckBox7.visibility = View.GONE
+                    binding.checkedCheckBox7.visibility = View.VISIBLE
+                }else{
+                    isCameraClicked = false
+                    binding.emptyCheckBox7.visibility = View.VISIBLE
+                    binding.checkedCheckBox7.visibility = View.GONE
+                }
             }
             binding.voiceLayout->{
-                binding.voiceCheckBox.isChecked = !binding.voiceCheckBox.isChecked
+                if (!isVoiceClicked){
+                    isVoiceClicked = true
+                    binding.emptyCheckBox8.visibility = View.GONE
+                    binding.checkedCheckBox8.visibility = View.VISIBLE
+                }else{
+                    isVoiceClicked = false
+                    binding.emptyCheckBox8.visibility = View.VISIBLE
+                    binding.checkedCheckBox8.visibility = View.GONE
+                }
+            }
+
+            binding.goback1->{
+
+                onBackPressed()
+                }
             }
         }
-
-    }
 
 }

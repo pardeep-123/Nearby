@@ -7,12 +7,12 @@
     tools:context=".ui.AlertActivity">
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/goback1"
         android:layout_width="16dp"
         android:layout_height="16dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
-        app:tint="@color/dark_grey"
+        app:tint="@color/black"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/back_arrow" />
@@ -25,10 +25,10 @@
         android:text="Alert Settings"
         android:textColor="@color/black"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView9"
+        app:layout_constraintBottom_toBottomOf="@+id/goback1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView9" />
+        app:layout_constraintTop_toTopOf="@+id/goback1" />
 
 
     <ScrollView
@@ -51,8 +51,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -75,29 +75,38 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/people_who_sent_you_a_new_message"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toStartOf="@+id/message_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView40" />
 
-                <CheckBox
-                    android:id="@+id/message_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:gravity="center"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:scaleX="1.20"
-                    android:scaleY="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box1"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -118,8 +127,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/message_layout">
@@ -141,25 +150,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/friends_you_match_with"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/new_friend_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView43" />
 
-                <CheckBox
-                    android:id="@+id/new_friend_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -181,8 +199,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/new_friend_layout">
@@ -205,29 +223,37 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/people_who_wants_to_become_friends"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/request_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView44" />
 
-                <CheckBox
-                    android:id="@+id/request_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box3"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageView
+                    android:id="@+id/checked_check_box3"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <View
@@ -246,8 +272,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/requests_layout">
@@ -269,25 +295,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/receive_in_app_notification"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/in_app_notification_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView46" />
 
-                <CheckBox
-                    android:id="@+id/in_app_notification_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box4"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box4"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -310,8 +345,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/in_app_notification_layout">
@@ -334,25 +369,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/get_profile_tips_and_updates"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/tips_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView48" />
 
-                <CheckBox
-                    android:id="@+id/tips_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box5"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box5"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -376,8 +420,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tips_layout">
@@ -399,25 +443,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="Adjust settings for the map"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/location_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView50" />
 
-                <CheckBox
-                    android:id="@+id/location_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box6"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box6"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -441,8 +494,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/location_layout">
@@ -464,25 +517,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/for_taking_and_sending_pictures"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/camera_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView53" />
 
-                <CheckBox
-                    android:id="@+id/camera_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box7"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box7"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -505,8 +567,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
                 android:layout_marginEnd="24dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/camera_layout">
@@ -528,25 +590,34 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="40dp"
                     android:fontFamily="@font/worksans_regular"
                     android:text="@string/for_calling_and_video_calling"
                     android:textColor="@color/dark_grey"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@+id/voice_check_box"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView55" />
 
-                <CheckBox
-                    android:id="@+id/voice_check_box"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/empty_check_box8"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:button="@drawable/check_box_selector"
-                    android:minHeight="0dp"
-                    android:minWidth="0dp"
-                    android:scaleY="1.20"
-                    android:scaleX="1.20"
+                    android:src="@drawable/check_box_base"
                     android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/checked_check_box8"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:button="@drawable/check_box_selector"
+                    android:src="@drawable/check_box_checked"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />

@@ -1,12 +1,20 @@
 package com.creation.nearby.ui
 
 import android.content.Intent
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
@@ -63,6 +71,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.settingsImageView.setOnClickListener(this)
         binding.userProfileIv.setOnClickListener(this)
         binding.filterImageView.setOnClickListener(this)
+        binding.searchImageView.setOnClickListener(this)
 
         dialogBinding.closeDialog.setOnClickListener(this)
 
@@ -74,74 +83,58 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val onActionListener = object : OnActionListener<ActivitiesModel> {
             override fun notify(model: ActivitiesModel, position: Int, view: View) {
 
-                val activityPic: ImageView = view.findViewById(R.id.activity_pic)
-                val activityName: TextView = view.findViewById(R.id.activity_name)
                 val mapLayout: FrameLayout = findViewById(R.id.complete_frame_layout)
                 val mainLayout: FrameLayout = findViewById(R.id.selection_frame_layout)
+
+//                val mainActivityLayout: ConstraintLayout = findViewById(R.id.mainActivityLayout)
+//                val set = ConstraintSet()
+//                set.clone(mainActivityLayout)
+//                set.connect(R.id.selection_frame_layout,ConstraintSet.TOP,R.id.section_recycler_view,ConstraintSet.BOTTOM,24)
+//                set.applyTo(mainActivityLayout)
 
                 if (position == 0) {
 
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    activityPic.imageTintList = resources.getColorStateList(R.color.blue)
-                    activityName.setTextColor(resources.getColorStateList(R.color.blue))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(R.id.selection_frame_layout, HomeFragment())
-                    fragment.commit()
+
+                    openFragment(HomeFragment(),R.id.selection_frame_layout)
+
                 }
                 if (position == 1) {
 
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    activityPic.imageTintList = resources.getColorStateList(R.color.blue)
-                    activityName.setTextColor(resources.getColorStateList(R.color.blue))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(
-                        R.id.selection_frame_layout,
-                        SwipeCardFragment()
-                    )
-                    fragment.commit()
+                    openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
+
                 }
 
                 if (position == 2) {
 
+
                     mapLayout.visibility = View.VISIBLE
                     mainLayout.visibility=View.GONE
-                    activityPic.imageTintList = resources.getColorStateList(R.color.green1)
-                    activityName.setTextColor(resources.getColorStateList(R.color.green1))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(R.id.complete_frame_layout, MapFragment())
-                    fragment.commit()
+                //    mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
+                    openFragment(MapFragment(),R.id.complete_frame_layout)
                 }
                 if (position == 3) {
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    activityPic.imageTintList =
-                        resources.getColorStateList(com.creation.nearby.R.color.sky_blue)
-                    activityName.setTextColor(resources.getColorStateList(com.creation.nearby.R.color.sky_blue))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(R.id.selection_frame_layout, EventsFragment())
-                    fragment.commit()
+
+                    openFragment(EventsFragment(),R.id.selection_frame_layout)
                 }
                 if (position == 4) {
 
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    activityPic.imageTintList = resources.getColorStateList(R.color.red)
-                    activityName.setTextColor(resources.getColorStateList(R.color.red))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(R.id.selection_frame_layout, FeedFragment())
-                    fragment.commit()
+                    openFragment(FeedFragment(),R.id.selection_frame_layout)
+
                 }
                 if (position == 5) {
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    activityPic.imageTintList =
-                        resources.getColorStateList(com.creation.nearby.R.color.red)
-                    activityName.setTextColor(resources.getColorStateList(R.color.red))
-                    val fragment = supportFragmentManager.beginTransaction()
-                    fragment.replace(R.id.selection_frame_layout, FriendsFragment())
-                    fragment.commit()
+
+                    openFragment(FriendsFragment(),R.id.selection_frame_layout)
+
                 }
             }
         }
@@ -174,14 +167,25 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 filterDialog.show()
 
             }
+            binding.searchImageView -> {
+
+                startActivity(Intent(this, ContactUsActivity::class.java))
+
+            }
+
             dialogBinding.closeDialog -> {
                 filterDialog.dismiss()
             }
-
         }
     }
 
+    private fun openFragment( fragment: Fragment, id : Int){
 
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(id, fragment)
+        fragmentTransaction.commit()
+
+    }
 }
 
 

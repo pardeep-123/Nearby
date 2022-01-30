@@ -2,8 +2,7 @@ package com.creation.nearby.adapter
 
 import android.opengl.Visibility
 import android.view.LayoutInflater
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.DiscoverItemBinding
@@ -41,7 +40,7 @@ class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : Rec
                         if (direction == SwipeLayout.RIGHT) {
                             binding.messageDay.visibility = VISIBLE
                         } else if (direction == SwipeLayout.LEFT) {
-                            binding.messageDay.visibility = GONE
+                            binding.messageDay.visibility = INVISIBLE
                         }
 
                     }

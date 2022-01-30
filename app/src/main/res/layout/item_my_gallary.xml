@@ -12,7 +12,9 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         app:cardCornerRadius="16dp"
+        android:transitionName="@string/open_with_animation"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

@@ -17,8 +17,9 @@ class FriendsFragment : Fragment() {
 
     lateinit var binding: FragmentFriendsBinding
     lateinit var onlineAdapter: OnlineUserFriendsAdapter
-    private lateinit var friendsAdapter: FriendsAdapter
     private var onlineList = ArrayList<FriendsModel>()
+
+    private lateinit var friendsAdapter: FriendsAdapter
     private var friendsList = ArrayList<FriendsModel>()
 
     override fun onCreateView(
