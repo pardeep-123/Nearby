@@ -1,5 +1,6 @@
 package com.creation.nearby.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import com.creation.nearby.R
 import com.creation.nearby.adapter.SwipeCardAdapter
 import com.creation.nearby.databinding.FragmentSwipeCardBinding
 import com.creation.nearby.model.SwipeCardModel
+import com.creation.nearby.ui.CongratulationActivity
 import com.yuyakaido.android.cardstackview.*
 
 
@@ -72,6 +74,8 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     }
 
     override fun onCardSwiped(direction: Direction?) {
+
+        requireContext().startActivity(Intent(requireContext(),CongratulationActivity::class.java))
 
     }
 

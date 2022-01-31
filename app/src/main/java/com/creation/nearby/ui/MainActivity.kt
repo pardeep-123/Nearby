@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -15,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
@@ -33,6 +35,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var adapter: ActivityAdapter
     private lateinit var binding: ActivityMainBinding
     private var list = ArrayList<ActivitiesModel>()
+    private lateinit var fragmentTransaction: FragmentTransaction
 
     lateinit var dialogBinding: FilterBottomSheetDialogBinding
     lateinit var filterDialog: BottomSheetDialog
@@ -74,10 +77,13 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.searchImageView.setOnClickListener(this)
 
         dialogBinding.closeDialog.setOnClickListener(this)
-
+        dialogBinding.allFilter.setOnClickListener(this)
+        dialogBinding.maleLooking.setOnClickListener(this)
+        dialogBinding.femaleLooking.setOnClickListener(this)
+        dialogBinding.bothLooking.setOnClickListener(this)
+        dialogBinding.filterOnline.setOnClickListener(this)
+        dialogBinding.filterNew.setOnClickListener(this)
     }
-
-
     private fun initAdapter() {
 
         val onActionListener = object : OnActionListener<ActivitiesModel> {
@@ -85,55 +91,55 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
                 val mapLayout: FrameLayout = findViewById(R.id.complete_frame_layout)
                 val mainLayout: FrameLayout = findViewById(R.id.selection_frame_layout)
-
-//                val mainActivityLayout: ConstraintLayout = findViewById(R.id.mainActivityLayout)
+//                val constraint: ConstraintLayout = findViewById(R.id.mainActivityLayout)
 //                val set = ConstraintSet()
-//                set.clone(mainActivityLayout)
-//                set.connect(R.id.selection_frame_layout,ConstraintSet.TOP,R.id.section_recycler_view,ConstraintSet.BOTTOM,24)
-//                set.applyTo(mainActivityLayout)
+//                set.clone(constraint)
+//
+//                set.connect(R.id.selection_frame_layout,ConstraintSet.TOP,R.id.section_recycler_view,ConstraintSet.BOTTOM)
+//                set.connect(R.id.selection_frame_layout,ConstraintSet.START,ConstraintSet.PARENT_ID,ConstraintSet.START)
+//                set.connect(R.id.selection_frame_layout,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END)
+//                set.connect(R.id.selection_frame_layout,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
+//                set.constrainDefaultHeight(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
+//                set.constrainDefaultWidth(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
+//                set.applyTo(constraint)
 
                 if (position == 0) {
 
+                    openFragment(HomeFragment(),R.id.selection_frame_layout)
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-
-                    openFragment(HomeFragment(),R.id.selection_frame_layout)
-
                 }
                 if (position == 1) {
-
+                    openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
-
                 }
 
                 if (position == 2) {
+//                    mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
 
-
+                    mainLayout.removeAllViews()
+                    openFragment(MapFragment(),R.id.complete_frame_layout)
                     mapLayout.visibility = View.VISIBLE
                     mainLayout.visibility=View.GONE
-                //    mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
-                    openFragment(MapFragment(),R.id.complete_frame_layout)
                 }
                 if (position == 3) {
+                    openFragment(EventsFragment(),R.id.selection_frame_layout)
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-
-                    openFragment(EventsFragment(),R.id.selection_frame_layout)
                 }
                 if (position == 4) {
 
+                    openFragment(FeedFragment(),R.id.selection_frame_layout)
                     mapLayout.visibility = View.GONE
                     mainLayout.visibility=View.VISIBLE
-                    openFragment(FeedFragment(),R.id.selection_frame_layout)
 
                 }
                 if (position == 5) {
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
 
                     openFragment(FriendsFragment(),R.id.selection_frame_layout)
+                    mapLayout.visibility = View.GONE
+                    mainLayout.visibility=View.VISIBLE
 
                 }
             }
@@ -176,12 +182,98 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             dialogBinding.closeDialog -> {
                 filterDialog.dismiss()
             }
+
+            dialogBinding.maleLooking->{
+
+                dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
+                dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
+
+                dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+                dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+                dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+                dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+
+            } dialogBinding.femaleLooking->{
+
+            dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+            dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+            dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+            dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
+            dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
+
+            dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+            dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+        }dialogBinding.bothLooking->{
+
+            dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+            dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+            dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+            dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+
+            dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+            dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
+            dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
+
+        }
+
+            dialogBinding.allFilter->{
+
+                dialogBinding.allFilter.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                dialogBinding.allFilter.setTextColor(ContextCompat.getColor(this,R.color.white))
+
+                dialogBinding.filterOnline.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.filterOnline.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+                dialogBinding.filterNew.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.filterNew.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+
+            }
+            dialogBinding.filterOnline->{
+
+                dialogBinding.allFilter.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.allFilter.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+                dialogBinding.filterOnline.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                dialogBinding.filterOnline.setTextColor(ContextCompat.getColor(this,R.color.white))
+
+                dialogBinding.filterNew.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.filterNew.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+
+            }
+            dialogBinding.filterNew->{
+
+                dialogBinding.allFilter.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.allFilter.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+                dialogBinding.filterOnline.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                dialogBinding.filterOnline.setTextColor(ContextCompat.getColor(this,R.color.black))
+
+                dialogBinding.filterNew.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                dialogBinding.filterNew.setTextColor(ContextCompat.getColor(this,R.color.white))
+
+            }
+
+
+
         }
     }
 
     private fun openFragment( fragment: Fragment, id : Int){
-
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+         fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(id, fragment)
         fragmentTransaction.commit()
 

@@ -127,6 +127,10 @@
         android:layout_marginTop="8dp"
         android:elevation="5dp"
         android:clickable="true"
+        tools:listitem="@layout/item_activities"
+        android:orientation="horizontal"
+        tools:itemCount="4"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
     <FrameLayout

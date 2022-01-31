@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.SwipeCardItemBinding
 import com.creation.nearby.model.SwipeCardModel
 import com.creation.nearby.ui.DetailedProfileActivity
+import com.creation.nearby.ui.OtherUserProfileActivity
 
 class SwipeCardAdapter(val context: Context,var swipeList: ArrayList<SwipeCardModel> ):RecyclerView.Adapter<SwipeCardAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SwipeCardAdapter.ViewHolder {
 
         val binding = SwipeCardItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return ViewHolder(binding)
+
     }
 
     override fun onBindViewHolder(holder: SwipeCardAdapter.ViewHolder, position: Int) {
@@ -25,12 +27,10 @@ class SwipeCardAdapter(val context: Context,var swipeList: ArrayList<SwipeCardMo
                 swipeUserName.text = name
                 swipeUserAgeCity.text =age.plus(" - ").plus(city)
 
-
                 userDetailLayout.setOnClickListener{
-                    context.startActivity(Intent(context,DetailedProfileActivity::class.java))
+                    context.startActivity(Intent(context,OtherUserProfileActivity::class.java))
                 }
             }
-
         }
     }
 

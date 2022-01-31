@@ -147,5 +147,8 @@
     <string name="open_with_animation">Animation</string>
     <string name="it_is_empty_here">It is empty here...</string>
     <string name="enter_your_email">Enter your Email</string>
+    <string name="wave_and_say_hi">👋 Wave and say Hi!</string>
+    <string name="continue_to_swipe">Continue to Swipe</string>
+
 
 </resources>

@@ -8,26 +8,44 @@
         <entry key="app/src/main/res/drawable-xxhdpi/round_shape_small.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/check_box_selector.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/circle_background.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/drawable/dash_gallary_stroke.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/drawable/round_shape.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/activity_alert.xml" value="0.21" />
+        <entry key="app/src/main/res/layout/activity_congratulation.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_contact_us.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_detailed_profile.xml" value="0.16" />
         <entry key="app/src/main/res/layout/activity_edit_profile.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/activity_event_details.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_forgot_password.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_full_picture.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/activity_my_profile.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/activity_other_user_profile.xml" value="0.17407407407407408" />
+        <entry key="app/src/main/res/layout/activity_privacy_policy.xml" value="0.17407407407407408" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/activity_side_bar_menu.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.17407407407407408" />
+        <entry key="app/src/main/res/layout/activity_swipe_user_profile.xml" value="0.17407407407407408" />
+        <entry key="app/src/main/res/layout/activity_terms_of_use.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/activity_welcome.xml" value="0.125" />
         <entry key="app/src/main/res/layout/block_bottom_sheet.xml" value="0.16111111111111112" />
         <entry key="app/src/main/res/layout/discover_item.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/layout/filter_bottom_sheet_dialog.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_events.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/layout/fragment_feed.xml" value="0.1675925925925926" />
+        <entry key="app/src/main/res/layout/fragment_friends.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17407407407407408" />
         <entry key="app/src/main/res/layout/fragment_map.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/fragment_swipe_card.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/image_picker_bottom_sheet.xml" value="0.17407407407407408" />
         <entry key="app/src/main/res/layout/item_activities.xml" value="0.16944444444444445" />
         <entry key="app/src/main/res/layout/item_events.xml" value="0.1675925925925926" />
         <entry key="app/src/main/res/layout/item_gallary.xml" value="0.17685185185185184" />
+        <entry key="app/src/main/res/layout/item_history_message.xml" value="0.125" />
         <entry key="app/src/main/res/layout/item_my_gallary.xml" value="0.17685185185185184" />
         <entry key="app/src/main/res/layout/item_notification.xml" value="0.1648148148148148" />
+        <entry key="app/src/main/res/layout/item_online_chat_user.xml" value="0.125" />
         <entry key="app/src/main/res/layout/item_posts.xml" value="0.22" />
         <entry key="app/src/main/res/layout/report_bottom_sheet.xml" value="0.25" />
         <entry key="app/src/main/res/layout/report_dialog.xml" value="0.21" />

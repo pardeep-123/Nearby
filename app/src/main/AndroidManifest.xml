@@ -12,7 +12,19 @@
         android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White">
-        <activity android:name=".ui.OngoingChatActivity"></activity>
+        <activity
+            android:name=".ui.OtherUserProfileActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.PrivacyPolicyActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ui.TermsOfUse"
+            android:exported="true" />
+        <activity
+            android:name=".ui.CongratulationActivity"
+            android:exported="true" />
+        <activity android:name=".ui.OngoingChatActivity" />
         <activity android:name=".ui.SwipeUserProfileActivity" />
         <activity
             android:name=".ui.FullPictureActivity"
