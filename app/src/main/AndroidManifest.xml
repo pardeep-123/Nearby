@@ -14,6 +14,7 @@
         android:theme="@style/Theme.Nearby.White">
         <activity
             android:name=".ui.OtherUserProfileActivity"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"
             android:exported="true" />
         <activity
             android:name=".ui.PrivacyPolicyActivity"

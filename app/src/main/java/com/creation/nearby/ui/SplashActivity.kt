@@ -24,7 +24,6 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-
     fun fullscreen(activity: Activity) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE)
         activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
