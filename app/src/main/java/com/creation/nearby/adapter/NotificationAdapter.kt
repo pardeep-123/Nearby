@@ -52,16 +52,8 @@ class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : Rec
 
                 binding.removeView.setOnClickListener{
 
-                    if(isHomeFragment){
-                        mList.removeAt(position)
-                        HomeFragment.notificationAdapter.notifyDataSetChanged()
-
-                    }else{
-
-                        mList.removeAt(position)
-                        NotificationsActivity.notificationAdapter.notifyDataSetChanged()
-
-                    }
+                    mList.removeAt(position)
+                    notifyDataSetChanged()
 
                 }
 

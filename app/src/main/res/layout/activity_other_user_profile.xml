@@ -9,10 +9,11 @@
 
     <ImageView
         android:id="@+id/back"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:tint="@color/white"
         android:elevation="3dp"
+        android:padding="10dp"
         android:layout_marginTop="55dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -109,7 +110,6 @@
 
         </androidx.recyclerview.widget.RecyclerView>
 
-
         <TextView
             android:id="@+id/textView63"
             android:layout_width="wrap_content"
@@ -117,7 +117,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/worksans_semibold"
-            android:text="Swipe up to view more"
+            android:text="Swipe down to view more"
             android:textColor="@color/white"
             android:textSize="16sp"
 

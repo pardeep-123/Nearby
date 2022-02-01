@@ -129,14 +129,13 @@
                 <com.makeramen.roundedimageview.RoundedImageView
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/map_pic"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:riv_corner_radius="5dp"
-                    app:riv_mutate_background="true">
+                    app:riv_corner_radius="20dp">
 
                 </com.makeramen.roundedimageview.RoundedImageView>
 

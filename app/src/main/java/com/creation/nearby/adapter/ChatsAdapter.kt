@@ -1,6 +1,7 @@
 package com.creation.nearby.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.model.ChatModel
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.NotificationModel
+import com.creation.nearby.ui.OngoingChatActivity
 
 class ChatsAdapter(private val mList: ArrayList<ChatModel>) : RecyclerView.Adapter<ChatsAdapter.ViewHolder>() {
 
@@ -38,6 +40,10 @@ class ChatsAdapter(private val mList: ArrayList<ChatModel>) : RecyclerView.Adapt
                 }else{
                     binding.circleImageView.visibility = View.GONE
 
+                }
+
+                itemView.setOnClickListener{
+                    itemView.context.startActivity(Intent(itemView.context,OngoingChatActivity::class.java))
                 }
 
             }

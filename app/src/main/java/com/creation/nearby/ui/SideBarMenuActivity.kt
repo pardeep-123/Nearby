@@ -18,7 +18,7 @@ import com.creation.nearby.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.permissionx.guolindev.PermissionX
 
-class SideBarMenuActivity : AppCompatActivity(),View.OnClickListener {
+class SideBarMenuActivity : AppCompatActivity() {
 
    private lateinit var binding: ActivitySideBarMenuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,47 +26,45 @@ class SideBarMenuActivity : AppCompatActivity(),View.OnClickListener {
         binding = ActivitySideBarMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.notificationLayout.setOnClickListener(this)
-        binding.settingsLayout.setOnClickListener(this)
-        binding.myProfileLayout.setOnClickListener(this)
-        binding.toggleOnLayout.setOnClickListener(this)
-        binding.toggleOffLayout.setOnClickListener(this)
-        binding.userCamera.setOnClickListener(this)
+        onClickEvent()
 
     }
 
-    override fun onClick(v: View?) {
+    private fun onClickEvent() {
 
-        when(v){
+        binding.notificationLayout.setOnClickListener{
+            startActivity(Intent(this,NotificationsActivity::class.java))
+        }
+        binding.settingsLayout.setOnClickListener{
+            startActivity(Intent(this,SettingsActivity::class.java))
+        }
+        binding.myProfileLayout.setOnClickListener{
+            startActivity(Intent(this,MyProfileActivity::class.java))
+        }
+        binding.feedbackLayout.setOnClickListener{
+            startActivity(Intent(this,FeedBackActivity::class.java))
+        }
+        binding.contactUsLayout.setOnClickListener{
+            startActivity(Intent(this,ContactUsActivity::class.java))
+        }
+        binding.toggleOnLayout.setOnClickListener{
+            binding.toggleOffLayout.visibility = View.VISIBLE
+            binding.toggleOnLayout.visibility = View.GONE
+        }
+        binding.toggleOffLayout.setOnClickListener{
+            binding.toggleOffLayout.visibility = View.GONE
+            binding.toggleOnLayout.visibility = View.VISIBLE
+        }
+        binding.userCamera.setOnClickListener{
 
-           binding.notificationLayout->{
-               startActivity(Intent(this,NotificationsActivity::class.java))
-           }
+            optionsDialog()
 
-            binding.settingsLayout->{
-                startActivity(Intent(this,SettingsActivity::class.java))
-            }
-            binding.myProfileLayout->{
-                startActivity(Intent(this,MyProfileActivity::class.java))
-            }
-            binding.toggleOnLayout->{
-                binding.toggleOffLayout.visibility = View.VISIBLE
-                binding.toggleOnLayout.visibility = View.GONE
-            }
-            binding.toggleOffLayout->{
-                binding.toggleOffLayout.visibility = View.GONE
-                binding.toggleOnLayout.visibility = View.VISIBLE
-            }
-            binding.userCamera->{
-
-                optionsDialog()
-
-            }
-
+        }
+        binding.backBtn.setOnClickListener{
+            onBackPressed()
         }
 
     }
-
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

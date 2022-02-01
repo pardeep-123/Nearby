@@ -15,7 +15,7 @@ import com.creation.nearby.databinding.FragmentEventsBinding
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.ui.AddEventActivity
 
-class EventsFragment : Fragment(),View.OnClickListener {
+class EventsFragment : Fragment() {
 
     lateinit var binding: FragmentEventsBinding
     lateinit var eventsAdapter: EventsAdapter
@@ -42,19 +42,16 @@ class EventsFragment : Fragment(),View.OnClickListener {
         binding.eventsRecView.adapter = eventsAdapter
         eventsAdapter.notifyDataSetChanged()
 
-        binding.addEventIv.setOnClickListener(this)
+
+        onClickHandler()
 
     }
 
-    override fun onClick(v: View?) {
-
-        when(v){
-
-            binding.addEventIv->{
-                startActivity(Intent(view?.context,AddEventActivity::class.java))
-            }
-
+    private fun onClickHandler() {
+        binding.addEventLayout.setOnClickListener{
+            startActivity(Intent(requireContext(),AddEventActivity::class.java))
         }
-
     }
+
+
 }

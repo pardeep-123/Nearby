@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Nearby</string>
+
+    //not for this project
+    <string name="map_key">AIzaSyBC8rG3Pm4TYeTkAiqrqhAEB3X2jk3HvpA</string>
+
+
+
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="login_with_google">Login with Google</string>
     <string name="login_with_apple">Login with Apple</string>
@@ -149,6 +155,10 @@
     <string name="enter_your_email">Enter your Email</string>
     <string name="wave_and_say_hi">👋 Wave and say Hi!</string>
     <string name="continue_to_swipe">Continue to Swipe</string>
+    <string name="reset_account_password">Reset Account\nPassword</string>
+    <string name="your_password_must_have_at_least_6_characters_and_one_capitalized_letter">Your password must have at least 6 characters and one capitalized letter.</string>
+    <string name="request_password">Request Password</string>
+    <string name="start_a_random_chat">Start a random chat</string>
 
 
 </resources>

@@ -12,7 +12,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:src="@drawable/discover_everything"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,183 +25,198 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:src="@drawable/logo"
-        android:padding="20dp"
+        android:layout_marginTop="8dp"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
     </ImageView>
 
-
-    <LinearLayout
-        android:id="@+id/login_layout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:clickable="true"
-            android:background="@drawable/round_shape"
-            android:backgroundTint="@color/black">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:tint="@color/white"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/apple_icon">
-
-            </ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_with_apple"
-                android:textColor="@color/white"
-                android:textSize="16sp"
-                android:fontFamily="@font/worksans_black">
-
-
-            </TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center"
-            android:paddingTop="16dp"
-            android:layout_marginTop="16dp"
-            android:paddingBottom="16dp"
-            android:clickable="true"
-            android:background="@drawable/round_shape"
-            android:backgroundTint="@color/blue">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:tint="@color/white"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/facebook_icon">
-
-            </ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_with_facebook"
-                android:textColor="@color/white"
-                android:textSize="16sp">
-
-
-            </TextView>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginLeft="25dp"
-            android:layout_marginRight="25dp"
-            android:gravity="center"
-            android:clickable="true"
-            android:paddingTop="16dp"
-            android:paddingBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/round_shape"
-            android:backgroundTint="@color/dark_orange">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                app:tint="@color/white"
-                android:layout_marginRight="8dp"
-                android:src="@drawable/google_icon">
-
-            </ImageView>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_with_google"
-                android:textColor="@color/white"
-                android:textSize="16sp">
-
-
-            </TextView>
-
-        </LinearLayout>
-
-
-    </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/login_with_email"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/worksans_semibold"
-        android:gravity="center"
-        android:padding="8dp"
-        android:text="@string/login_with_email"
-        android:textSize="16sp"
-        android:textColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_layout">
+        android:layout_height="0dp">
 
-    </TextView>
+        <LinearLayout
+            android:id="@+id/login_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login_with_email"
-        app:layout_constraintVertical_bias="0.25">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/black"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/apple_icon"
+                    app:tint="@color/white">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/worksans_black"
+                    android:text="@string/login_with_apple"
+                    android:textColor="@color/white"
+                    android:textSize="16sp">
+
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/blue"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/facebook_icon"
+                    app:tint="@color/white">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/worksans_black"
+                    android:text="@string/login_with_facebook"
+                    android:textColor="@color/white"
+                    android:textSize="16sp">
+
+
+                </TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="25dp"
+                android:background="@drawable/round_shape"
+                android:backgroundTint="@color/dark_orange"
+                android:clickable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingVertical="16dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="8dp"
+                    android:src="@drawable/google_icon"
+                    app:tint="@color/white">
+
+                </ImageView>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/worksans_black"
+                    android:text="@string/login_with_google"
+                    android:textColor="@color/white"
+                    android:textSize="16sp">
+
+
+                </TextView>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/login_with_email"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/worksans_black"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="@string/login_with_email"
             android:textColor="@color/black"
-            android:text="@string/don_t_have_an_account"
-            android:textSize="16sp">
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_layout">
 
         </TextView>
 
-        <TextView
-            android:id="@+id/sign_up"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="4dp"
-            android:fontFamily="@font/worksans_semibold"
-            android:text="@string/sign_up"
-            android:textColor="@color/black"
-            android:textSize="18sp">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/login_with_email"
+            app:layout_constraintVertical_bias="0.25">
 
-        </TextView>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/worksans_regular"
+                android:text="@string/don_t_have_an_account"
+                android:textColor="@color/black"
+                android:textSize="16sp">
 
-    </LinearLayout>
+            </TextView>
+
+            <TextView
+                android:id="@+id/sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:fontFamily="@font/worksans_black"
+                android:text="@string/sign_up"
+                android:textColor="@color/black"
+                android:textSize="18sp">
+
+            </TextView>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

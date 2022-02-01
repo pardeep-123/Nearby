@@ -62,5 +62,15 @@ class ChatActivity : AppCompatActivity() {
         binding.chatsRecView.adapter = chatAdapter
         chatAdapter.notifyDataSetChanged()
 
+        onClickHandler()
+
+    }
+
+    private fun onClickHandler() {
+
+        binding.backiv.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 }

@@ -1,6 +1,7 @@
 package com.creation.nearby.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import com.creation.nearby.databinding.ItemFriendsBinding
 import com.creation.nearby.databinding.ItemOnlineChatUserBinding
 import com.creation.nearby.model.FriendsModel
 import com.creation.nearby.model.OnlineUserChatModel
+import com.creation.nearby.ui.DetailedProfileActivity
 
 class OnlineUserFriendsAdapter(private val mList: ArrayList<FriendsModel>) : RecyclerView.Adapter<OnlineUserFriendsAdapter.ViewHolder>() {
 
@@ -36,6 +38,11 @@ class OnlineUserFriendsAdapter(private val mList: ArrayList<FriendsModel>) : Rec
                     binding.friendsActive.visibility = View.GONE
 
                 }
+
+                itemView.setOnClickListener{
+                    itemView.context.startActivity(Intent(itemView.context,DetailedProfileActivity::class.java))
+                }
+
             }
         }
 

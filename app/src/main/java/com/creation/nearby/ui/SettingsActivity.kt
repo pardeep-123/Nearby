@@ -5,8 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.creation.nearby.databinding.ActivitySettingsBinding
-import com.creation.nearby.databinding.ActivitySideBarMenuBinding
-import com.creation.nearby.ui.authentication.ResetPasswordActivity
+import com.creation.nearby.ui.authentication.ChangePasswordActivity
 
 class SettingsActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding: ActivitySettingsBinding
@@ -28,7 +27,7 @@ class SettingsActivity : AppCompatActivity(),View.OnClickListener {
             }
 
             binding.changePasswordActivity->{
-                startActivity(Intent(this,ResetPasswordActivity::class.java))
+                startActivity(Intent(this,ChangePasswordActivity::class.java))
             }
 
         }

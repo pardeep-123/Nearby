@@ -20,13 +20,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:id="@+id/back_btn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="32dp"
         android:src="@drawable/back_arrow"
-        android:tint="@color/black"
+        app:tint="@color/black"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView23"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -38,7 +39,9 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/select_image_pic"
+        android:scaleType="centerCrop"
+        app:riv_corner_radius="120dp"
+        android:src="@drawable/select_image_pic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView23" />
@@ -83,7 +86,6 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                android:textCursorDrawable="@null"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
@@ -113,13 +115,12 @@
                 android:backgroundTint="@color/edittext_grey"
                 android:hint="@string/type_here"
                 android:inputType="textPersonName"
-                android:paddingStart="16dp"
+                android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/black"
                 android:layout_marginTop="8dp"
                 android:textColorHint="@color/dark_grey"
-                android:textCursorDrawable="@null"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
@@ -147,12 +148,11 @@
                 android:backgroundTint="@color/edittext_grey"
                 android:hint="@string/type_here"
                 android:inputType="textPersonName"
-                android:paddingStart="16dp"
+                android:paddingHorizontal="16dp"
                 android:paddingTop="16dp"
                 android:paddingBottom="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_grey"
-                android:textCursorDrawable="@null"
                 android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -173,8 +173,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName5"
+            <TextView
+                android:id="@+id/time_picker"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -183,13 +183,12 @@
                 android:hint="@string/select_time"
                 android:inputType="textPersonName"
                 android:paddingStart="16dp"
-                android:paddingTop="16dp"
-                android:paddingBottom="16dp"
+                android:paddingVertical="16dp"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_grey"
-                android:textCursorDrawable="@null"
                 android:textSize="16sp"
+                android:paddingHorizontal="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
@@ -205,10 +204,10 @@
                 android:textSize="16sp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName5" />
+                app:layout_constraintTop_toBottomOf="@+id/time_picker" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName6"
+                android:id="@+id/location"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="32dp"
@@ -218,11 +217,12 @@
                 android:inputType="textPersonName"
                 android:paddingStart="16dp"
                 android:paddingTop="16dp"
+                android:clickable="false"
+                android:focusable="false"
                 android:paddingBottom="16dp"
                 android:layout_marginTop="8dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_grey"
-                android:textCursorDrawable="@null"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView24"
@@ -232,7 +232,7 @@
                 android:id="@+id/button2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="12dp"
                 android:background="@drawable/round_edittext_background"
                 android:backgroundTint="@color/sky_blue"
                 android:fontFamily="@font/worksans_semibold"
@@ -242,9 +242,12 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonName6"
-                app:layout_constraintStart_toStartOf="@+id/editTextTextPersonName6"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName6" />
+                android:layout_marginBottom="32dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/location"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/location"
+                app:layout_constraintTop_toBottomOf="@+id/location" />
 
 
 

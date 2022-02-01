@@ -175,7 +175,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.searchImageView -> {
 
-                startActivity(Intent(this, ContactUsActivity::class.java))
+                startActivity(Intent(this, SearchActivity::class.java))
 
             }
 

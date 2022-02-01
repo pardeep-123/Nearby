@@ -25,6 +25,11 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
         binding.showHide.setOnClickListener(this)
         binding.signInLogin.setOnClickListener(this)
 
+        binding.emailLogin.addTextChangedListener(this)
+        binding.passwordLogin.addTextChangedListener(this)
+
+        binding.signInLogin.isEnabled = false
+        binding.signInLogin.alpha = 0.5f
 
     }
 
@@ -37,7 +42,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
 
             }
             binding.goBack->{
-               finish()
+               onBackPressed()
             }
 
             binding.signUp->{
@@ -77,15 +82,27 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
     }
 
     override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        if (binding.emailLogin.text.toString().isNotEmpty()){
 
-            binding.signInLogin.isEnabled = binding.passwordLogin.text.toString().isNotEmpty() && binding.passwordLogin.text.toString().length >= 7
-
-        }else{
-            binding.signInLogin.isEnabled = false
-        }
     }
 
     override fun afterTextChanged(s: Editable?) {
+
+        if (binding.emailLogin.text.isNotEmpty()){
+
+            if(binding.passwordLogin.text.isNotEmpty()){
+
+                binding.signInLogin.isEnabled =  true
+                binding.signInLogin.alpha = 1f
+
+            }else{
+                binding.signInLogin.isEnabled = false
+                binding.signInLogin.alpha = 0.5f
+            }
+
+        }else{
+            binding.signInLogin.isEnabled = false
+            binding.signInLogin.alpha = 0.5f
+        }
+
     }
 }

@@ -72,7 +72,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
 
 
-
         //full profile dialog
 
         fullProfileDialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
@@ -105,11 +104,11 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         //full profile dialog
 
-
         binding.back.setOnClickListener(this)
+        dialogBinding.goBack.setOnClickListener(this)
+        dialogBinding.blockTv.setOnClickListener(this)
 
     }
-
 
     private fun initAdapter() {
         val onActionListener = object : OnActionListener<GallaryModel> {

@@ -13,9 +13,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White">
         <activity
-            android:name=".ui.OtherUserProfileActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
+            android:name=".ui.authentication.ResetPasswordActivity"
             android:exported="true" />
+        <activity
+            android:name=".ui.OtherUserProfileActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
         <activity
             android:name=".ui.PrivacyPolicyActivity"
             android:exported="true" />
@@ -60,7 +63,7 @@
             android:exported="true"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".ui.authentication.ResetPasswordActivity"
+            android:name=".ui.authentication.ChangePasswordActivity"
             android:exported="true" />
         <activity
             android:name=".ui.authentication.SignUpActivity"

@@ -105,7 +105,6 @@
             android:fontFamily="@font/worksans_regular"
             android:hint="@string/search"
             android:textColor="@color/black"
-            android:textCursorDrawable="@null"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

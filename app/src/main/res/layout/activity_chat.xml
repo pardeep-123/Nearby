@@ -8,12 +8,13 @@
     tools:context=".ui.ChatActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
+        android:id="@+id/backiv"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black"
+        android:padding="10dp"
         android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
         app:srcCompat="@drawable/back_arrow" />
@@ -27,7 +28,7 @@
         app:srcCompat="@drawable/plus_icon"
         android:layout_marginTop="30dp"
         android:layout_marginEnd="24dp"
-        android:tint="@color/black"/>
+        app:tint="@color/black"/>
 
     <TextView
         android:id="@+id/textView19"
@@ -39,7 +40,7 @@
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintStart_toEndOf="@+id/backiv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
@@ -56,7 +57,6 @@
         android:layout_marginEnd="24dp"
         android:gravity="center_vertical"
         android:layout_marginTop="24dp"
-        android:textCursorDrawable="@null"
         android:textColor="@color/black"
         android:drawableStart="@drawable/search_icon"
         android:drawableTint="@color/dark_grey"
@@ -84,9 +84,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/online_now"
-                android:fontFamily="@font/worksans_semibold"
+                android:fontFamily="@font/worksans_black"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -114,6 +114,59 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/start_random_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/round_small_with_border"
+                android:paddingVertical="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/online_chats_recy_view">
+
+                <ImageView
+                    android:id="@+id/imageView29"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_marginStart="24dp"
+                    android:src="@drawable/chat_icon1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </ImageView>
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/worksans_semibold"
+                    android:text="@string/start_a_random_chat"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/imageView29"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                </TextView>
+
+                <ImageView
+                    android:layout_width="14dp"
+                    android:layout_height="14dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/arrow_forward"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/black">
+
+                </ImageView>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <TextView
                 android:id="@+id/textView22"
                 android:layout_width="wrap_content"
@@ -121,11 +174,11 @@
                 android:text="@string/chats"
                 android:textColor="@color/black"
                 android:textSize="24sp"
-                android:fontFamily="@font/worksans_semibold"
+                android:fontFamily="@font/worksans_black"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/online_chats_recy_view" />
+                app:layout_constraintTop_toBottomOf="@+id/start_random_chat" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chats_rec_view"
