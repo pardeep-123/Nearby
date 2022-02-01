@@ -40,11 +40,29 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var dialogBinding: FilterBottomSheetDialogBinding
     lateinit var filterDialog: BottomSheetDialog
 
+    lateinit var set: ConstraintSet
+    lateinit var mapLayout: FrameLayout
+    lateinit var mainLayout: FrameLayout
+    lateinit var constraint: ConstraintLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        mapLayout = findViewById(R.id.complete_frame_layout)
+        mainLayout = findViewById(R.id.selection_frame_layout)
+        constraint = findViewById(R.id.mainActivityLayout)
+        set = ConstraintSet()
+        set.clone(constraint)
+
+        set.connect(R.id.selection_frame_layout,ConstraintSet.TOP,R.id.section_recycler_view,ConstraintSet.BOTTOM)
+        set.connect(R.id.selection_frame_layout,ConstraintSet.START,ConstraintSet.PARENT_ID,ConstraintSet.START)
+        set.connect(R.id.selection_frame_layout,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END)
+        set.connect(R.id.selection_frame_layout,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
+        set.constrainDefaultHeight(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
+        set.constrainDefaultWidth(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
 
         filterDialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
         dialogBinding = FilterBottomSheetDialogBinding.inflate(layoutInflater, null, false)
@@ -89,57 +107,46 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val onActionListener = object : OnActionListener<ActivitiesModel> {
             override fun notify(model: ActivitiesModel, position: Int, view: View) {
 
-                val mapLayout: FrameLayout = findViewById(R.id.complete_frame_layout)
-                val mainLayout: FrameLayout = findViewById(R.id.selection_frame_layout)
-//                val constraint: ConstraintLayout = findViewById(R.id.mainActivityLayout)
-//                val set = ConstraintSet()
-//                set.clone(constraint)
-//
-//                set.connect(R.id.selection_frame_layout,ConstraintSet.TOP,R.id.section_recycler_view,ConstraintSet.BOTTOM)
-//                set.connect(R.id.selection_frame_layout,ConstraintSet.START,ConstraintSet.PARENT_ID,ConstraintSet.START)
-//                set.connect(R.id.selection_frame_layout,ConstraintSet.END,ConstraintSet.PARENT_ID,ConstraintSet.END)
-//                set.connect(R.id.selection_frame_layout,ConstraintSet.BOTTOM,ConstraintSet.PARENT_ID,ConstraintSet.BOTTOM)
-//                set.constrainDefaultHeight(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
-//                set.constrainDefaultWidth(R.id.selection_frame_layout,ConstraintSet.MATCH_CONSTRAINT_SPREAD)
-//                set.applyTo(constraint)
+
+                set.applyTo(constraint)
 
                 if (position == 0) {
 
                     openFragment(HomeFragment(),R.id.selection_frame_layout)
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
+              //      mapLayout.visibility = View.GONE
+              //      mainLayout.visibility=View.VISIBLE
                 }
                 if (position == 1) {
                     openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
+               //     mapLayout.visibility = View.GONE
+               //     mainLayout.visibility=View.VISIBLE
                 }
 
                 if (position == 2) {
-//                    mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
+                    mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
 
-                    mainLayout.removeAllViews()
-                    openFragment(MapFragment(),R.id.complete_frame_layout)
-                    mapLayout.visibility = View.VISIBLE
-                    mainLayout.visibility=View.GONE
+       //             mainLayout.removeAllViews()
+                    openFragment(MapFragment(),R.id.selection_frame_layout)
+              //      mapLayout.visibility = View.VISIBLE
+               //     mainLayout.visibility=View.GONE
                 }
                 if (position == 3) {
                     openFragment(EventsFragment(),R.id.selection_frame_layout)
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
+               //     mapLayout.visibility = View.GONE
+                //    mainLayout.visibility=View.VISIBLE
                 }
                 if (position == 4) {
 
                     openFragment(FeedFragment(),R.id.selection_frame_layout)
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
+                //    mapLayout.visibility = View.GONE
+                //    mainLayout.visibility=View.VISIBLE
 
                 }
                 if (position == 5) {
 
                     openFragment(FriendsFragment(),R.id.selection_frame_layout)
-                    mapLayout.visibility = View.GONE
-                    mainLayout.visibility=View.VISIBLE
+                //    mapLayout.visibility = View.GONE
+                //    mainLayout.visibility=View.VISIBLE
 
                 }
             }
@@ -148,8 +155,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         binding.sectionRecyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
     }
-    override fun onClick(p0: View?) {
-        when (p0) {
+    override fun onClick(v: View?) {
+        when (v) {
 
             binding.chatImageView -> {
 
