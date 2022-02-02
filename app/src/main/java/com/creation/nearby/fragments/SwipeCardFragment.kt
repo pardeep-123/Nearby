@@ -22,9 +22,9 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     private lateinit var swipeAdapter: SwipeCardAdapter
     private lateinit var swipeLayoutManager: CardStackLayoutManager
     private var swipeLIst = ArrayList<SwipeCardModel>()
-    private var height: Int? = null
-
     private lateinit var binding: FragmentSwipeCardBinding
+
+    private var countSwipe = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +75,12 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
 
     override fun onCardSwiped(direction: Direction?) {
 
-        requireContext().startActivity(Intent(requireContext(),CongratulationActivity::class.java))
+        countSwipe += 1
+
+        if (countSwipe == 3){
+            requireContext().startActivity(Intent(requireContext(),CongratulationActivity::class.java))
+
+        }
 
     }
 

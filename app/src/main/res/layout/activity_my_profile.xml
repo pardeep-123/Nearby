@@ -9,11 +9,12 @@
 
 
     <ImageView
-        android:id="@+id/imageView9"
-        android:layout_width="18dp"
-        android:layout_height="18dp"
+        android:id="@+id/backbtn1"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         app:tint="@color/white"
         android:elevation="3dp"
+        android:padding="10dp"
         android:layout_marginTop="55dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +44,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/user_profile_pic_my_profile"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9">
+        app:layout_constraintTop_toBottomOf="@+id/backbtn1">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"

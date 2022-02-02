@@ -49,7 +49,6 @@
             android:textSize="16sp"
             android:focusable="true"
             android:textColor="@color/black"
-            android:textCursorDrawable="@null"
             android:paddingVertical="8dp"
             android:paddingHorizontal="8dp"
             android:textColorHint="@color/dark_grey"

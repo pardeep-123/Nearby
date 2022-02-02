@@ -107,8 +107,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:elevation="10dp"
-        android:src="@drawable/report_icon"
-        android:background="@color/white"
+        android:src="@drawable/report"
         app:layout_constraintBottom_toTopOf="@+id/materialCardView"
         app:layout_constraintEnd_toEndOf="@+id/materialCardView"
         app:layout_constraintTop_toTopOf="@+id/materialCardView">

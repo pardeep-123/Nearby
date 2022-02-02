@@ -1,10 +1,13 @@
 package com.creation.nearby.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.creation.nearby.R
@@ -17,6 +20,7 @@ import com.creation.nearby.model.InterestedModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.android.material.card.MaterialCardView
 
 class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
     private lateinit var binding: ActivitySwipeUserProfileBinding
@@ -60,7 +64,13 @@ class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
         val onActionListener = object : OnActionListener<GallaryModel> {
             override fun notify(model: GallaryModel, position: Int, view: View) {
 
+                val intent  = Intent(this@SwipeUserProfileActivity,FullPictureActivity::class.java)
 
+                val transitionName: String = getString(R.string.open_with_animation)
+                val viewImage: MaterialCardView = view.findViewById(R.id.layoutCard)
+
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@SwipeUserProfileActivity,viewImage,transitionName)
+                ActivityCompat.startActivity(this@SwipeUserProfileActivity,intent,options.toBundle())
 
             }
         }

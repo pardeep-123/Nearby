@@ -57,6 +57,8 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtherUserProfileBinding.inflate(layoutInflater)
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(binding.root)
 
         interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
@@ -70,8 +72,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
-
-
         //full profile dialog
 
         fullProfileDialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
@@ -81,7 +81,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         fullProfileDialog.setCanceledOnTouchOutside(true)
 
         onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.otherUserMainLayout))
-
+        onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.showLayout))
 
         swipeInterestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         swipeInterestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
@@ -145,7 +145,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         }
     }
-
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

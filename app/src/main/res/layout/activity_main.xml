@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/mainActivityLayout"
-    android:fitsSystemWindows="true"
     tools:context=".ui.MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -13,19 +12,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="16dp"
         android:elevation="5dp"
         android:background="@drawable/round_edittext_background"
-        android:padding="16dp"
+        android:paddingVertical="16dp"
+        android:paddingHorizontal="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/user_profile_iv"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginStart="8dp"
             android:src="@drawable/user_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,8 +52,8 @@
 
         <ImageView
             android:id="@+id/search_image_view"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/search_icon"
             android:rotation="90"
@@ -67,8 +67,8 @@
 
         <ImageView
             android:id="@+id/chat_image_view"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/chat_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -92,8 +92,8 @@
 
         <ImageView
             android:id="@+id/filter_image_view"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/filter_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -105,8 +105,8 @@
 
         <ImageView
             android:id="@+id/settings_image_view"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/settings_icon"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -124,8 +124,9 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="8dp"
         android:elevation="5dp"
+        android:paddingVertical="8dp"
+        android:layout_marginHorizontal="2dp"
         android:clickable="true"
         tools:listitem="@layout/item_activities"
         android:orientation="horizontal"

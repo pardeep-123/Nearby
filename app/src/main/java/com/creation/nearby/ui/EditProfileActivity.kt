@@ -86,7 +86,6 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("House Parties",true,false))
         interestsList.add(InterestedModel("Astrology",true,false))
 
-
         interestsAdapter = InterestsAdapter(interestsList)
         binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this,FlexDirection.ROW)
 
@@ -100,6 +99,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.womenTv.setOnClickListener(this)
         binding.bothTv.setOnClickListener(this)
         binding.userProfilePic.setOnClickListener(this)
+        binding.backBtn2.setOnClickListener(this)
     }
 
 
@@ -257,6 +257,10 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         when(v){
 
+            binding.backBtn2->{
+                onBackPressed()
+            }
+
             binding.userProfilePic->{
                 isMainPhoto = true
                 optionsDialog()
@@ -304,10 +308,6 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
             binding.otherGender.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
-
-
-
-
             binding.menTv->{
 
                 binding.menTv.backgroundTintList = resources.getColorStateList(R.color.sky_blue)

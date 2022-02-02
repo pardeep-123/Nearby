@@ -14,11 +14,10 @@ class EventDetailsActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding: ActivityEventDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(binding.root)
-
         binding.goBack.setOnClickListener(this)
         binding.eventsCheck.setOnClickListener(this)
         binding.reportTv.setOnClickListener(this)
@@ -33,14 +32,11 @@ class EventDetailsActivity : AppCompatActivity(),View.OnClickListener {
             binding.eventsCheck->{
                 finish()
             }
-            binding.reportTv->{
+            binding.reportTv-> {
                 optionsDialog()
             }
-
         }
-
     }
-
 
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)

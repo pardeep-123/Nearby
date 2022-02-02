@@ -68,6 +68,7 @@ class ActivityAdapter(
 
                 itemView.setOnClickListener {
 
+                    onActionListener.notify(model, position, holder.itemView)
 
                     selectPosition = position
                         if (position == 0) {
@@ -100,8 +101,6 @@ class ActivityAdapter(
 
                     notifyDataSetChanged()
 
-                    onActionListener.notify(model, position, holder.itemView)
-
                 }
             }
         }
@@ -112,34 +111,6 @@ class ActivityAdapter(
     }
 
     class ViewHolder(val binding: ItemActivitiesBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(selectPosition: Int, position: Int, color: Int) {
-
-            if (selectPosition == position){
-
-                binding.activityName.setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        color
-                    )
-                )
-                binding.activityPic.imageTintList =
-                    ActivityCompat.getColorStateList(itemView.context, color)
-
-
-            }else{
-                binding.activityName.setTextColor(
-                    ContextCompat.getColor(
-                        itemView.context,
-                        R.color.black_dark_transparent
-                    )
-                )
-                binding.activityPic.imageTintList = ActivityCompat.getColorStateList(
-                    itemView.context,
-                    R.color.black_dark_transparent
-                )
-            }
-
-        }
 
     }
 

@@ -2,6 +2,7 @@ package com.creation.nearby.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.ImageView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityFullPictureBinding
@@ -12,6 +13,9 @@ class FullPictureActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFullPictureBinding.inflate(layoutInflater)
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+
         setContentView(binding.root)
 
      //   postponeEnterTransition()

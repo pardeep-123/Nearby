@@ -13,5 +13,15 @@ class PersonalInfoActivity : AppCompatActivity() {
         binding = ActivityPersonalInfoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        clickHandler()
+
+    }
+
+    private fun clickHandler() {
+
+        binding.gobackBtn.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 }

@@ -13,7 +13,7 @@ import com.creation.nearby.ui.authentication.WelcomeActivity
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        fullscreen(this)
+        fullscreen()
         setContentView(R.layout.activity_splash)
 
         Handler().postDelayed({
@@ -24,9 +24,11 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    fun fullscreen(activity: Activity) {
-        activity.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+    fun fullscreen() {
+
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN)
+
     }
 
 

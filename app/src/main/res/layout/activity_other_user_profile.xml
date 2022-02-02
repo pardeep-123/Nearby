@@ -14,7 +14,7 @@
         app:tint="@color/white"
         android:elevation="3dp"
         android:padding="10dp"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="50dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

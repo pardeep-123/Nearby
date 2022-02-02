@@ -33,7 +33,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import com.permissionx.guolindev.PermissionX
 
-class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
+class MyProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMyProfileBinding
     private  var interestsList = ArrayList<InterestedModel>()
@@ -45,6 +45,9 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
+
+        window.decorView.systemUiVisibility =
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(binding.root)
 
         initAdapter()
@@ -60,15 +63,31 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
-
         gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
         gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
         gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
         gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
         gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
 
-        binding.cameraIv.setOnClickListener(this)
-        binding.editProfileIv.setOnClickListener(this)
+        clickHandler()
+
+    }
+
+    private fun clickHandler() {
+
+        binding.backbtn1.setOnClickListener{
+            onBackPressed()
+        }
+
+        binding.cameraIv.setOnClickListener{
+
+            optionsDialog()
+
+        }
+        binding.editProfileIv.setOnClickListener{
+
+            startActivity(Intent(this,EditProfileActivity::class.java))
+        }
 
     }
 
@@ -93,21 +112,6 @@ class MyProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.gallaryRecyclerView.adapter = gallaryAdapter
         gallaryAdapter.notifyDataSetChanged()
     }
-
-    override fun onClick(v: View?) {
-        when(v){
-
-            binding.cameraIv->{
-
-                optionsDialog()
-
-            }binding.editProfileIv->{
-
-                startActivity(Intent(this,EditProfileActivity::class.java))
-            }
-        }
-    }
-
 
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
