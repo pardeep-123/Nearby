@@ -25,6 +25,8 @@ import com.creation.nearby.model.PostModel
 import com.creation.nearby.model.SuggestionsModel
 import com.creation.nearby.utils.ToastUtils
 import com.futuremind.recyclerviewfastscroll.Utils
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class FeedFragment : Fragment() {
@@ -72,7 +74,7 @@ class FeedFragment : Fragment() {
 
         val onActionListener = object : OnActionListener<PostModel> {
             override fun notify(model: PostModel, position: Int, view: View) {
-                        optionsDialog()
+                optionsDialog()
             }
         }
 

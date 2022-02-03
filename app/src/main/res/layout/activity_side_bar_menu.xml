@@ -32,15 +32,40 @@
 
     </com.makeramen.roundedimageview.RoundedImageView>
 
-    <ImageView
-        android:id="@+id/user_camera"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="-10dp"
+        app:cardCornerRadius="30dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/white"
+        android:background="@drawable/circle_background"
+        android:backgroundTint="@color/grey2"
         app:layout_constraintBottom_toTopOf="@+id/user_image"
         app:layout_constraintEnd_toEndOf="@+id/user_image"
-        app:layout_constraintTop_toTopOf="@+id/user_image"
-        app:srcCompat="@drawable/settings_camera_icon" />
+        app:layout_constraintTop_toTopOf="@+id/user_image">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/user_camera"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/my_profile_camera_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
 
     <ImageView
         android:id="@+id/imageView11"

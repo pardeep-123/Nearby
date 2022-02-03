@@ -37,6 +37,7 @@ class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
 
         binding.goback.setOnClickListener(this)
         binding.sendMessageBtn.setOnClickListener(this)
+        binding.sendMessageBtn.setOnClickListener(this)
 
 
     }

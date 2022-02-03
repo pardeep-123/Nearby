@@ -1,5 +1,6 @@
 package com.creation.nearby.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -70,6 +71,9 @@ class ChatActivity : AppCompatActivity() {
 
         binding.backiv.setOnClickListener{
             onBackPressed()
+        }
+        binding.chatIv.setOnClickListener{
+            startActivity(Intent(this,OngoingChatActivity::class.java))
         }
 
     }

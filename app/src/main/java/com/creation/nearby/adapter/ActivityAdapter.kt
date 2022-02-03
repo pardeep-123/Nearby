@@ -77,11 +77,11 @@ class ActivityAdapter(
                         }
 
                         if (position == 1) {
-                            color = R.color.blue
+                            color = R.color.teal
                         }
 
                         if (position == 2) {
-                            color = R.color.green
+                            color = R.color.teal
                         }
 
                         if (position == 3) {
@@ -91,7 +91,7 @@ class ActivityAdapter(
 
                         if (position == 4) {
 
-                            color = R.color.red
+                            color = R.color.blue
                         }
 
                         if (position == 5) {

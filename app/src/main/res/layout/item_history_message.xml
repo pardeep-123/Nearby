@@ -8,8 +8,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userHistoryPic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:scaleType="centerCrop"
@@ -23,13 +23,15 @@
         android:id="@+id/userTime"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2 hrs ago"
         android:layout_marginEnd="16dp"
+        android:fontFamily="@font/worksans_regular"
+        android:text="2 hrs ago"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:textColor="@color/dark_grey"
         android:textSize="12sp"
-        android:fontFamily="@font/worksans_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/userHistoryPic" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/userMessage"
@@ -62,8 +64,8 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/replyPic"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:scaleType="centerCrop"
         android:src="@drawable/user_pic_1"
@@ -84,8 +86,9 @@
         android:text="2 hrs ago"
         android:textColor="@color/dark_grey"
         android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView76"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/replyPic" />
+        app:layout_constraintTop_toTopOf="@+id/textView76" />
 
     <TextView
         android:id="@+id/reply_message"
@@ -94,7 +97,6 @@
         android:layout_marginStart="8dp"
 
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp"
         android:fontFamily="@font/worksans_regular"
         android:text="-No Reply-"
         android:textColor="@color/black"
@@ -103,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/replyPic"
         app:layout_constraintTop_toBottomOf="@+id/reply_time"
-        app:layout_constraintVertical_bias="0.16000003" />
+        app:layout_constraintVertical_bias="0.32999998" />
 
     <View
         android:id="@+id/divider13"

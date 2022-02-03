@@ -173,7 +173,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.userProfileIv -> {
 
-                startActivity(Intent(this, EditProfileActivity::class.java))
+                startActivity(Intent(this, MyProfileActivity::class.java))
 
             }
             binding.filterImageView -> {
@@ -196,46 +196,45 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             dialogBinding.maleLooking->{
 
                 dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-                dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
-                dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
+                dialogBinding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+                dialogBinding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
 
                 dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-                dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+                dialogBinding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                dialogBinding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
                 dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-                dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+                dialogBinding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                dialogBinding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
 
             } dialogBinding.femaleLooking->{
 
             dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-            dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-            dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+            dialogBinding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
             dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-            dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
-            dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
+            dialogBinding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+            dialogBinding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
 
             dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-            dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-            dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+            dialogBinding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
         }dialogBinding.bothLooking->{
 
             dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-            dialogBinding.maleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-            dialogBinding.maleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+            dialogBinding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
             dialogBinding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-            dialogBinding.femaleLooking.setTextColor(ContextCompat.getColor(this,R.color.black))
-            dialogBinding.femaleLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.black))
+            dialogBinding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+            dialogBinding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
             dialogBinding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-            dialogBinding.bothLooking.setTextColor(ContextCompat.getColor(this,R.color.white))
-            dialogBinding.bothLooking.compoundDrawables[0].setTint(ActivityCompat.getColor(this,R.color.white))
-
+            dialogBinding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+            dialogBinding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
         }
 
             dialogBinding.allFilter->{

@@ -31,7 +31,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/black_dark_transparent">
+            app:tint="@color/dark_grey">
 
         </ImageView>
 
@@ -40,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:fontFamily="@font/decalotype_semibold"
+            android:fontFamily="@font/worksans_black"
             android:text="Nearby"
             android:textColor="@color/black"
             android:textSize="24sp"

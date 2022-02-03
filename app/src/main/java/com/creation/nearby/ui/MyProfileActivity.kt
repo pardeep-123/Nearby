@@ -60,6 +60,7 @@ class MyProfileActivity : AppCompatActivity() {
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+     //   binding.profileInterestRecView.layoutManager = GridLayoutManager(this, 3,RecyclerView.VERTICAL,false)
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 

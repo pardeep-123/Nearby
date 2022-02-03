@@ -2,9 +2,13 @@ package com.creation.nearby.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import com.creation.nearby.R
 import com.creation.nearby.databinding.DiscoverItemBinding
+import com.creation.nearby.fragments.EventsFragment
 import com.creation.nearby.model.DiscoverModel
+
 
 class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
 
@@ -25,6 +29,14 @@ class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerVie
             binding.distance.text = item.distance
             binding.titleName.text = item.name
             binding.topicName.text = item.topicName
+
+           holder.itemView.setOnClickListener{
+             var  fragmentTransaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+               fragmentTransaction.replace(R.id.selection_frame_layout, EventsFragment())
+               fragmentTransaction.commit()
+
+
+           }
 
         }
     }

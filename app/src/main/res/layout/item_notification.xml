@@ -8,41 +8,55 @@
     app:draggedItem="@id/drag_item"
     app:rightItem="@id/right_view"
     android:paddingVertical="4dp"
-    android:layout_margin="2dp"
+    android:layout_marginBottom="4dp"
+    android:layout_marginHorizontal="2dp"
     app:swipeDirection="left">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/right_view"
-        android:layout_width="100dp"
+        android:layout_width="140dp"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:layout_gravity="end">
 
-        <ImageView
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_imv"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/add_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginEnd="8dp"
+            android:background="@drawable/round_shape_small1"
+            android:backgroundTint="@color/teal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        </ImageView>
+            <ImageView
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:src="@drawable/plus_icon"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:id="@+id/remove_view"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginStart="4dp"
             android:layout_marginEnd="8dp"
-            android:background="@drawable/circle_background"
+            android:background="@drawable/round_shape_small1"
             android:backgroundTint="@color/edittext_grey"
-            android:padding="16dp"
+            android:padding="14dp"
             android:src="@drawable/cross_icon"
             app:layout_constraintBottom_toBottomOf="@+id/add_imv"
             app:layout_constraintEnd_toStartOf="@+id/add_imv"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/add_imv">
 
         </ImageView>
@@ -53,26 +67,23 @@
         android:id="@+id/drag_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingVertical="4dp"
         android:background="@color/white">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/user_pic"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="2dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
             android:src="@drawable/user_pic_2"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/circle_image_view"
-            android:layout_width="10dp"
-            android:layout_height="10dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="10dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:src="@drawable/circle_4"
             app:layout_constraintBottom_toBottomOf="@+id/user_pic"
             app:layout_constraintEnd_toEndOf="@+id/user_pic" />
@@ -83,13 +94,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/worksans_semibold"
-            android:padding="3dp"
+            android:paddingHorizontal="3dp"
             android:text="@string/brooklyn_simmons"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:layout_marginEnd="4dp"
+            android:textSize="15sp"
             app:layout_constraintEnd_toStartOf="@+id/message_day"
             app:layout_constraintStart_toEndOf="@+id/user_pic"
             app:layout_constraintTop_toTopOf="@+id/user_pic" />
@@ -98,14 +108,15 @@
             android:id="@+id/tvMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
             android:fontFamily="@font/worksans_light"
+            android:padding="3dp"
             android:text="@string/you_are_friends"
             android:textColor="@color/dark_grey"
-            android:textSize="14sp"
-            android:layout_marginEnd="8dp"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/user_pic"
+            app:layout_constraintStart_toStartOf="@+id/tvName"
             app:layout_constraintTop_toBottomOf="@+id/tvName" />
 
 

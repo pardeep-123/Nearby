@@ -1,6 +1,7 @@
 package com.creation.nearby.adapter
 
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -10,6 +11,7 @@ import com.creation.nearby.databinding.ItemPostsBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.PostModel
+import com.creation.nearby.ui.OngoingChatActivity
 
 class PostAdapter(private val mList: ArrayList<PostModel>,var onActionListener: OnActionListener<PostModel>) : RecyclerView.Adapter<PostAdapter.ViewHolder>() {
 
@@ -37,6 +39,10 @@ class PostAdapter(private val mList: ArrayList<PostModel>,var onActionListener: 
                 binding.postReportIv.setOnClickListener{
                     onActionListener.notify(model,position,holder.itemView)
                 }
+                binding.postMessageBtn.setOnClickListener{
+                    holder.itemView.context.startActivity(Intent(itemView.context,OngoingChatActivity::class.java))
+                }
+
 
             }
         }

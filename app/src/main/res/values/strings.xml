@@ -120,7 +120,7 @@
     <string name="gender">Gender</string>
     <string name="other">Other</string>
     <string name="biography">Biography</string>
-    <string name="my_gallary">My Gallary</string>
+    <string name="my_gallary">My Gallery</string>
     <string name="my_zodiac_sign">My Zodiac Sign</string>
     <string name="select_zodiac_sign">Select Zodiac Sign</string>
     <string name="switch_zodiac">Switch</string>
@@ -138,7 +138,7 @@
     <string name="bio">Bio</string>
     <string name="zodiac_sign">Zodiac Sign</string>
     <string name="interests">Interests</string>
-    <string name="gallary">Gallary</string>
+    <string name="gallary">Gallery</string>
     <string name="send">Send</string>
     <string name="search_1">Search</string>
     <string name="feedback">Feedback</string>

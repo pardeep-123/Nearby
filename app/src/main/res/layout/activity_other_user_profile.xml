@@ -58,29 +58,61 @@
 
         </TextView>
 
-        <ImageView
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dislike_btn"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/cross"
-            app:layout_constraintBottom_toBottomOf="@+id/liked_btn"
-            app:layout_constraintEnd_toStartOf="@+id/liked_btn"
-            app:layout_constraintTop_toTopOf="@+id/liked_btn">
+            android:background="@drawable/round_shape_small1"
+            android:backgroundTint="#BF9C80"
+            app:layout_constraintBottom_toBottomOf="@+id/liked_btn1"
+            app:layout_constraintEnd_toStartOf="@+id/liked_btn1"
+            app:layout_constraintTop_toTopOf="@+id/liked_btn1">
 
-        </ImageView>
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/cross_icon"
+                android:tint="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/liked_btn"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/add_icon"
+            </ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/liked_btn1"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/circle_background"
+            android:backgroundTint="@color/teal"
             app:layout_constraintBottom_toBottomOf="@+id/textView66"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"
             app:layout_constraintTop_toTopOf="@+id/textView66">
 
-        </ImageView>
+
+            <ImageView
+                android:id="@+id/liked_btn"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/plus_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
         <TextView
             android:id="@+id/user_description"

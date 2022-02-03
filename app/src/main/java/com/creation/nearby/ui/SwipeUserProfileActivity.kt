@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
 import com.creation.nearby.adapter.OtherProfileInterestAdapter
@@ -44,6 +45,7 @@ class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
 
         interestsAdapter = OtherProfileInterestAdapter(interestsList)
         binding.interestRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+      //  binding.interestRecyclerView.layoutManager = GridLayoutManager(this, 3,RecyclerView.VERTICAL,false)
         binding.interestRecyclerView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
@@ -54,7 +56,6 @@ class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
         galleryList.add(GallaryModel(R.drawable.my_profile_pic))
 
         initAdapter()
-
         binding.goBack.setOnClickListener(this)
         binding.blockTv.setOnClickListener(this)
 

@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
 import com.creation.nearby.adapter.InterestsAdapter
@@ -47,7 +48,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
     lateinit var dialogBinding: ActivitySwipeUserProfileBinding
     lateinit var fullProfileDialog: BottomSheetDialog
 
-
     private  var swipeInterestsList = ArrayList<InterestedModel>()
     private lateinit var  swipeInterestsAdapter: OtherProfileInterestAdapter
 
@@ -69,6 +69,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+    //    binding.profileInterestRecView.layoutManager = GridLayoutManager(this, 3,RecyclerView.VERTICAL,false)
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
@@ -107,6 +108,8 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.back.setOnClickListener(this)
         dialogBinding.goBack.setOnClickListener(this)
         dialogBinding.blockTv.setOnClickListener(this)
+        binding.dislikeBtn.setOnClickListener(this)
+        binding.likedBtn1.setOnClickListener(this)
 
     }
 
@@ -141,6 +144,12 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
             }
             dialogBinding.blockTv->{
                 optionsDialog()
+            }
+            binding.dislikeBtn->{
+                fullProfileDialog.show()
+            }
+            binding.likedBtn1->{
+                fullProfileDialog.show()
             }
 
         }

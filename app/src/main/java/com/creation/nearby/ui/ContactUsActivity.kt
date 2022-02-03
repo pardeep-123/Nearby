@@ -26,30 +26,30 @@ class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
 
         historyList.add(
             HistoryModel(
-                R.drawable.user_pic_2,
+                R.drawable.chat_pic_3,
                 "5 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.user_pic_1,
+                R.drawable.chat_pic_4,
                 "",
                 ""
             )
         )
         historyList.add(
             HistoryModel(
-                R.drawable.user_pic_2,
+                R.drawable.chat_pic_3,
                 "3 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.user_pic_1,
+                R.drawable.chat_pic_4,
                 "10 mins ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque."
             )
         )
         historyList.add(
             HistoryModel(
-                R.drawable.user_pic_2,
+                R.drawable.chat_pic_3,
                 "2 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.user_pic_1,
+                R.drawable.chat_pic_4,
                 "",
                 ""
             )

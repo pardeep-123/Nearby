@@ -15,6 +15,9 @@ import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.adapter.ImageAdapter
@@ -88,6 +91,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this,FlexDirection.ROW)
+      //    binding.interestsRecyclerView.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
 
         binding.interestsRecyclerView.adapter = interestsAdapter
 
@@ -100,6 +104,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.bothTv.setOnClickListener(this)
         binding.userProfilePic.setOnClickListener(this)
         binding.backBtn2.setOnClickListener(this)
+        binding.finishBtn.setOnClickListener(this)
     }
 
 
@@ -259,6 +264,10 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
             binding.backBtn2->{
                 onBackPressed()
+            }
+
+            binding.finishBtn->{
+                finish()
             }
 
             binding.userProfilePic->{
