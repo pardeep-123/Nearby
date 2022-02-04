@@ -8,6 +8,7 @@ import com.creation.nearby.R
 import com.creation.nearby.databinding.DiscoverItemBinding
 import com.creation.nearby.fragments.EventsFragment
 import com.creation.nearby.model.DiscoverModel
+import com.creation.nearby.ui.MainActivity
 
 
 class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerView.Adapter<DiscoverAdapter.ViewHolder>() {
@@ -30,13 +31,24 @@ class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerVie
             binding.titleName.text = item.name
             binding.topicName.text = item.topicName
 
-           holder.itemView.setOnClickListener{
-             var  fragmentTransaction = (itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
-               fragmentTransaction.replace(R.id.selection_frame_layout, EventsFragment())
-               fragmentTransaction.commit()
 
 
-           }
+        }
+        holder.itemView.setOnClickListener{
+        //    var  fragmentTransaction = (holder.itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
+        //    fragmentTransaction.replace(R.id.selection_frame_layout, EventsFragment())
+        //    fragmentTransaction.commit()
+            MainActivity.binding.sectionRecyclerView.postDelayed( Runnable {
+
+                MainActivity.binding.sectionRecyclerView.scrollToPosition(3)
+
+                MainActivity.binding.sectionRecyclerView.postDelayed( Runnable {
+                    MainActivity.binding.sectionRecyclerView.findViewHolderForAdapterPosition(3)?.itemView?.performClick()
+
+
+                },10)
+
+            },50)
 
         }
     }

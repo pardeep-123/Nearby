@@ -34,7 +34,10 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var adapter: ActivityAdapter
-    private lateinit var binding: ActivityMainBinding
+    companion object{
+         lateinit var binding: ActivityMainBinding
+
+    }
     private var list = ArrayList<ActivitiesModel>()
     private lateinit var fragmentTransaction: FragmentTransaction
 
