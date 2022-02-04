@@ -13,29 +13,24 @@ import android.widget.ListAdapter
 import android.widget.ListPopupWindow
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.adapter.ImageAdapter
 import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.adapter.ZodiacAdapter
 import com.creation.nearby.databinding.ActivityEditProfileBinding
-import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.model.PopupModel
-import com.creation.nearby.model.SuggestionsModel
+import com.creation.nearby.utils.ImagePickerUtility
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.permissionx.guolindev.PermissionX
 
 
-class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
+class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
 
     private var images = ArrayList<ImageModel>()
     private lateinit var imageAdapter: ImageAdapter
@@ -50,6 +45,16 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var interestsAdapter: InterestsAdapter
 
     private var isMainPhoto: Boolean = false
+
+    private var pos: Int = 0
+    private lateinit var v: View
+    override fun selectedImage(imagePath: String?) {
+
+        images[tempPos].imagePath=imagePath!!
+
+        images[tempPos].isDeleteL=false
+        imageAdapter.notifyDataSetChanged()
+    }
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,16 +110,26 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.userProfilePic.setOnClickListener(this)
         binding.backBtn2.setOnClickListener(this)
         binding.finishBtn.setOnClickListener(this)
+
+        images.add(ImageModel("",false))
+        images.add(ImageModel("",false))
+        images.add(ImageModel("",false))
+        images.add(ImageModel("",false))
+        images.add(ImageModel("",false))
+        images.add(ImageModel("",false))
     }
 
 
     private fun initAdapter() {
 
-        val onActionListener = object : OnActionListener<ImageModel> {
+       /* val onActionListener = object : OnActionListener<ImageModel> {
             override fun notify(model: ImageModel, position: Int,view: View) {
+
+                pos = position
                 when(view.id){
                     R.id.layoutAdd->{
-                        optionsDialog()
+                            optionsDialog()
+
                     }
                     R.id.close_image->{
                         images.removeAt(position)
@@ -123,11 +138,19 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                 }
 
             }
-        }
+        }*/
 
-        imageAdapter = ImageAdapter(this, images, onActionListener)
+        imageAdapter = ImageAdapter(this, images,this@EditProfileActivity)
         binding.myGallaryRecyclerView.adapter = imageAdapter
     }
+
+    var tempPos=0
+
+    fun getPosition(pos:Int){
+        tempPos=pos
+        getImage(this, 0)
+    }
+
 
 
     private fun optionsDialog() {
@@ -219,6 +242,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                     binding.userProfilePic.setImageURI(uri)
 
                 }else{
+
                     addImageToList(uri)
                 }
             }
@@ -232,6 +256,7 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
                     isMainPhoto = false
                     binding.userProfilePic.setImageURI(data?.data)
                 }else{
+
                     addImageToList(data?.data)
                 }
 
@@ -240,10 +265,10 @@ class EditProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     private fun addImageToList(uri: Uri?) {
 
-            images.add(ImageModel(uri))
-            imageAdapter?.notifyDataSetChanged()
-
-        binding.myGallaryRecyclerView.scrollToPosition(images.size)
+//        images[pos] = ImageModel(uri)
+//            imageAdapter?.notifyDataSetChanged()
+//
+//            binding.myGallaryRecyclerView.scrollToPosition(images.size)
     }
 
     private fun getImageUri(inImage: Bitmap?): Uri? {

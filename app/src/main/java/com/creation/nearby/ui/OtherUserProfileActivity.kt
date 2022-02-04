@@ -64,8 +64,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
+        interestsList.add(InterestedModel("Music",isSelected = false,isProfile = true))
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)

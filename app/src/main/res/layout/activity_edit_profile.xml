@@ -47,8 +47,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_profile_pic"
-                android:layout_width="96dp"
-                android:layout_height="96dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginTop="24dp"
                 android:src="@drawable/user"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -59,8 +59,8 @@
 
             <ImageView
                 android:id="@+id/imageView27"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
                 android:src="@drawable/camera_edit_icon"
                 app:layout_constraintBottom_toBottomOf="@+id/user_profile_pic"
                 app:layout_constraintEnd_toEndOf="@+id/user_profile_pic"
@@ -366,8 +366,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                tools:itemCount="2"
-                app:spanCount="3"
+                 app:spanCount="3"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/item_gallary"

@@ -22,14 +22,14 @@
         android:id="@+id/textView39"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/account"
-        android:textSize="20sp"
-        android:textColor="@color/black"
         android:fontFamily="@font/worksans_black"
-        app:layout_constraintBottom_toBottomOf="@+id/gpoBackBtn1"
+        android:text="@string/account"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/goBackBtn1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/gpoBackBtn1" />
+        app:layout_constraintTop_toTopOf="@+id/goBackBtn1" />
 
     <ScrollView
         android:layout_width="0dp"
@@ -351,7 +351,7 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginTop="8dp"
-                    android:src="@drawable/apple_icon"
+                    android:src="@drawable/snapchat_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -483,17 +483,18 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button3"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
         android:background="@drawable/round_shape"
-        android:backgroundTint="@color/red_transparent"
+        android:backgroundTint="@color/red_transparent1"
         android:fontFamily="@font/worksans_black"
         android:text="@string/log_out"
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:paddingHorizontal="100dp"
+        android:drawableStart="@drawable/logout_icon"
+        android:drawablePadding="8dp"
         android:layout_marginBottom="24dp"
         app:layout_constraintBottom_toTopOf="@+id/textView52"
         app:layout_constraintEnd_toEndOf="parent"

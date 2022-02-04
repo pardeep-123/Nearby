@@ -29,7 +29,7 @@ class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
                 R.drawable.chat_pic_3,
                 "5 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.chat_pic_4,
+                R.drawable.history_user_icon,
                 "",
                 ""
             )
@@ -39,7 +39,7 @@ class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
                 R.drawable.chat_pic_3,
                 "3 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.chat_pic_4,
+                R.drawable.history_user_icon,
                 "10 mins ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque."
             )
@@ -49,7 +49,7 @@ class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
                 R.drawable.chat_pic_3,
                 "2 hrs ago",
                 "Loren ipsom dolor sit amet, consectetur adipi-scing elit.Phasellus nisineque.",
-                R.drawable.chat_pic_4,
+                R.drawable.history_user_icon,
                 "",
                 ""
             )

@@ -58,8 +58,8 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:padding="4dp"
                         android:src="@drawable/cross_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -88,8 +88,8 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <ImageView
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
                         android:padding="2dp"
                         android:src="@drawable/plus_icon"
                         app:layout_constraintBottom_toBottomOf="parent"
