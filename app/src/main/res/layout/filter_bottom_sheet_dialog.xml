@@ -142,9 +142,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/round_shape"
         android:backgroundTint="@color/edittext_grey"
-        android:paddingStart="24dp"
+        android:paddingStart="20dp"
         android:paddingTop="14dp"
-        android:paddingEnd="24dp"
+        android:paddingEnd="20dp"
         android:paddingBottom="14dp"
         app:layout_constraintEnd_toStartOf="@+id/female_looking"
         app:layout_constraintHorizontal_bias="0.5"
@@ -184,16 +184,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/female_looking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape"
         android:backgroundTint="@color/sky_blue"
-        android:paddingStart="24dp"
+        android:paddingStart="20dp"
         android:paddingTop="14dp"
-        android:paddingEnd="24dp"
+        android:paddingEnd="20dp"
         android:paddingBottom="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/male_looking"
         app:layout_constraintEnd_toStartOf="@+id/both_looking"
@@ -236,16 +235,15 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/both_looking"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/round_shape"
         android:backgroundTint="@color/edittext_grey"
-        android:paddingStart="24dp"
+        android:paddingStart="20dp"
         android:paddingTop="14dp"
-        android:paddingEnd="24dp"
+        android:paddingEnd="20dp"
         android:paddingBottom="14dp"
         app:layout_constraintBottom_toBottomOf="@+id/female_looking"
         app:layout_constraintEnd_toEndOf="parent"

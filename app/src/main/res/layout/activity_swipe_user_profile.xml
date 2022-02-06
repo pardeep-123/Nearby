@@ -15,9 +15,10 @@
             android:layout_marginTop="40dp"
             android:elevation="3dp"
             android:padding="10dp"
+            android:tint="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/back_arrow" />
+            android:src="@drawable/back_arrow" />
     <TextView
         android:id="@+id/block_tv"
         android:layout_width="wrap_content"
@@ -83,25 +84,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"></TextView>
 
-                <ImageView
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/eventsCheck"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:src="@drawable/add_icon"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/round_shape_small1"
+                    android:backgroundTint="@color/teal"
                     app:layout_constraintBottom_toBottomOf="@+id/textView69"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textView69" />
+                    app:layout_constraintTop_toTopOf="@+id/textView69">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/plus_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                    </ImageView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <ImageView
                     android:id="@+id/eventsCross"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:layout_marginEnd="16dp"
+                    android:padding="10dp"
                     android:background="@drawable/circle_background"
                     android:backgroundTint="@color/edittext_grey"
-                    android:padding="16dp"
                     android:src="@drawable/cross_icon"
                     app:layout_constraintBottom_toBottomOf="@+id/eventsCheck"
                     app:layout_constraintEnd_toStartOf="@+id/eventsCheck"

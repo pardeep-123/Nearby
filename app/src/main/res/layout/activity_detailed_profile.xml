@@ -14,9 +14,10 @@
         android:layout_marginTop="55dp"
         android:elevation="3dp"
         android:padding="10dp"
+        android:tint="@color/white"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_arrow" />
+        android:src="@drawable/back_arrow" />
 
 
     <TextView

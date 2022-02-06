@@ -39,7 +39,6 @@
         android:id="@+id/showLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
@@ -70,10 +69,11 @@
             app:layout_constraintTop_toTopOf="@+id/liked_btn1">
 
             <ImageView
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:src="@drawable/cross_icon"
                 android:tint="@color/white"
+                android:padding="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -99,8 +99,8 @@
 
             <ImageView
                 android:id="@+id/liked_btn"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:tint="@color/white"
                 android:src="@drawable/plus_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -137,40 +137,13 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_description">
 
         </androidx.recyclerview.widget.RecyclerView>
-
-        <TextView
-            android:id="@+id/textView63"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="24dp"
-            android:fontFamily="@font/worksans_semibold"
-            android:text="Swipe down to view more"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_interest_rec_view"></TextView>
-
-        <ImageView
-            android:layout_width="8dp"
-            android:layout_height="8dp"
-            android:src="@drawable/arrow_down"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textView63"
-            app:layout_constraintStart_toEndOf="@+id/textView63"
-            app:layout_constraintTop_toTopOf="@+id/textView63"
-            app:tint="@color/white">
-
-        </ImageView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -114,45 +114,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val onActionListener = object : OnActionListener<ActivitiesModel> {
             override fun notify(model: ActivitiesModel, position: Int, view: View) {
 
-                set.applyTo(constraint)
-
                 if (position == 0) {
-
                     openFragment(HomeFragment(),R.id.selection_frame_layout)
-              //      mapLayout.visibility = View.GONE
-              //      mainLayout.visibility=View.VISIBLE
+                    set.applyTo(constraint)
+
                 }
                 if (position == 1) {
                     openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
-               //     mapLayout.visibility = View.GONE
-               //     mainLayout.visibility=View.VISIBLE
+                    set.applyTo(constraint)
                 }
 
                 if (position == 2) {
                     mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
-
-       //             mainLayout.removeAllViews()
                     openFragment(MapFragment(),R.id.selection_frame_layout)
-              //      mapLayout.visibility = View.VISIBLE
-               //     mainLayout.visibility=View.GONE
                 }
                 if (position == 3) {
                     openFragment(EventsFragment(),R.id.selection_frame_layout)
-               //     mapLayout.visibility = View.GONE
-                //    mainLayout.visibility=View.VISIBLE
+                    set.applyTo(constraint)
                 }
                 if (position == 4) {
-
                     openFragment(FeedFragment(),R.id.selection_frame_layout)
-                //    mapLayout.visibility = View.GONE
-                //    mainLayout.visibility=View.VISIBLE
+                    set.applyTo(constraint)
 
                 }
                 if (position == 5) {
-
                     openFragment(FriendsFragment(),R.id.selection_frame_layout)
-                //    mapLayout.visibility = View.GONE
-                //    mainLayout.visibility=View.VISIBLE
+                    set.applyTo(constraint)
 
                 }
             }
@@ -211,7 +198,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 dialogBinding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
 
-            } dialogBinding.femaleLooking->{
+            }
+            dialogBinding.femaleLooking->{
 
             dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
             dialogBinding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
@@ -225,7 +213,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             dialogBinding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
             dialogBinding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
 
-        }dialogBinding.bothLooking->{
+        }
+            dialogBinding.bothLooking->{
 
             dialogBinding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
             dialogBinding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
@@ -288,6 +277,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
          fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(id, fragment)
         fragmentTransaction.commit()
+
 
     }
 }

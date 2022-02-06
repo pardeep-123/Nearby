@@ -13,7 +13,9 @@ import android.widget.ListAdapter
 import android.widget.ListPopupWindow
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.adapter.ImageAdapter
@@ -46,14 +48,20 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
 
     private var isMainPhoto: Boolean = false
 
-    private var pos: Int = 0
-    private lateinit var v: View
     override fun selectedImage(imagePath: String?) {
 
-        images[tempPos].imagePath=imagePath!!
+        if (isMainPhoto){
 
-        images[tempPos].isDeleteL=false
-        imageAdapter.notifyDataSetChanged()
+            isMainPhoto = false
+            Glide.with(this).load(imagePath).into(binding.userProfilePic)
+
+        }else{
+            images[tempPos].imagePath=imagePath!!
+            images[tempPos].isDeleteL=false
+            imageAdapter.notifyDataSetChanged()
+        }
+
+
     }
 
 
@@ -104,9 +112,9 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         binding.maleGender.setOnClickListener(this)
         binding.femaleGender.setOnClickListener(this)
         binding.otherGender.setOnClickListener(this)
-        binding.menTv.setOnClickListener(this)
-        binding.womenTv.setOnClickListener(this)
-        binding.bothTv.setOnClickListener(this)
+        binding.maleLooking.setOnClickListener(this)
+        binding.femaleLooking.setOnClickListener(this)
+        binding.bothLooking.setOnClickListener(this)
         binding.userProfilePic.setOnClickListener(this)
         binding.backBtn2.setOnClickListener(this)
         binding.finishBtn.setOnClickListener(this)
@@ -150,9 +158,6 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         tempPos=pos
         getImage(this, 0)
     }
-
-
-
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -297,7 +302,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
 
             binding.userProfilePic->{
                 isMainPhoto = true
-                optionsDialog()
+                getImage(this,0)
             }
 
             binding.selectZodiacLayout->{
@@ -342,7 +347,54 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             binding.otherGender.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
-            binding.menTv->{
+              binding.maleLooking->{
+
+                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+                  binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
+
+                  binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                  binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                  binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+                  binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                  binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                  binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+
+            }
+            binding.femaleLooking->{
+
+                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+                binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+                binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
+
+                binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+        }
+            binding.bothLooking->{
+
+                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+                binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
+                binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+
+                binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
+                binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.white))
+                binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
+        }
+
+
+      /*      binding.menTv->{
 
                 binding.menTv.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
                 binding.menTv.compoundDrawables[0].setTint(resources.getColor(R.color.white))
@@ -385,7 +437,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.white))
 
         }
-
+*/
         }
     }
 }

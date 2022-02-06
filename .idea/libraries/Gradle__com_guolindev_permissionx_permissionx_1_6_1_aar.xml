@@ -1,9 +1,9 @@
 <component name="libraryTable">
   <library name="Gradle: com.guolindev.permissionx:permissionx:1.6.1@aar">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ad8f499ce27753352bbfb3bbf811f81f/transformed/jetified-permissionx-1.6.1/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad8f499ce27753352bbfb3bbf811f81f/transformed/jetified-permissionx-1.6.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ad8f499ce27753352bbfb3bbf811f81f/transformed/jetified-permissionx-1.6.1/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/4870792940afd8b5592b04afad72ce55/transformed/jetified-permissionx-1.6.1/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4870792940afd8b5592b04afad72ce55/transformed/jetified-permissionx-1.6.1/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/4870792940afd8b5592b04afad72ce55/transformed/jetified-permissionx-1.6.1/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.guolindev.permissionx/permissionx/1.6.1/18f4ed76d97bed2e8c064793659d8646c59f76aa/permissionx-1.6.1-javadoc.jar!/" />

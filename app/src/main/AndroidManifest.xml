@@ -80,8 +80,9 @@
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:windowSoftInputMode="adjustResize"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"/>
+
         <activity
             android:name=".ui.authentication.ChangePasswordActivity"
             android:exported="true" />
