@@ -11,6 +11,7 @@ import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
@@ -43,7 +44,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
     private  var interestsList = ArrayList<InterestedModel>()
     private lateinit var  interestsAdapter: InterestsAdapter
 
-    var onSwipeTouchListener: OnSwipeTouchListener? = null
+   // var onSwipeTouchListener: OnSwipeTouchListener? = null
 
     lateinit var dialogBinding: ActivitySwipeUserProfileBinding
     lateinit var fullProfileDialog: BottomSheetDialog
@@ -53,6 +54,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     private var galleryList = ArrayList<GallaryModel>()
     private lateinit var galleryAdapter: GallaryAdapter
+    private lateinit var mainGalleryAdapter: GallaryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,12 +66,11 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Music",isSelected = false,isProfile = true))
+        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
         interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
-    //    binding.profileInterestRecView.layoutManager = GridLayoutManager(this, 3,RecyclerView.VERTICAL,false)
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
@@ -80,9 +81,12 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         fullProfileDialog.setContentView(dialogBinding.root)
         fullProfileDialog.setCancelable(true)
         fullProfileDialog.setCanceledOnTouchOutside(true)
+        fullProfileDialog.behavior.peekHeight = Resources.getSystem().displayMetrics.heightPixels
+        fullProfileDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
+        fullProfileDialog.behavior.skipCollapsed = true
 
-        onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.otherUserMainLayout))
-        onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.showLayout))
+    //    onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.otherUserMainLayout))
+    //    onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.showLayout))
 
         swipeInterestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
         swipeInterestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
@@ -102,15 +106,15 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         galleryList.add(GallaryModel(R.drawable.my_profile_pic))
 
         initAdapter()
+        initAdapter2()
 
         //full profile dialog
 
-        binding.back.setOnClickListener(this)
+        binding.backbtn1.setOnClickListener(this)
         dialogBinding.goBack.setOnClickListener(this)
         dialogBinding.blockTv.setOnClickListener(this)
         binding.dislikeBtn.setOnClickListener(this)
         binding.likedBtn1.setOnClickListener(this)
-
     }
 
     private fun initAdapter() {
@@ -122,7 +126,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
                 val viewImage: MaterialCardView = view.findViewById(R.id.layoutCard)
                 val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@OtherUserProfileActivity,viewImage,transitionName)
                 ActivityCompat.startActivity(this@OtherUserProfileActivity,intent,options.toBundle())
-
             }
         }
         dialogBinding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
@@ -132,9 +135,28 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
     }
 
 
+    private fun initAdapter2() {
+        val onActionListener = object : OnActionListener<GallaryModel> {
+            override fun notify(model: GallaryModel, position: Int, view: View) {
+
+                val intent  = Intent(this@OtherUserProfileActivity,FullPictureActivity::class.java)
+                val transitionName: String = getString(R.string.open_with_animation)
+                val viewImage: MaterialCardView = view.findViewById(R.id.layoutCard)
+                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@OtherUserProfileActivity,viewImage,transitionName)
+                ActivityCompat.startActivity(this@OtherUserProfileActivity,intent,options.toBundle())
+
+            }
+        }
+        binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
+        mainGalleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
+        binding.gallaryRecyclerView.adapter = mainGalleryAdapter
+        mainGalleryAdapter.notifyDataSetChanged()
+    }
+
+
     override fun onClick(v: View?) {
         when(v){
-            binding.back->{
+            binding.backbtn1->{
 
                 onBackPressed()
 
@@ -146,6 +168,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
                 optionsDialog()
             }
             binding.dislikeBtn->{
+
                 fullProfileDialog.show()
             }
             binding.likedBtn1->{
@@ -184,7 +207,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         dialog.show()
     }
 
-    class OnSwipeTouchListener internal constructor(ctx: Context,dia: BottomSheetDialog,act:Activity, mainView: View):View.OnTouchListener{
+ /*   class OnSwipeTouchListener internal constructor(ctx: Context,dia: BottomSheetDialog,act:Activity, mainView: View):View.OnTouchListener{
         private val gestureDetector: GestureDetector
         private var context: Context
         private var activity: Activity
@@ -213,7 +236,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
                 try{
                     val diffY = e2.y - e1.y
                     val diffX = e2.x - e1.x
-               /*     if (kotlin.math.abs(diffX) > kotlin.math.abs(diffY)){
+               *//*     if (kotlin.math.abs(diffX) > kotlin.math.abs(diffY)){
                         if (kotlin.math.abs(diffX) > swipeThreshold && kotlin.math.abs(velocityX) > swipeVelocityThreshold){
                             if (diffX > 0){
                                 onSwipeRight()
@@ -223,7 +246,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
                             }
                             result = true
                         }
-                    }*/
+                    }*//*
                      if (kotlin.math.abs(diffY) > swipeThreshold && kotlin.math.abs(velocityY) > swipeVelocityThreshold){
                         if (diffY > 0){
                          //   onSwipeBottom()
@@ -262,7 +285,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         }
     }
 
-
+*/
 
 
 }

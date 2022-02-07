@@ -24,8 +24,6 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     private var swipeLIst = ArrayList<SwipeCardModel>()
     private lateinit var binding: FragmentSwipeCardBinding
 
-    private var countSwipe = 0
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,12 +41,12 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
         }
         swipeLayoutManager.setStackFrom(StackFrom.Bottom)
         swipeLayoutManager.setScaleInterval(0.95f)
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Saurabh Thakur","23","Hamirpur"))
+        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Erik Smith","23","Maxico"))
         swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amit Thakur","23","Hamirpur"))
         swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rahul Thakur","23","Hamirpur"))
         swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amish Thakur","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Saurabh Thakur","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Saurabh Thakur","23","Hamirpur"))
+        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Steve Smith","23","Hamirpur"))
+        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rohan Thakur","23","Hamirpur"))
 
         binding.cardStackView.layoutManager = swipeLayoutManager
         swipeAdapter = context?.let { SwipeCardAdapter(it,swipeLIst) }!!
@@ -75,12 +73,7 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
 
     override fun onCardSwiped(direction: Direction?) {
 
-        countSwipe += 1
 
-        if (countSwipe == 3){
-            requireContext().startActivity(Intent(requireContext(),CongratulationActivity::class.java))
-
-        }
 
     }
 

@@ -40,7 +40,6 @@ abstract class ImagePickerUtility : AppCompatActivity() {
     private var mActivity: Activity? = null
     private var mCode = 0
 
-
     open fun getImage(activity: Activity, code: Int) {
         mActivity = activity
         mCode = code

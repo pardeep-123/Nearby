@@ -42,7 +42,9 @@
 
             </com.makeramen.roundedimageview.RoundedImageView>
 
+
         </com.google.android.material.card.MaterialCardView>
+
 
     </FrameLayout>
 

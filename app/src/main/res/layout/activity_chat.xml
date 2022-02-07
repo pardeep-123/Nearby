@@ -21,10 +21,9 @@
 
     <ImageView
         android:id="@+id/chat_iv"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="24dp"
-        android:padding="10dp"
         android:src="@drawable/plus_icon"
         app:layout_constraintBottom_toBottomOf="@+id/textView19"
         app:layout_constraintEnd_toEndOf="parent"

@@ -53,9 +53,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        window.decorView.systemUiVisibility =
+     /*   window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-
+*/
         setContentView(binding.root)
 
         mapLayout = findViewById(R.id.complete_frame_layout)

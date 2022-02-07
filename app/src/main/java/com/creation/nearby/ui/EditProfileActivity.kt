@@ -60,10 +60,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             images[tempPos].isDeleteL=false
             imageAdapter.notifyDataSetChanged()
         }
-
-
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -86,7 +83,6 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
 
         popup = ListPopupWindow(this)
         zodiacAdapter = ZodiacAdapter(popupList)
-
 
         popup.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
             popup.dismiss()
@@ -158,136 +154,6 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         tempPos=pos
         getImage(this, 0)
     }
-    private fun optionsDialog() {
-        val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.window?.setBackgroundDrawable(
-            ContextCompat.getDrawable(
-                this,
-                android.R.color.transparent
-            )
-        )
-        dialog.setContentView(R.layout.image_picker_bottom_sheet)
-
-        val tvCamera: TextView? = dialog.findViewById(R.id.select_camera)
-        val tvGallery: TextView? = dialog.findViewById(R.id.select_photo_library)
-        val tvCancel: TextView? = dialog.findViewById(R.id.cancel)
-
-        tvCamera?.setOnClickListener {
-            dialog.dismiss()
-            openResourceWithPermissionCheck(isCameraRequest = true)
-        }
-
-        tvGallery?.setOnClickListener {
-            dialog.dismiss()
-            openResourceWithPermissionCheck(isCameraRequest = false)
-        }
-
-        tvCancel?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-    private fun openResourceWithPermissionCheck(isCameraRequest: Boolean) {
-
-        PermissionX.init(this)
-            .permissions(android.Manifest.permission.CAMERA,android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            .onExplainRequestReason{ scope,deniedList->
-
-                scope.showRequestReasonDialog(deniedList,"You need to allow permissions, to select photo.",
-                    "Allow",
-                    "Deny")
-
-            }
-            .onForwardToSettings { scope, deniedList ->
-                scope.showForwardToSettingsDialog(
-                    deniedList,
-                    "You need to allow necessary permissions in Settings manually",
-                    "Open Settings",
-                    "Cancel"
-                )
-            }
-            .request { allGranted, _, _ ->
-                if (allGranted) {
-                    if (isCameraRequest)
-                        getImageFromCamera()
-                    else
-                        getImageFromGallery()
-                } else
-                    ToastUtils.showToast("Unable to perform action due to permissions",this)
-            }
-
-    }
-
-    private fun getImageFromCamera() {
-        cameraResultLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-    }
-
-    private fun getImageFromGallery() {
-        galleryResultLauncher.launch(
-            Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-            },
-        )
-    }
-
-
-    private var cameraResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val imageBitmap = data?.extras?.get("data") as Bitmap?
-                val uri = getImageUri(imageBitmap)
-                if(isMainPhoto){
-                    isMainPhoto = false
-                    binding.userProfilePic.setImageURI(uri)
-
-                }else{
-
-                    addImageToList(uri)
-                }
-            }
-        }
-
-    private var galleryResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                if (isMainPhoto){
-                    isMainPhoto = false
-                    binding.userProfilePic.setImageURI(data?.data)
-                }else{
-
-                    addImageToList(data?.data)
-                }
-
-            }
-        }
-
-    private fun addImageToList(uri: Uri?) {
-
-//        images[pos] = ImageModel(uri)
-//            imageAdapter?.notifyDataSetChanged()
-//
-//            binding.myGallaryRecyclerView.scrollToPosition(images.size)
-    }
-
-    private fun getImageUri(inImage: Bitmap?): Uri? {
-        val outImage = Bitmap.createScaledBitmap(inImage!!, 1000, 1000, true)
-        val path = MediaStore.Images.Media.insertImage(
-            baseContext.contentResolver,
-            outImage,
-            "Title",
-            null
-        )
-        return Uri.parse(path)
-    }
-
-
     override fun onClick(v: View?) {
 
         when(v){
