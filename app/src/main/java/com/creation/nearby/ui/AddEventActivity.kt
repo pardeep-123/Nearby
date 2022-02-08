@@ -32,16 +32,22 @@ import android.view.Window
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
 import com.creation.nearby.model.ImageModel
+import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.utils.ToastUtils
 import com.permissionx.guolindev.PermissionX
 import java.text.SimpleDateFormat
 
 
-class AddEventActivity : AppCompatActivity() {
+class AddEventActivity : ImagePickerUtility(){
 
     var MY_REQUEST = 1
     lateinit var binding: ActivityAddEventBinding
+    override fun selectedImage(imagePath: String?) {
+        Glide.with(this).load(imagePath).into(binding.selectImageRv)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddEventBinding.inflate(layoutInflater)
@@ -62,7 +68,7 @@ class AddEventActivity : AppCompatActivity() {
 
         binding.selectImageRv.setOnClickListener() {
 
-            optionsDialog()
+            getImage(this,0)
         }
 
         binding.location.setOnClickListener{
@@ -107,118 +113,5 @@ class AddEventActivity : AppCompatActivity() {
     private fun setPlaceData(it: Place) {
         binding.location.setText(it.address.toString())
     }
-
-
-    private fun optionsDialog() {
-        val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        dialog.setCancelable(true)
-        dialog.setCanceledOnTouchOutside(true)
-        dialog.window?.setBackgroundDrawable(
-            ContextCompat.getDrawable(
-                this,
-                android.R.color.transparent
-            )
-        )
-        dialog.setContentView(R.layout.image_picker_bottom_sheet)
-
-        val tvCamera: TextView? = dialog.findViewById(R.id.select_camera)
-        val tvGallery: TextView? = dialog.findViewById(R.id.select_photo_library)
-        val tvCancel: TextView? = dialog.findViewById(R.id.cancel)
-
-        tvCamera?.setOnClickListener {
-            dialog.dismiss()
-            openResourceWithPermissionCheck(isCameraRequest = true)
-        }
-
-        tvGallery?.setOnClickListener {
-            dialog.dismiss()
-            openResourceWithPermissionCheck(isCameraRequest = false)
-        }
-
-        tvCancel?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
-    }
-
-    private fun openResourceWithPermissionCheck(isCameraRequest: Boolean) {
-
-        PermissionX.init(this)
-            .permissions(android.Manifest.permission.CAMERA,android.Manifest.permission.READ_EXTERNAL_STORAGE)
-            .onExplainRequestReason{ scope,deniedList->
-
-                scope.showRequestReasonDialog(deniedList,"You need to allow permissions, to select photo.",
-                    "Allow",
-                    "Deny")
-
-            }
-            .onForwardToSettings { scope, deniedList ->
-                scope.showForwardToSettingsDialog(
-                    deniedList,
-                    "You need to allow necessary permissions in Settings manually",
-                    "Open Settings",
-                    "Cancel"
-                )
-            }
-            .request { allGranted, _, _ ->
-                if (allGranted) {
-                    if (isCameraRequest)
-                        getImageFromCamera()
-                    else
-                        getImageFromGallery()
-                } else
-                    ToastUtils.showToast("Unable to perform action due to permissions",this)
-            }
-
-    }
-
-    private fun getImageFromCamera() {
-        cameraResultLauncher.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE))
-    }
-
-    private fun getImageFromGallery() {
-        galleryResultLauncher.launch(
-            Intent(Intent.ACTION_PICK).apply {
-                type = "image/*"
-            },
-        )
-    }
-
-
-    private var cameraResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                val imageBitmap = data?.extras?.get("data") as Bitmap?
-                val uri = getImageUri(imageBitmap)
-                    binding.selectImageRv.setImageURI(uri)
-
-            }
-        }
-
-    private var galleryResultLauncher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                val data: Intent? = result.data
-                    binding.selectImageRv.setImageURI(data?.data)
-
-
-            }
-        }
-
-    private fun getImageUri(inImage: Bitmap?): Uri? {
-        val outImage = Bitmap.createScaledBitmap(inImage!!, 1000, 1000, true)
-        val path = MediaStore.Images.Media.insertImage(
-            baseContext.contentResolver,
-            outImage,
-            "Title",
-            null
-        )
-        return Uri.parse(path)
-    }
-
-
 
 }

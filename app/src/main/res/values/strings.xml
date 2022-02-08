@@ -73,7 +73,6 @@
     <string name="time">Time</string>
     <string name="select_time">Select Time</string>
     <string name="location">Location</string>
-    <string name="select_location">Select Location</string>
     <string name="new_event">New Event</string>
     <string name="finish">Finish</string>
     <string name="select_source">Select Source</string>
@@ -166,6 +165,7 @@
     <string name="start_a_random_chat">Start a random chat</string>
     <string name="discover_everything_nearby">Discover\neverything\nnearby</string>
     <string name="remember_me">Remember me</string>
+    <string name="select_location">Select Location</string>
 
 
 </resources>

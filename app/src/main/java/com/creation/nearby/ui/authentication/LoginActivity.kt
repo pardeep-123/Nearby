@@ -8,12 +8,15 @@ import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityLoginBinding
 import com.creation.nearby.ui.MainActivity
 
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
     lateinit var binding: ActivityLoginBinding
+
+    var isChecked = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -24,6 +27,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
         binding.signUp.setOnClickListener(this)
         binding.showHide.setOnClickListener(this)
         binding.signInLogin.setOnClickListener(this)
+        binding.rememberCheckbox.setOnClickListener(this)
 
         binding.emailLogin.addTextChangedListener(this)
         binding.passwordLogin.addTextChangedListener(this)
@@ -67,6 +71,13 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
             binding.signInLogin->{
                 startActivity(Intent(this,MainActivity::class.java))
 
+            }
+            binding.rememberCheckbox->{
+                isChecked = !isChecked
+                if (isChecked)
+                    binding.rememberCheckbox.setImageResource(R.drawable.checked)
+                else
+                    binding.rememberCheckbox.setImageResource(R.drawable.unchecked)
             }
 
 

@@ -11,6 +11,8 @@ import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
@@ -27,8 +29,15 @@ import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
 import com.creation.nearby.fragments.*
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ActivitiesModel
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.AutocompleteActivity
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -49,6 +58,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var mainLayout: FrameLayout
     lateinit var constraint: ConstraintLayout
 
+    var MY_REQUEST = 1
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -57,6 +68,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
 */
         setContentView(binding.root)
+
+        if (!Places.isInitialized()) {
+            Places.initialize(this, resources.getString(R.string.map_key))
+        }
 
         mapLayout = findViewById(R.id.complete_frame_layout)
         mainLayout = findViewById(R.id.selection_frame_layout)
@@ -108,6 +123,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         dialogBinding.bothLooking.setOnClickListener(this)
         dialogBinding.filterOnline.setOnClickListener(this)
         dialogBinding.filterNew.setOnClickListener(this)
+        dialogBinding.filterNew.setOnClickListener(this)
+        dialogBinding.selectLocation.setOnClickListener(this)
     }
     private fun initAdapter() {
 
@@ -181,6 +198,10 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
             dialogBinding.closeDialog -> {
                 filterDialog.dismiss()
+            }
+
+               dialogBinding.selectLocation -> {
+                openPlacePicker()
             }
 
             dialogBinding.maleLooking->{
@@ -272,6 +293,37 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         }
     }
+
+    fun openPlacePicker() {
+        MY_REQUEST = 1
+        val fields = Arrays.asList(
+            Place.Field.ID,
+            Place.Field.NAME,
+            Place.Field.LAT_LNG,
+            Place.Field.ADDRESS
+        )
+        val intent =
+            Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+        startActivityForResult.launch(intent)
+    }
+
+    var startActivityForResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result: ActivityResult ->
+            if (result.resultCode == AutocompleteActivity.RESULT_OK) {
+                val place: Place? =
+                    result.data?.let { Autocomplete.getPlaceFromIntent(it) }
+                place?.let {
+                    setPlaceData(it)
+                }
+            }
+        }
+
+    private fun setPlaceData(it: Place) {
+        dialogBinding.selectLocation.setText(it.address.toString())
+    }
+
 
     private fun openFragment( fragment: Fragment, id : Int){
          fragmentTransaction = supportFragmentManager.beginTransaction()

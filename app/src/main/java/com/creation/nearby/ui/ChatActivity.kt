@@ -75,6 +75,9 @@ class ChatActivity : AppCompatActivity() {
         binding.chatIv.setOnClickListener{
             startActivity(Intent(this,OngoingChatActivity::class.java))
         }
+        binding.startRandomChat.setOnClickListener{
+            startActivity(Intent(this,OngoingChatActivity::class.java))
+        }
 
     }
 }

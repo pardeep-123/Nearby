@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="24dp"
-    android:layout_marginStart="24dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp">
 
@@ -50,20 +50,18 @@
 
     <ImageView
         android:id="@+id/eventsCheck"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/circle_check" />
 
     <ImageView
         android:id="@+id/eventsCross"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:background="@android:color/transparent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/eventsCheck"
         app:layout_constraintEnd_toStartOf="@+id/eventsCheck"

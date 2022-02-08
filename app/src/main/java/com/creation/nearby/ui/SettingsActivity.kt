@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import com.creation.nearby.databinding.ActivitySettingsBinding
 import com.creation.nearby.ui.authentication.ChangePasswordActivity
+import com.creation.nearby.ui.authentication.LoginActivity
 
 class SettingsActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySettingsBinding
@@ -29,6 +30,10 @@ class SettingsActivity : AppCompatActivity() {
 
         binding.changePasswordActivity.setOnClickListener{
             startActivity(Intent(this,ChangePasswordActivity::class.java))
+        }
+        binding.logoutBtn.setOnClickListener{
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }
 
     }

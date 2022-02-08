@@ -52,9 +52,9 @@ class FeedFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.postsRecyView.layoutManager = LinearLayoutManager(view.context,RecyclerView.VERTICAL,false)
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.sky_blue))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.color.sky_blue))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.sky_blue))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.teal))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.color.teal))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.teal))
 
         initAdapter()
 

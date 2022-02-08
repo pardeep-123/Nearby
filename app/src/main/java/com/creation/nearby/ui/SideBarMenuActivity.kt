@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivitySideBarMenuBinding
+import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.utils.ToastUtils
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -70,6 +71,11 @@ class SideBarMenuActivity : ImagePickerUtility() {
         binding.backBtn.setOnClickListener{
             onBackPressed()
         }
+        binding.logoutBtn.setOnClickListener{
+            startActivity(Intent(this,LoginActivity::class.java))
+            finish()
+        }
+
 
     }
 

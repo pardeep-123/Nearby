@@ -2,6 +2,7 @@ package com.creation.nearby.adapter
 
 import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -34,8 +35,17 @@ class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : Rec
                 binding.tvMessage.text = message
                 binding.messageDay.text = day
 
+                if (isShown){
 
-                binding.swipeLayout.setOnActionsListener(object : SwipeActionsListener {
+                    binding.buttonContainer.visibility = View.VISIBLE
+                    binding.messageDay.visibility = View.GONE
+                }else{
+                    binding.messageDay.visibility = View.VISIBLE
+                    binding.buttonContainer.visibility = View.GONE
+                }
+
+
+              /*  binding.swipeLayout.setOnActionsListener(object : SwipeActionsListener {
                     override fun onOpen(direction: Int, isContinuous: Boolean) {
                         if (direction == SwipeLayout.RIGHT) {
                             binding.messageDay.visibility = VISIBLE
@@ -55,7 +65,7 @@ class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : Rec
                     mList.removeAt(position)
                     notifyDataSetChanged()
 
-                }
+                }*/
 
             }
 

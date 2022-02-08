@@ -75,7 +75,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="6dp"
                     android:src="@drawable/apple_icon"
                     app:tint="@color/white">
 
@@ -110,7 +110,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="6dp"
                     android:src="@drawable/facebook_icon"
                     app:tint="@color/white">
 
@@ -145,7 +145,7 @@
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginRight="6dp"
                     android:src="@drawable/google_icon"
                     app:tint="@color/white">
 

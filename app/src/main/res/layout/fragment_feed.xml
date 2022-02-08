@@ -35,11 +35,11 @@
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:src="@drawable/settings_icon"
         android:tint="@color/black"
-        android:layout_marginEnd="8dp"
+        android:padding="6dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView31"
         app:layout_constraintEnd_toStartOf="@+id/textView31"
         app:layout_constraintTop_toTopOf="@+id/textView31" />
