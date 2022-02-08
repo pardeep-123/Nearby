@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black"
-        android:padding="10dp"
+        android:padding="2dp"
         android:layout_marginTop="30dp"
         android:layout_marginStart="24dp"
         app:srcCompat="@drawable/back_arrow" />

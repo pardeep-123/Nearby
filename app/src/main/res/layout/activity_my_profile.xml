@@ -7,14 +7,13 @@
     android:background="@color/white"
     tools:context=".ui.MyProfileActivity">
 
-
     <ImageView
         android:id="@+id/backbtn1"
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:tint="@color/white"
         android:elevation="3dp"
-        android:padding="10dp"
+        android:padding="2dp"
         android:layout_marginTop="55dp"
         android:layout_marginStart="24dp"
         app:layout_constraintStart_toStartOf="parent"
