@@ -4,21 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
     android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/drag_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/white"
         android:paddingVertical="4dp"
-        android:background="@color/white">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/user_pic"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:layout_marginTop="2dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
             android:src="@drawable/user_pic_2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +47,7 @@
             android:text="@string/brooklyn_simmons"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintEnd_toStartOf="@+id/button_container"
+            app:layout_constraintEnd_toStartOf="@+id/message_day"
             app:layout_constraintStart_toEndOf="@+id/user_pic"
             app:layout_constraintTop_toTopOf="@+id/user_pic" />
 
@@ -51,7 +55,7 @@
             android:id="@+id/tvMessage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="4dp"
             android:fontFamily="@font/worksans_light"
             android:padding="3dp"
             android:text="@string/you_are_friends"
@@ -70,8 +74,8 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/worksans_light"
             android:text="@string/today"
-            android:textSize="12sp"
             android:textColor="@color/dark_grey"
+            android:textSize="12sp"
             app:layout_constraintBottom_toTopOf="@+id/tvMessage"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tvName">
@@ -79,56 +83,56 @@
         </TextView>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/button_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/button_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/add_imv"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/round_shape_small1"
+                android:backgroundTint="@color/teal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/add_imv"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/round_shape_small1"
-                    android:backgroundTint="@color/teal"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/plus_icon"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/plus_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </ImageView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <ImageView
-                    android:id="@+id/remove_view"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="8dp"
-                    android:background="@drawable/round_shape_small1"
-                    android:backgroundTint="@color/edittext_grey"
-                    android:padding="12dp"
-                    android:src="@drawable/cross_icon"
-                    app:layout_constraintBottom_toBottomOf="@+id/add_imv"
-                    app:layout_constraintEnd_toStartOf="@+id/add_imv"
-                    app:layout_constraintTop_toTopOf="@+id/add_imv">
 
                 </ImageView>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/remove_view"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/round_shape_small1"
+                android:backgroundTint="@color/edittext_grey"
+                android:padding="12dp"
+                android:src="@drawable/cross_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/add_imv"
+                app:layout_constraintEnd_toStartOf="@+id/add_imv"
+                app:layout_constraintTop_toTopOf="@+id/add_imv">
+
+            </ImageView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

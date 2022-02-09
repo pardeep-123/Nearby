@@ -2,14 +2,14 @@
     <string name="app_name">Nearby</string>
 
     //not for this project
-    <string name="map_key">AIzaSyBC8rG3Pm4TYeTkAiqrqhAEB3X2jk3HvpA</string>
+    <string name="map_key" translatable="false">AIzaSyBC8rG3Pm4TYeTkAiqrqhAEB3X2jk3HvpA</string>
 
     <string name="select_photo">Select Photo</string>
     <string name="opencamera">Camera</string>
     <string name="pick_from_gallery">Gallery</string>
-     <string name="permissionRequired">Permission Required</string>
+    <string name="permissionRequired">Permission Required</string>
     <string name="openSettings">Open Settings</string>
-     <string name="select_any_option">Select any option</string>
+    <string name="select_any_option">Select any option</string>
 
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="login_with_google">Login with Email</string>

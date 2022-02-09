@@ -54,7 +54,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var filterDialog: BottomSheetDialog
 
     lateinit var set: ConstraintSet
-    lateinit var mapLayout: FrameLayout
     lateinit var mainLayout: FrameLayout
     lateinit var constraint: ConstraintLayout
 
@@ -73,7 +72,6 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Places.initialize(this, resources.getString(R.string.map_key))
         }
 
-        mapLayout = findViewById(R.id.complete_frame_layout)
         mainLayout = findViewById(R.id.selection_frame_layout)
         constraint = findViewById(R.id.mainActivityLayout)
         set = ConstraintSet()
@@ -131,6 +129,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val onActionListener = object : OnActionListener<ActivitiesModel> {
             override fun notify(model: ActivitiesModel, position: Int, view: View) {
 
+
                 if (position == 0) {
                     openFragment(HomeFragment(),R.id.selection_frame_layout)
                     set.applyTo(constraint)
@@ -142,6 +141,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 }
 
                 if (position == 2) {
+                    mainLayout.removeAllViews()
                     mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
                     openFragment(MapFragment(),R.id.selection_frame_layout)
                 }

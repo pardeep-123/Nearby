@@ -14,11 +14,11 @@
 
 
     <application
-        android:requestLegacyExternalStorage="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:logo="@mipmap/ic_launcher"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White">
@@ -32,78 +32,112 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
+
+
         <activity
             android:name=".ui.authentication.ResetPasswordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.OtherUserProfileActivity"
             android:exported="true"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.PrivacyPolicyActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.TermsOfUse"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.CongratulationActivity"
-            android:exported="true" />
-        <activity android:name=".ui.OngoingChatActivity" />
-        <activity android:name=".ui.SwipeUserProfileActivity" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.OngoingChatActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SwipeUserProfileActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.FullPictureActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
-        <activity android:name=".ui.ContactUsActivity" />
-        <activity android:name=".ui.FeedBackActivity" />
-        <activity android:name=".ui.SearchActivity" />
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ContactUsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.FeedBackActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SearchActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.DetailedProfileActivity"
             android:exported="true"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.EventDetailsActivity"
             android:exported="true"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+            android:theme="@style/Theme.Nearby.TransparentStatusBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.MyProfileActivity"
+            android:exported="true"
             android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:exported="true" />
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.EditProfileActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity android:name=".ui.AlertActivity" />
-        <activity android:name=".ui.NotificationsActivity" />
-        <activity android:name=".ui.PersonalInfoActivity" />
-        <activity android:name=".ui.SettingsActivity" />
-        <activity android:name=".ui.SideBarMenuActivity" />
-        <activity android:name=".ui.AddEventActivity" />
-        <activity android:name=".ui.ChatActivity" />
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.AlertActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.NotificationsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.PersonalInfoActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SettingsActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.SideBarMenuActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.AddEventActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.ChatActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.MainActivity"
             android:exported="true"
-            android:windowSoftInputMode="adjustResize">
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait">
             <!--android:theme="@style/Theme.Nearby.TransparentStatusBar"/-->
-
         </activity>
 
         <activity
             android:name=".ui.authentication.ChangePasswordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.authentication.SignUpActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.authentication.ForgotPasswordActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.authentication.LoginActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.authentication.WelcomeActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
+            android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
