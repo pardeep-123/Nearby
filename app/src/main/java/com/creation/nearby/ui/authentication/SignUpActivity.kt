@@ -39,8 +39,8 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
         binding.passwordSignup.addTextChangedListener(this)
         binding.confirmPassword.addTextChangedListener(this)
 
-        binding.signUpBtn.isEnabled = false
-        binding.signUpBtn.alpha = 0.5f
+        /*   binding.signUpBtn.isEnabled = false
+           binding.signUpBtn.alpha = 0.5f*/
 
     }
 
@@ -94,8 +94,9 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
             }
             binding.alreadyHaveAnAccount -> {
 
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
+//                startActivity(Intent(this, LoginActivity::class.java))
+                //              finish()
+                onBackPressed()
             }
             binding.signUpBtn -> {
 
@@ -104,79 +105,86 @@ class SignUpActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
         }
 
     }
-        private fun confirmationDialog() {
-            val dialog = Dialog(this)
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            dialog.setCancelable(true)
-            dialog.setCanceledOnTouchOutside(true)
-            dialog.window?.setBackgroundDrawable(
-                ContextCompat.getDrawable(
-                    this,
-                    android.R.color.transparent
-                )
-            )
-            dialog.setContentView(R.layout.send_verification_dialog)
 
-            val ok: AppCompatButton? = dialog.findViewById(R.id.ok)
-
-            ok?.setOnClickListener {
-                dialog.dismiss()
-            }
-
-
-            dialog.show()
-        }
-
-        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-
-        }
-
-        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-
-        }
-
-        override fun afterTextChanged(s: Editable?) {
-
-            if (binding.userFirstName.text.isNotEmpty()) {
-
-                if (binding.userLastName.text.isNotEmpty()) {
-                    if (binding.userEmail.text.isNotEmpty()) {
-                        if (binding.passwordSignup.text.isNotEmpty()) {
-                            if (binding.confirmPassword.text.isNotEmpty()) {
-                                if (binding.referralCode.text.isNotEmpty()) {
-                                    binding.signUpBtn.isEnabled = true
-                                    binding.signUpBtn.alpha = 1f
-                                } else {
-                                    binding.signUpBtn.isEnabled = false
-                                    binding.signUpBtn.alpha = 0.5f
-                                }
-
-                            } else {
-
-                                binding.signUpBtn.isEnabled = false
-                                binding.signUpBtn.alpha = 0.5f
-
-                            }
-                        } else {
-                            binding.signUpBtn.isEnabled = false
-                            binding.signUpBtn.alpha = 0.5f
-                        }
-                    } else {
-                        binding.signUpBtn.isEnabled = false
-                        binding.signUpBtn.alpha = 0.5f
-                    }
-
-                } else {
-                    binding.signUpBtn.isEnabled = false
-                    binding.signUpBtn.alpha = 0.5f
-                }
-
-            } else {
-                binding.signUpBtn.isEnabled = false
-                binding.signUpBtn.alpha = 0.5f
-            }
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
     }
+
+    private fun confirmationDialog() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                this,
+                android.R.color.transparent
+            )
+        )
+        dialog.setContentView(R.layout.send_verification_dialog)
+
+        val ok: AppCompatButton? = dialog.findViewById(R.id.ok)
+
+        ok?.setOnClickListener {
+            dialog.dismiss()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
+
+
+        dialog.show()
+    }
+
+    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+
+    }
+
+    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+
+    }
+
+    override fun afterTextChanged(s: Editable?) {
+
+        /* if (binding.userFirstName.text.isNotEmpty()) {
+
+             if (binding.userLastName.text.isNotEmpty()) {
+                 if (binding.userEmail.text.isNotEmpty()) {
+                     if (binding.passwordSignup.text.isNotEmpty()) {
+                         if (binding.confirmPassword.text.isNotEmpty()) {
+                             if (binding.referralCode.text.isNotEmpty()) {
+                                 binding.signUpBtn.isEnabled = true
+                                 binding.signUpBtn.alpha = 1f
+                             } else {
+                                 binding.signUpBtn.isEnabled = false
+                                 binding.signUpBtn.alpha = 0.5f
+                             }
+
+                         } else {
+
+                             binding.signUpBtn.isEnabled = false
+                             binding.signUpBtn.alpha = 0.5f
+
+                         }
+                     } else {
+                         binding.signUpBtn.isEnabled = false
+                         binding.signUpBtn.alpha = 0.5f
+                     }
+                 } else {
+                     binding.signUpBtn.isEnabled = false
+                     binding.signUpBtn.alpha = 0.5f
+                 }
+
+             } else {
+                 binding.signUpBtn.isEnabled = false
+                 binding.signUpBtn.alpha = 0.5f
+             }
+
+         } else {
+             binding.signUpBtn.isEnabled = false
+             binding.signUpBtn.alpha = 0.5f
+         }*/
+    }
+}
 

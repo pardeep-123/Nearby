@@ -16,9 +16,10 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWat
 
         binding.goBackForgot.setOnClickListener(this)
         binding.forgotEmail.addTextChangedListener(this)
+        binding.sendRequestBtn.setOnClickListener(this)
 
-        binding.sendRequestBtn.isEnabled = true
-        binding.sendRequestBtn.alpha = 0.5f
+     /*   binding.sendRequestBtn.isEnabled = true
+        binding.sendRequestBtn.alpha = 0.5*/
     }
 
     override fun onClick(v: View?) {
@@ -28,8 +29,10 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWat
             binding.goBackForgot->{
                 onBackPressed()
             }
+            binding.sendRequestBtn->{
+                finish()
+            }
         }
-
     }
 
     override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -40,7 +43,7 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWat
 
     override fun afterTextChanged(s: Editable?) {
 
-        if (binding.forgotEmail.text.isNotEmpty()){
+     /*   if (binding.forgotEmail.text.isNotEmpty()){
 
             binding.sendRequestBtn.isEnabled = true
             binding.sendRequestBtn.alpha = 1f
@@ -48,6 +51,6 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWat
             binding.sendRequestBtn.isEnabled = true
             binding.sendRequestBtn.alpha = 0.5f
         }
-
+*/
     }
 }

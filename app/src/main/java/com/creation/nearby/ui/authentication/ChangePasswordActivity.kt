@@ -21,13 +21,12 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
         binding.showHide.setOnClickListener(this)
         binding.showHideConfirmNew.setOnClickListener(this)
         binding.showHideNew.setOnClickListener(this)
+        binding.saveBtn.setOnClickListener(this)
 
         binding.newPassword.addTextChangedListener(this)
         binding.confirmNewPassword.addTextChangedListener(this)
         binding.confirmLatestPassword.addTextChangedListener(this)
 
-        binding.saveBtn.isEnabled = false
-        binding.saveBtn.alpha = 0.5f
 
     }
 
@@ -85,6 +84,9 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
 
                 }
             }
+            binding.saveBtn->{
+                finish()
+            }
 
 
         }
@@ -103,27 +105,6 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
 
     override fun afterTextChanged(s: Editable?) {
 
-        if (binding.passwordChange.text.isNotEmpty()){
-
-            if(binding.newPassword.text.isNotEmpty()){
-                if (binding.confirmLatestPassword.text.isNotEmpty()){
-
-                    binding.saveBtn.isEnabled = true
-                    binding.saveBtn.alpha = 1f
-
-                }else{
-                    binding.saveBtn.isEnabled = false
-                    binding.saveBtn.alpha = 0.5f
-                }
-            }else{
-                binding.saveBtn.isEnabled = false
-                binding.saveBtn.alpha = 0.5f
-            }
-
-        }else{
-            binding.saveBtn.isEnabled = false
-            binding.saveBtn.alpha = 0.5f
-        }
 
     }
 }

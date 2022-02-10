@@ -22,6 +22,9 @@ class PersonalInfoActivity : AppCompatActivity() {
         binding.gobackBtn.setOnClickListener{
             onBackPressed()
         }
+        binding.personalInfoBtn.setOnClickListener{
+            finish()
+        }
 
     }
 }

@@ -32,8 +32,8 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
         binding.emailLogin.addTextChangedListener(this)
         binding.passwordLogin.addTextChangedListener(this)
 
-        binding.signInLogin.isEnabled = false
-        binding.signInLogin.alpha = 0.5f
+     /*   binding.signInLogin.isEnabled = false
+        binding.signInLogin.alpha = 0.5f*/
 
     }
 
@@ -70,6 +70,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
             }
             binding.signInLogin->{
                 startActivity(Intent(this,MainActivity::class.java))
+                finishAffinity()
 
             }
             binding.rememberCheckbox->{
@@ -98,7 +99,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
 
     override fun afterTextChanged(s: Editable?) {
 
-        if (binding.emailLogin.text.isNotEmpty()){
+       /* if (binding.emailLogin.text.isNotEmpty()){
 
             if(binding.passwordLogin.text.isNotEmpty()){
 
@@ -113,7 +114,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
         }else{
             binding.signInLogin.isEnabled = false
             binding.signInLogin.alpha = 0.5f
-        }
+        }*/
 
     }
 }

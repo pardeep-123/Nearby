@@ -81,6 +81,9 @@ class AddEventActivity : ImagePickerUtility(){
 
 
         }
+        binding.addEventBtn.setOnClickListener{
+            finish()
+        }
     }
 
 

@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:textSize="30sp"
+        android:textSize="36sp"
         android:fontFamily="@font/worksans_black"
         android:textColor="@color/black"
         android:gravity="center_horizontal"
@@ -60,39 +60,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="24dp"
-                android:layout_marginRight="24dp"
-                android:background="@drawable/round_shape"
-                android:backgroundTint="@color/black"
-                android:clickable="true"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:paddingVertical="16dp">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginRight="6dp"
-                    android:src="@drawable/apple_icon"
-                    app:tint="@color/white">
-
-                </ImageView>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/worksans_black"
-                    android:text="@string/login_with_apple"
-                    android:textColor="@color/white"
-                    android:textSize="16sp">
-
-
-                </TextView>
-
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

@@ -169,7 +169,7 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
             }
             binding.dislikeBtn->{
 
-                fullProfileDialog.show()
+                onBackPressed()
             }
             binding.likedBtn1->{
                 fullProfileDialog.show()

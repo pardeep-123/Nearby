@@ -68,9 +68,9 @@ class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
         when (v) {
             binding.goBack -> {
                 onBackPressed()
-            }   binding.submitMessage -> {
-
-
+            }
+            binding.submitMessage -> {
+                finish()
         }
         }
     }

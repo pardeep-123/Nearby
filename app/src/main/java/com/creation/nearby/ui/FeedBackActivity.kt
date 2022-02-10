@@ -90,6 +90,7 @@ class FeedBackActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.sendFeedback -> {
 
+                finish()
 
             }
         }

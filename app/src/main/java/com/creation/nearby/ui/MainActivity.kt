@@ -123,6 +123,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         dialogBinding.filterNew.setOnClickListener(this)
         dialogBinding.filterNew.setOnClickListener(this)
         dialogBinding.selectLocation.setOnClickListener(this)
+        dialogBinding.filterApplyBtn.setOnClickListener(this)
     }
     private fun initAdapter() {
 
@@ -287,6 +288,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 dialogBinding.filterNew.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
                 dialogBinding.filterNew.setTextColor(ContextCompat.getColor(this,R.color.white))
 
+            }dialogBinding.filterApplyBtn->{
+                filterDialog.dismiss()
             }
 
 
