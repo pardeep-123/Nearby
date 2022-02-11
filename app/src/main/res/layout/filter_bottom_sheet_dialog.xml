@@ -428,7 +428,6 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/round_shape"
         android:backgroundTint="@color/teal"
-        android:alpha="0.5"
         android:fontFamily="@font/worksans_black"
         android:text="@string/apply"
         android:textAllCaps="false"
@@ -439,7 +438,6 @@
         app:layout_constraintTop_toBottomOf="@+id/range_slider">
 
     </androidx.appcompat.widget.AppCompatButton>
-
 
     <TextView
         android:layout_width="wrap_content"

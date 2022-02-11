@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityLoginBinding
 import com.creation.nearby.ui.MainActivity
+import com.creation.nearby.utils.AppUtils
 
 
 class LoginActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {

@@ -17,7 +17,6 @@
     </style>
 
 
-
     <style name="Theme.Nearby.White" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/white</item>
@@ -32,36 +31,36 @@
         <!-- Customize your theme here. -->
         <item name="android:windowLightStatusBar">true</item>
 
-       </style>
+    </style>
 
-       <style name="Theme.Nearby.TransparentStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Nearby.TransparentStatusBar" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
-           <!--      <item name="android:windowTranslucentStatus">true</item>  -->
-           <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
-           <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
-           <!-- Customize your theme here. -->
+        <!--      <item name="android:windowTranslucentStatus">true</item>  -->
+        <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
+        <item name="android:statusBarColor" tools:targetApi="l">@android:color/transparent</item>
+        <!-- Customize your theme here. -->
 
 
-           <item name="android:windowSharedElementsUseOverlay">true</item>
-           <item name="android:windowSharedElementEnterTransition">@transition/smooth_transition</item>
-           <item name="android:windowSharedElementExitTransition">@transition/smooth_transition</item>
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/smooth_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/smooth_transition</item>
 
-            </style>
+    </style>
 
-            <style name="roundedImageView" parent="">
-                <item name="cornerFamily">rounded</item>
-                <item name="cornerSize">12%</item>
-            </style>
+    <style name="roundedImageView" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12%</item>
+    </style>
 
-            <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
-                <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
-            </style>
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+    </style>
 
-            <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
-                <item name="android:background">@android:color/transparent</item>
-            </style>
+    <style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">@android:color/transparent</item>
+    </style>
 
-    <style name="DialogTimePicker" parent= "Theme.MaterialComponents.Light.Dialog">
+    <style name="DialogTimePicker" parent="Theme.MaterialComponents.Light.Dialog">
 
         <item name="android:timePickerStyle">@style/Theme.MyTheme.TimePicker</item>
 
@@ -83,4 +82,8 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-        </resources>
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/black</item>
+    </style>
+
+</resources>

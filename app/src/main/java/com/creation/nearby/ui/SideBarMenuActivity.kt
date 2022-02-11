@@ -1,6 +1,7 @@
 package com.creation.nearby.ui
 
 import android.app.Activity
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -11,6 +12,7 @@ import android.view.View
 import android.view.Window
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
@@ -72,11 +74,23 @@ class SideBarMenuActivity : ImagePickerUtility() {
             onBackPressed()
         }
         binding.logoutBtn.setOnClickListener{
-            startActivity(Intent(this,LoginActivity::class.java))
-            finish()
+            logoutDialog()
         }
+    }
 
 
+    private fun logoutDialog(){
+        AlertDialog.Builder(this, R.style.MyDialogTheme)
+            .setTitle("Log Out")
+            .setMessage("Are you sure want to Quit?")
+            .setPositiveButton("Yes") { dialog: DialogInterface?, whichButton: Int ->
+                startActivity(Intent(this, LoginActivity::class.java))
+                finishAffinity()
+            }
+            .setNegativeButton("No") { dialog: DialogInterface?, i: Int ->
+                dialog?.dismiss()
+            }
+            .show()
     }
 
 }

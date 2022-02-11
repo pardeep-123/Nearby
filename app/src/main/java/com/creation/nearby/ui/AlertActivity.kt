@@ -12,11 +12,11 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
     private var isMessageClicked = false
     private var isFriendClicked = false
     private var isRequestClicked = false
-    private var isTipsClicked = false
+/*    private var isTipsClicked = false
     private var isCameraClicked = false
-    private var isLocationClicked = false
+    private var isLocationClicked = false*/
     private var isNotificationClicked = false
-    private var isVoiceClicked = false
+/*    private var isVoiceClicked = false*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,10 +27,10 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
         binding.newFriendLayout.setOnClickListener(this)
         binding.requestsLayout.setOnClickListener(this)
         binding.inAppNotificationLayout.setOnClickListener(this)
-        binding.tipsLayout.setOnClickListener(this)
+      /*  binding.tipsLayout.setOnClickListener(this)
         binding.locationLayout.setOnClickListener(this)
         binding.cameraLayout.setOnClickListener(this)
-        binding.voiceLayout.setOnClickListener(this)
+        binding.voiceLayout.setOnClickListener(this)*/
         binding.goback1.setOnClickListener(this)
 
 
@@ -51,9 +51,6 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
                     binding.emptyCheckBox1.visibility = View.VISIBLE
                     binding.checkedCheckBox1.visibility = View.GONE
                 }
-
-
-
             }
             binding.newFriendLayout->{
                 if (!isFriendClicked){
@@ -88,7 +85,7 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
                     binding.checkedCheckBox4.visibility = View.GONE
                 }
             }
-            binding.tipsLayout->{
+          /*  binding.tipsLayout->{
                 if (!isTipsClicked){
                     isTipsClicked = true
                     binding.emptyCheckBox5.visibility = View.GONE
@@ -132,7 +129,7 @@ class AlertActivity : AppCompatActivity(),View.OnClickListener {
                     binding.checkedCheckBox8.visibility = View.GONE
                 }
             }
-
+*/
             binding.goback1->{
 
                 onBackPressed()

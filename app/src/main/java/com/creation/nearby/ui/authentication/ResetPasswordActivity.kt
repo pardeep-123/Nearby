@@ -9,6 +9,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityResetPasswordBinding
+import com.creation.nearby.utils.AppUtils
 
 class ResetPasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
 

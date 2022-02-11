@@ -34,7 +34,9 @@ class EventDetailsActivity : AppCompatActivity(),View.OnClickListener {
             }
             binding.reportTv-> {
                 optionsDialog()
-            }
+            } binding.eventsCross-> {
+            onBackPressed()
+        }
         }
     }
 

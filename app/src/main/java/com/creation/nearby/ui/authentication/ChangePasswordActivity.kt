@@ -9,6 +9,7 @@ import android.text.method.PasswordTransformationMethod
 import android.view.View
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityChangePasswordBinding
+import com.creation.nearby.utils.AppUtils
 
 class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
     private lateinit var binding: ActivityChangePasswordBinding
@@ -16,6 +17,8 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        AppUtils.hideKeyboard(this)
 
         binding.goBackForgot.setOnClickListener(this)
         binding.showHide.setOnClickListener(this)

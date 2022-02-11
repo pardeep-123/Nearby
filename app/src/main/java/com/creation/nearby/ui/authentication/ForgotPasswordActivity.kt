@@ -6,6 +6,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import com.creation.nearby.databinding.ActivityForgotPasswordBinding
+import com.creation.nearby.utils.AppUtils
 
 class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWatcher {
     lateinit var binding: ActivityForgotPasswordBinding

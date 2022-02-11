@@ -16,6 +16,7 @@ import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivitySignUpBinding
 import com.creation.nearby.ui.PrivacyPolicyActivity
 import com.creation.nearby.ui.TermsOfUse
+import com.creation.nearby.utils.AppUtils
 
 class SignUpActivity : AppCompatActivity(), View.OnClickListener, TextWatcher {
     lateinit var binding: ActivitySignUpBinding

@@ -9,6 +9,7 @@ import com.creation.nearby.R
 import com.creation.nearby.adapter.HistoryAdapter
 import com.creation.nearby.databinding.ActivityContactUsBinding
 import com.creation.nearby.model.HistoryModel
+import com.creation.nearby.utils.AppUtils
 
 class ContactUsActivity : AppCompatActivity(), View.OnClickListener {
 

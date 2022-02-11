@@ -378,7 +378,7 @@
                     android:background="@drawable/round_shape"
                     android:backgroundTint="@color/toggle_grey"
                     android:fontFamily="@font/worksans_black"
-                    android:paddingStart="40dp"
+                    android:paddingStart="42dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="65dp"
                     android:paddingBottom="12dp"

@@ -29,6 +29,7 @@ import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
 import com.creation.nearby.fragments.*
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ActivitiesModel
+import com.creation.nearby.utils.AppUtils
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete

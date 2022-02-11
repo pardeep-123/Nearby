@@ -15,6 +15,7 @@ import com.creation.nearby.model.ActivitiesModel
 import com.creation.nearby.model.ChatModel
 import com.creation.nearby.model.FriendsModel
 import com.creation.nearby.model.OnlineUserChatModel
+import com.creation.nearby.utils.AppUtils
 
 class ChatActivity : AppCompatActivity() {
 
@@ -32,7 +33,6 @@ class ChatActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         binding.onlineChatsRecyView.layoutManager = LinearLayoutManager(this,
             RecyclerView.HORIZONTAL,false)

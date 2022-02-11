@@ -330,6 +330,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+<!--
             <View
                 android:id="@+id/divider10"
                 android:layout_width="0dp"
@@ -339,8 +340,9 @@
                 app:layout_constraintStart_toStartOf="@+id/message_layout"
                 app:layout_constraintTop_toBottomOf="@+id/in_app_notification_layout" />
 
+-->
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+           <!-- <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/tips_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -625,7 +627,7 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-
+-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

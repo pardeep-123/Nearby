@@ -1,5 +1,6 @@
 package com.creation.nearby.ui
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -13,6 +14,7 @@ import com.creation.nearby.databinding.ActivityOngoingChatBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.SuggestionsModel
+import com.creation.nearby.utils.AppUtils
 
 class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding: ActivityOngoingChatBinding
@@ -25,7 +27,7 @@ class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
         binding = ActivityOngoingChatBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
+        AppUtils.hideKeyboard(this)
         binding.suggestionRecyclerView.layoutManager = LinearLayoutManager(this,
             RecyclerView.HORIZONTAL,false)
 
@@ -38,6 +40,8 @@ class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
         binding.goback.setOnClickListener(this)
         binding.sendMessageBtn.setOnClickListener(this)
         binding.sendMessageBtn.setOnClickListener(this)
+        binding.phoneIv.setOnClickListener(this)
+        binding.videoIv.setOnClickListener(this)
 
 
     }
@@ -57,7 +61,6 @@ class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
         suggestionAdapter.notifyDataSetChanged()
     }
 
-
     override fun onClick(p0: View?) {
         when(p0) {
 
@@ -68,6 +71,13 @@ class OngoingChatActivity : AppCompatActivity(),View.OnClickListener {
             {
                 binding.emptyLayout.visibility = View.GONE
             }
+            binding.phoneIv ->
+            {
+                startActivity(Intent(this,AudioActivity::class.java))
+            }  binding.videoIv ->
+        {
+            startActivity(Intent(this,VideoActivity::class.java))
+        }
 
         }
     }

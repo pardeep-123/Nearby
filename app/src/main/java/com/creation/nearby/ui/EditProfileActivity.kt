@@ -1,6 +1,7 @@
 package com.creation.nearby.ui
 
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.net.Uri
@@ -25,11 +26,15 @@ import com.creation.nearby.databinding.ActivityEditProfileBinding
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.model.PopupModel
+import com.creation.nearby.utils.AppUtils
 import com.creation.nearby.utils.ImagePickerUtility
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.permissionx.guolindev.PermissionX
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
@@ -38,6 +43,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
     private lateinit var imageAdapter: ImageAdapter
 
     private val popupList  = ArrayList<PopupModel>()
+    var cal: Calendar = Calendar.getInstance()
 
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var popup: ListPopupWindow
@@ -66,6 +72,8 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
         initAdapter()
 
         popupList.add(PopupModel("Aries"))
@@ -114,6 +122,8 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         binding.userProfilePic.setOnClickListener(this)
         binding.backBtn2.setOnClickListener(this)
         binding.finishBtn.setOnClickListener(this)
+        binding.cameraPictureBtn.setOnClickListener(this)
+        binding.editTextDOB.setOnClickListener(this)
 
         images.add(ImageModel("",false))
         images.add(ImageModel("",false))
@@ -163,12 +173,20 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             }
 
             binding.finishBtn->{
-                finish()
+                onBackPressed()
             }
 
             binding.userProfilePic->{
                 isMainPhoto = true
                 getImage(this,0)
+            }
+
+            binding.cameraPictureBtn->{
+                isMainPhoto = true
+                getImage(this,0)
+            }
+            binding.editTextDOB->{
+                datePickerDialog()
             }
 
             binding.selectZodiacLayout->{
@@ -259,51 +277,30 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
                 binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
         }
 
-
-      /*      binding.menTv->{
-
-                binding.menTv.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-                binding.menTv.compoundDrawables[0].setTint(resources.getColor(R.color.white))
-                binding.menTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-
-                binding.womenTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-                binding.womenTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-                binding.womenTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-                binding.bothTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-                binding.bothTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-                binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-        }binding.womenTv->{
-
-            binding.menTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.menTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-            binding.menTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-            binding.womenTv.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-            binding.womenTv.compoundDrawables[0].setTint(resources.getColor(R.color.white))
-            binding.womenTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-
-            binding.bothTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.bothTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-            binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-        }binding.bothTv->{
-
-            binding.menTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.menTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-            binding.menTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-            binding.womenTv.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.womenTv.compoundDrawables[0].setTint(resources.getColor(R.color.black))
-            binding.womenTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-
-            binding.bothTv.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-            binding.bothTv.compoundDrawables[0].setTint(resources.getColor(R.color.white))
-            binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-
         }
-*/
+    }
+
+    private fun datePickerDialog() {
+        val dateSetListener =
+            DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+            }
+        binding.editTextDOB!!.setOnClickListener {
+            DatePickerDialog(
+                this,R.style.DialogTimePicker,
+                dateSetListener,
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
         }
+    }
+    private fun updateDateInView() {
+        val myFormat = "dd/MM/yyyy"
+        val sdf = SimpleDateFormat(myFormat, Locale.US)
+        binding.editTextDOB.setText(sdf.format(cal.time))
     }
 }
