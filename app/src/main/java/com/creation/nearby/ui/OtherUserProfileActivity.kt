@@ -38,7 +38,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
 import java.lang.Math.abs
 
-class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
+class OtherUserProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityOtherUserProfileBinding
     private  var interestsList = ArrayList<InterestedModel>()
@@ -110,11 +110,37 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
 
         //full profile dialog
 
-        binding.backbtn1.setOnClickListener(this)
-        dialogBinding.goBack.setOnClickListener(this)
-        dialogBinding.blockTv.setOnClickListener(this)
-        binding.dislikeBtn.setOnClickListener(this)
-        binding.likedBtn1.setOnClickListener(this)
+        clickHandler()
+    }
+
+    private fun clickHandler() {
+
+        binding.backbtn1.setOnClickListener{
+
+            onBackPressed()
+
+        }
+        dialogBinding.goBack.setOnClickListener{
+            fullProfileDialog.dismiss()
+        }
+        dialogBinding.blockTv.setOnClickListener{
+            optionsDialog()
+        }
+        dialogBinding.eventsCheck.setOnClickListener{
+            fullProfileDialog.dismiss()
+        }
+        dialogBinding.eventsCross.setOnClickListener{
+            fullProfileDialog.dismiss()
+        }
+
+        binding.dislikeBtn.setOnClickListener{
+
+            onBackPressed()
+        }
+        binding.likedBtn1.setOnClickListener{
+            fullProfileDialog.show()
+        }
+
     }
 
     private fun initAdapter() {
@@ -153,30 +179,6 @@ class OtherUserProfileActivity : AppCompatActivity(),View.OnClickListener {
         mainGalleryAdapter.notifyDataSetChanged()
     }
 
-
-    override fun onClick(v: View?) {
-        when(v){
-            binding.backbtn1->{
-
-                onBackPressed()
-
-            }
-            dialogBinding.goBack->{
-                fullProfileDialog.dismiss()
-            }
-            dialogBinding.blockTv->{
-                optionsDialog()
-            }
-            binding.dislikeBtn->{
-
-                onBackPressed()
-            }
-            binding.likedBtn1->{
-                onBackPressed()
-            }
-
-        }
-    }
     private fun optionsDialog() {
         val dialog = BottomSheetDialog(this, R.style.CustomBottomSheetDialogTheme)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)

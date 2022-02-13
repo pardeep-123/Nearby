@@ -2,34 +2,30 @@ package com.creation.nearby.fragments
 
 import android.app.Dialog
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.widget.*
+import android.transition.Slide
+import android.transition.Transition
+import android.transition.TransitionManager
+import android.view.*
+import android.widget.Button
+import android.widget.EditText
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.creation.nearby.R
-import com.creation.nearby.adapter.ImageAdapter
-import com.creation.nearby.adapter.OnlineUserFriendsAdapter
 import com.creation.nearby.adapter.PostAdapter
 import com.creation.nearby.adapter.SuggestionAdapter
 import com.creation.nearby.databinding.FragmentFeedBinding
 import com.creation.nearby.listeners.OnActionListener
-import com.creation.nearby.model.FriendsModel
-import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.PostModel
 import com.creation.nearby.model.SuggestionsModel
-import com.creation.nearby.utils.ToastUtils
-import com.futuremind.recyclerviewfastscroll.Utils
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
+import com.creation.nearby.utils.ImagePickerFragmentUtility
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class FeedFragment : Fragment() {
+
+class FeedFragment : ImagePickerFragmentUtility() {
 
     lateinit var binding: FragmentFeedBinding
 
@@ -51,9 +47,9 @@ class FeedFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.postsRecyView.layoutManager = LinearLayoutManager(view.context,RecyclerView.VERTICAL,false)
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.teal))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.color.teal))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.color.teal))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.drawable.swipe_image2))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.drawable.swipe_image2))
+        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",null))
 
         initAdapter()
 
@@ -64,6 +60,8 @@ class FeedFragment : Fragment() {
         suggestionList.add(SuggestionsModel("Want to chat?"))
 
         suggestionAdapter()
+
+        clickHandler()
 
     }
 
@@ -151,5 +149,33 @@ class FeedFragment : Fragment() {
     }
 
 
+    override fun selectedImage(imagePath: String?) {
+        Glide.with(requireActivity()).load(imagePath).into(binding.gallerySelectedImage)
+
+
+        val transition: Transition = Slide(Gravity.BOTTOM)
+        transition.duration= 600
+        transition.addTarget(binding.feedGalleryImage)
+        TransitionManager.beginDelayedTransition(binding.parent, transition)
+        binding.feedGalleryImage.visibility = View.VISIBLE
+    }
+
+    private fun clickHandler(){
+
+        binding.imageCameraIv.setOnClickListener{
+            getImage(requireActivity(),0)
+        }
+
+        binding.closeImage.setOnClickListener{
+
+            val transition: Transition = Slide(Gravity.BOTTOM)
+            transition.duration= 600
+            transition.addTarget(binding.feedGalleryImage)
+            TransitionManager.beginDelayedTransition(binding.parent, transition)
+            binding.feedGalleryImage.visibility = View.GONE
+
+        }
+
+    }
 
 }

@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:background="@color/blue"
+        android:background="@color/teal"
         app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,13 +22,13 @@
             android:id="@+id/post_main_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/sky_blue">
+            android:background="@color/teal">
 
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/post_image_view"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:src="@drawable/user_pic_1"
@@ -78,6 +78,20 @@
                 app:layout_constraintStart_toStartOf="@+id/post_time_tv"
                 app:layout_constraintTop_toBottomOf="@+id/post_time_tv" />
 
+
+            <ImageView
+                android:id="@+id/post_image"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/swipe_image2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/post_message_tv">
+
+            </ImageView>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/post_message_btn"
                 android:layout_width="wrap_content"
@@ -97,7 +111,7 @@
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/post_message_tv" />
+                app:layout_constraintTop_toBottomOf="@+id/post_image" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

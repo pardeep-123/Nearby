@@ -11,7 +11,7 @@
         android:id="@+id/goback"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:padding="2dp"
         android:src="@drawable/back_arrow"
@@ -118,7 +118,7 @@
         app:layout_constraintBottom_toTopOf="@+id/suggestion_recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView77">
+        app:layout_constraintTop_toBottomOf="@+id/circleImageView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -163,12 +163,12 @@
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="24dp"
-                android:src="@drawable/hi_icon"
-                android:background="@drawable/hi_image_round"
-                android:padding="20dp"
+                android:layout_marginTop="32dp"
                 android:layout_marginBottom="16dp"
+                android:background="@drawable/hi_image_round"
                 android:backgroundTint="@color/grey1"
+                android:padding="20dp"
+                android:src="@drawable/hi_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -200,6 +200,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="8dp"
+        tools:listitem="@layout/suggestions_item"
+        tools:itemCount="1"
         app:layout_constraintStart_toStartOf="parent">
 
     </androidx.recyclerview.widget.RecyclerView>

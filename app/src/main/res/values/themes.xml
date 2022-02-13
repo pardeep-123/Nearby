@@ -84,6 +84,7 @@
 
     <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorPrimary">@color/black</item>
+        <item name="colorOnPrimary">@color/black</item>
     </style>
 
 </resources>

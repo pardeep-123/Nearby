@@ -3,8 +3,10 @@ package com.creation.nearby.adapter
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.databinding.ItemPostsBinding
@@ -30,19 +32,23 @@ class PostAdapter(private val mList: ArrayList<PostModel>,var onActionListener: 
 
             with(mList[position]){
 
-                binding.postImageView.setImageResource(postPic)
+                binding.postImageView.setImageResource(postProfilePic)
                 binding.postUserName.text = postName
                 binding.postTimeTv.text = postTime
                 binding.postMessageTv.text = postMessage
-                binding.postMainLayout.setBackgroundColor(itemView.resources.getColor(backgroundColor))
+                if(postPicture != null && !postPicture.equals("")){
 
+                    binding.postImage.setImageResource(postPicture)
+
+                }else{
+                    binding.postImage.visibility = View.GONE
+                }
                 binding.postReportIv.setOnClickListener{
                     onActionListener.notify(model,position,holder.itemView)
                 }
                 binding.postMessageBtn.setOnClickListener{
                     holder.itemView.context.startActivity(Intent(itemView.context,OngoingChatActivity::class.java))
                 }
-
 
             }
         }

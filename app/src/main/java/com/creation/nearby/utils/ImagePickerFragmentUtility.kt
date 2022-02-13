@@ -3,6 +3,7 @@ package com.creation.nearby.utils
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
@@ -31,9 +32,9 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-abstract class ImagePickerUtility : AppCompatActivity() {
+abstract class ImagePickerFragmentUtility : Fragment() {
 
-    val REQUEST_CODE = 100
+    private val REQUEST_CODE = 100
     private val GALLERY_REQUEST_CODE = 101
     private val CAMERA_REQUEST_CODE = 102
     private lateinit var mImageFile: File
@@ -104,7 +105,7 @@ abstract class ImagePickerUtility : AppCompatActivity() {
         }
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         val fileUri = FileProvider.getUriForFile(
-            Objects.requireNonNull(activity), BuildConfig.APPLICATION_ID + ".provider",
+            Objects.requireNonNull(activity.applicationContext), BuildConfig.APPLICATION_ID + ".provider",
             mImageFile
         )
         intent.putExtra(MediaStore.EXTRA_OUTPUT, fileUri)
@@ -175,10 +176,10 @@ abstract class ImagePickerUtility : AppCompatActivity() {
                             false
                         )
                         .setPositiveButton(R.string.openSettings) { dialog, which ->
-                            finish()
+                            requireActivity().finish()
                             val intent = Intent(
                                 Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                Uri.fromParts("package", packageName, null)
+                                Uri.fromParts("package", requireActivity().packageName, null)
                             )
                             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             startActivity(intent)

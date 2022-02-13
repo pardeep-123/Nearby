@@ -10,7 +10,7 @@ import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityEventDetailsBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
-class EventDetailsActivity : AppCompatActivity(),View.OnClickListener {
+class EventDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventDetailsBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,26 +18,24 @@ class EventDetailsActivity : AppCompatActivity(),View.OnClickListener {
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(binding.root)
-        binding.goBack.setOnClickListener(this)
-        binding.eventsCheck.setOnClickListener(this)
-        binding.reportTv.setOnClickListener(this)
+
+        clickHandler()
     }
 
-    override fun onClick(v: View?) {
-        when(v){
-
-            binding.goBack->{
-                onBackPressed()
-            }
-            binding.eventsCheck->{
-                finish()
-            }
-            binding.reportTv-> {
-                optionsDialog()
-            } binding.eventsCross-> {
+    private fun clickHandler() {
+        binding.goBack.setOnClickListener{
             onBackPressed()
         }
+        binding.eventsCheck.setOnClickListener{
+            onBackPressed()
         }
+        binding.reportTv.setOnClickListener {
+            optionsDialog()
+        }
+        binding.eventsCross.setOnClickListener {
+            onBackPressed()
+        }
+
     }
 
     private fun optionsDialog() {
