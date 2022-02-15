@@ -1,19 +1,14 @@
 package com.creation.nearby.adapter
 
-import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ItemActivitiesBinding
-import com.creation.nearby.fragments.*
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ActivitiesModel
-import com.creation.nearby.ui.MainActivity
 
 class ActivityAdapter(
     val mList: ArrayList<ActivitiesModel>,
@@ -22,6 +17,8 @@ class ActivityAdapter(
 
     private var selectPosition = 0
     private var color = R.color.blue
+
+   // var onClickListener: ((pos: Int,id: ActivitiesModel) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
 
@@ -33,7 +30,7 @@ class ActivityAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var model: ActivitiesModel = mList[position]
+        val model: ActivitiesModel = mList[position]
 
         with(holder) {
 
@@ -67,6 +64,8 @@ class ActivityAdapter(
                 }
 
                 itemView.setOnClickListener {
+
+                 //   onClickListener?.invoke(position,mList[position])
 
                     onActionListener.notify(model, position, holder.itemView)
 

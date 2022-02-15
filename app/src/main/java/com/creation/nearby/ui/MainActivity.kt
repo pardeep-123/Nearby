@@ -1,16 +1,10 @@
 package com.creation.nearby.ui
 
 import android.content.Intent
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
-import android.view.ViewGroup
-import android.view.Window
-import android.view.WindowManager
 import android.widget.FrameLayout
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -29,7 +23,6 @@ import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
 import com.creation.nearby.fragments.*
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ActivitiesModel
-import com.creation.nearby.utils.AppUtils
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
@@ -37,8 +30,6 @@ import com.google.android.libraries.places.widget.AutocompleteActivity
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import java.util.*
-import kotlin.collections.ArrayList
 
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
@@ -51,14 +42,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     private var list = ArrayList<ActivitiesModel>()
     private lateinit var fragmentTransaction: FragmentTransaction
 
-    lateinit var dialogBinding: FilterBottomSheetDialogBinding
-    lateinit var filterDialog: BottomSheetDialog
+    private lateinit var dialogBinding: FilterBottomSheetDialogBinding
+    private lateinit var filterDialog: BottomSheetDialog
 
     lateinit var set: ConstraintSet
     lateinit var mainLayout: FrameLayout
     lateinit var constraint: ConstraintLayout
 
-    var MY_REQUEST = 1
+    var myRequest = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -91,10 +82,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         filterDialog.setCancelable(true)
         filterDialog.setCanceledOnTouchOutside(true)
 
-        binding.sectionRecyclerView.layoutManager = LinearLayoutManager(
-            this,
-            RecyclerView.HORIZONTAL, false
-        )
+        binding.sectionRecyclerView.layoutManager = LinearLayoutManager(this,
+            RecyclerView.HORIZONTAL, false)
 
         list.add(ActivitiesModel(R.drawable.home, "Home", isChecked = true))
         list.add(ActivitiesModel(R.drawable.user_icon, "Swipe", isChecked = false))
@@ -131,33 +120,32 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         val onActionListener = object : OnActionListener<ActivitiesModel> {
             override fun notify(model: ActivitiesModel, position: Int, view: View) {
 
-
                 if (position == 0) {
-                    openFragment(HomeFragment(),R.id.selection_frame_layout)
+                    openFragment(HomeFragment())
                     set.applyTo(constraint)
 
                 }
                 if (position == 1) {
-                    openFragment(SwipeCardFragment(),R.id.selection_frame_layout)
+                    openFragment(SwipeCardFragment())
                     set.applyTo(constraint)
                 }
 
                 if (position == 2) {
                     mainLayout.removeAllViews()
                     mainLayout.layoutParams = FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT,FrameLayout.LayoutParams.MATCH_PARENT)
-                    openFragment(MapFragment(),R.id.selection_frame_layout)
+                    openFragment(MapFragment())
                 }
                 if (position == 3) {
-                    openFragment(EventsFragment(),R.id.selection_frame_layout)
+                    openFragment(EventsFragment())
                     set.applyTo(constraint)
                 }
                 if (position == 4) {
-                    openFragment(FeedFragment(),R.id.selection_frame_layout)
+                    openFragment(FeedFragment())
                     set.applyTo(constraint)
 
                 }
                 if (position == 5) {
-                    openFragment(FriendsFragment(),R.id.selection_frame_layout)
+                    openFragment(FriendsFragment())
                     set.applyTo(constraint)
 
                 }
@@ -166,6 +154,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         adapter = ActivityAdapter(list, onActionListener)
         binding.sectionRecyclerView.adapter = adapter
         adapter.notifyDataSetChanged()
+
+
+//        adapter.onClickListener = { pos ,id->
+//            id.activityName
+//        }
     }
     override fun onClick(v: View?) {
         when (v) {
@@ -292,22 +285,18 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }dialogBinding.filterApplyBtn->{
                 filterDialog.dismiss()
             }
-
-
-
         }
     }
 
     fun openPlacePicker() {
-        MY_REQUEST = 1
-        val fields = Arrays.asList(
+        myRequest = 1
+        val fields = listOf(
             Place.Field.ID,
             Place.Field.NAME,
             Place.Field.LAT_LNG,
-            Place.Field.ADDRESS
-        )
-        val intent =
-            Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
+            Place.Field.ADDRESS)
+
+        val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields).build(this)
         startActivityForResult.launch(intent)
     }
 
@@ -329,14 +318,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
 
-    private fun openFragment( fragment: Fragment, id : Int){
+    private fun openFragment( fragment: Fragment){
          fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(id, fragment)
+        fragmentTransaction.replace(R.id.selection_frame_layout, fragment)
         fragmentTransaction.commit()
 
 
     }
-}
+ }
 
 
 

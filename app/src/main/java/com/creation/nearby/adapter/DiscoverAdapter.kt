@@ -38,11 +38,11 @@ class DiscoverAdapter(private val mList: ArrayList<DiscoverModel>) : RecyclerVie
         //    var  fragmentTransaction = (holder.itemView.context as AppCompatActivity).supportFragmentManager.beginTransaction()
         //    fragmentTransaction.replace(R.id.selection_frame_layout, EventsFragment())
         //    fragmentTransaction.commit()
-            MainActivity.binding.sectionRecyclerView.postDelayed( Runnable {
+            MainActivity.binding.sectionRecyclerView.postDelayed({
 
                 MainActivity.binding.sectionRecyclerView.scrollToPosition(3)
 
-                MainActivity.binding.sectionRecyclerView.postDelayed( Runnable {
+                MainActivity.binding.sectionRecyclerView.postDelayed({
                     MainActivity.binding.sectionRecyclerView.findViewHolderForAdapterPosition(3)?.itemView?.performClick()
 
 

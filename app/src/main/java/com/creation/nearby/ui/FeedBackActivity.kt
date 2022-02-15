@@ -54,7 +54,7 @@ class FeedBackActivity : AppCompatActivity(), View.OnClickListener {
                 if (allGranted) {
                     getImageFromGallery()
                 } else
-                    ToastUtils.showToast("Unable to perform action due to permissions", this)
+                    ToastUtils.showToast("Unable to perform action due to permissions")
             }
 
     }

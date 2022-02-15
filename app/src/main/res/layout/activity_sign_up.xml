@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="signUpVM"
+            type="com.creation.nearby.viewmodel.SignupVm" />
+
+    </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -17,7 +29,7 @@
         android:src="@drawable/back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/black"></ImageView>
+        app:tint="@color/black"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -66,6 +78,7 @@
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_grey"
                 android:textSize="16sp"
+                android:text="@={signUpVM.firstname}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -83,6 +96,7 @@
                 android:fontFamily="@font/worksans_regular"
                 android:hint="@string/last_name"
                 android:inputType="text"
+                android:text="@={signUpVM.lastname}"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="16dp"
                 android:textColor="@color/black"
@@ -104,6 +118,7 @@
                 android:backgroundTint="@color/edittext_grey"
                 android:fontFamily="@font/worksans_regular"
                 android:hint="@string/email"
+                android:text="@={signUpVM.email}"
                 android:inputType="textEmailAddress"
                 android:paddingVertical="16dp"
                 android:paddingHorizontal="16dp"
@@ -131,39 +146,49 @@
                     android:id="@+id/password_signup"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/show_hide_signup"
+                    android:layout_toStartOf="@+id/show_signup"
                     android:backgroundTint="@color/edittext_grey"
                     android:fontFamily="@font/worksans_regular"
                     android:hint="@string/password"
                     android:inputType="textPassword"
                     android:padding="12dp"
+                    android:text="@={signUpVM.password}"
                     android:textColor="@color/black"
                     android:textColorHint="@color/dark_grey"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/show_hide_signup"
+                    app:layout_constraintEnd_toStartOf="@+id/show_signup"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"/>
 
-                </EditText>
-
-                <TextView
-                    android:id="@+id/show_hide_signup"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/show_signup"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:fontFamily="@font/worksans_semibold"
-                    android:text="@string/display"
+                    android:layout_marginEnd="16dp"
+                  android:src="@drawable/ic_eye"
+                    android:textColor="@color/display_color"
+                    android:textSize="14sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/hide_signup"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_eyeclose"
                     android:textColor="@color/display_color"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
-
+                    app:layout_constraintTop_toTopOf="parent"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -181,7 +206,7 @@
                     android:id="@+id/confirm_password"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_toStartOf="@+id/show_hide_signup_confirm"
+                    android:layout_toStartOf="@+id/show_confirm_signup"
                     android:backgroundTint="@color/edittext_grey"
                     android:fontFamily="@font/worksans_regular"
                     android:hint="@string/confirm_password"
@@ -190,29 +215,42 @@
                     android:textColor="@color/black"
                     android:textColorHint="@color/dark_grey"
                     android:textSize="16sp"
+                    android:text="@={signUpVM.confirmPassword}"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/show_hide_signup_confirm"
+                    app:layout_constraintEnd_toStartOf="@+id/show_confirm_signup"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                 </EditText>
 
-                <TextView
-                    android:id="@+id/show_hide_signup_confirm"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/show_confirm_signup"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
                     android:layout_alignParentEnd="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="16dp"
-                    android:fontFamily="@font/worksans_semibold"
-                    android:text="@string/display"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_eye"
+                    android:textColor="@color/display_color"
+                    android:textSize="14sp"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/hide_confirm_signup"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_eyeclose"
                     android:textColor="@color/display_color"
                     android:textSize="14sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -254,6 +292,7 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:onClick="@{(v)->signUpVM.onClick(v,`signup`)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/referral_code" />
@@ -363,3 +402,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -24,9 +24,7 @@ class WelcomeActivity : AppCompatActivity(),View.OnClickListener{
 
         when(v){
             binding.loginWithEmail->{
-
                 startActivity(Intent(this,LoginActivity::class.java))
-
             }
             binding.signUp->{
                 startActivity(Intent(this,SignUpActivity::class.java))
@@ -35,6 +33,4 @@ class WelcomeActivity : AppCompatActivity(),View.OnClickListener{
         }
 
     }
-
-
-}
+ }
