@@ -10,7 +10,6 @@
     </CLASSES>
     <JAVADOC>
       <root url="jar://$USER_HOME$/caches/modules-2/files-2.1/com.google.android.libraries.places/places/2.4.0/5ed6dd1c8202b5c622548077d727cf02512ccae7/places-2.4.0-javadoc.jar!/" />
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.android.libraries.places/places/2.4.0/5ed6dd1c8202b5c622548077d727cf02512ccae7/places-2.4.0-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES />
   </library>
