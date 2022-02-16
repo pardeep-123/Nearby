@@ -48,23 +48,6 @@ object PreferenceFile {
         return sharedPreferences.getBoolean("connect", false)
     }
 
-
-
-    fun storeUserRole(context: Context, status: String) {
-        sharedPreferences =
-            context.getSharedPreferences(Constants.preferenceName, Context.MODE_PRIVATE)
-        editor = sharedPreferences.edit()
-        editor.putString("role", status)
-        editor.apply()
-    }
-
-    fun retrieveUserRole(context: Context): String {
-        sharedPreferences =
-            context.getSharedPreferences(Constants.preferenceName, Context.MODE_PRIVATE)
-        // 1 for user
-        return sharedPreferences.getString("role", "1")!!
-    }
-
     fun storeUserId(context: Context, user_id: String) {
         sharedPreferences =
             context.getSharedPreferences(Constants.preferenceName, Context.MODE_PRIVATE)

@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="settingVM"
+            type="com.creation.nearby.viewmodel.SettingVM" />
+
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -46,7 +57,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/user_info_layout"
@@ -56,6 +67,8 @@
                 android:layout_marginEnd="24dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:onClick="@{(v)->settingVM.onClick(v,`personInfo`)}"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -129,6 +142,8 @@
                 android:layout_marginEnd="24dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
+                android:onClick="@{(v)->settingVM.onClick(v,`changepassword`)}"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/user_info_layout">
@@ -494,6 +509,7 @@
         android:textAllCaps="false"
         android:textColor="@color/white"
         android:textSize="16sp"
+        android:onClick="@{(v)->settingVM.onClick(v,`logout`)}"
         android:paddingHorizontal="100dp"
         android:drawableStart="@drawable/logout_icon"
         android:drawablePadding="8dp"
@@ -518,3 +534,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

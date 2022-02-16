@@ -52,7 +52,7 @@ class SignupVm : ViewModel() {
             signUpApi(context)
 
         } else {
-            ToastUtils.showToast(Validator.ErrorMessage)
+            ToastUtils.showToast((context as Activity),Validator.ErrorMessage)
         }
     }
     private fun signUpApi(context: Context) {
@@ -61,12 +61,13 @@ class SignupVm : ViewModel() {
             CallApi().callService(
                 context,
                 true,
-                "",
+
                 object : RequestProcessor<Response<LoginModel>> {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<LoginModel> {
 
-
-                        return retrofitApi.signup(mapValues(context))
+                        return retrofitApi.signup(
+                            mapValues()
+                        )
 
                     }
 
@@ -74,14 +75,9 @@ class SignupVm : ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             Log.e("isSuccess", "====$response")
-                         ToastUtils.showToast(response.message)
-                            (context as Activity).finishAffinity()
-                            context.startActivity(
-                                Intent(
-                                    context,
-                                    LoginActivity::class.java
-                                )
-                            )
+
+                            ToastUtils.showToast((context as Activity),response.message)
+                            context.finish()
                         }
                     }
 
@@ -96,17 +92,17 @@ class SignupVm : ViewModel() {
     }
 
     // function for hashmap
-    fun mapValues(context: Context) : HashMap<String,RequestBody>{
+    fun mapValues() : HashMap<String,String>{
 
-     val hashMap = HashMap<String,RequestBody>()
+     val hashMap = HashMap<String,String>()
 
-        hashMap["email"] = email.get()!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        hashMap["firstname"] = firstname.get()!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        hashMap["lastname"] = lastname.get()!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        hashMap["password"] = password.get()!!.toRequestBody("text/plain".toMediaTypeOrNull())
-        hashMap["deviceToken"] = "12345".toRequestBody("text/plain".toMediaTypeOrNull())
+        hashMap["email"] = email.get()!!
+        hashMap["firstname"] = firstname.get()!!
+        hashMap["lastname"] = lastname.get()!!
+        hashMap["password"] = password.get()!!
+        hashMap["deviceToken"] = "23"
        // hashMap["deviceToken"] = PreferenceFile.retrieveFcmDeviceId(context)
-        hashMap["deviceType"] = "0".toRequestBody("text/plain".toMediaTypeOrNull())
+        hashMap["deviceType"] = "23"
 
         return hashMap
     }

@@ -23,5 +23,6 @@ object Constants {
     const val preferenceName = "Nearby"
     const val foreverPreferenceName = "Nearby"
     const val loginData = "loginData"
+    const val AUTH_KEY = "AUTH_KEY"
     const val notifiactionBroadcase = "notificatiionCallChange"
 }

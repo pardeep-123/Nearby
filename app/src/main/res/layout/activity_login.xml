@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="loginVM"
+            type="com.creation.nearby.viewmodel.LoginVm" />
+
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,6 +26,8 @@
         android:layout_marginTop="24dp"
         android:padding="2dp"
         android:src="@drawable/back_arrow"
+        android:onClick="@{(v)->loginVM.onClick(v,`onback`)}"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/black">
@@ -65,6 +78,7 @@
                 android:padding="14dp"
                 android:singleLine="true"
                 android:textSize="16sp"
+                android:text="@={loginVM.email}"
                 android:textColor="@color/black"
                 android:textColorHint="@color/dark_grey"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +106,7 @@
                     android:backgroundTint="@color/edittext_grey"
                     android:fontFamily="@font/worksans_regular"
                     android:hint="@string/password"
+                    android:text="@={loginVM.password}"
                     android:inputType="textPassword"
                     android:padding="14dp"
                     android:textColor="@color/black"
@@ -130,6 +145,8 @@
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"
+                android:onClick="@{(v)->loginVM.onClick(v,`login`)}"
+
                 app:layout_constraintEnd_toEndOf="@+id/relativeLayout"
                 app:layout_constraintStart_toStartOf="@+id/relativeLayout"
                 app:layout_constraintTop_toBottomOf="@+id/relativeLayout">
@@ -182,6 +199,7 @@
                 android:text="@string/forgot_password"
                 android:textColor="@color/display_color"
                 android:textSize="16sp"
+                android:onClick="@{(v)->loginVM.onClick(v,`forget`)}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sign_in_login">
 
@@ -257,6 +275,7 @@
                     android:backgroundTint="@color/blue"
                     android:clickable="true"
                     android:gravity="center"
+                    android:onClick="@{(v)->loginVM.onClick(v,`loginfb`)}"
                     android:orientation="horizontal"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp">
@@ -293,6 +312,8 @@
                     android:backgroundTint="@color/dark_orange"
                     android:clickable="true"
                     android:gravity="center"
+                    android:onClick="@{(v)->loginVM.onClick(v,`logingoogle`)}"
+
                     android:orientation="horizontal"
                     android:paddingTop="16dp"
                     android:paddingBottom="16dp">
@@ -353,6 +374,8 @@
                     android:layout_marginStart="4dp"
                     android:fontFamily="@font/worksans_black"
                     android:text="@string/sign_up"
+                    android:onClick="@{(v)->loginVM.onClick(v,`signup`)}"
+
                     android:textColor="@color/black"
                     android:textSize="16sp">
 
@@ -365,3 +388,4 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

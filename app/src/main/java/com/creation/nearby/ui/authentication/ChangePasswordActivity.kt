@@ -7,16 +7,21 @@ import android.text.TextWatcher
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
+import androidx.activity.viewModels
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityChangePasswordBinding
 import com.creation.nearby.utils.AppUtils
+import com.creation.nearby.viewmodel.ChangePasswordVM
 
-class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatcher {
+class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener {
     private lateinit var binding: ActivityChangePasswordBinding
+
+    val changePasswordVM : ChangePasswordVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.changePasswordVM = changePasswordVM
 
         AppUtils.hideKeyboard(this)
 
@@ -24,13 +29,6 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
         binding.showHide.setOnClickListener(this)
         binding.showHideConfirmNew.setOnClickListener(this)
         binding.showHideNew.setOnClickListener(this)
-        binding.saveBtn.setOnClickListener(this)
-
-        binding.newPassword.addTextChangedListener(this)
-        binding.confirmNewPassword.addTextChangedListener(this)
-        binding.confirmLatestPassword.addTextChangedListener(this)
-
-
     }
 
     override fun onClick(v: View?) {
@@ -87,27 +85,7 @@ class ChangePasswordActivity : AppCompatActivity(),View.OnClickListener,TextWatc
 
                 }
             }
-            binding.saveBtn->{
-                finish()
-            }
-
-
         }
-
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-
-
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-
 
     }
 }

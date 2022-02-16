@@ -18,7 +18,7 @@ class AppController : Application(), AppLifecycleHandler.AppLifecycleDelegates {
         super.onCreate()
         mInstance = this
         if (PreferenceFile.retrieveLoginData(this) != null) {
-            getSocketManager()
+          //  getSocketManager()
         }
 
 

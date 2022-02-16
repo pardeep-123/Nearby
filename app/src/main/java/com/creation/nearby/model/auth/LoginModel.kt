@@ -2,7 +2,7 @@ package com.creation.nearby.model.auth
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginModel(
+data class  LoginModel(
     @SerializedName("body")
     val body: Body,
     @SerializedName("code")

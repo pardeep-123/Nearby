@@ -13,6 +13,7 @@ import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.Constants
+import com.creation.nearby.utils.ToastUtils
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -30,16 +31,16 @@ class CallApi {
     fun <T> callService(
         mContext: Context,
         dialogFlag: Boolean,
-        authKey: String,
         requestProcessor: RequestProcessor<T>
     ) {
         try {
+            val authKey = PreferenceFile.retrieveKey(mContext,Constants.AUTH_KEY)
             if (dialogFlag) {
                 showDialog(mContext)
             }
 
             val okHttpClient: OkHttpClient?
-            if (authKey.isEmpty()) {
+            if (authKey.isNullOrEmpty()) {
 
                 val client = OkHttpClient.Builder()
                     .readTimeout(10, TimeUnit.MINUTES)
@@ -48,7 +49,7 @@ class CallApi {
                         val original = chain.request()
 
                         val request = original.newBuilder()
-                            .header("security_key", "choirPopUp)(*&")
+                            //.header("security_key", "choirPopUp)(*&")
                             .method(original.method, original.body)
                             .build()
 
@@ -64,8 +65,8 @@ class CallApi {
                         val original = chain.request()
 
                         val request = original.newBuilder()
-                            .header("security_key", "choirPopUp)(*&")
-                            .header("auth_key", authKey)
+//                            .header("security_key", "choirPopUp)(*&")
+                            .header("Authorization", authKey!!)
                             .method(original.method, original.body)
                             .build()
 
@@ -80,6 +81,7 @@ class CallApi {
                 .baseUrl(Constants.BASEURL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
+
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
 
@@ -131,10 +133,10 @@ class CallApi {
                         } else {*/
                         val jsonObject = JSONObject(res)
                         when {
-                            jsonObject.has("msg") && !jsonObject.isNull("msg") -> {
-                                val message = jsonObject.getString("msg")
+                            jsonObject.has("message") && !jsonObject.isNull("message") -> {
+                                val message = jsonObject.getString("message")
 
-                                if (jsonObject.getString("msg") == "Invalid Authorization Key") {
+                                if (jsonObject.getString("message") == "Invalid Authorization Key") {
                                     Toast.makeText(mContext,message.toString(),Toast.LENGTH_LONG).show()
 
                                     PreferenceFile.clearPreference(mContext)
@@ -147,15 +149,13 @@ class CallApi {
                                         )
                                     )
                                 }
-//                                else if (jsonObject.getString("msg") == "Account not approved yet.") {
-//                                    Helping.getInstance().ApproveAdminLoginDialog(
-//                                        mContext
-//                                    ) {
-//
-//                                    }
-//                                }
+                               /* else if (jsonObject.getInt("code") == 400) {
+                                    ToastUtils.showToast(mContext,jsonObject.getString("message").toString())
+                                   Log.e("====","behjdbchjbdcdc")
+                                }*/
                                 else {
-                                    Toast.makeText(mContext,message.toString(),Toast.LENGTH_LONG).show()
+                                    val errorMsg= jsonObject.getString("message")
+                                    Toast.makeText(mContext,errorMsg.toString(),Toast.LENGTH_LONG).show()
 
                                 }
 

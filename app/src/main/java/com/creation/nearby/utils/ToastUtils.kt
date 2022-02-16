@@ -7,9 +7,9 @@ import com.creation.nearby.base.AppController
 object ToastUtils {
 
 
-    fun showToast(msg: String){
+    fun showToast(context: Context,msg: String){
 
-        Toast.makeText(AppController.mInstance,msg,Toast.LENGTH_SHORT).show()
+        Toast.makeText(context,msg,Toast.LENGTH_SHORT).show()
     }
 
 }
