@@ -1,17 +1,26 @@
 package com.creation.nearby.viewmodel
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import android.view.Window
+import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.creation.nearby.R
+import com.creation.nearby.animateFade
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.auth.LoginModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
+import com.creation.nearby.ui.PrivacyPolicyActivity
+import com.creation.nearby.ui.TermsOfUse
+import com.creation.nearby.ui.authentication.ForgotPasswordActivity
 import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.utils.Validator
@@ -31,14 +40,28 @@ class SignupVm : ViewModel() {
 
     // create function for onclicks
     fun onClick(v: View, s:String){
-        if (s == "signup"){
-
-            validateSignup(v.context)
+        when (s) {
+            "signup" -> {
+                validateSignup(v.context)
+            }
+            "terms" -> {
+                v.context.startActivity(Intent(v.context, TermsOfUse::class.java))
+                animateFade(v.context as Activity)
+            }
+            "privacy" -> {
+                v.context.startActivity(Intent(v.context, PrivacyPolicyActivity::class.java))
+                animateFade(v.context as Activity)
+            }
+            "login" ->{
+                v.context.startActivity(Intent(v.context, LoginActivity::class.java))
+                (v.context as Activity).finishAffinity()
+                animateFade(v.context as Activity)
+            }
         }
     }
 
     // function for validation check
-    fun validateSignup(context: Context){
+    private fun validateSignup(context: Context){
         if (Validator().validateRegister(
                 firstname.get()!!,
                 lastname.get()!!,
@@ -76,8 +99,7 @@ class SignupVm : ViewModel() {
                             val response = res.body()!!
                             Log.e("isSuccess", "====$response")
 
-                            ToastUtils.showToast((context as Activity),response.message)
-                            context.finish()
+                            confirmationDialog(context)
                         }
                     }
 
@@ -105,5 +127,30 @@ class SignupVm : ViewModel() {
         hashMap["deviceType"] = "23"
 
         return hashMap
+    }
+
+    private fun confirmationDialog(context: Context) {
+        val dialog = Dialog(context)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setCancelable(true)
+        dialog.setCanceledOnTouchOutside(true)
+        dialog.window?.setBackgroundDrawable(
+            ContextCompat.getDrawable(
+                context,
+                android.R.color.transparent
+            )
+        )
+        dialog.setContentView(R.layout.send_verification_dialog)
+
+        val ok: AppCompatButton? = dialog.findViewById(R.id.ok)
+
+        ok?.setOnClickListener {
+            dialog.dismiss()
+           // context.startActivity(Intent(context, LoginActivity::class.java))
+            (context as Activity).finish()
+        }
+
+
+        dialog.show()
     }
 }

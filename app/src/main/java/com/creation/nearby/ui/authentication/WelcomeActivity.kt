@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
+import com.creation.nearby.animateFade
 import com.creation.nearby.databinding.ActivityWelcomeBinding
 
 class WelcomeActivity : AppCompatActivity(),View.OnClickListener{
@@ -25,10 +26,11 @@ class WelcomeActivity : AppCompatActivity(),View.OnClickListener{
         when(v){
             binding.loginWithEmail->{
                 startActivity(Intent(this,LoginActivity::class.java))
+                animateFade(this)
             }
             binding.signUp->{
                 startActivity(Intent(this,SignUpActivity::class.java))
-
+                animateFade(this)
             }
         }
 

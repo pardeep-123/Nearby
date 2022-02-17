@@ -48,7 +48,6 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
     @SuppressLint("NotifyDataSetChanged")
 
     lateinit var binding: FragmentHomeBinding
-
     private var discoverList = ArrayList<DiscoverModel>()
     private var feedList = ArrayList<DiscoverModel>()
     private var notificationList = ArrayList<NotificationModel>()
@@ -73,7 +72,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        mapTimeScrollOff()
+      //  mapTimeScrollOff()
 
         binding.discoverRecyclerView.layoutManager = LinearLayoutManager(view.context,
             RecyclerView.HORIZONTAL,false)
@@ -86,7 +85,6 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
         discoverAdapter.notifyDataSetChanged()
 
         // discover recycler view
-
 
         //feed recycler view
 
@@ -137,9 +135,9 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
-        mMap!!.uiSettings.isMapToolbarEnabled = false
-        mMap!!.uiSettings.isCompassEnabled = false
-        mMap!!.uiSettings.isMyLocationButtonEnabled = false
+        mMap.uiSettings.isMapToolbarEnabled = false
+        mMap.uiSettings.isCompassEnabled = false
+        mMap.uiSettings.isMyLocationButtonEnabled = false
         mapFragment.view?.isClickable = false;
         //  30.7333° N, 76.7794° E
 
@@ -148,7 +146,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
         list.add(LatLng(29.7041, 77.1025))
         list.add(LatLng(31.1048,77.1734))
 
-        p0.addMarker(
+        mMap.addMarker(
             MarkerOptions().position(list[0]).icon(
                 BitmapDescriptorFactory.fromBitmap(
                     createCustomMarker(requireContext(), R.drawable.chat_pic_5)
@@ -156,21 +154,21 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
             )
         )
 
-        p0.addMarker(
+        mMap.addMarker(
             MarkerOptions().position(list[1]).icon(
                 BitmapDescriptorFactory.fromBitmap(
                     createCustomMarker(requireContext(), R.drawable.chat_pic_1)
                 )
             )
         )
-        p0.addMarker(
+        mMap.addMarker(
             MarkerOptions().position(list[2]).icon(
                 BitmapDescriptorFactory.fromBitmap(
                     createCustomMarker(requireContext(), R.drawable.chat_pic_2)
                 )
             )
         )
-        p0.addMarker(
+        mMap.addMarker(
             MarkerOptions().position(list[3]).icon(
                 BitmapDescriptorFactory.fromBitmap(
                     createCustomMarker(requireContext(), R.drawable.chat_pic_8)
@@ -185,22 +183,22 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
 
         val bounds = builder.build()
         val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
-         // p0.moveCamera(cu)
-        p0.setOnMapLoadedCallback(GoogleMap.OnMapLoadedCallback {
-            p0.moveCamera(
+       // mMap.moveCamera   (cu)
+        mMap.setOnMapLoadedCallback {
+            mMap.moveCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     bounds,
                     30
                 )
             )
-        })
-        p0.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
-            p0.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+        }
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17f), 2000, null)
+        mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
-                var intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
+                val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
                 startActivity(intent)
                 false
-            })
+            }
     }
 
     private fun createCustomMarker(context: Context, @DrawableRes resource: Int): Bitmap {

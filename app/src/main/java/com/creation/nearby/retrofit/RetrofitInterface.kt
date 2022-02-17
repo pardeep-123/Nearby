@@ -29,4 +29,11 @@ interface RetrofitInterface {
     suspend fun changePasswordApi(
         @Body map : HashMap<String,String>
     ): Response<CommonModel>
+
+    // change password api
+    @POST(Constants.forgotPassword)
+    suspend fun forgetPasswordApi(
+        @Body map : HashMap<String,String>
+    ): Response<CommonModel>
+
    }

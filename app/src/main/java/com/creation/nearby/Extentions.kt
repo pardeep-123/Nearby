@@ -2,6 +2,7 @@ package com.creation.nearby
 
 import android.Manifest
 import android.app.Activity
+import android.app.Dialog
 import android.app.ProgressDialog
 import android.content.Context
 import android.content.Intent
@@ -16,15 +17,19 @@ import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
+import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.creation.nearby.ui.authentication.LoginActivity
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.snackbar.Snackbar
 
@@ -294,6 +299,31 @@ fun animateFade(activity:Activity) {
 }
 
 
-fun animateSlide(activity: AppCompatActivity) {
+fun animateSlide(activity: Activity) {
     activity.overridePendingTransition(R.anim.slide_in, R.anim.slide_out)
+}
+
+ fun confirmationDialog(context: Context) {
+    val dialog = Dialog(context)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setCancelable(true)
+    dialog.setCanceledOnTouchOutside(true)
+    dialog.window?.setBackgroundDrawable(
+        ContextCompat.getDrawable(
+            context,
+            android.R.color.transparent
+        )
+    )
+    dialog.setContentView(R.layout.send_verification_dialog)
+
+    val ok: AppCompatButton? = dialog.findViewById(R.id.ok)
+
+    ok?.setOnClickListener {
+        dialog.dismiss()
+        context.startActivity(Intent(context, LoginActivity::class.java))
+        (context as Activity).finish()
+    }
+
+
+    dialog.show()
 }

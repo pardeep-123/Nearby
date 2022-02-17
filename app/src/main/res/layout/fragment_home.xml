@@ -150,6 +150,7 @@
                         android:id="@+id/ivTransparent"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
+                        android:visibility="gone"
                        app:layout_constraintTop_toTopOf="@id/homeMap"
                         app:layout_constraintStart_toStartOf="@+id/homeMap"
                         app:layout_constraintEnd_toEndOf="@id/homeMap"

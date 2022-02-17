@@ -3,7 +3,7 @@
 
     //not for this project
     <string name="map_key" translatable="false">AIzaSyBC8rG3Pm4TYeTkAiqrqhAEB3X2jk3HvpA</string>
-
+<!--    <string name="map_key">AIzaSyDG3ftTHL_IMGAd8c8vU-q0Oi-oURgTeKE</string>-->
     <string name="select_photo">Select Photo</string>
     <string name="opencamera">Camera</string>
     <string name="pick_from_gallery">Gallery</string>

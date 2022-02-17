@@ -324,6 +324,7 @@
                     android:text="@string/terms_of_use"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:onClick="@{(v)->signUpVM.onClick(v,`terms`)}"
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -354,8 +355,10 @@
                     android:text="@string/privacy_policy"
                     android:textColor="@color/black"
                     android:textSize="14sp"
+                    android:onClick="@{(v)->signUpVM.onClick(v,`privacy`)}"
+
                     app:layout_constraintStart_toEndOf="@+id/textView9"
-                    app:layout_constraintTop_toBottomOf="@+id/textView7"></TextView>
+                    app:layout_constraintTop_toBottomOf="@+id/textView7"/>
 
                 <TextView
                     android:id="@+id/textView10"
@@ -388,6 +391,7 @@
                     android:text="@string/login"
                     android:textColor="@color/black"
                     android:textSize="16sp"
+                    android:onClick="@{(v)->signUpVM.onClick(v,`login`)}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView10"

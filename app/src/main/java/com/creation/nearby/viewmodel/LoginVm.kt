@@ -8,6 +8,8 @@ import android.view.View
 import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.creation.nearby.animateFade
+import com.creation.nearby.animateSlide
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.auth.LoginModel
 import com.creation.nearby.retrofit.CallApi
@@ -34,12 +36,14 @@ class LoginVm : ViewModel() {
             }
             "forget" -> {
                 v.context.startActivity(Intent(v.context, ForgotPasswordActivity::class.java))
+                animateFade(v.context as Activity)
             }
             "onback" -> {
                 (v.context as Activity).finish()
             }
             "signup" -> {
                 v.context.startActivity(Intent(v.context, SignUpActivity::class.java))
+                animateFade(v.context as Activity)
             }
         }
     }
@@ -48,9 +52,7 @@ class LoginVm : ViewModel() {
     private fun validateLogin(context: Context) {
         if (Validator().validateLogin(
                 email.get()!!,
-                password.get()!!
-            )
-        ) {
+                password.get()!!)) {
 
             loginApi(context)
 
@@ -80,6 +82,7 @@ class LoginVm : ViewModel() {
                             Log.e("isSuccess", "====$response")
                             context.startActivity(
                                 Intent(context, MainActivity::class.java))
+                            animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
                             ToastUtils.showToast((context as Activity), response.message)

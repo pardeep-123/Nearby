@@ -5,22 +5,20 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
+import androidx.activity.viewModels
 import com.creation.nearby.databinding.ActivityForgotPasswordBinding
 import com.creation.nearby.utils.AppUtils
+import com.creation.nearby.viewmodel.ForgetVM
 
-class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWatcher {
+class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener {
     lateinit var binding: ActivityForgotPasswordBinding
+    val ForgetVM : ForgetVM by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityForgotPasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.forgetPasswordVm = ForgetVM
         binding.goBackForgot.setOnClickListener(this)
-        binding.forgotEmail.addTextChangedListener(this)
-        binding.sendRequestBtn.setOnClickListener(this)
-
-     /*   binding.sendRequestBtn.isEnabled = true
-        binding.sendRequestBtn.alpha = 0.5*/
     }
 
     override fun onClick(v: View?) {
@@ -30,28 +28,7 @@ class ForgotPasswordActivity : AppCompatActivity(), View.OnClickListener,TextWat
             binding.goBackForgot->{
                 onBackPressed()
             }
-            binding.sendRequestBtn->{
-                finish()
-            }
+
         }
-    }
-
-    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-    }
-
-    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-    }
-
-    override fun afterTextChanged(s: Editable?) {
-
-     /*   if (binding.forgotEmail.text.isNotEmpty()){
-
-            binding.sendRequestBtn.isEnabled = true
-            binding.sendRequestBtn.alpha = 1f
-        }else{
-            binding.sendRequestBtn.isEnabled = true
-            binding.sendRequestBtn.alpha = 0.5f
-        }
-*/
     }
 }

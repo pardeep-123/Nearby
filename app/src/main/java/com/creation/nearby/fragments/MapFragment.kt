@@ -7,14 +7,12 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
 import android.util.DisplayMetrics
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
-import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
 import com.creation.nearby.R
 import com.creation.nearby.databinding.FragmentMapBinding
 import com.creation.nearby.ui.OtherUserProfileActivity
@@ -54,9 +52,9 @@ class MapFragment : Fragment(),OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
-        mMap!!.uiSettings.isMapToolbarEnabled = false
-        mMap!!.uiSettings.isCompassEnabled = false
-        mMap!!.uiSettings.isMyLocationButtonEnabled = false
+        mMap.uiSettings.isMapToolbarEnabled = false
+        mMap.uiSettings.isCompassEnabled = false
+        mMap.uiSettings.isMyLocationButtonEnabled = false
         mapFragment.view?.isClickable = false;
         //  30.7333° N, 76.7794° E
 

@@ -1,5 +1,6 @@
 package com.creation.nearby.ui
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -18,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.ActivityAdapter
+import com.creation.nearby.animateFade
 import com.creation.nearby.databinding.ActivityMainBinding
 import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
 import com.creation.nearby.fragments.*
@@ -166,17 +168,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.chatImageView -> {
 
                 startActivity(Intent(this, ChatActivity::class.java))
-
+                animateFade(this)
             }
             binding.settingsImageView -> {
 
                 startActivity(Intent(this, SideBarMenuActivity::class.java))
-
+                animateFade(this)
             }
             binding.userProfileIv -> {
 
                 startActivity(Intent(this, MyProfileActivity::class.java))
-
+                animateFade(this)
             }
             binding.filterImageView -> {
 
@@ -188,7 +190,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             binding.searchImageView -> {
 
                 startActivity(Intent(this, SearchActivity::class.java))
-
+                animateFade(this)
             }
 
             dialogBinding.closeDialog -> {
