@@ -30,13 +30,20 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.view.Window
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.utils.ToastUtils
+import com.creation.nearby.viewmodel.AddEventVm
 import com.permissionx.guolindev.PermissionX
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import java.io.File
 import java.text.SimpleDateFormat
 
 
@@ -44,15 +51,18 @@ class AddEventActivity : ImagePickerUtility(){
 
     var MY_REQUEST = 1
     lateinit var binding: ActivityAddEventBinding
+    val AddEventVm : AddEventVm by viewModels()
     override fun selectedImage(imagePath: String?) {
         Glide.with(this).load(imagePath).into(binding.selectImageRv)
+        AddEventVm.image.set(imagePath)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAddEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+         binding.addEventVM = AddEventVm
         if (!Places.isInitialized()) {
             Places.initialize(this, resources.getString(R.string.map_key))
         }
@@ -115,6 +125,8 @@ class AddEventActivity : ImagePickerUtility(){
 
     private fun setPlaceData(it: Place) {
         binding.location.setText(it.address.toString())
+         AddEventVm.latitude.set(it.latLng?.latitude.toString())
+         AddEventVm.longitude.set(it.latLng?.longitude.toString())
     }
 
 }

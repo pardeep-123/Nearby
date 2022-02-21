@@ -1,8 +1,10 @@
 package com.creation.nearby.retrofit
 
+import com.creation.nearby.model.AddEventModel
 import com.creation.nearby.model.CommonModel
 import com.creation.nearby.model.auth.LoginModel
 import com.creation.nearby.utils.Constants
+import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
@@ -35,5 +37,16 @@ interface RetrofitInterface {
     suspend fun forgetPasswordApi(
         @Body map : HashMap<String,String>
     ): Response<CommonModel>
+
+
+
+    // change password api
+    @Multipart
+   // @FormUrlEncoded
+    @POST(Constants.addEvent)
+    suspend fun addEventApi(
+        @PartMap map : HashMap<String,RequestBody>,
+        @Part image : MultipartBody.Part
+    ): Response<AddEventModel>
 
    }

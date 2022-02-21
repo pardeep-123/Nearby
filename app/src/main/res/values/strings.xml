@@ -195,5 +195,10 @@
     <string name="msg_enter_location">Please enter location</string>
     <string name="retry">Retry</string>
     <string name="connection_to_server_lost">Connection Lost</string>
+    <string name="title_empty">"Please enter title "</string>
+    <string name="details_empty">Please enter Details</string>
+    <string name="discount_empty">Please enter discount</string>
+    <string name="time_empty">Please enter time</string>
+    <string name="chooseimage">Please choose image</string>
 
 </resources>

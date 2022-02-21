@@ -15,6 +15,7 @@ object Constants {
     const val forgotPassword = "forgot_password"
     const val getContent = "get_content"
     const val editProfile = "edit_profile"
+    const val addEvent = "addEvent"
 
 
     //preferences

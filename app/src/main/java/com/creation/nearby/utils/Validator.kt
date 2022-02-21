@@ -146,6 +146,50 @@ class Validator() {
         } else true
     }
 
+    // add event validation
+
+    fun validateAddEvent(
+        title: String,
+        details: String,
+        discount: String,
+        time: String,
+        location: String,
+        image: String): Boolean {
+        return when {
+            TextUtils.isEmpty(title) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.title_empty)
+                false
+            }
+            TextUtils.isEmpty(details) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.details_empty)
+                false
+            }
+            TextUtils.isEmpty(discount) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.discount_empty)
+                false
+            }
+            TextUtils.isEmpty(time) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.time_empty)
+                false
+            }
+            TextUtils.isEmpty(location) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.location)
+                false
+            }
+            TextUtils.isEmpty(image) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.chooseimage)
+                false
+            }
+            else -> true
+        }
+    }
+
     fun validateChangePassword(
         oldPassword: String?,
         newPassword: String?,

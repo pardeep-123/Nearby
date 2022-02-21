@@ -37,7 +37,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         binding = FragmentMapBinding.inflate(layoutInflater,container,false)
@@ -100,21 +100,21 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         val bounds = builder.build()
         val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
         //  p0.moveCamera(cu)
-        p0.setOnMapLoadedCallback(GoogleMap.OnMapLoadedCallback {
+        p0.setOnMapLoadedCallback {
             p0.moveCamera(
                 CameraUpdateFactory.newLatLngBounds(
                     bounds,
                     30
                 )
             )
-        })
+        }
         p0.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
-        p0.setOnMarkerClickListener(GoogleMap.OnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
+        p0.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
             // which is clicked and displaying it in a toast message.
-            var intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
+            val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
             startActivity(intent)
             false
-        })
+        }
     }
     private fun createCustomMarker(context: Context, @DrawableRes resource: Int): Bitmap {
         val marker: View =
@@ -134,8 +134,7 @@ class MapFragment : Fragment(),OnMapReadyCallback {
         val bitmap = Bitmap.createBitmap(
             marker.measuredWidth,
             marker.measuredHeight,
-            Bitmap.Config.ARGB_8888
-        )
+            Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         marker.draw(canvas)
         return bitmap

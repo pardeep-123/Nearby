@@ -72,7 +72,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-      //  mapTimeScrollOff()
+        mapTimeScrollOff()
 
         binding.discoverRecyclerView.layoutManager = LinearLayoutManager(view.context,
             RecyclerView.HORIZONTAL,false)
@@ -192,7 +192,7 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
                 )
             )
         }
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17f), 2000, null)
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
                 val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
