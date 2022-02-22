@@ -1,31 +1,44 @@
 package com.creation.nearby.adapter
 
 
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.creation.nearby.databinding.ItemEventsBinding
 import com.creation.nearby.model.EventsModel
+import com.creation.nearby.model.GetEventModel
 import com.creation.nearby.ui.EventDetailsActivity
 
-class EventsAdapter(private val mList: ArrayList<EventsModel>) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
+class EventsAdapter(val mList: ArrayList<GetEventModel>) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
+
+    lateinit var context: Context
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
         val binding = ItemEventsBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        context = parent.context
         return ViewHolder(binding)
 
     }
+
+    fun addItems(items: List<T>) {
+        this.items.clear()
+        this.items.addAll(items)
+        notifyDataSetChanged()
+    }
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder){
 
             with(mList[position]){
 
-                binding.eventsPic.setImageResource(eventImage)
-                binding.eventsName.text = eventName
-                binding.eventsDistance.text = eventDistance
+                Glide.with(context).load(body[position].image).into(binding.eventsPic)
+                binding.eventsName.text = body[position].title
+              //  binding.eventsDistance.text = body[position].
 
                 binding.eventsPic.setOnClickListener{
                     holder.itemView.context.startActivity(Intent(holder.itemView.context,EventDetailsActivity::class.java))
