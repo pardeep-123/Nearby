@@ -91,5 +91,6 @@ class RecyclerAdapter<T : AbstractModel>(@LayoutRes val layoutId: Int) :
 
     interface OnItemClick {
         fun onClick(view: View, position: Int, type: String)
+
     }
 }

@@ -12,7 +12,7 @@ import com.creation.nearby.model.EventsModel
 import com.creation.nearby.model.GetEventModel
 import com.creation.nearby.ui.EventDetailsActivity
 
-class EventsAdapter(val mList: ArrayList<GetEventModel>) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
+class EventsAdapter(val mList: ArrayList<GetEventModel.Body>) : RecyclerView.Adapter<EventsAdapter.ViewHolder>() {
 
     lateinit var context: Context
 
@@ -23,11 +23,11 @@ class EventsAdapter(val mList: ArrayList<GetEventModel>) : RecyclerView.Adapter<
 
     }
 
-    fun addItems(items: List<T>) {
-        this.items.clear()
-        this.items.addAll(items)
-        notifyDataSetChanged()
-    }
+//    fun addItems(items: List<T>) {
+//        this.items.clear()
+//        this.items.addAll(items)
+//        notifyDataSetChanged()
+//    }
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -36,8 +36,8 @@ class EventsAdapter(val mList: ArrayList<GetEventModel>) : RecyclerView.Adapter<
 
             with(mList[position]){
 
-                Glide.with(context).load(body[position].image).into(binding.eventsPic)
-                binding.eventsName.text = body[position].title
+                Glide.with(context).load(image).into(binding.eventsPic)
+                binding.eventsName.text = title
               //  binding.eventsDistance.text = body[position].
 
                 binding.eventsPic.setOnClickListener{

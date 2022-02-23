@@ -1,7 +1,10 @@
 package com.creation.nearby.model
 
 
+import android.os.Parcelable
+import com.creation.nearby.adapter.AbstractModel
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
 data class GetEventModel(
     @SerializedName("body")
@@ -12,7 +15,8 @@ data class GetEventModel(
     val message: String, // Event listing fetched successfully.
     @SerializedName("success")
     val success: Boolean // true
-) {
+): AbstractModel() {
+    @Parcelize
     data class Body(
         @SerializedName("attend")
         val attend: String,
@@ -42,5 +46,5 @@ data class GetEventModel(
         val updatedAt: String, // 2022-02-21T13:19:01.000Z
         @SerializedName("userId")
         val userId: Int // 0
-    )
+    ):AbstractModel(),Parcelable
 }

@@ -5,16 +5,27 @@ import android.os.Bundle
 import android.view.View
 import android.view.Window
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityEventDetailsBinding
+import com.creation.nearby.model.GetEventModel
+import com.creation.nearby.viewmodel.EventDetailsVM
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class EventDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventDetailsBinding
+    val eventDetailsVM: EventDetailsVM by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEventDetailsBinding.inflate(layoutInflater)
+        binding.detailsVM = eventDetailsVM
+        binding.lifecycleOwner = this
+        val data = intent.extras?.get("eventData") as GetEventModel.Body
+        eventDetailsVM.detailsModel.set(data)
+
+
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setContentView(binding.root)

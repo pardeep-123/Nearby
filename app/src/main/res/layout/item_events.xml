@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="model"
+            type="com.creation.nearby.model.GetEventModel.Body" />
+
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,6 +17,8 @@
     android:layout_height="wrap_content"
     android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
+    android:onClick="@{(v)->model.onItemClick.onClick(v,model.adapterPosition,`eventClick`)}"
+
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp">
 
@@ -15,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/image"
+        setImageSrc="@{model.image}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +40,7 @@
         android:id="@+id/eventsName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/let_s_co_work"
+        android:text="@{model.title}"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:fontFamily="@font/worksans_semibold"
@@ -39,7 +52,7 @@
         android:id="@+id/eventsDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/_5km_away_from_you"
+        android:text="@{model.details}"
         android:fontFamily="@font/worksans_light"
         android:textSize="12sp"
         android:textColor="@color/white_events"
@@ -70,3 +83,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

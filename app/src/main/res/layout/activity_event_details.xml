@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <import type="android.view.View" />
+
+        <variable
+            name="detailsVM"
+            type="com.creation.nearby.viewmodel.EventDetailsVM" />
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -37,14 +46,14 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/goBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/goBack"></TextView>
+        app:layout_constraintTop_toTopOf="@+id/goBack"/>
 
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
         android:layout_height="230dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/details_event_pic"
+        setImageSrc="@{detailsVM.detailsModel.image}"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -65,7 +74,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView69"
@@ -75,12 +84,12 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/worksans_black"
-                android:text="Coffee\nBreak"
+                android:text="@{detailsVM.detailsModel.title}"
                 android:textColor="@color/black"
                 android:textSize="30sp"
                 app:layout_constraintEnd_toStartOf="@+id/eventsCross"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:id="@+id/eventsCheck"
@@ -110,12 +119,12 @@
                 android:layout_marginTop="4dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/worksans_regular"
-                android:text="34th Block Street in New York"
+                android:text="@{detailsVM.detailsModel.location}"
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView69"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView69"/>
 
 
             <TextView
@@ -128,7 +137,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView71"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView71"/>
 
             <TextView
                 android:id="@+id/textView73"
@@ -137,12 +146,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/worksans_regular"
-                android:text="Go grab a coffee with others with the same interest. Meet other Nearby friends and use our deal to gain discount."
+                android:text="@{detailsVM.detailsModel.details}"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView72"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView72"/>
 
             <TextView
                 android:id="@+id/discount_title"
@@ -154,7 +163,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView73"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView73"/>
 
 
             <TextView
@@ -164,12 +173,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/worksans_regular"
-                android:text="Deals that are usable in the store and gives you discount on products."
+                android:text="@{detailsVM.detailsModel.discount}"
                 android:textColor="@color/dark_grey"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/discount_title"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/discount_title"/>
 
             <TextView
                 android:id="@+id/discount_name"
@@ -185,7 +194,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/discount_detail"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/discount_detail"/>
 
             <TextView
                 android:id="@+id/host_title"
@@ -197,7 +206,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/discount_name"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/discount_name"/>
 
             <TextView
                 android:id="@+id/host_activity_name"
@@ -214,7 +223,7 @@
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/host_title"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/host_title"/>
 
 
             <TextView
@@ -230,7 +239,7 @@
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/host_activity_name"
-                app:layout_constraintTop_toBottomOf="@+id/host_activity_name"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/host_activity_name"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -238,3 +247,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

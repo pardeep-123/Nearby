@@ -2,26 +2,20 @@ package com.creation.nearby.fragments
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.creation.nearby.R
-import com.creation.nearby.adapter.ActivityAdapter
-import com.creation.nearby.adapter.EventsAdapter
 import com.creation.nearby.databinding.FragmentEventsBinding
-import com.creation.nearby.model.EventsModel
 import com.creation.nearby.ui.AddEventActivity
 import com.creation.nearby.viewmodel.GetEventVM
 
 class EventsFragment : Fragment() {
 
     lateinit var binding: FragmentEventsBinding
-    lateinit var eventsAdapter: EventsAdapter
-    private var eventsList = ArrayList<EventsModel>()
 
     // initialize the viewmodel
     val getEventVM: GetEventVM by viewModels()
@@ -40,18 +34,17 @@ class EventsFragment : Fragment() {
         binding.eventsRecView.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
-        eventsList.add(EventsModel(R.drawable.image, "Let’s Co-work", "5km away from you."))
-        eventsList.add(EventsModel(R.drawable.image_1, "Coffee Break", "300m away from you."))
-        eventsList.add(EventsModel(R.drawable.image_2, "Let’s Co-work", "5km away from you."))
-
-        eventsAdapter = EventsAdapter(eventsList)
-        binding.eventsRecView.adapter = eventsAdapter
-        eventsAdapter.notifyDataSetChanged()
+//        eventsList.add(EventsModel(R.drawable.image, "Let’s Co-work", "5km away from you."))
+//        eventsList.add(EventsModel(R.drawable.image_1, "Coffee Break", "300m away from you."))
+//        eventsList.add(EventsModel(R.drawable.image_2, "Let’s Co-work", "5km away from you."))
 
         // call api
         getEventVM.eventListApi(requireContext())
         onClickHandler()
 
+//        eventsAdapter = EventsAdapter(getEventVM.getEventList)
+//        binding.eventsRecView.adapter = eventsAdapter
+//        eventsAdapter.notifyDataSetChanged()
     }
 
     private fun onClickHandler() {

@@ -168,7 +168,7 @@ class SearchActivity : AppCompatActivity(), TextWatcher {
         binding.searchRecyView.layoutManager =
             LinearLayoutManager(this, RecyclerView.VERTICAL, false)
 
-        eventsAdapter = EventsAdapter(eventsList)
+       // eventsAdapter = EventsAdapter(eventsList)
         binding.searchRecyView.adapter = eventsAdapter
         eventsAdapter.notifyDataSetChanged()
 
