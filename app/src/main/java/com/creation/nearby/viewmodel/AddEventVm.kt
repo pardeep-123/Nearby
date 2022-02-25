@@ -17,6 +17,7 @@ import com.creation.nearby.utils.Validator
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Response
 import java.io.File
@@ -66,7 +67,7 @@ class AddEventVm : ViewModel() {
                 object : RequestProcessor<Response<AddEventModel>> {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<AddEventModel> {
                         val requestFile =
-                            File(image.get()!!).name.toRequestBody("multipart/form-data".toMediaTypeOrNull())
+                            File(image.get()!!).asRequestBody("image/*".toMediaTypeOrNull())
                         imagefile = MultipartBody.Part.createFormData("image",File(image.get()!!).name, requestFile)
                         return retrofitApi.addEventApi(
                             mapValues(),imagefile!!)

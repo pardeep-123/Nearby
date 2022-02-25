@@ -66,7 +66,7 @@ class CallApi {
 
                         val request = original.newBuilder()
 //                            .header("security_key", "choirPopUp)(*&")
-                            .header("Authorization", authKey!!)
+                            .header("Authorization", authKey)
                             .method(original.method, original.body)
                             .build()
 

@@ -45,6 +45,7 @@ class LoginVm : ViewModel() {
                 v.context.startActivity(Intent(v.context, SignUpActivity::class.java))
                 animateFade(v.context as Activity)
             }
+
         }
     }
 

@@ -18,7 +18,7 @@ class EventsFragment : Fragment() {
     lateinit var binding: FragmentEventsBinding
 
     // initialize the viewmodel
-    val getEventVM: GetEventVM by viewModels()
+    private val getEventVM: GetEventVM by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,17 +34,10 @@ class EventsFragment : Fragment() {
         binding.eventsRecView.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
-//        eventsList.add(EventsModel(R.drawable.image, "Let’s Co-work", "5km away from you."))
-//        eventsList.add(EventsModel(R.drawable.image_1, "Coffee Break", "300m away from you."))
-//        eventsList.add(EventsModel(R.drawable.image_2, "Let’s Co-work", "5km away from you."))
-
         // call api
         getEventVM.eventListApi(requireContext())
         onClickHandler()
 
-//        eventsAdapter = EventsAdapter(getEventVM.getEventList)
-//        binding.eventsRecView.adapter = eventsAdapter
-//        eventsAdapter.notifyDataSetChanged()
     }
 
     private fun onClickHandler() {

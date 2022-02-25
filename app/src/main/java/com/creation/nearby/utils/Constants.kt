@@ -3,6 +3,7 @@ package com.creation.nearby.utils
 object Constants {
 
     val BASEURL = "http://202.164.42.227:9022/api/"
+  //  val BASEURL = "http://192.168.1.96:9022/api/"
 
     const val SIGNUP = "signup"
 

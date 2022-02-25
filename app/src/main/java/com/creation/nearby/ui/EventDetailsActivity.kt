@@ -15,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog
 
 class EventDetailsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityEventDetailsBinding
-    val eventDetailsVM: EventDetailsVM by viewModels()
+    private val eventDetailsVM: EventDetailsVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
