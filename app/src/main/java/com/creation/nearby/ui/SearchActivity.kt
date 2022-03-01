@@ -49,14 +49,14 @@ class SearchActivity : AppCompatActivity(), TextWatcher {
             binding.searchEvent.backgroundTintList =
                 ActivityCompat.getColorStateList(this, R.color.edittext_grey)
 
-            friendsList.clear()
-            eventsList.clear()
-            userAdapter()
-
-
-            if(binding.searchEditext.text.isNotEmpty()){
-                userList()
-            }
+//            friendsList.clear()
+//            eventsList.clear()
+//            userAdapter()
+//
+//
+//            if(binding.searchEditext.text.isNotEmpty()){
+//                userList()
+//            }
 
 
 
@@ -69,13 +69,13 @@ class SearchActivity : AppCompatActivity(), TextWatcher {
             binding.searchEvent.backgroundTintList =
                 ActivityCompat.getColorStateList(this, R.color.sky_blue)
 
-            friendsList.clear()
-            eventsList.clear()
-            eventsAdapter()
-
-            if(binding.searchEditext.text.isNotEmpty()){
-                eventList()
-            }
+//            friendsList.clear()
+//            eventsList.clear()
+//            eventsAdapter()
+//
+//            if(binding.searchEditext.text.isNotEmpty()){
+//                eventList()
+//            }
 
 
         }

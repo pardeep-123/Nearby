@@ -34,12 +34,16 @@ class EventsFragment : Fragment() {
         binding.eventsRecView.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
-        // call api
-        getEventVM.eventListApi(requireContext())
+
         onClickHandler()
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        // call api
+        getEventVM.eventListApi(requireContext())
+    }
     private fun onClickHandler() {
         binding.addEventLayout.setOnClickListener {
             startActivity(Intent(requireContext(), AddEventActivity::class.java))

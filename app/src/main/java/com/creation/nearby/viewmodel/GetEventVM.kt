@@ -64,4 +64,12 @@ class GetEventVM : ViewModel() {
         }
     }
 
+    fun setVisibility() : Boolean{
+        return getEventList.size <= 0
+    }
+
+    // function to check either tick button needs to be shown or not.
+//    fun showTick() : Boolean{
+//
+//    }
 }

@@ -14,9 +14,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bba603ee-cc55-4c68-97dc-5ed77c56bb6a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/google-services.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/FacebookAuth.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" afterDir="false" />
@@ -25,20 +22,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/EventsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/EventsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/EventDetailsActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/EventDetailsActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/authentication/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/authentication/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/AddEventVm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/AddEventVm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/LoginVm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/LoginVm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/SearchActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/SearchActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/GetEventVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/GetEventVM.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,10 +223,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="485" y="206" width="387" height="381" key="AndroidCreateXmlResourceDialog/0.27.1366.741@0.27.1366.741" timestamp="1645792274059" />
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog" timestamp="1645771010195">
+    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog" timestamp="1646031994427">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1645771010195" />
+    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1646031994427" />
     <state width="507" height="506" key="DebuggerActiveHint" timestamp="1645622165305">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -248,22 +235,22 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="442" y="140" width="472" height="513" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1645161573374" />
-    <state width="1320" height="132" key="GridCell.Tab.0.bottom" timestamp="1645771053365">
+    <state width="1320" height="103" key="GridCell.Tab.0.bottom" timestamp="1646115940875">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="132" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1645771053365" />
-    <state width="1320" height="132" key="GridCell.Tab.0.center" timestamp="1645771053364">
+    <state width="1320" height="103" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1646115940875" />
+    <state width="1320" height="103" key="GridCell.Tab.0.center" timestamp="1646115940875">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="132" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1645771053364" />
-    <state width="1320" height="132" key="GridCell.Tab.0.left" timestamp="1645771053364">
+    <state width="1320" height="103" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1646115940875" />
+    <state width="1320" height="103" key="GridCell.Tab.0.left" timestamp="1646115940875">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="132" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1645771053364" />
-    <state width="1320" height="132" key="GridCell.Tab.0.right" timestamp="1645771053365">
+    <state width="1320" height="103" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1646115940875" />
+    <state width="1320" height="103" key="GridCell.Tab.0.right" timestamp="1646115940875">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="1320" height="132" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1645771053365" />
+    <state width="1320" height="103" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1646115940875" />
     <state x="314" y="159" width="728" height="475" key="MultipleFileMergeDialog" timestamp="1645017966434">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -284,10 +271,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="374" y="135" width="848" height="522" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1645792391664" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1645618909441">
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1646115451300">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1645618909441" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1646115451300" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
