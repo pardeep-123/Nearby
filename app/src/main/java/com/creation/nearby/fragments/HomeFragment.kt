@@ -8,39 +8,37 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
 import android.util.DisplayMetrics
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
-import com.creation.nearby.adapter.DiscoverAdapter
-import com.creation.nearby.adapter.FeedAdapter
 import com.creation.nearby.adapter.NotificationAdapter
 import com.creation.nearby.databinding.FragmentHomeBinding
-import com.creation.nearby.model.DiscoverModel
 import com.creation.nearby.model.NotificationModel
 import com.creation.nearby.ui.OtherUserProfileActivity
+import com.creation.nearby.viewmodel.HomeVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class HomeFragment : Fragment(),OnMapReadyCallback {
+class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
 
-    private lateinit var discoverAdapter: DiscoverAdapter
-    private lateinit var feedAdapter: FeedAdapter
     private lateinit var mMap: GoogleMap
 
+    private val homeViewModel : HomeVM by viewModels()
     companion object{
         lateinit var notificationAdapter: NotificationAdapter
     }
@@ -48,12 +46,10 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
     @SuppressLint("NotifyDataSetChanged")
 
     lateinit var binding: FragmentHomeBinding
-    private var discoverList = ArrayList<DiscoverModel>()
-    private var feedList = ArrayList<DiscoverModel>()
+
     private var notificationList = ArrayList<NotificationModel>()
 
     private lateinit var  mapFragment: SupportMapFragment
-    private var  list = ArrayList<LatLng>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,53 +63,57 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.homeViewModel = homeViewModel
         // discover recycler view
 
-        mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
-        mapFragment.getMapAsync(this)
+
 
         mapTimeScrollOff()
 
         binding.discoverRecyclerView.layoutManager = LinearLayoutManager(view.context,
             RecyclerView.HORIZONTAL,false)
 
-        discoverList.add(DiscoverModel("300m away","Starbucks","Let’s meet and talk."))
-        discoverList.add(DiscoverModel("1km away","Basketball","We are up to play...."))
-
-        discoverAdapter = DiscoverAdapter(discoverList)
-        binding.discoverRecyclerView.adapter = discoverAdapter
-        discoverAdapter.notifyDataSetChanged()
-
-        // discover recycler view
-
-        //feed recycler view
-
-        binding.feedRecView.layoutManager = LinearLayoutManager(view.context, RecyclerView.HORIZONTAL,false)
-
-        feedList.add(DiscoverModel("2min ago","Coffee?","Let’s meet and talk."))
-        feedList.add(DiscoverModel("3min ago","New here","We are up to play..."))
-
-        feedAdapter = FeedAdapter(feedList)
-        binding.feedRecView.adapter = feedAdapter
-        feedAdapter.notifyDataSetChanged()
-
-        //feed recycler view
-
         //notification recycler view
 
         binding.notificationRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL,false)
 
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Brooklyn Simmons","You are friends! \uD83C\uDF89","Today",false))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",true))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",true))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
-        notificationList.add(NotificationModel(R.drawable.user_pic_2,"Courtney Henry","You are friends! Share nearby to get a bigger circle.Share nearby to get a bigger circle.","Today",false))
+        homeViewModel.mapListData.observeForever {
+            if(this::mMap.isInitialized){
+                if (it.isNotEmpty()){
 
-        notificationAdapter = NotificationAdapter(notificationList)
-        binding.notificationRecyclerView.adapter = notificationAdapter
-        notificationAdapter.notifyDataSetChanged()
+                    //
+                    // create bounds that encompass every location we reference
+                    val boundsBuilder = LatLngBounds.Builder()
+                    // include all places we have markers for on the map
+
+                    (homeViewModel.mList.indices).map {
+                        boundsBuilder.include(homeViewModel.mList[it].latlng)
+                    }
+
+                    val bounds = boundsBuilder.build()
+
+                    with(mMap) {
+                        // Hide the zoom controls as the button panel will cover it.
+                        uiSettings.isZoomControlsEnabled = false
+
+                        // Setting an info window adapter allows us to change the both the contents and
+                        // setInfoWindowAdapter(ChildCareInfoWindowAdapter())
+
+                        //   setOnInfoWindowClickListener(this@HomeFragment)
+
+                        // Ideally this string would be localised.
+                        setContentDescription("Map with lots of markers.")
+
+                        moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 30))
+                    }
+
+                    // Add lots of markers to the googleMap.
+                    addMarkersToMap()
+                    //
+                }
+            }
+        }
+
 
         //notification recycler view
     }
@@ -135,64 +135,97 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
-        mMap.uiSettings.isMapToolbarEnabled = false
-        mMap.uiSettings.isCompassEnabled = false
-        mMap.uiSettings.isMyLocationButtonEnabled = false
-        mapFragment.view?.isClickable = false;
-        //  30.7333° N, 76.7794° E
+        if (homeViewModel.mList.isNotEmpty()){
 
-        list.add(LatLng(30.7046, 76.7179))
-        list.add(LatLng(30.0668, 79.0193))
-        list.add(LatLng(29.7041, 77.1025))
-        list.add(LatLng(31.1048,77.1734))
+            //
+            // create bounds that encompass every location we reference
+            val boundsBuilder = LatLngBounds.Builder()
+            // include all places we have markers for on the map
 
-        mMap.addMarker(
-            MarkerOptions().position(list[0]).icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    createCustomMarker(requireContext(), R.drawable.chat_pic_5)
-                )
-            )
-        )
+            (homeViewModel.mList.indices).map {
+                boundsBuilder.include(homeViewModel.mList[it].latlng)
+            }
 
-        mMap.addMarker(
-            MarkerOptions().position(list[1]).icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    createCustomMarker(requireContext(), R.drawable.chat_pic_1)
-                )
-            )
-        )
-        mMap.addMarker(
-            MarkerOptions().position(list[2]).icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    createCustomMarker(requireContext(), R.drawable.chat_pic_2)
-                )
-            )
-        )
-        mMap.addMarker(
-            MarkerOptions().position(list[3]).icon(
-                BitmapDescriptorFactory.fromBitmap(
-                    createCustomMarker(requireContext(), R.drawable.chat_pic_8)
-                )
-            )
-        )
+            val bounds = boundsBuilder.build()
 
-        val builder = LatLngBounds.Builder()
-        builder.include(list[0]) //Taking Point A (First LatLng)
+            with(mMap!!) {
+                // Hide the zoom controls as the button panel will cover it.
+                uiSettings!!.isZoomControlsEnabled = false
 
-        builder.include(list[1]) //Taking Point B (Second LatLng)
+                // Setting an info window adapter allows us to change the both the contents and
+               // setInfoWindowAdapter(ChildCareInfoWindowAdapter())
 
-        val bounds = builder.build()
-        val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
-       // mMap.moveCamera   (cu)
-        mMap.setOnMapLoadedCallback {
-            mMap.moveCamera(
-                CameraUpdateFactory.newLatLngBounds(
-                    bounds,
-                    30
-                )
-            )
+             //   setOnInfoWindowClickListener(this@HomeFragment)
+
+                // Ideally this string would be localised.
+                setContentDescription("Map with lots of markers.")
+
+                moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 30))
+            }
+
+            // Add lots of markers to the googleMap.
+            addMarkersToMap()
+            //
         }
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
+
+//        mMap.uiSettings.isMapToolbarEnabled = false
+//        mMap.uiSettings.isCompassEnabled = false
+//        mMap.uiSettings.isMyLocationButtonEnabled = false
+//        mapFragment.view?.isClickable = false
+//        //  30.7333° N, 76.7794° E
+//
+//        list.add(LatLng(30.7046, 76.7179))
+//        list.add(LatLng(30.0668, 79.0193))
+//        list.add(LatLng(29.7041, 77.1025))
+//        list.add(LatLng(31.1048,77.1734))
+//
+//        mMap.addMarker(
+//            MarkerOptions().position(list[0]).icon(
+//                BitmapDescriptorFactory.fromBitmap(
+//                    createCustomMarker(requireContext(), R.drawable.chat_pic_5)
+//                )
+//            )
+//        )
+//
+//        mMap.addMarker(
+//            MarkerOptions().position(list[1]).icon(
+//                BitmapDescriptorFactory.fromBitmap(
+//                    createCustomMarker(requireContext(), R.drawable.chat_pic_1)
+//                )
+//            )
+//        )
+//        mMap.addMarker(
+//            MarkerOptions().position(list[2]).icon(
+//                BitmapDescriptorFactory.fromBitmap(
+//                    createCustomMarker(requireContext(), R.drawable.chat_pic_2)
+//                )
+//            )
+//        )
+//        mMap.addMarker(
+//            MarkerOptions().position(list[3]).icon(
+//                BitmapDescriptorFactory.fromBitmap(
+//                    createCustomMarker(requireContext(), R.drawable.chat_pic_8)
+//                )
+//            )
+//        )
+//
+//        val builder = LatLngBounds.Builder()
+//        builder.include(list[0]) //Taking Point A (First LatLng)
+//
+//        builder.include(list[1]) //Taking Point B (Second LatLng)
+//
+//        val bounds = builder.build()
+//        val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
+//       // mMap.moveCamera   (cu)
+//        mMap.setOnMapLoadedCallback {
+//            mMap.moveCamera(
+//                CameraUpdateFactory.newLatLngBounds(
+//                    bounds,
+//                    30
+//                )
+//            )
+//        }
+//        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
                 val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
@@ -200,6 +233,24 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
                 false
             }
     }
+    private fun addMarkersToMap() {
+        // place markers for each of the defined locations
+        (homeViewModel.mList.indices).map {
+            mMap.addMarker(
+                MarkerOptions()
+                    .position(homeViewModel.mList[it].latlng)
+                    .title(homeViewModel.mList[it].name)
+                  //  .snippet(list[it].snippet + "###" + list[it].url)
+                    .icon(BitmapDescriptorFactory.defaultMarker())
+                    .infoWindowAnchor(0.5F, 0F)
+                    .draggable(false)
+                    .zIndex(it.toFloat())
+
+            )!!.tag = it.toString()
+
+        }
+    }
+
 
     private fun createCustomMarker(context: Context, @DrawableRes resource: Int): Bitmap {
         val marker: View =
@@ -226,4 +277,15 @@ class HomeFragment : Fragment(),OnMapReadyCallback {
         return bitmap
     }
 
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.homeListingApi(requireContext())
+
+        mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+    }
+
+    override fun onInfoWindowClick(p0: Marker) {
+
+    }
 }

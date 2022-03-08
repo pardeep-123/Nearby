@@ -73,7 +73,7 @@ class LoginVm : ViewModel() {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<LoginModel> {
 
                         return retrofitApi.loginApi(
-                            mapValues()
+                            mapValues(context)
                         )
                     }
 
@@ -86,7 +86,7 @@ class LoginVm : ViewModel() {
                             animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
-                            ToastUtils.showToast((context as Activity), response.message)
+                            PreferenceFile.storeUserId(context,response.body.id.toString())
                             context.finishAffinity()
                         }
                     }
@@ -101,18 +101,74 @@ class LoginVm : ViewModel() {
         }
     }
 
+    // api for social login
+     fun socialLoginApi(context: Context,
+                               name:String,email:String,socialId:String,socialType:String) {
+        try {
+
+            CallApi().callService(
+                context,
+                true,
+
+                object : RequestProcessor<Response<LoginModel>> {
+                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<LoginModel> {
+
+                        return retrofitApi.socialLoginApi(
+                            socialMapValues(context,name,email,socialId,socialType)
+                        )
+                    }
+
+                    override fun onResponse(res: Response<LoginModel>) {
+                        if (res.isSuccessful) {
+                            val response = res.body()!!
+                            Log.e("isSuccess", "====$response")
+                            context.startActivity(
+                                Intent(context, MainActivity::class.java))
+                            animateSlide(context as Activity)
+                            PreferenceFile.storeLoginData(context, response)
+                            PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
+                            PreferenceFile.storeUserId(context,response.body.id.toString())
+
+                            context.finishAffinity()
+                        }
+                    }
+
+                    override fun onException(message: String?) {
+                        Log.e("userException", "====$message")
+                    }
+                })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
     // function for hashmap
-    fun mapValues(): HashMap<String, String> {
+    fun mapValues(context: Context): HashMap<String, String> {
 
         val hashMap = HashMap<String, String>()
 
         hashMap["email"] = email.get()!!
         hashMap["password"] = password.get()!!
-        hashMap["deviceToken"] = "23"
+        hashMap["deviceToken"] = PreferenceFile.retrieveKey(context,Constants.FIREBASE_FCM_TOKEN).toString()
         // hashMap["deviceToken"] = PreferenceFile.retrieveFcmDeviceId(context)
-        hashMap["deviceType"] = "23"
+        hashMap["deviceType"] = "1"
 
         return hashMap
     }
 
+    // FUNCTION for social login hasmap
+    fun socialMapValues(context: Context,name:String,email:String,socialId:String,socialType:String): HashMap<String, String> {
+
+        val hashMap = HashMap<String, String>()
+
+        hashMap["email"] = email
+        hashMap["name"] = name
+        hashMap["social_id"] = socialId
+        hashMap["socialType"] = socialType
+        hashMap["deviceToken"] = PreferenceFile.retrieveKey(context,Constants.FIREBASE_FCM_TOKEN).toString()
+        // hashMap["deviceToken"] = PreferenceFile.retrieveFcmDeviceId(context)
+        hashMap["deviceType"] = "1"
+
+        return hashMap
+    }
 }

@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.creation.nearby.R
 import com.creation.nearby.adapter.EventsAdapter
 import com.creation.nearby.adapter.RecyclerAdapter
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.GetEventModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
@@ -50,6 +51,9 @@ class GetEventVM : ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             getEventList.addAll(response.body)
+                            for (i in 0 until  response.body.size){
+                                response.body[i].visible = response.body[i].userId.toString()!=PreferenceFile.retrieveUserId()
+                            }
                             adapter.addItems(getEventList)
                         }
                     }

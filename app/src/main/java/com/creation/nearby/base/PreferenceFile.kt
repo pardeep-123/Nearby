@@ -40,7 +40,7 @@ object PreferenceFile {
         editor.commit()
     }
 
-    fun getConnected(): Boolean? {
+    fun getConnected(): Boolean {
         sharedPreferences = AppController.mInstance.getSharedPreferences(
             Constants.preferenceName,
             Context.MODE_PRIVATE

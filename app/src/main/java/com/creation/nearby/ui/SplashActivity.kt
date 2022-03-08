@@ -4,11 +4,17 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.ui.authentication.WelcomeActivity
+import com.creation.nearby.utils.Constants
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +30,25 @@ class SplashActivity : AppCompatActivity() {
            callNextScreen()
         }, 3000) // 3000 is the delayed time in milliseconds.
 
+        // set firebase
+
+        try {
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(
+                        "gg",
+                        "Fetching FCM registration token failed",
+                        task.exception
+                    )
+                    return@OnCompleteListener
+                }
+                val token = task.result
+                PreferenceFile.storeKey(this,Constants.FIREBASE_FCM_TOKEN,token)
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+        }
     }
 
     private fun fullScreen() {

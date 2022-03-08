@@ -1,6 +1,7 @@
 package com.creation.nearby.model
 
 
+import com.creation.nearby.adapter.AbstractModel
 import com.google.gson.annotations.SerializedName
 
 data class HomeListingModel(
@@ -12,17 +13,17 @@ data class HomeListingModel(
     val message: String, // Home Listing
     @SerializedName("success")
     val success: Boolean // true
-) {
+) : AbstractModel() {
     data class Body(
         @SerializedName("eventList")
-        val eventList: List<Event>,
+        val eventList: ArrayList<Event>,
         @SerializedName("feedList")
-        val feedList: List<Feed>,
+        val feedList: ArrayList<Feed>,
         @SerializedName("notificationList")
-        val notificationList: List<Notification>,
+        val notificationList: ArrayList<Notification>,
         @SerializedName("userList")
-        val userList: List<User>
-    ) {
+        val userList: ArrayList<User>
+    ) : AbstractModel() {
         data class Event(
             @SerializedName("attend")
             val attend: String,
@@ -52,7 +53,7 @@ data class HomeListingModel(
             val updatedAt: String, // 2022-03-01T05:04:44.000Z
             @SerializedName("userId")
             val userId: Int // 147
-        )
+        ): AbstractModel()
 
         data class Feed(
             @SerializedName("createdAt")
@@ -73,7 +74,7 @@ data class HomeListingModel(
             val updatedAt: String, // 2021-11-26T11:49:02.000Z
             @SerializedName("userId")
             val userId: Int // 123
-        )
+        ): AbstractModel()
 
         data class Notification(
             @SerializedName("created")
@@ -98,7 +99,7 @@ data class HomeListingModel(
             val user2Id: Int, // 147
             @SerializedName("userId")
             val userId: Int // 0
-        )
+        ): AbstractModel()
 
         data class User(
             @SerializedName("distance")
@@ -113,6 +114,6 @@ data class HomeListingModel(
             val longitude: String, // 0.000000
             @SerializedName("name")
             val name: String // Ashu Kumar
-        )
+        ): AbstractModel()
     }
 }

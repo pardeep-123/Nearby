@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="loginVM"
+            type="com.creation.nearby.viewmodel.LoginVm" />
+
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -62,6 +73,7 @@
 
 
             <LinearLayout
+                android:id="@+id/fbBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -69,7 +81,6 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/round_shape"
                 android:backgroundTint="@color/blue"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingVertical="16dp">
@@ -97,6 +108,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/googleBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
@@ -104,7 +116,6 @@
                 android:layout_marginRight="25dp"
                 android:background="@drawable/round_shape"
                 android:backgroundTint="@color/dark_orange"
-                android:clickable="true"
                 android:gravity="center"
                 android:orientation="horizontal"
                 android:paddingVertical="16dp">
@@ -191,3 +202,5 @@
     </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

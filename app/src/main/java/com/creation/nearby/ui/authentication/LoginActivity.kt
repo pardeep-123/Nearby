@@ -10,33 +10,30 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ActivityLoginBinding
-import com.creation.nearby.showToast
-import com.creation.nearby.utils.FacebookAuth
+import com.creation.nearby.utils.FacebookHelper
+import com.creation.nearby.utils.GoogleHelper
 import com.creation.nearby.viewmodel.LoginVm
-import com.facebook.CallbackManager
-import com.facebook.login.LoginManager
-import com.facebook.login.widget.LoginButton
-import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.facebook.FacebookException
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
-import org.json.JSONObject
 
 
-class LoginActivity : AppCompatActivity(),View.OnClickListener, FacebookAuth.FbResult {
+class LoginActivity : AppCompatActivity(), View.OnClickListener,  FacebookHelper.FacebookHelperCallback {
     lateinit var binding: ActivityLoginBinding
-    val loginVm : LoginVm by viewModels()
+    val loginVm: LoginVm by viewModels()
     var isChecked = false
 
-    private var mGoogleSignInClient: GoogleSignInClient? = null
-    private lateinit var mCallbackManager: CallbackManager
-    private lateinit var loginButton: LoginButton
-    private lateinit var facebookAuth: FacebookAuth
-    private val rcSignIn: Int = 231
+    var facebookHelper: FacebookHelper? = null
+
+    lateinit var googleHelper: GoogleHelper
+    var socialLoginType = ""
+    var firstName = ""
+    var lastName = ""
+    var socialEmail = ""
+    var socialId = ""
+    var socialImage = ""
+    var socialtype = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,45 +43,73 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, FacebookAuth.FbR
         binding.showHide.setOnClickListener(this)
         binding.rememberCheckbox.setOnClickListener(this)
         binding.fbBtn.setOnClickListener(this)
+        binding.googleBtn.setOnClickListener(this)
+        facebookHelper = FacebookHelper(this, this)
+        googleLogin()
 
-        /*
-        facebook code starts from here
-         */
-        loginButton = LoginButton(this)
-        loginButton.setPermissions(listOf("email", "public_profile"))
-        mCallbackManager = CallbackManager.Factory.create()
-        facebookAuth = FacebookAuth(loginButton, mCallbackManager, this)
-
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-        // Build a GoogleSignInClient with the options specified by gso.
-        mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
-
-        val account = GoogleSignIn.getLastSignedInAccount(this)  //Check last Signed account
-        if (account != null) {
-            signOut()
-        }
-
-        loginButton.setOnClickListener {
-            LoginManager.getInstance().logOut()
-            facebookAuth.allowUserToFacebookLogin()
-        }
     }
+
+    private fun googleLogin() {
+        googleHelper = GoogleHelper(this, object : GoogleHelper.GoogleHelperCallback {
+            override fun onSuccessGoogle(account: GoogleSignInAccount) {
+                try {
+                    var photo = ""
+                    if (account.photoUrl != null) {
+                        photo = account.photoUrl.toString()
+                    }
+
+                    googleHelper.signOut()
+                    val fatchName = account.displayName!!.split(" ")
+
+                    try {
+                        var firstNames = ""
+                        for (i in 0 until fatchName.size - 1) {
+                            firstNames = if (firstNames.isEmpty()) {
+                                fatchName[i]
+                            } else {
+                                firstNames + " " + fatchName[i]
+                            }
+                        }
+
+                        socialtype = "1"
+                        firstName = firstNames
+                        lastName = fatchName[fatchName.size - 1]
+                        socialEmail = account.email!!
+                        socialId = account.id!!
+                        socialImage = photo
+
+                        // hit api here
+
+                        loginVm.socialLoginApi(this@LoginActivity,firstName+lastName,socialEmail,socialId,socialtype)
+
+                    } catch (e: Exception) {
+                    }
+                } catch (ex: Exception) {
+                    ex.localizedMessage
+                }
+            }
+
+            override fun onErrorGoogle() {}
+        })
+
+
+    }
+
 
     override fun onClick(v: View?) {
 
-        when(v){
+        when (v) {
 
-            binding.showHide->{
+            binding.showHide -> {
 
-                if(binding.showHide.text.toString() == "Display"){
-                    binding.passwordLogin.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                if (binding.showHide.text.toString() == "Display") {
+                    binding.passwordLogin.transformationMethod =
+                        HideReturnsTransformationMethod.getInstance()
                     binding.showHide.text = "Hide"
                     binding.passwordLogin.setSelection(binding.passwordLogin.length())
-                } else{
-                    binding.passwordLogin.transformationMethod = PasswordTransformationMethod.getInstance()
+                } else {
+                    binding.passwordLogin.transformationMethod =
+                        PasswordTransformationMethod.getInstance()
                     binding.showHide.text = "Display"
                     binding.passwordLogin.setSelection(binding.passwordLogin.length())
 
@@ -92,7 +117,7 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, FacebookAuth.FbR
 
             }
 
-            binding.rememberCheckbox->{
+            binding.rememberCheckbox -> {
                 isChecked = !isChecked
                 if (isChecked)
                     binding.rememberCheckbox.setImageResource(R.drawable.checked)
@@ -100,102 +125,57 @@ class LoginActivity : AppCompatActivity(),View.OnClickListener, FacebookAuth.FbR
                     binding.rememberCheckbox.setImageResource(R.drawable.unchecked)
             }
 
-        // set click listner on fb button
-            binding.fbBtn->{
-                loginButton.performClick()
+            // set click listner on fb button
+            binding.fbBtn -> {
+                socialLoginType = "Fb"
+                facebookHelper!!.login(this)
 
             }
 
+            // set click listner on google button
+            binding.googleBtn -> {
+                signIn()
+            }
         }
 
     }
 
-    override fun fbResult(token: String, jsonObj: JSONObject) {
-        val facebookId = jsonObj.optString("id")
-        val fbEmail = jsonObj.optString("email")
-        val fbName = jsonObj.optString("name")
-        val picObject: JSONObject = jsonObj.getJSONObject("picture")
-        val data: JSONObject = picObject.getJSONObject("data")
-        val imgUrl = data.getString("url")
-
-        //perform task here
-    }
     private fun signIn() {
-        val signInIntent = mGoogleSignInClient?.signInIntent
-        startActivityForResult(signInIntent, rcSignIn)
+        socialLoginType = "Google"
+        googleHelper.signIn()
+
     }
 
-    private fun signOut() {
-        mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
-            Log.e("JSON", "Logout")
-        }
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        if (socialLoginType == "Fb")
+            facebookHelper!!.onResult(requestCode, resultCode, data)
+        else if (socialLoginType == "Google")
+            googleHelper.onResult(requestCode, resultCode, data)
+    }
 
-        if (loginButton.hasOnClickListeners()) {
-            mCallbackManager.onActivityResult(requestCode, resultCode, data)
+    override fun onSuccessFacebook(bundle: Bundle?) {
+        firstName = bundle!!.getString(FacebookHelper.FIRST_NAME)!!
+        lastName = bundle.getString(FacebookHelper.LAST_NAME)!!
+
+        socialEmail = if (bundle.getString(FacebookHelper.EMAIL) != null){
+
+            bundle.getString(FacebookHelper.EMAIL)!!
+        }else{
+            "$socialId@gmail.com"
         }
+        socialId = bundle.getString(FacebookHelper.FACEBOOK_ID)!!
+        socialImage = bundle.getString(FacebookHelper.PROFILE_PIC)!!
+        socialtype = "2"
 
-        if (requestCode == rcSignIn) {
-            Log.e("SocialResultCode", "$resultCode---$requestCode")
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            handleGoogleSignInResult(task)
-        }
-    }
-    private fun handleGoogleSignInResult(completedTask: Task<GoogleSignInAccount>) {
-        if (completedTask.isSuccessful) {
-            Log.e("UserLoginActivity", "Google$completedTask")
-            try {
-                val account = completedTask.getResult(ApiException::class.java)
-                Log.e(
-                    "JSON",
-                    account?.id + " " + account?.email + " " + account?.displayName + " " + account?.photoUrl
-                            + "Token" + account?.idToken
-                )
-
-                //perform task here
-
-
-            } catch (e: ApiException) {
-                Log.e("JSON", e.toString())
-            }
-        } else {
-            Log.e("UserLoginActivity", "Google Cancel")
-            showToast("Google Cancel")
-        }
+        loginVm.socialLoginApi(this,firstName+lastName,socialEmail,socialId,socialtype)
     }
 
+    override fun onCancelFacebook() {
+     }
 
-//    private fun loginFnGoogle(map: HashMap<String, RequestBody>, imagenPerfil: MultipartBody.Part) {
-//        loginViewModel.socialLogin(getSecurityKey(context)!!, map, imagenPerfil)
-//        setSocialLoginObservables()
-//    }
+    override fun onErrorFacebook(ex: FacebookException?) {
+     }
 
-//    private fun setSocialLoginObservables() {
-//        loginViewModel.loginObservable.observe(this, Observer {
-//            saveUser(this, it.data!!)
-//
-//            if (it?.data.phone.isNullOrEmpty()) {
-//                val intent = Intent(this, SignupActivity::class.java)
-//                intent.putExtra("screen_type", "social")
-//                startActivity(intent)
-//                finish()
-//            } else {
-//                val intent = Intent(this, HomeActivity::class.java)
-//                startActivity(intent)
-//                finishAffinity()
-//            }
-//        })
-//    }
-
-    fun createRequestBody(param: String): RequestBody {
-        val request=  RequestBody.create("text/plain".toMediaTypeOrNull(), param)
-        return request
-    }
-
-    override fun onFbCancel() {
-        showToast("cancel")
-    }
 }

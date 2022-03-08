@@ -45,6 +45,8 @@ data class GetEventModel(
         @SerializedName("updatedAt")
         val updatedAt: String, // 2022-02-21T13:19:01.000Z
         @SerializedName("userId")
-        val userId: Int // 0
+        val userId: Int ,// 0
+
+    var visible : Boolean = false
     ):AbstractModel(),Parcelable
 }

@@ -202,8 +202,9 @@
     <string name="chooseimage">Please choose image</string>
     <string name="facebook_app_id">976487152977398</string>
     <string name="fb_login_protocol_scheme">fb976487152977398</string>
-    <string name="default_web_client_id">1050273893801-g9kibbppievid7tigi6e3ddp1g9adqk0.apps.googleusercontent.com</string>
+<!--    <string name="default_web_client_id">1050273893801-g9kibbppievid7tigi6e3ddp1g9adqk0.apps.googleusercontent.com</string>-->
     <string name="noEvents">No Events Found</string>
+    <string name="address">Address</string>
 
 
 </resources>

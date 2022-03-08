@@ -22,6 +22,7 @@ import com.creation.nearby.ui.PrivacyPolicyActivity
 import com.creation.nearby.ui.TermsOfUse
 import com.creation.nearby.ui.authentication.ForgotPasswordActivity
 import com.creation.nearby.ui.authentication.LoginActivity
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.utils.Validator
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -35,6 +36,9 @@ class SignupVm : ViewModel() {
     var firstname: ObservableField<String> = ObservableField("")
     var lastname: ObservableField<String> = ObservableField("")
     var email: ObservableField<String> = ObservableField("")
+    var location: ObservableField<String> = ObservableField("")
+    var latitude: ObservableField<String> = ObservableField("")
+    var longitude: ObservableField<String> = ObservableField("")
     var password: ObservableField<String> = ObservableField("")
     var confirmPassword: ObservableField<String> = ObservableField("")
 
@@ -89,7 +93,7 @@ class SignupVm : ViewModel() {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<LoginModel> {
 
                         return retrofitApi.signup(
-                            mapValues()
+                            mapValues(context)
                         )
 
                     }
@@ -114,7 +118,7 @@ class SignupVm : ViewModel() {
     }
 
     // function for hashmap
-    fun mapValues() : HashMap<String,String>{
+    fun mapValues(context: Context) : HashMap<String,String>{
 
      val hashMap = HashMap<String,String>()
 
@@ -122,9 +126,12 @@ class SignupVm : ViewModel() {
         hashMap["firstname"] = firstname.get()!!
         hashMap["lastname"] = lastname.get()!!
         hashMap["password"] = password.get()!!
-        hashMap["deviceToken"] = "23"
+        hashMap["location"] = location.get()!!
+        hashMap["latitude"] = latitude.get()!!
+        hashMap["longitude"] = longitude.get()!!
+        hashMap["deviceToken"] = PreferenceFile.retrieveKey(context, Constants.FIREBASE_FCM_TOKEN).toString()
        // hashMap["deviceToken"] = PreferenceFile.retrieveFcmDeviceId(context)
-        hashMap["deviceType"] = "23"
+        hashMap["deviceType"] = "1"
 
         return hashMap
     }

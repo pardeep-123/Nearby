@@ -127,9 +127,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_last_name">
-
-                </EditText>
+                    app:layout_constraintTop_toBottomOf="@+id/user_last_name"/>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/constraintLayout"
@@ -277,6 +275,39 @@
                     app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
                 </EditText>
+                <EditText
+                    android:id="@+id/user_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="32dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_shape"
+                    android:backgroundTint="@color/edittext_grey"
+                    android:fontFamily="@font/worksans_regular"
+                    android:hint="@string/address"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:text="@={signUpVM.location}"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/referral_code"/>
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_my_location"
+                    app:layout_constraintBottom_toBottomOf="@+id/user_location"
+                    app:layout_constraintEnd_toEndOf="@+id/user_location"
+                    app:layout_constraintTop_toTopOf="@+id/user_location" />
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/sign_up_btn"
@@ -296,7 +327,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/referral_code" />
+                    app:layout_constraintTop_toBottomOf="@+id/user_location" />
 
                 <TextView
                     android:id="@+id/textView7"
