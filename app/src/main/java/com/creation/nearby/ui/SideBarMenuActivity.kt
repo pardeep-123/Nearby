@@ -1,27 +1,17 @@
 package com.creation.nearby.ui
 
-import android.app.Activity
 import android.content.DialogInterface
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import android.view.Window
-import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivitySideBarMenuBinding
 import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.ImagePickerUtility
-import com.creation.nearby.utils.ToastUtils
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.permissionx.guolindev.PermissionX
+import kotlinx.android.synthetic.main.activity_side_bar_menu.*
 
 class SideBarMenuActivity : ImagePickerUtility() {
 
@@ -35,7 +25,7 @@ class SideBarMenuActivity : ImagePickerUtility() {
         super.onCreate(savedInstanceState)
         binding = ActivitySideBarMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        username.text = PreferenceFile.retrieveKey(this,"username")
         onClickEvent()
 
     }

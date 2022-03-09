@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.FragmentEventsBinding
 import com.creation.nearby.ui.AddEventActivity
+import com.creation.nearby.ui.MyEventActivity
 import com.creation.nearby.viewmodel.GetEventVM
 
 class EventsFragment : Fragment() {
@@ -48,6 +49,11 @@ class EventsFragment : Fragment() {
         binding.addEventLayout.setOnClickListener {
             startActivity(Intent(requireContext(), AddEventActivity::class.java))
         }
+
+        binding.myEventLayout.setOnClickListener {
+            startActivity(Intent(requireContext(), MyEventActivity::class.java))
+        }
+
     }
 
 

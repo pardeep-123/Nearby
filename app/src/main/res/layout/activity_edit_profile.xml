@@ -7,7 +7,7 @@
 
         <variable
             name="loginVM"
-            type="com.creation.nearby.viewmodel.LoginVm" />
+            type="com.creation.nearby.viewmodel.EditProfileVM" />
 
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

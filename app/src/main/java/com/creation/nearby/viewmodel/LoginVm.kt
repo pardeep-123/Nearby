@@ -85,6 +85,7 @@ class LoginVm : ViewModel() {
                                 Intent(context, MainActivity::class.java))
                             animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
+                            PreferenceFile.storeKey(context,"username",response.body.name)
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
                             PreferenceFile.storeUserId(context,response.body.id.toString())
                             context.finishAffinity()
@@ -126,6 +127,8 @@ class LoginVm : ViewModel() {
                                 Intent(context, MainActivity::class.java))
                             animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
+                            PreferenceFile.storeKey(context,"username",response.body.name)
+
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
                             PreferenceFile.storeUserId(context,response.body.id.toString())
 

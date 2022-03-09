@@ -21,20 +21,25 @@
         android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/Theme.Nearby.White">
-        <activity android:name=".ui.CallingVideoActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".ui.VideoActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.CallingActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.AudioActivity"
-            android:theme="@style/Theme.Nearby.TransparentStatusBar"
-            android:screenOrientation="portrait"/>
+        android:theme="@style/Theme.Nearby.White"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".ui.MyEventActivity"></activity>
+        <activity
+            android:name=".ui.CallingVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+        <activity
+            android:name=".ui.VideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+        <activity
+            android:name=".ui.CallingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
+        <activity
+            android:name=".ui.AudioActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Nearby.TransparentStatusBar" />
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -54,7 +59,7 @@
             android:name=".ui.authentication.ResetPasswordActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.OtherUserProfileActivity"
             android:exported="true"
@@ -75,7 +80,7 @@
         <activity
             android:name=".ui.OngoingChatActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.SwipeUserProfileActivity"
             android:screenOrientation="portrait" />
@@ -85,16 +90,16 @@
             android:theme="@style/Theme.Nearby.TransparentStatusBar" />
         <activity
             android:name=".ui.ContactUsActivity"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.FeedBackActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.SearchActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize|stateHidden"/>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name=".ui.DetailedProfileActivity"
             android:exported="true"
@@ -146,23 +151,23 @@
         <activity
             android:name=".ui.authentication.ChangePasswordActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.authentication.SignUpActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.authentication.ForgotPasswordActivity"
             android:exported="true"
-            android:windowSoftInputMode="stateHidden"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.authentication.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden"/>
+            android:windowSoftInputMode="stateHidden" />
         <activity
             android:name=".ui.authentication.WelcomeActivity"
             android:exported="true"

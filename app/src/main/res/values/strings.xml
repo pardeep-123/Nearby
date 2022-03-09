@@ -3,7 +3,7 @@
 
     //not for this project
     <string name="map_key" translatable="false">AIzaSyBC8rG3Pm4TYeTkAiqrqhAEB3X2jk3HvpA</string>
-<!--    <string name="map_key">AIzaSyDG3ftTHL_IMGAd8c8vU-q0Oi-oURgTeKE</string>-->
+    <!--    <string name="map_key">AIzaSyDG3ftTHL_IMGAd8c8vU-q0Oi-oURgTeKE</string>-->
     <string name="select_photo">Select Photo</string>
     <string name="opencamera">Camera</string>
     <string name="pick_from_gallery">Gallery</string>
@@ -202,9 +202,10 @@
     <string name="chooseimage">Please choose image</string>
     <string name="facebook_app_id">976487152977398</string>
     <string name="fb_login_protocol_scheme">fb976487152977398</string>
-<!--    <string name="default_web_client_id">1050273893801-g9kibbppievid7tigi6e3ddp1g9adqk0.apps.googleusercontent.com</string>-->
+    <!--    <string name="default_web_client_id">1050273893801-g9kibbppievid7tigi6e3ddp1g9adqk0.apps.googleusercontent.com</string>-->
     <string name="noEvents">No Events Found</string>
     <string name="address">Address</string>
+    <string name="my_events">My Events</string>
 
 
 </resources>

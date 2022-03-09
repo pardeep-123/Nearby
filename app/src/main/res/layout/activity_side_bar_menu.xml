@@ -57,12 +57,12 @@
         app:srcCompat="@drawable/chat_active_icon" />
 
     <TextView
-        android:id="@+id/textView32"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/worksans_black"
-        android:text="Logan Wills"
+        android:text=""
         android:textColor="@color/black"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,7 +80,7 @@
         android:textColor="@color/black"
         android:textSize="28sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView32" />
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
     <ScrollView
         android:layout_width="0dp"

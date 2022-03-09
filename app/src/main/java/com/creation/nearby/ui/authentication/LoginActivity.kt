@@ -9,24 +9,27 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivityLoginBinding
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.FacebookHelper
 import com.creation.nearby.utils.GoogleHelper
 import com.creation.nearby.viewmodel.LoginVm
 import com.facebook.FacebookException
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener,  FacebookHelper.FacebookHelperCallback {
     lateinit var binding: ActivityLoginBinding
     val loginVm: LoginVm by viewModels()
-    var isChecked = false
+    private var isChecked = false
 
-    var facebookHelper: FacebookHelper? = null
+    private var facebookHelper: FacebookHelper? = null
 
     lateinit var googleHelper: GoogleHelper
-    var socialLoginType = ""
+    private var socialLoginType = ""
     var firstName = ""
     var lastName = ""
     var socialEmail = ""
@@ -47,6 +50,26 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,  FacebookHelper
         facebookHelper = FacebookHelper(this, this)
         googleLogin()
 
+
+        // set firebase
+
+        try {
+            FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+                if (!task.isSuccessful) {
+                    Log.w(
+                        "gg",
+                        "Fetching FCM registration token failed",
+                        task.exception
+                    )
+                    return@OnCompleteListener
+                }
+                val token = task.result
+                PreferenceFile.storeKey(this, Constants.FIREBASE_FCM_TOKEN,token)
+            })
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+        }
     }
 
     private fun googleLogin() {

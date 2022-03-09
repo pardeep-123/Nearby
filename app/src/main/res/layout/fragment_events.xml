@@ -21,14 +21,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/add_event_layout"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginVertical="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/my_event_layout"
             android:background="@drawable/round_background_with_border"
             android:backgroundTint="@color/grey2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
@@ -51,7 +52,7 @@
                 android:id="@+id/add_event_iv"
                 android:layout_width="36dp"
                 android:layout_height="36dp"
-                android:layout_marginEnd="24dp"
+                android:layout_marginEnd="4dp"
                 android:padding="10dp"
                 android:src="@drawable/arrow_forward"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -61,7 +62,48 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_event_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintStart_toEndOf="@id/add_event_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/round_background_with_border"
+            android:backgroundTint="@color/grey2"
 
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/worksans_black"
+                android:text="My Events"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <ImageView
+                android:id="@+id/my_event_iv"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:layout_marginEnd="4dp"
+                android:padding="10dp"
+                android:src="@drawable/arrow_forward"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/black" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
         <TextView
             android:id="@+id/textView17"
             android:layout_width="wrap_content"

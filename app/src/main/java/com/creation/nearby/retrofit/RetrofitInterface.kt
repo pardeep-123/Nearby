@@ -59,6 +59,10 @@ interface RetrofitInterface {
     @GET(Constants.eventListing)
     suspend fun eventListingApi(): Response<GetEventModel>
 
+    // to get my event listing
+    @GET(Constants.myEventListing)
+    suspend fun myEventListingApi(): Response<GetEventModel>
+
     // to get home listing
     @GET(Constants.homeListing)
     suspend fun homeListing() : Response<HomeListingModel>
