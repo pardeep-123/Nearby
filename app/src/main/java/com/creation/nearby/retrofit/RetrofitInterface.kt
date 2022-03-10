@@ -1,9 +1,6 @@
 package com.creation.nearby.retrofit
 
-import com.creation.nearby.model.AddEventModel
-import com.creation.nearby.model.CommonModel
-import com.creation.nearby.model.GetEventModel
-import com.creation.nearby.model.HomeListingModel
+import com.creation.nearby.model.*
 import com.creation.nearby.model.auth.LoginModel
 import com.creation.nearby.utils.Constants
 import okhttp3.MultipartBody
@@ -61,10 +58,27 @@ interface RetrofitInterface {
 
     // to get my event listing
     @GET(Constants.myEventListing)
-    suspend fun myEventListingApi(): Response<GetEventModel>
+    suspend fun myEventListingApi(): Response<MyEventModel>
 
     // to get home listing
     @GET(Constants.homeListing)
     suspend fun homeListing() : Response<HomeListingModel>
 
+    @Multipart
+    // to upload file
+    @POST(Constants.fileUpload)
+    suspend fun fileUpload(
+        @PartMap map : HashMap<String,RequestBody>,
+        @Part image : MultipartBody.Part
+    ) : Response<FileUploadModel>
+
+    // Add Feed Api
+    @POST(Constants.addFeed)
+    suspend fun addFeed(
+        @Body map : HashMap<String,String>
+    ): Response<CommonModel>
+
+    // to get home listing
+    @GET(Constants.getFeed)
+    suspend fun feedListing() : Response<GetFeedModel>
    }

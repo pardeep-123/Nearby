@@ -14,6 +14,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bba603ee-cc55-4c68-97dc-5ed77c56bb6a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/checksums/checksums.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" afterDir="false" />
@@ -21,17 +22,19 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules/app/Nearby.app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/Nearby.app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/EventsFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/EventsFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/SideBarMenuActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/SideBarMenuActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/authentication/LoginActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/authentication/LoginActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/LoginVm.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/LoginVm.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profile.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_edit_profile.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_side_bar_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_side_bar_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_events.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/FeedFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/FeedFragment.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/GetEventModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/GetEventModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/HomeListingModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/HomeListingModel.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/items_feeds.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/items_feeds.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +115,7 @@
     <property name="android-custom-view/root/.gradle/caches/modules-2/files-2.1/androidx.constraintlayout/constraintlayout/2.1.3/ef09d725f04e18996fce65076118fc289416b8ca/constraintlayout-2.1.3-sources.jar!/androidx/constraintlayout/widget/ConstraintLayout.java_SELECTED" value="ConstraintLayout" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils" />
-    <property name="memory.settings.postsync.last.time.stamp" value="1646801430928" />
+    <property name="memory.settings.postsync.last.time.stamp" value="1646904105845" />
     <property name="project.structure.last.edited" value="SDK Location" />
     <property name="project.structure.proportion" value="0.17" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -255,11 +258,11 @@
     </state>
     <state x="457" y="111" key="#com.intellij.ide.util.MemberChooser/0.27.1366.704@0.27.1366.704" timestamp="1646716751523" />
     <state x="457" y="115" width="442" height="562" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1646645671778" />
-    <state x="711" y="190" key="#xdebugger.evaluate" timestamp="1646817992253">
+    <state x="711" y="190" key="#xdebugger.evaluate" timestamp="1646913179561">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="441" y="135" key="#xdebugger.evaluate/0.27.1366.704@0.27.1366.704" timestamp="1646716393434" />
-    <state x="711" y="190" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1646817992253" />
+    <state x="711" y="190" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1646913179561" />
     <state x="266" y="154" width="824" height="484" key="AndroidCreateResourceFileDialog" timestamp="1646628893940">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -268,39 +271,39 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="485" y="206" width="387" height="381" key="AndroidCreateXmlResourceDialog/0.27.1366.741@0.27.1366.741" timestamp="1646821212565" />
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog" timestamp="1646818260617">
+    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog" timestamp="1646913151550">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="430" y="138" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.704@0.27.1366.704" timestamp="1646716970191" />
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1646818260617" />
-    <state width="507" height="506" key="DebuggerActiveHint" timestamp="1646818338820">
+    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1646913151550" />
+    <state width="507" height="506" key="DebuggerActiveHint" timestamp="1646912812109">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="507" height="506" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1646818338820" />
+    <state width="507" height="506" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1646912812109" />
     <state x="442" y="140" width="472" height="513" key="FileChooserDialogImpl" timestamp="1645161573374">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="442" y="140" width="472" height="513" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1645161573374" />
-    <state width="1320" height="26" key="GridCell.Tab.0.bottom" timestamp="1646822153784">
+    <state width="1320" height="64" key="GridCell.Tab.0.bottom" timestamp="1646913233136">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.bottom/0.27.1366.704@0.27.1366.704" timestamp="1646717101113" />
-    <state width="1320" height="26" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1646822153784" />
-    <state width="1320" height="26" key="GridCell.Tab.0.center" timestamp="1646822153783">
+    <state width="1320" height="64" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1646913233136" />
+    <state width="1320" height="64" key="GridCell.Tab.0.center" timestamp="1646913233126">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.center/0.27.1366.704@0.27.1366.704" timestamp="1646717101107" />
-    <state width="1320" height="26" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1646822153783" />
-    <state width="1320" height="26" key="GridCell.Tab.0.left" timestamp="1646822153783">
+    <state width="1320" height="64" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1646913233126" />
+    <state width="1320" height="64" key="GridCell.Tab.0.left" timestamp="1646913233126">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.left/0.27.1366.704@0.27.1366.704" timestamp="1646717101107" />
-    <state width="1320" height="26" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1646822153783" />
-    <state width="1320" height="26" key="GridCell.Tab.0.right" timestamp="1646822153783">
+    <state width="1320" height="64" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1646913233126" />
+    <state width="1320" height="64" key="GridCell.Tab.0.right" timestamp="1646913233136">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.right/0.27.1366.704@0.27.1366.704" timestamp="1646717101111" />
-    <state width="1320" height="26" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1646822153783" />
+    <state width="1320" height="64" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1646913233136" />
     <state x="314" y="159" width="728" height="475" key="MultipleFileMergeDialog" timestamp="1645017966434">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -309,27 +312,27 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="172" y="31" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1645161284769" />
-    <state width="683" height="371" key="XDebugger.FullValuePopup" timestamp="1646738801067">
+    <state width="683" height="371" key="XDebugger.FullValuePopup" timestamp="1646913178281">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="683" height="371" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1646738801067" />
+    <state width="683" height="371" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1646913178281" />
     <state x="293" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1646743973309">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="293" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.27.1366.741@0.27.1366.741" timestamp="1646743973309" />
-    <state x="374" y="135" width="848" height="522" key="find.popup" timestamp="1645792391664">
+    <state x="374" y="135" width="848" height="522" key="find.popup" timestamp="1646905344528">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="374" y="135" width="848" height="522" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1645792391664" />
+    <state x="374" y="135" width="848" height="522" key="find.popup/0.27.1366.741@0.27.1366.741" timestamp="1646905344528" />
     <state x="347" y="168" width="672" height="644" key="run.anything.popup" timestamp="1646716215760">
       <screen x="0" y="27" width="1366" height="704" />
     </state>
     <state x="347" y="168" width="672" height="644" key="run.anything.popup/0.27.1366.704@0.27.1366.704" timestamp="1646716215760" />
     <state x="347" y="175" width="672" height="677" key="run.anything.popup/0.27.1366.741@0.27.1366.741" timestamp="1646659251919" />
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1646653763426">
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup" timestamp="1646905777612">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1646653763426" />
+    <state x="346" y="89" width="672" height="678" key="search.everywhere.popup/0.27.1366.741@0.27.1366.741" timestamp="1646905777612" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -378,6 +381,16 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/LoginVm.kt</url>
           <line>87</line>
           <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt</url>
+          <line>52</line>
+          <option name="timeStamp" value="72" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt</url>
+          <line>61</line>
+          <option name="timeStamp" value="73" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

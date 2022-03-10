@@ -9,6 +9,7 @@ import com.creation.nearby.R
 import com.creation.nearby.adapter.RecyclerAdapter
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.GetEventModel
+import com.creation.nearby.model.MyEventModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
@@ -17,9 +18,9 @@ import retrofit2.Response
 
 class MyEventVM : ViewModel() {
 
-    val myEventList by lazy { ArrayList<GetEventModel.Body>() }
+    val myEventList by lazy { ArrayList<MyEventModel.Body>() }
 
-    val adapter by lazy { RecyclerAdapter<GetEventModel.Body>(R.layout.item_events) }
+    val adapter by lazy { RecyclerAdapter<MyEventModel.Body>(R.layout.item_events) }
 
     init {
 
@@ -42,13 +43,13 @@ class MyEventVM : ViewModel() {
                 context,
                 true,
 
-                object : RequestProcessor<Response<GetEventModel>> {
-                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<GetEventModel> {
+                object : RequestProcessor<Response<MyEventModel>> {
+                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<MyEventModel> {
 
-                        return retrofitApi.eventListingApi()
+                        return retrofitApi.myEventListingApi()
                     }
 
-                    override fun onResponse(res: Response<GetEventModel>) {
+                    override fun onResponse(res: Response<MyEventModel>) {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             myEventList.addAll(response.body)

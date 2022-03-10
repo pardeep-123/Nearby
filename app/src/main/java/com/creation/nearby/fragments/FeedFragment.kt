@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -22,6 +23,7 @@ import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.PostModel
 import com.creation.nearby.model.SuggestionsModel
 import com.creation.nearby.utils.ImagePickerFragmentUtility
+import com.creation.nearby.viewmodel.AddFeedVM
 import com.google.android.material.bottomsheet.BottomSheetDialog
 
 
@@ -35,17 +37,21 @@ class FeedFragment : ImagePickerFragmentUtility() {
 
     private  var postList = ArrayList<PostModel>()
 
+    private val addFeedVm : AddFeedVM by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentFeedBinding.inflate(inflater,container,false)
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.feedVM = addFeedVm
         binding.postsRecyView.layoutManager = LinearLayoutManager(view.context,RecyclerView.VERTICAL,false)
         postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.drawable.swipe_image2))
         postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.drawable.swipe_image2))
@@ -152,11 +158,12 @@ class FeedFragment : ImagePickerFragmentUtility() {
     override fun selectedImage(imagePath: String?) {
         Glide.with(requireActivity()).load(imagePath).into(binding.gallerySelectedImage)
 
+        addFeedVm.image.set(imagePath)
 
         val transition: Transition = Slide(Gravity.BOTTOM)
         transition.duration= 600
         transition.addTarget(binding.feedGalleryImage)
-        TransitionManager.beginDelayedTransition(binding.parent, transition)
+        TransitionManager.beginDelayedTransition(binding.parentLayout, transition)
         binding.feedGalleryImage.visibility = View.VISIBLE
     }
 
@@ -171,11 +178,12 @@ class FeedFragment : ImagePickerFragmentUtility() {
             val transition: Transition = Slide(Gravity.BOTTOM)
             transition.duration= 600
             transition.addTarget(binding.feedGalleryImage)
-            TransitionManager.beginDelayedTransition(binding.parent, transition)
+            TransitionManager.beginDelayedTransition(binding.parentLayout, transition)
             binding.feedGalleryImage.visibility = View.GONE
 
         }
 
     }
+
 
 }

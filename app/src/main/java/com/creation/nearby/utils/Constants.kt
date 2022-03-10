@@ -17,9 +17,12 @@ object Constants {
     const val getContent = "get_content"
     const val editProfile = "edit_profile"
     const val addEvent = "addEvent"
+    const val addFeed = "add_feed"
+    const val getFeed = "feeds"
     const val eventListing = "eventListing"
     const val myEventListing = "my_event"
     const val homeListing = "home"
+    const val fileUpload = "file_upload"
 
 
     //preferences

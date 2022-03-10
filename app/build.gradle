@@ -113,6 +113,8 @@ dependencies {
 //upload image
     implementation 'com.yanzhenjie:album:2.1.3'
 
+    // tiny image
+    implementation 'com.zxy.android:tiny:1.1.0'
     //facebook
 //    implementation 'com.facebook.android:facebook-android-sdk:5.0.0'
     implementation 'com.facebook.android:facebook-android-sdk:8.2.0'
