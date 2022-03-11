@@ -32,6 +32,9 @@ import com.bumptech.glide.Glide
 import com.creation.nearby.ui.authentication.LoginActivity
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.snackbar.Snackbar
+import java.text.ParseException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -326,4 +329,109 @@ fun animateSlide(activity: Activity) {
 
 
     dialog.show()
+}
+
+// automatically date and time formatting by get api
+fun getNotificationTime(time_stamp: Long): String {
+    var date: Date? = null
+    try {
+        date = Date(time_stamp * 1000)
+    } catch (ex: Exception) {
+        ex.printStackTrace()
+    }
+    System.out.println("dateeee" + date.toString())
+    var string_date = ""
+    val current = Calendar.getInstance().time
+    var diffInSeconds = (current.time - date!!.time) / 1000
+    val sec = if (diffInSeconds >= 60) diffInSeconds % 60 else diffInSeconds
+    val min = if ((diffInSeconds / 60).also {
+            diffInSeconds = it
+        } >= 60) diffInSeconds % 60 else diffInSeconds
+    val hrs = if ((diffInSeconds / 60).also {
+            diffInSeconds = it
+        } >= 24) diffInSeconds % 24 else diffInSeconds
+    val days = if ((diffInSeconds / 24).also {
+            diffInSeconds = it
+        } >= 30) diffInSeconds % 30 else diffInSeconds
+    val weeks = days / 7
+    val months = if ((diffInSeconds / 30).also {
+            diffInSeconds = it
+        } >= 12) diffInSeconds % 12 else diffInSeconds
+    val years = (diffInSeconds / 12).also { diffInSeconds = it }
+    if (years > 0) {
+        string_date = if (years == 1L) {
+            "1 year"
+        } else {
+            "$years years"
+        }
+    } else if (months > 0) {
+        string_date = if (months == 1L) {
+            "1 month"
+        } else {
+            "$months months"
+        }
+    } else if (weeks > 0) {
+        string_date = if (weeks == 1L) {
+            "1 week"
+        } else {
+            "$weeks Weeks"
+        }
+    } else if (days > 0) {
+        string_date = if (days == 1L) {
+            "1 day"
+        } else {
+            "$days days"
+        }
+    } else if (hrs > 0) {
+        string_date = if (hrs == 1L) {
+            "1 hour"
+        } else {
+            "$hrs hours"
+        }
+    } else if (min > 0) {
+        string_date = if (min == 1L) {
+            "1 minute"
+        } else {
+            "$min minutes"
+        }
+    }
+    string_date = "$string_date ago"
+    if (string_date == " ago") {
+        string_date = "1 sec" + " ago"
+    }
+    return string_date
+}
+// zuluTime time convert to string
+fun getChatListTime(zuluTime: String): Long {
+    val input = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+    val output = SimpleDateFormat("dd/MM/yyyy")
+
+    var d: Date? = null
+    try {
+        d = input.parse(zuluTime)
+    } catch (e: ParseException) {
+        e.printStackTrace()
+    }
+    val formatted = output.format(d)
+    Log.i("DATE", "" + formatted)
+
+    return time_to_timestamp(formatted, "dd/MM/yyyy")
+}
+
+// convert date and time book appointment fragment
+fun time_to_timestamp(str_date: String?, pattren: String?): Long {
+    var time_stamp: Long = 0
+    try {
+        val formatter = SimpleDateFormat(pattren)
+//SimpleDateFormat formatter = new SimpleDateFormat("HH:mm");
+        formatter.timeZone = TimeZone.getTimeZone("GMT")
+        val date = formatter.parse(str_date) as Date
+        time_stamp = date.time
+    } catch (ex: ParseException) {
+        ex.printStackTrace()
+    } catch (ex: java.lang.Exception) {
+        ex.printStackTrace()
+    }
+    time_stamp /= 1000
+    return time_stamp
 }

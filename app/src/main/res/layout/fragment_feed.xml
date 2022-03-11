@@ -58,10 +58,25 @@
         android:id="@+id/posts_recy_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        setRecyclerAdapter="@{feedVM.feedAdapter}"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/suggestion_rec_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView30" />
+        <TextView
+            android:id="@+id/noDataFound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/worksans_semibold"
+            android:text="@string/nodatafound"
+            android:visibility="@{feedVM.setVisibility()? View.GONE : View.VISIBLE}"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@+id/suggestion_rec_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView30" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/suggestion_rec_view"

@@ -24,11 +24,11 @@ data class GetFeedModel(
         @SerializedName("image")
         val image: String,
         @SerializedName("latitude")
-        val latitude: Int, // 0
+        val latitude: String, // 0
         @SerializedName("location")
         val location: String, // Chandigarh
         @SerializedName("longitude")
-        val longitude: Int, // 0
+        val longitude: String, // 0
         @SerializedName("status")
         val status: Int, // 1
         @SerializedName("updatedAt")
@@ -36,8 +36,13 @@ data class GetFeedModel(
         @SerializedName("user")
         val user: User,
         @SerializedName("userId")
-        val userId: Int // 123
-    ) : AbstractModel(){
+        val userId: Int, // 123
+        var myfeed : Boolean = false
+
+
+    ) : AbstractModel() {
+
+
         data class User(
             @SerializedName("id")
             val id: Int, // 123

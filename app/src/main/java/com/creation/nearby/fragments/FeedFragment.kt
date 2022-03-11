@@ -52,12 +52,8 @@ class FeedFragment : ImagePickerFragmentUtility() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.feedVM = addFeedVm
-        binding.postsRecyView.layoutManager = LinearLayoutManager(view.context,RecyclerView.VERTICAL,false)
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",R.drawable.swipe_image2))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","1 min ago","Anyone wanna take a coffee, I have many hours to spare.",R.drawable.swipe_image2))
-        postList.add(PostModel(R.drawable.friends_pic_1,"Jenna","3 mins ago","Hey! I don’t know what to do in this city. Anyone able to help me get around?",null))
 
-        initAdapter()
+//        initAdapter()
 
         binding.suggestionRecView.layoutManager = LinearLayoutManager(view.context,RecyclerView.HORIZONTAL,false)
 
@@ -69,6 +65,8 @@ class FeedFragment : ImagePickerFragmentUtility() {
 
         clickHandler()
 
+        // get feed api
+        addFeedVm.feedListApi(requireContext())
     }
 
     private fun initAdapter() {
@@ -78,9 +76,9 @@ class FeedFragment : ImagePickerFragmentUtility() {
                 optionsDialog()
             }
         }
-        postAdapter = PostAdapter(postList,onActionListener)
-        binding.postsRecyView.adapter = postAdapter
-        postAdapter.notifyDataSetChanged()
+//        postAdapter = PostAdapter(postList,onActionListener)
+//        binding.postsRecyView.adapter = postAdapter
+//        postAdapter.notifyDataSetChanged()
 
     }
 

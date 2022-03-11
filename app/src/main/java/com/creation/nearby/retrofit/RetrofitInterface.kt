@@ -81,4 +81,8 @@ interface RetrofitInterface {
     // to get home listing
     @GET(Constants.getFeed)
     suspend fun feedListing() : Response<GetFeedModel>
+
+    // get swipe user list
+    @GET(Constants.swipeList)
+    suspend fun swipeUserList() : Response<UserListModel>
    }

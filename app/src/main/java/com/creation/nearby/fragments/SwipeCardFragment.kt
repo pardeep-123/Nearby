@@ -1,6 +1,5 @@
 package com.creation.nearby.fragments
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,12 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
 import com.creation.nearby.R
 import com.creation.nearby.adapter.SwipeCardAdapter
 import com.creation.nearby.databinding.FragmentSwipeCardBinding
 import com.creation.nearby.model.SwipeCardModel
-import com.creation.nearby.ui.CongratulationActivity
+import com.creation.nearby.viewmodel.SwipeVM
 import com.yuyakaido.android.cardstackview.*
 
 
@@ -24,10 +24,12 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     private var swipeLIst = ArrayList<SwipeCardModel>()
     private lateinit var binding: FragmentSwipeCardBinding
 
+    val swipeVM : SwipeVM by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentSwipeCardBinding.inflate(inflater)
         return binding.root
@@ -41,15 +43,15 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
         }
         swipeLayoutManager.setStackFrom(StackFrom.Bottom)
         swipeLayoutManager.setScaleInterval(0.95f)
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Erik Smith","23","Maxico"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amit Thakur","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rahul Thakur","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amish Thakur","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Steve Smith","23","Hamirpur"))
-        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rohan Thakur","23","Hamirpur"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Erik Smith","23","Maxico"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amit Thakur","23","Hamirpur"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rahul Thakur","23","Hamirpur"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_image2,"Amish Thakur","23","Hamirpur"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Steve Smith","23","Hamirpur"))
+//        swipeLIst.add(SwipeCardModel(R.drawable.swipe_card_image,"Rohan Thakur","23","Hamirpur"))
 
         binding.cardStackView.layoutManager = swipeLayoutManager
-        swipeAdapter = context?.let { SwipeCardAdapter(it,swipeLIst) }!!
+       // swipeAdapter = context?.let { SwipeCardAdapter(it,swipeLIst) }!!
         binding.cardStackView.adapter = swipeAdapter
 
         binding.cardStackView.itemAnimator.apply {

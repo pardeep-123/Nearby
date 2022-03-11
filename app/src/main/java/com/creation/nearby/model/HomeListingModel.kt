@@ -63,11 +63,11 @@ data class HomeListingModel(
             @SerializedName("id")
             val id: Int, // 4
             @SerializedName("latitude")
-            val latitude: Int, // 0
+            val latitude: Double, // 0
             @SerializedName("location")
             val location: String, // Chandigarh
             @SerializedName("longitude")
-            val longitude: Int, // 0
+            val longitude: Double, // 0
             @SerializedName("status")
             val status: Int, // 1
             @SerializedName("updatedAt")
@@ -76,6 +76,7 @@ data class HomeListingModel(
             val userId: Int,// 123
             @SerializedName("user")
             val user: FeedUser,
+
         ): AbstractModel()
         {
             data class FeedUser(
@@ -121,7 +122,7 @@ data class HomeListingModel(
 
         data class User(
             @SerializedName("distance")
-            val distance: Int, // 0
+            val distance: Double, // 0
             @SerializedName("id")
             val id: Int, // 166
             @SerializedName("image")
@@ -133,113 +134,5 @@ data class HomeListingModel(
             @SerializedName("name")
             val name: String // Ashu Kumar
         ): AbstractModel()
-    }
-}
-
-data class ff(
-    @SerializedName("body")
-    val body: Body,
-    @SerializedName("code")
-    val code: Int, // 200
-    @SerializedName("message")
-    val message: String, // Home Listing
-    @SerializedName("success")
-    val success: Boolean // true
-) {
-    data class Body(
-        @SerializedName("eventList")
-        val eventList: List<Event>,
-        @SerializedName("feedList")
-        val feedList: List<Feed>,
-        @SerializedName("notificationList")
-        val notificationList: List<Any>,
-        @SerializedName("userList")
-        val userList: List<User>
-    ) {
-        data class Event(
-            @SerializedName("attend")
-            val attend: String,
-            @SerializedName("createdAt")
-            val createdAt: String, // 2022-03-07T15:42:49.000Z
-            @SerializedName("details")
-            val details: String, // This event is created by user3
-            @SerializedName("discount")
-            val discount: String, // 50
-            @SerializedName("id")
-            val id: Int, // 70
-            @SerializedName("image")
-            val image: String, // 1d6c3b05-1417-4f5b-b5bc-4ba390daaca2.jpeg
-            @SerializedName("latitude")
-            val latitude: String, // 0.00000000
-            @SerializedName("location")
-            val location: String, // Dehradun, Uttarakhand, India
-            @SerializedName("longitude")
-            val longitude: String, // 0.00000000
-            @SerializedName("status")
-            val status: Int, // 1
-            @SerializedName("time")
-            val time: String, // 15:42
-            @SerializedName("title")
-            val title: String, // EventUser3
-            @SerializedName("updatedAt")
-            val updatedAt: String, // 2022-03-07T15:42:49.000Z
-            @SerializedName("userId")
-            val userId: Int // 176
-        )
-
-        data class Feed(
-            @SerializedName("createdAt")
-            val createdAt: String, // 2021-11-26T11:31:47.000Z
-            @SerializedName("description")
-            val description: String, // seems to be adorable
-            @SerializedName("id")
-            val id: Int, // 4
-            @SerializedName("image")
-            val image: String,
-            @SerializedName("latitude")
-            val latitude: Int, // 0
-            @SerializedName("location")
-            val location: String, // Chandigarh
-            @SerializedName("longitude")
-            val longitude: Int, // 0
-            @SerializedName("status")
-            val status: Int, // 1
-            @SerializedName("updatedAt")
-            val updatedAt: String, // 2021-11-26T11:49:02.000Z
-            @SerializedName("user")
-            val user: User,
-            @SerializedName("userId")
-            val userId: Int // 123
-        ) {
-            data class User(
-                @SerializedName("id")
-                val id: Int, // 123
-                @SerializedName("image")
-                val image: String, // funsukh2.jpg
-                @SerializedName("latitude")
-                val latitude: String, // 0.000000
-                @SerializedName("location")
-                val location: String, // chandigarh
-                @SerializedName("longitude")
-                val longitude: String, // 0.000000
-                @SerializedName("name")
-                val name: String // Mark
-            )
-        }
-
-        data class User(
-            @SerializedName("distance")
-            val distance: Int, // 0
-            @SerializedName("id")
-            val id: Int, // 178
-            @SerializedName("image")
-            val image: String,
-            @SerializedName("latitude")
-            val latitude: String, // 0.000000
-            @SerializedName("longitude")
-            val longitude: String, // 0.000000
-            @SerializedName("name")
-            val name: String // CqlsysTechnology
-        )
     }
 }

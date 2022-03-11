@@ -23,6 +23,7 @@ object Constants {
     const val myEventListing = "my_event"
     const val homeListing = "home"
     const val fileUpload = "file_upload"
+    const val swipeList = "user_listing"
 
 
     //preferences

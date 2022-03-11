@@ -20,7 +20,7 @@ class MyEventVM : ViewModel() {
 
     val myEventList by lazy { ArrayList<MyEventModel.Body>() }
 
-    val adapter by lazy { RecyclerAdapter<MyEventModel.Body>(R.layout.item_events) }
+    val adapter by lazy { RecyclerAdapter<MyEventModel.Body>(R.layout.item_my_events) }
 
     init {
 
@@ -53,7 +53,9 @@ class MyEventVM : ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             myEventList.addAll(response.body)
-
+                   myEventList.forEach {
+                       it.visible = false
+                   }
                             adapter.addItems(myEventList)
                         }
                     }

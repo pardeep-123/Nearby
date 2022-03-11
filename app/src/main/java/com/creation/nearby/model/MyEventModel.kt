@@ -48,7 +48,8 @@ data class MyEventModel(
         @SerializedName("user")
         val user: User,
         @SerializedName("userId")
-        val userId: Int // 161
+        val userId: Int, // 161
+       var visible : Boolean = false
     ) :AbstractModel(),Parcelable {
         @Parcelize
         data class User(

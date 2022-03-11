@@ -6,9 +6,13 @@ import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
+import com.creation.nearby.R
+import com.creation.nearby.adapter.RecyclerAdapter
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.AddEventModel
 import com.creation.nearby.model.CommonModel
 import com.creation.nearby.model.FileUploadModel
+import com.creation.nearby.model.GetFeedModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
@@ -30,6 +34,11 @@ class AddFeedVM : ViewModel() {
     val image : ObservableField<String> = ObservableField("")
     var imagefile : MultipartBody.Part?=null
     var imagePath = ""
+
+    val feedList by lazy { ArrayList<GetFeedModel.Body>() }
+    val feedAdapter by lazy { RecyclerAdapter<GetFeedModel.Body>(R.layout.item_posts) }
+
+
     fun onClick(v: View, s: String) {
         when (s) {
             "feedSubmit" -> {
@@ -163,6 +172,51 @@ class AddFeedVM : ViewModel() {
 
 
         return hashMap
+    }
+
+    // get event list
+    fun feedListApi(context: Context) {
+        try {
+            CallApi().callService(
+                context,
+                true,
+
+                object : RequestProcessor<Response<GetFeedModel>> {
+                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<GetFeedModel> {
+
+                        return retrofitApi.feedListing()
+                    }
+
+                    override fun onResponse(res: Response<GetFeedModel>) {
+                        if (res.isSuccessful) {
+                            val response = res.body()!!
+                            feedList.addAll(response.body)
+
+                            feedAdapter.addItems(feedList)
+
+                            // to check if my own feed, then hide the buttons
+                            feedList.forEachIndexed { index, body ->
+                                if (body.userId.toString() == PreferenceFile.retrieveUserId()) {
+                                    feedList[index].myfeed = true
+                                }
+
+                            }
+
+                        }
+                    }
+
+                    override fun onException(message: String?) {
+                        Log.e("userException", "====$message")
+                    }
+                })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun setVisibility(): Boolean {
+        return feedList.size <= 0
     }
 
 }
