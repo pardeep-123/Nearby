@@ -7,40 +7,18 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bba603ee-cc55-4c68-97dc-5ed77c56bb6a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.3.3/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/file-system.probe" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/file-system.probe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/Extentions.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/Extentions.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/FeedFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/FeedFragment.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/SwipeCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/SwipeCardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/GetFeedModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/GetFeedModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/HomeListingModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/HomeListingModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/MyEventModel.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/model/MyEventModel.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/RetrofitInterface.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/BindingAdapter.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/BindingAdapter.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/utils/Constants.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/AddFeedVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/AddFeedVM.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/GetFeedVM.kt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feed.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_home.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/item_posts.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/item_posts.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/items_feeds.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/items_feeds.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/swipe_card_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/swipe_card_item.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/SwipeVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/SwipeVM.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_swipe_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_swipe_card.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -264,11 +242,11 @@
     </state>
     <state x="457" y="111" key="#com.intellij.ide.util.MemberChooser/0.27.1366.704@0.27.1366.704" timestamp="1646716751523" />
     <state x="457" y="115" width="442" height="562" key="#com.intellij.ide.util.MemberChooser/0.27.1366.741@0.27.1366.741" timestamp="1646645671778" />
-    <state x="711" y="190" key="#xdebugger.evaluate" timestamp="1646976007095">
+    <state x="711" y="190" key="#xdebugger.evaluate" timestamp="1647250656586">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="441" y="135" key="#xdebugger.evaluate/0.27.1366.704@0.27.1366.704" timestamp="1646716393434" />
-    <state x="711" y="190" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1646976007095" />
+    <state x="711" y="190" key="#xdebugger.evaluate/0.27.1366.741@0.27.1366.741" timestamp="1647250656586" />
     <state x="266" y="154" width="824" height="484" key="AndroidCreateResourceFileDialog" timestamp="1646628893940">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -277,39 +255,39 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="485" y="206" width="387" height="381" key="AndroidCreateXmlResourceDialog/0.27.1366.741@0.27.1366.741" timestamp="1646975624438" />
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog" timestamp="1646975905658">
+    <state x="430" y="144" width="495" height="505" key="AndroidProcessChooserDialog" timestamp="1647235771885">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="430" y="138" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.704@0.27.1366.704" timestamp="1646716970191" />
-    <state x="430" y="144" width="505" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1646975905658" />
-    <state width="507" height="506" key="DebuggerActiveHint" timestamp="1646975972511">
+    <state x="430" y="144" width="495" height="505" key="AndroidProcessChooserDialog/0.27.1366.741@0.27.1366.741" timestamp="1647235771885" />
+    <state width="507" height="506" key="DebuggerActiveHint" timestamp="1647235811853">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="507" height="506" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1646975972511" />
+    <state width="507" height="506" key="DebuggerActiveHint/0.27.1366.741@0.27.1366.741" timestamp="1647235811853" />
     <state x="442" y="140" width="472" height="513" key="FileChooserDialogImpl" timestamp="1645161573374">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="442" y="140" width="472" height="513" key="FileChooserDialogImpl/0.27.1366.741@0.27.1366.741" timestamp="1645161573374" />
-    <state width="1320" height="278" key="GridCell.Tab.0.bottom" timestamp="1646978170587">
+    <state width="1320" height="124" key="GridCell.Tab.0.bottom" timestamp="1647251591062">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.bottom/0.27.1366.704@0.27.1366.704" timestamp="1646717101113" />
-    <state width="1320" height="278" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1646978170587" />
-    <state width="1320" height="278" key="GridCell.Tab.0.center" timestamp="1646978170585">
+    <state width="1320" height="124" key="GridCell.Tab.0.bottom/0.27.1366.741@0.27.1366.741" timestamp="1647251591062" />
+    <state width="1320" height="124" key="GridCell.Tab.0.center" timestamp="1647251591062">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.center/0.27.1366.704@0.27.1366.704" timestamp="1646717101107" />
-    <state width="1320" height="278" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1646978170585" />
-    <state width="1320" height="278" key="GridCell.Tab.0.left" timestamp="1646978170584">
+    <state width="1320" height="124" key="GridCell.Tab.0.center/0.27.1366.741@0.27.1366.741" timestamp="1647251591062" />
+    <state width="1320" height="124" key="GridCell.Tab.0.left" timestamp="1647251591062">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.left/0.27.1366.704@0.27.1366.704" timestamp="1646717101107" />
-    <state width="1320" height="278" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1646978170584" />
-    <state width="1320" height="278" key="GridCell.Tab.0.right" timestamp="1646978170586">
+    <state width="1320" height="124" key="GridCell.Tab.0.left/0.27.1366.741@0.27.1366.741" timestamp="1647251591062" />
+    <state width="1320" height="124" key="GridCell.Tab.0.right" timestamp="1647251591062">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state width="1320" height="301" key="GridCell.Tab.0.right/0.27.1366.704@0.27.1366.704" timestamp="1646717101111" />
-    <state width="1320" height="278" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1646978170586" />
+    <state width="1320" height="124" key="GridCell.Tab.0.right/0.27.1366.741@0.27.1366.741" timestamp="1647251591062" />
     <state x="314" y="159" width="728" height="475" key="MultipleFileMergeDialog" timestamp="1645017966434">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -318,10 +296,10 @@
       <screen x="0" y="27" width="1366" height="741" />
     </state>
     <state x="172" y="31" key="SettingsEditor/0.27.1366.741@0.27.1366.741" timestamp="1645161284769" />
-    <state width="683" height="371" key="XDebugger.FullValuePopup" timestamp="1646913178281">
+    <state width="683" height="371" key="XDebugger.FullValuePopup" timestamp="1647235792400">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
-    <state width="683" height="371" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1646913178281" />
+    <state width="683" height="371" key="XDebugger.FullValuePopup/0.27.1366.741@0.27.1366.741" timestamp="1647235792400" />
     <state x="293" y="27" width="770" height="741" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1646986369334">
       <screen x="0" y="27" width="1366" height="741" />
     </state>
@@ -347,21 +325,6 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/AddEventActivity.kt</url>
           <line>128</line>
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt</url>
-          <line>135</line>
-          <option name="timeStamp" value="35" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt</url>
-          <line>157</line>
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt</url>
-          <line>138</line>
-          <option name="timeStamp" value="47" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/ui/SplashActivity.kt</url>
@@ -397,6 +360,16 @@
           <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/MyEventVM.kt</url>
           <line>63</line>
           <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/HomeVM.kt</url>
+          <line>111</line>
+          <option name="timeStamp" value="74" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/HomeVM.kt</url>
+          <line>149</line>
+          <option name="timeStamp" value="75" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

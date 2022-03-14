@@ -37,6 +37,7 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        binding.swipeVM = swipeVM
         swipeLayoutManager = CardStackLayoutManager(context,this).apply {
             setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
             setOverlayInterpolator(LinearInterpolator())
@@ -52,8 +53,10 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
 
         binding.cardStackView.layoutManager = swipeLayoutManager
        // swipeAdapter = context?.let { SwipeCardAdapter(it,swipeLIst) }!!
-        binding.cardStackView.adapter = swipeAdapter
+     //   binding.cardStackView.adapter = swipeAdapter
 
+        // hit api
+        swipeVM.swipeListApi(requireContext())
         binding.cardStackView.itemAnimator.apply {
 
             if (this is DefaultItemAnimator){
@@ -61,7 +64,7 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
             }
         }
 
-        swipeAdapter.notifyDataSetChanged()
+      //  swipeAdapter.notifyDataSetChanged()
 
 
         binding.swipeDislikeLayout.setOnClickListener(this)

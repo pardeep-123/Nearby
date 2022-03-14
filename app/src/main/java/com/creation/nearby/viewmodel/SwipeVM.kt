@@ -15,7 +15,7 @@ class SwipeVM : ViewModel() {
 
   val getSwipeList by lazy { ArrayList<UserListModel.Body>() }
 
-  val adapter by lazy { RecyclerAdapter<UserListModel.Body>(R.layout.item_events) }
+  val adapter by lazy { RecyclerAdapter<UserListModel.Body>(R.layout.swipe_card_item) }
 
   // get event list
   fun swipeListApi(context: Context) {

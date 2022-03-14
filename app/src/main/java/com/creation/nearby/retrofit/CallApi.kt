@@ -49,7 +49,6 @@ class CallApi {
                         val original = chain.request()
 
                         val request = original.newBuilder()
-                            //.header("security_key", "choirPopUp)(*&")
                             .method(original.method, original.body)
                             .build()
 
@@ -65,7 +64,6 @@ class CallApi {
                         val original = chain.request()
 
                         val request = original.newBuilder()
-//                            .header("security_key", "choirPopUp)(*&")
                             .header("Authorization", authKey)
                             .method(original.method, original.body)
                             .build()
@@ -136,7 +134,8 @@ class CallApi {
                             jsonObject.has("message") && !jsonObject.isNull("message") -> {
                                 val message = jsonObject.getString("message")
 
-                                if (jsonObject.getString("message") == "Invalid Authorization Key") {
+                                if (jsonObject.getString("message") == "Invalid Authorization Key" ||
+                                    jsonObject.getString("message") =="Authorization is required.") {
                                     Toast.makeText(mContext,message.toString(),Toast.LENGTH_LONG).show()
 
                                     PreferenceFile.clearPreference(mContext)
