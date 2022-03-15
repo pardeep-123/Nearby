@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +22,7 @@ import com.creation.nearby.adapter.NotificationAdapter
 import com.creation.nearby.databinding.FragmentHomeBinding
 import com.creation.nearby.model.NotificationModel
 import com.creation.nearby.ui.OtherUserProfileActivity
+import com.creation.nearby.utils.LocationUpdateUtilityFragment
 import com.creation.nearby.viewmodel.HomeVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
 
     private lateinit var mMap: GoogleMap
@@ -50,6 +50,19 @@ class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     private var notificationList = ArrayList<NotificationModel>()
 
     private lateinit var  mapFragment: SupportMapFragment
+    var currentLat=0.0
+    var currentLng=0.0
+    override fun updatedLatLng(lat: Double, lng: Double) {
+
+        currentLat=lat
+        currentLng=lng
+        homeViewModel.homeListingApi(requireContext(),currentLat,currentLng)
+    }
+
+    override fun liveLatLng(lat: Double, lng: Double) {
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -279,8 +292,9 @@ class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.homeListingApi(requireContext())
 
+
+        getLiveLocation(requireActivity())
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }

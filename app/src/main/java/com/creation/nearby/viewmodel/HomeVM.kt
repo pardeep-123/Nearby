@@ -96,8 +96,18 @@ class HomeVM : ViewModel() {
     }
 
     // get event list
-    fun homeListingApi(context: Context) {
+    fun homeListingApi(context: Context, currentLat: Double, currentLng: Double) {
         try {
+            var haQueryMap=HashMap<String,String>()
+
+            haQueryMap["is_online"]="1"
+            haQueryMap["gender"]="0"
+            haQueryMap["latitude"]=currentLat.toString()
+            haQueryMap["longitude"]=currentLng.toString()
+            haQueryMap["radius"]="100"
+            haQueryMap["min_age"]="1"
+            haQueryMap["max_age"]="50"
+
             CallApi().callService(
                 context,
                 true,
@@ -105,7 +115,7 @@ class HomeVM : ViewModel() {
                 object : RequestProcessor<Response<HomeListingModel>> {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<HomeListingModel> {
 
-                        return retrofitApi.homeListing()
+                        return retrofitApi.homeListing(haQueryMap)
                     }
 
                     override fun onResponse(res: Response<HomeListingModel>) {

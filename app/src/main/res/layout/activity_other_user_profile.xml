@@ -25,13 +25,17 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/my_profile_pic"
+        android:src="@drawable/placeholder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ImageView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#50000000"/>
 
 
     <androidx.core.widget.NestedScrollView
@@ -66,10 +70,11 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:fontFamily="@font/worksans_black"
-                    android:text="@string/logan_wills"
-                    android:textColor="@color/white"
+                     android:textColor="@color/white"
                     android:textSize="30sp"
-                    app:layout_constraintStart_toStartOf="parent"
+
+                    android:text="sgsdfgsdfkgksdaghkdjsfghjkdsfghjksdfhgjksdf"
+                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
                 </TextView>
@@ -89,7 +94,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:src="@drawable/cross_icon"
-                        android:tint="@color/black"
+                        app:tint="@color/black"
                         android:padding="2dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -70,11 +70,11 @@ class MyProfileActivity : ImagePickerUtility() {
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
-        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
-        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
-        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
-        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
-        gallaryList.add(GallaryModel(R.drawable.swipe_card_image))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+
 
         clickHandler()
 

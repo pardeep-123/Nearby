@@ -54,11 +54,11 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
         binding.interestRecyclerView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
-        gallaryList.add(GallaryModel(R.drawable.my_profile_pic))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
+        gallaryList.add(GallaryModel(""))
 
         initAdapter()
 

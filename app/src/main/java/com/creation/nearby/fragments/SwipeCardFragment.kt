@@ -1,7 +1,6 @@
 package com.creation.nearby.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,15 +8,15 @@ import android.view.animation.AccelerateInterpolator
 import android.view.animation.LinearInterpolator
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.creation.nearby.R
 import com.creation.nearby.adapter.SwipeCardAdapter
 import com.creation.nearby.databinding.FragmentSwipeCardBinding
 import com.creation.nearby.model.SwipeCardModel
+import com.creation.nearby.utils.LocationUpdateUtilityFragment
 import com.creation.nearby.viewmodel.SwipeVM
 import com.yuyakaido.android.cardstackview.*
 
 
-class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
+class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View.OnClickListener{
 
     private lateinit var swipeAdapter: SwipeCardAdapter
     private lateinit var swipeLayoutManager: CardStackLayoutManager
@@ -25,6 +24,18 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
     private lateinit var binding: FragmentSwipeCardBinding
 
     val swipeVM : SwipeVM by viewModels()
+
+    var currentLat = 0.0
+    var currentLng = 0.0
+    override fun updatedLatLng(lat: Double, lng: Double) {
+        currentLat=lat
+        currentLng=lng
+        swipeVM.swipeListApi(requireContext(),currentLat,currentLng)
+    }
+
+    override fun liveLatLng(lat: Double, lng: Double) {
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,7 +67,8 @@ class SwipeCardFragment : Fragment(),CardStackListener,View.OnClickListener{
      //   binding.cardStackView.adapter = swipeAdapter
 
         // hit api
-        swipeVM.swipeListApi(requireContext())
+       /* swipeVM.swipeListApi(requireContext())*/
+        getLiveLocation(requireActivity())
         binding.cardStackView.itemAnimator.apply {
 
             if (this is DefaultItemAnimator){

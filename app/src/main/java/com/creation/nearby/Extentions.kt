@@ -45,6 +45,9 @@ fun delay(millis: Long, runnable: () -> Unit) {
         runnable.invoke()
     }, millis)
 }
+fun Context.isValidGlideContext() = this !is Activity || (!this.isDestroyed && !this.isFinishing)
+
+
 
 fun Activity.open(activityToOpen: Class<*>) {
     startActivity(Intent(this, activityToOpen))

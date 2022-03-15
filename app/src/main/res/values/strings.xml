@@ -10,7 +10,10 @@
     <string name="permissionRequired">Permission Required</string>
     <string name="openSettings">Open Settings</string>
     <string name="select_any_option">Select any option</string>
-
+    <string name="permission_rationale">Location permission needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core functionality.</string>
+    <string name="gps_required">GPS is required you be turned on</string>
+    <string name="ok2">Ok</string>
     <string name="login_with_facebook">Login with Facebook</string>
     <string name="login_with_google">Login with Google</string>
     <string name="login_with_apple">Login with Apple</string>
