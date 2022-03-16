@@ -13,13 +13,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bba603ee-cc55-4c68-97dc-5ed77c56bb6a" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/SwipeCardFragment.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/fragments/SwipeCardFragment.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/retrofit/CallApi.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/SwipeVM.kt" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/creation/nearby/viewmodel/SwipeVM.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_swipe_card.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_swipe_card.xml" afterDir="false" />
-    </list>
+    <list default="true" id="bba603ee-cc55-4c68-97dc-5ed77c56bb6a" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
