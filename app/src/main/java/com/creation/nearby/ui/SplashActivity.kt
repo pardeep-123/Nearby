@@ -36,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
             FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
                 if (!task.isSuccessful) {
                     Log.w(
-                        "gddg",
+                        "gdddfg",
                         "Fetching FCM registration token failed",
                         task.exception
                     )
