@@ -195,7 +195,7 @@
     <string name="msg_enter_new_password">Please enter new password</string>
     <string name="msg_please_enter_confirm_password">Please enter confirm password</string>
     <string name="msg_password_not_match">Password doesn\'t match</string>
-    <string name="msg_enter_location">Please enter location</string>
+    <string name="msg_enter_location">Please enter address</string>
     <string name="retry">Retry</string>
     <string name="connection_to_server_lost">Connection Lost</string>
     <string name="title_empty">"Please enter title "</string>

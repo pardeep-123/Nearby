@@ -71,7 +71,8 @@ class SignupVm : ViewModel() {
                 lastname.get()!!,
                 email.get()!!,
                 password.get()!!,
-                confirmPassword.get()!!
+                confirmPassword.get()!!,
+                location.get()!!
             )
         ) {
 

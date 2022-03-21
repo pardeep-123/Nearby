@@ -40,7 +40,8 @@ class Validator() {
         mlastName: String,
         mEmail: String,
         mPassword: String,
-        mConfirmPassword: String
+        mConfirmPassword: String,
+        location: String
     ): Boolean {
         return  if (TextUtils.isEmpty(mfirstName)) {
             ErrorMessage =
@@ -74,6 +75,10 @@ class Validator() {
         } else if (mPassword != mConfirmPassword) {
             ErrorMessage =
                 AppController.mInstance.getString(R.string.msg_password_not_match)
+            false
+        }else if (TextUtils.isEmpty(location)) {
+            ErrorMessage =
+                AppController.mInstance.getString(R.string.msg_enter_location)
             false
         }
         else true

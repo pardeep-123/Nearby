@@ -1,6 +1,7 @@
 package com.creation.nearby.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,20 +15,20 @@ import com.creation.nearby.viewmodel.SwipeVM
 import com.yuyakaido.android.cardstackview.*
 
 
-class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View.OnClickListener{
+class SwipeCardFragment : LocationUpdateUtilityFragment(), CardStackListener, View.OnClickListener {
 
     private lateinit var swipeLayoutManager: CardStackLayoutManager
     private lateinit var binding: FragmentSwipeCardBinding
 
-    private val swipeVM : SwipeVM by viewModels()
+    private val swipeVM: SwipeVM by viewModels()
 
     var currentLat = 0.0
     var currentLng = 0.0
     private var userId = 0
     override fun updatedLatLng(lat: Double, lng: Double) {
-        currentLat=lat
-        currentLng=lng
-        swipeVM.swipeListApi(requireContext(),currentLat,currentLng)
+        currentLat = lat
+        currentLng = lng
+        swipeVM.swipeListApi(requireContext(), currentLat, currentLng)
     }
 
     override fun liveLatLng(lat: Double, lng: Double) {
@@ -43,10 +44,11 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
         return binding.root
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.swipeVM = swipeVM
-        swipeLayoutManager = CardStackLayoutManager(context,this).apply {
+        swipeLayoutManager = CardStackLayoutManager(context, this).apply {
             setSwipeableMethod(SwipeableMethod.AutomaticAndManual)
             setOverlayInterpolator(LinearInterpolator())
         }
@@ -60,12 +62,12 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
         getLiveLocation(requireActivity())
         binding.cardStackView.itemAnimator.apply {
 
-            if (this is DefaultItemAnimator){
+            if (this is DefaultItemAnimator) {
                 supportsChangeAnimations = false
             }
         }
 
-      //  swipeAdapter.notifyDataSetChanged()
+        //  swipeAdapter.notifyDataSetChanged()
 
         binding.swipeDislikeLayout.setOnClickListener(this)
         binding.swipeLikeLayout.setOnClickListener(this)
@@ -79,9 +81,8 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
     override fun onCardSwiped(direction: Direction?) {
 
         if (direction == Direction.Left)
-            swipeVM.swipeUserApi(requireContext(),userId.toString(),"0")
-            else  swipeVM.swipeUserApi(requireContext(),userId.toString(),"1")
-
+            swipeVM.swipeUserApi(requireContext(), userId.toString(), "0")
+        else swipeVM.swipeUserApi(requireContext(), userId.toString(), "1")
     }
 
     override fun onCardRewound() {
@@ -93,17 +94,33 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
     }
 
     override fun onCardAppeared(view: View?, position: Int) {
-          userId = swipeVM.getSwipeList[position].id
+        userId = swipeVM.getSwipeList[position].id
+
+        val visibility = swipeVM.setVisibility()
+        if(visibility){
+            binding.constButton.visibility = View.GONE
+            binding.noDataFound.visibility = View.VISIBLE
+        }else{
+            binding.constButton.visibility = View.VISIBLE
+            binding.noDataFound.visibility = View.GONE
+        }
     }
 
     override fun onCardDisappeared(view: View?, position: Int) {
 
+        if(position == swipeVM.getSwipeList.size-1){
+            binding.constButton.visibility = View.GONE
+            binding.noDataFound.visibility = View.VISIBLE
+        }else{
+            binding.constButton.visibility = View.VISIBLE
+            binding.noDataFound.visibility = View.GONE
+        }
     }
 
     override fun onClick(v: View?) {
 
-        when(v){
-            binding.swipeDislikeLayout->{
+        when (v) {
+            binding.swipeDislikeLayout -> {
                 val setting = SwipeAnimationSetting.Builder()
                     .setDirection(Direction.Left)
                     .setDuration(Duration.Normal.duration)
@@ -112,9 +129,9 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
                 swipeLayoutManager.setSwipeAnimationSetting(setting)
                 binding.cardStackView.swipe()
                 // hit api
-                swipeVM.swipeUserApi(requireContext(),userId.toString(),"0")
-        }
-            binding.swipeLikeLayout->{
+                swipeVM.swipeUserApi(requireContext(), userId.toString(), "0")
+            }
+            binding.swipeLikeLayout -> {
                 val setting = SwipeAnimationSetting.Builder()
                     .setDirection(Direction.Right)
                     .setDuration(Duration.Normal.duration)
@@ -124,7 +141,7 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(),CardStackListener,View
                 binding.cardStackView.swipe()
 
                 // hit api
-                swipeVM.swipeUserApi(requireContext(),userId.toString(),"1")
+                swipeVM.swipeUserApi(requireContext(), userId.toString(), "1")
             }
         }
 

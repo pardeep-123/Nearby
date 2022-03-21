@@ -45,12 +45,9 @@ class SwipeVM : ViewModel() {
           override fun onResponse(res: Response<UserListModel>) {
             if (res.isSuccessful) {
               val response = res.body()!!
-              if (response.body.user_list.isNotEmpty()) {
                 getSwipeList.addAll(response.body.user_list)
-
                 adapter.addItems(getSwipeList)
                 setVisibility()
-              }
             }
           }
 
@@ -85,7 +82,7 @@ class SwipeVM : ViewModel() {
           override fun onResponse(res: Response<CommonModel>) {
             if (res.isSuccessful) {
               val response = res.body()!!
-               ToastUtils.showToast(context,response.message)
+//               ToastUtils.showToast(context,response.message)
             }
           }
 

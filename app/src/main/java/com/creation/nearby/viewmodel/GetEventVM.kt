@@ -63,7 +63,7 @@ class GetEventVM : ViewModel() {
                             getEventList.addAll(response.body)
                             setVisibility()
                             for (i in 0 until  response.body.size){
-                                response.body[i].visible = response.body[i].isAccepted.toString()!="2"
+                                response.body[i].visible = response.body[i].isAccepted.toString()=="2"
                             }
                             adapter.addItems(getEventList)
                         }

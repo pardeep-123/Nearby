@@ -161,7 +161,7 @@
                         android:backgroundTint="@color/edittext_grey"
                         android:hint="@string/type_here"
                         android:text="@={addEventVM.discount}"
-                        android:inputType="textPersonName"
+                        android:inputType="number"
                         android:paddingHorizontal="16dp"
                         android:paddingTop="16dp"
                         android:paddingBottom="16dp"
