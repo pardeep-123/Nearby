@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -42,18 +43,22 @@ class CallApi {
             val okHttpClient: OkHttpClient?
             if (authKey.isNullOrEmpty()) {
 
-                val client = OkHttpClient.Builder()
-                    .readTimeout(10, TimeUnit.MINUTES)
-                    .connectTimeout(10, TimeUnit.MINUTES)
-                    .addInterceptor { chain ->
-                        val original = chain.request()
+                val client = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD) {
+                    OkHttpClient.Builder()
+                        .readTimeout(10, TimeUnit.MINUTES)
+                        .connectTimeout(10, TimeUnit.MINUTES)
+                        .addInterceptor { chain ->
+                            val original = chain.request()
 
-                        val request = original.newBuilder()
-                            .method(original.method, original.body)
-                            .build()
+                            val request = original.newBuilder()
+                                .method(original.method, original.body)
+                                .build()
 
-                        chain.proceed(request)
-                    }
+                            chain.proceed(request)
+                        }
+                } else {
+                    TODO("VERSION.SDK_INT < GINGERBREAD")
+                }
 
                 okHttpClient = client.build()
             } else {

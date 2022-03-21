@@ -94,7 +94,7 @@
 
                 <ImageView
                     android:id="@+id/post_image"
-                    setImageSrc="@{model.image}"
+                    setImageSrcWithUrl="@{model.image}"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:layout_marginTop="8dp"
@@ -140,7 +140,7 @@
             android:visibility="@{model.myfeed?View.GONE:View.VISIBLE}"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="@+id/materialCardView"
-            app:layout_constraintTop_toTopOf="@+id/materialCardView"></ImageView>
+            app:layout_constraintTop_toTopOf="@+id/materialCardView"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

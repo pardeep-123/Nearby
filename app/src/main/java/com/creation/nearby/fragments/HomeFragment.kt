@@ -14,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +22,7 @@ import com.creation.nearby.adapter.NotificationAdapter
 import com.creation.nearby.databinding.FragmentHomeBinding
 import com.creation.nearby.model.NotificationModel
 import com.creation.nearby.ui.OtherUserProfileActivity
+import com.creation.nearby.utils.LocationUpdateUtilityFragment
 import com.creation.nearby.viewmodel.HomeVM
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -33,7 +33,7 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
-class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
 
     private lateinit var mMap: GoogleMap
@@ -50,6 +50,19 @@ class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
     private var notificationList = ArrayList<NotificationModel>()
 
     private lateinit var  mapFragment: SupportMapFragment
+    var currentLat=0.0
+    var currentLng=0.0
+    override fun updatedLatLng(lat: Double, lng: Double) {
+
+        currentLat=lat
+        currentLng=lng
+        homeViewModel.homeListingApi(requireContext(),currentLat,currentLng)
+    }
+
+    override fun liveLatLng(lat: Double, lng: Double) {
+
+
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -168,64 +181,6 @@ class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
             //
         }
 
-//        mMap.uiSettings.isMapToolbarEnabled = false
-//        mMap.uiSettings.isCompassEnabled = false
-//        mMap.uiSettings.isMyLocationButtonEnabled = false
-//        mapFragment.view?.isClickable = false
-//        //  30.7333° N, 76.7794° E
-//
-//        list.add(LatLng(30.7046, 76.7179))
-//        list.add(LatLng(30.0668, 79.0193))
-//        list.add(LatLng(29.7041, 77.1025))
-//        list.add(LatLng(31.1048,77.1734))
-//
-//        mMap.addMarker(
-//            MarkerOptions().position(list[0]).icon(
-//                BitmapDescriptorFactory.fromBitmap(
-//                    createCustomMarker(requireContext(), R.drawable.chat_pic_5)
-//                )
-//            )
-//        )
-//
-//        mMap.addMarker(
-//            MarkerOptions().position(list[1]).icon(
-//                BitmapDescriptorFactory.fromBitmap(
-//                    createCustomMarker(requireContext(), R.drawable.chat_pic_1)
-//                )
-//            )
-//        )
-//        mMap.addMarker(
-//            MarkerOptions().position(list[2]).icon(
-//                BitmapDescriptorFactory.fromBitmap(
-//                    createCustomMarker(requireContext(), R.drawable.chat_pic_2)
-//                )
-//            )
-//        )
-//        mMap.addMarker(
-//            MarkerOptions().position(list[3]).icon(
-//                BitmapDescriptorFactory.fromBitmap(
-//                    createCustomMarker(requireContext(), R.drawable.chat_pic_8)
-//                )
-//            )
-//        )
-//
-//        val builder = LatLngBounds.Builder()
-//        builder.include(list[0]) //Taking Point A (First LatLng)
-//
-//        builder.include(list[1]) //Taking Point B (Second LatLng)
-//
-//        val bounds = builder.build()
-//        val cu = CameraUpdateFactory.newLatLngBounds(bounds, 200)
-//       // mMap.moveCamera   (cu)
-//        mMap.setOnMapLoadedCallback {
-//            mMap.moveCamera(
-//                CameraUpdateFactory.newLatLngBounds(
-//                    bounds,
-//                    30
-//                )
-//            )
-//        }
-//        mMap.animateCamera(CameraUpdateFactory.zoomTo(7f), 2000, null)
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
                 // which is clicked and displaying it in a toast message.
                 val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
@@ -279,8 +234,9 @@ class HomeFragment : Fragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickL
 
     override fun onResume() {
         super.onResume()
-        homeViewModel.homeListingApi(requireContext())
 
+
+        getLiveLocation(requireActivity())
         mapFragment = childFragmentManager.findFragmentById(R.id.homeMap) as SupportMapFragment
         mapFragment.getMapAsync(this)
     }

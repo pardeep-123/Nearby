@@ -49,11 +49,13 @@ class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
         binding.interestRecyclerView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
-        galleryList.add(GallaryModel(R.drawable.my_profile_pic))
-        galleryList.add(GallaryModel(R.drawable.my_profile_pic))
-        galleryList.add(GallaryModel(R.drawable.my_profile_pic))
-        galleryList.add(GallaryModel(R.drawable.my_profile_pic))
-        galleryList.add(GallaryModel(R.drawable.my_profile_pic))
+        galleryList.add(GallaryModel(""))
+        galleryList.add(GallaryModel(""))
+        galleryList.add(GallaryModel(""))
+        galleryList.add(GallaryModel(""))
+        galleryList.add(GallaryModel(""))
+
+
 
         initAdapter()
         binding.goBack.setOnClickListener(this)

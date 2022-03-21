@@ -86,4 +86,44 @@ object BindingAdapter {
             e.printStackTrace()
         }
     }
+
+    // method for image with url
+    @BindingAdapter(value = ["setImageSrcWithUrl"], requireAll = false)
+    @JvmStatic
+    fun setImageSrcWithUrl(
+        ivImage: ImageView,
+        str: String?
+
+    ) {
+        try {
+            Glide.with(ivImage.context)
+                .asBitmap().load("http://202.164.42.227:9022/$str")
+                .apply(RequestOptions().override(600, 200))
+                .into(object : CustomTarget<Bitmap>() {
+                    override fun onResourceReady(
+                        resource: Bitmap,
+                        transition: Transition<in Bitmap>?
+                    ) {
+                        ivImage.setImageBitmap(resource)
+                    }
+
+                    override fun onLoadCleared(placeholder: Drawable?) {
+
+                    }
+
+                    override fun onLoadFailed(errorDrawable: Drawable?) {
+                        Log.e("Image", "LoadingFailed")
+                        ivImage.setImageResource(R.drawable.user_icon)
+                    }
+
+                    override fun onDestroy() {
+                        Log.e("Image", "destroyed")
+                        ivImage.setImageResource(R.drawable.user_icon)
+                    }
+                })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
 }

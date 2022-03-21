@@ -67,6 +67,8 @@
         android:layout_height="50dp"
         android:layout_marginBottom="16dp"
         android:layout_marginEnd="16dp"
+        android:onClick="@{(v)->model.onItemClick.onClick(v,model.adapterPosition,`acceptEvent`)}"
+
         android:visibility="@{model.visible? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,6 +79,8 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginEnd="16dp"
+        android:onClick="@{(v)->model.onItemClick.onClick(v,model.adapterPosition,`rejectEvent`)}"
+
         android:visibility="@{model.visible? View.VISIBLE : View.GONE}"
         app:layout_constraintBottom_toBottomOf="@+id/eventsCheck"
         app:layout_constraintEnd_toStartOf="@+id/eventsCheck"

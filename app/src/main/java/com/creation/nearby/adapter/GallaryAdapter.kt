@@ -10,6 +10,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.databinding.ItemGallaryBinding
 import com.creation.nearby.databinding.ItemMyGallaryBinding
@@ -34,7 +35,9 @@ class GallaryAdapter(var context: Context, var items: ArrayList<GallaryModel>, v
 
             with(items[position]){
 
-                layoutImage.setImageResource(imageUrl)
+                Glide.with(context).load(items[position].imageUrl).placeholder(R.drawable.placeholder).error(R.drawable.placeholder)
+                    .into(layoutImage)
+
 
                 layoutImage.setOnClickListener{
 

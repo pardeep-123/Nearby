@@ -62,7 +62,7 @@ interface RetrofitInterface {
 
     // to get home listing
     @GET(Constants.homeListing)
-    suspend fun homeListing() : Response<HomeListingModel>
+    suspend fun homeListing(@QueryMap haQueryMap: HashMap<String,String>) : Response<HomeListingModel>
 
     @Multipart
     // to upload file
@@ -78,11 +78,28 @@ interface RetrofitInterface {
         @Body map : HashMap<String,String>
     ): Response<CommonModel>
 
+     // user_detail Api
+    @FormUrlEncoded
+    @POST(Constants.user_detail)
+    suspend fun userDetail(
+        @Field("profile_id") profile_id : String
+    ): Response<UserDetailResponse>
+
     // to get home listing
     @GET(Constants.getFeed)
     suspend fun feedListing() : Response<GetFeedModel>
 
+
     // get swipe user list
     @GET(Constants.swipeList)
-    suspend fun swipeUserList() : Response<UserListModel>
-   }
+    suspend fun swipeUserList(@QueryMap haQueryMap: HashMap<String,String>) : Response<UserListModel>
+
+    // for swipe users
+    @POST(Constants.swipeUser)
+    suspend fun swipeUser(@Body hasmap : HashMap<String,String>) : Response<CommonModel>
+
+    // accept reject event
+    @POST(Constants.acceptRejectEvent)
+    suspend fun acceptRejectEvent(@Body hasmap : HashMap<String,String>) : Response<CommonModel>
+
+}

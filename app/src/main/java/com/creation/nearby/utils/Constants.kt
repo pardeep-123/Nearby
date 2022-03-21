@@ -3,6 +3,7 @@ package com.creation.nearby.utils
 object Constants {
 
     val BASEURL = "http://202.164.42.227:9022/api/"
+    val IMAGE_BASE_URL = "http://202.164.42.227:9022"
   //  val BASEURL = "http://192.168.1.96:9022/api/"
 
     const val SIGNUP = "signup"
@@ -24,6 +25,9 @@ object Constants {
     const val homeListing = "home"
     const val fileUpload = "file_upload"
     const val swipeList = "user_listing"
+    const val user_detail = "user_detail"
+    const val swipeUser = "swipe_user"
+    const val acceptRejectEvent = "accept_reject_event"
 
 
     //preferences
