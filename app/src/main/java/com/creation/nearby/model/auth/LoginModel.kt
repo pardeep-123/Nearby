@@ -97,6 +97,8 @@ data class  LoginModel(
         val userDetail: UserDetail,
         @SerializedName("username")
         val username: String,
+        @SerializedName("first_login")
+        val firstLogin: String,
         @SerializedName("verified")
         val verified: Int, // 0
         @SerializedName("zodiac")

@@ -19,6 +19,8 @@ import com.creation.nearby.ui.MainActivity
 import com.creation.nearby.ui.authentication.ForgotPasswordActivity
 import com.creation.nearby.ui.authentication.SignUpActivity
 import com.creation.nearby.utils.Constants
+import com.creation.nearby.utils.Constants.IS_FIRST_LOGIN
+import com.creation.nearby.utils.Constants.USER_IMAGE
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.utils.Validator
 import retrofit2.Response
@@ -86,6 +88,8 @@ class LoginVm : ViewModel() {
                             animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
                             PreferenceFile.storeKey(context,"username",response.body.name)
+                            PreferenceFile.storeKey(context,USER_IMAGE,response.body.image)
+                            PreferenceFile.storeKey(context, IS_FIRST_LOGIN,response.body.firstLogin)
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
                             PreferenceFile.storeUserId(context,response.body.id.toString())
                             context.finishAffinity()

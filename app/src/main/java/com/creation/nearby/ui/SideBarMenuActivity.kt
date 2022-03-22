@@ -4,17 +4,21 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivitySideBarMenuBinding
 import com.creation.nearby.ui.authentication.LoginActivity
+import com.creation.nearby.utils.Constants.IMAGE_BASE_URL
+import com.creation.nearby.utils.Constants.USER_IMAGE
 import com.creation.nearby.utils.ImagePickerUtility
+import com.creation.nearby.viewmodel.SettingVM
 import kotlinx.android.synthetic.main.activity_side_bar_menu.*
 
 class SideBarMenuActivity : ImagePickerUtility() {
-
+    val settingVM : SettingVM by viewModels()
    private lateinit var binding: ActivitySideBarMenuBinding
     override fun selectedImage(imagePath: String?) {
         Glide.with(this).load(imagePath).into(binding.userImage)
@@ -25,8 +29,14 @@ class SideBarMenuActivity : ImagePickerUtility() {
         super.onCreate(savedInstanceState)
         binding = ActivitySideBarMenuBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.settingVM = settingVM
         username.text = PreferenceFile.retrieveKey(this,"username")
         onClickEvent()
+
+        val image = PreferenceFile.retrieveKey(this,USER_IMAGE)
+        if(image?.isNotEmpty() == true) {
+            Glide.with(this).load("$IMAGE_BASE_URL$image").into(binding.userImage)
+        }
 
     }
 
@@ -63,24 +73,5 @@ class SideBarMenuActivity : ImagePickerUtility() {
         binding.backBtn.setOnClickListener{
             onBackPressed()
         }
-        binding.logoutBtn.setOnClickListener{
-            logoutDialog()
-        }
     }
-
-
-    private fun logoutDialog(){
-        AlertDialog.Builder(this, R.style.MyDialogTheme)
-            .setTitle("Log Out")
-            .setMessage("Are you sure want to Quit?")
-            .setPositiveButton("Yes") { dialog: DialogInterface?, whichButton: Int ->
-                startActivity(Intent(this, LoginActivity::class.java))
-                finishAffinity()
-            }
-            .setNegativeButton("No") { dialog: DialogInterface?, i: Int ->
-                dialog?.dismiss()
-            }
-            .show()
-    }
-
 }

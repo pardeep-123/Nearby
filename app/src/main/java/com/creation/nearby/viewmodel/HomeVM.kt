@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.creation.nearby.R
 import com.creation.nearby.adapter.RecyclerAdapter
+import com.creation.nearby.base.PreferenceFile
+import com.creation.nearby.model.CommonModel
 import com.creation.nearby.model.DataMap
 import com.creation.nearby.model.HomeListingModel
 import com.creation.nearby.retrofit.CallApi
@@ -16,6 +18,8 @@ import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.ui.EventDetailsActivity
 import com.creation.nearby.ui.MainActivity
 import com.creation.nearby.ui.SplashActivity
+import com.creation.nearby.utils.Constants
+import com.creation.nearby.utils.ToastUtils
 import com.google.android.gms.maps.model.LatLng
 import retrofit2.Response
 
@@ -153,6 +157,34 @@ class HomeVM : ViewModel() {
                             feedAdapter.addItems(feedList)
                             notificationAdapter.addItems(notificationList)
 
+                        }
+                    }
+
+                    override fun onException(message: String?) {
+                        Log.e("userException", "====$message")
+                    }
+                })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    fun checkFirstTimeLoginApi(context: Context) {
+        try {
+            CallApi().callService(
+                context,
+                true,
+
+                object : RequestProcessor<Response<CommonModel>> {
+                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<CommonModel> {
+
+                        return retrofitApi.checkFirstTimeLoginStatus("1")
+                    }
+
+                    override fun onResponse(res: Response<CommonModel>) {
+                        if (res.isSuccessful) {
+                            PreferenceFile.storeKey(context, Constants.IS_FIRST_LOGIN,"1")
                         }
                     }
 

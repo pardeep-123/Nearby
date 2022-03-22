@@ -2,26 +2,30 @@ package com.creation.nearby.fragments
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.DisplayMetrics
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.NotificationAdapter
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.FragmentHomeBinding
 import com.creation.nearby.model.NotificationModel
+import com.creation.nearby.ui.EditProfileActivity
 import com.creation.nearby.ui.OtherUserProfileActivity
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.LocationUpdateUtilityFragment
 import com.creation.nearby.viewmodel.HomeVM
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -32,14 +36,18 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import io.socket.client.IO
+import kotlinx.coroutines.*
 
-class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
+    GoogleMap.OnInfoWindowClickListener {
 
 
     private lateinit var mMap: GoogleMap
 
-    private val homeViewModel : HomeVM by viewModels()
-    companion object{
+    private val homeViewModel: HomeVM by viewModels()
+
+    companion object {
         lateinit var notificationAdapter: NotificationAdapter
     }
 
@@ -49,14 +57,14 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
 
     private var notificationList = ArrayList<NotificationModel>()
 
-    private lateinit var  mapFragment: SupportMapFragment
-    var currentLat=0.0
-    var currentLng=0.0
+    private lateinit var mapFragment: SupportMapFragment
+    var currentLat = 0.0
+    var currentLng = 0.0
     override fun updatedLatLng(lat: Double, lng: Double) {
 
-        currentLat=lat
-        currentLng=lng
-        homeViewModel.homeListingApi(requireContext(),currentLat,currentLng)
+        currentLat = lat
+        currentLng = lng
+        homeViewModel.homeListingApi(requireContext(), currentLat, currentLng)
     }
 
     override fun liveLatLng(lat: Double, lng: Double) {
@@ -68,7 +76,7 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater, container,false)
+        binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
 
     }
@@ -78,21 +86,20 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
 
         binding.homeViewModel = homeViewModel
         // discover recycler view
-
-
-
         mapTimeScrollOff()
 
-        binding.discoverRecyclerView.layoutManager = LinearLayoutManager(view.context,
-            RecyclerView.HORIZONTAL,false)
+        binding.discoverRecyclerView.layoutManager = LinearLayoutManager(
+            view.context,
+            RecyclerView.HORIZONTAL, false
+        )
 
         //notification recycler view
-
-        binding.notificationRecyclerView.layoutManager = LinearLayoutManager(view.context, RecyclerView.VERTICAL,false)
+        binding.notificationRecyclerView.layoutManager =
+            LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
 
         homeViewModel.mapListData.observeForever {
-            if(this::mMap.isInitialized){
-                if (it.isNotEmpty()){
+            if (this::mMap.isInitialized) {
+                if (it.isNotEmpty()) {
 
                     //
                     // create bounds that encompass every location we reference
@@ -127,10 +134,47 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
             }
         }
 
+        //check first time login status
+        val isFirstTimeLogin =
+            PreferenceFile.retrieveKey(requireContext(), Constants.IS_FIRST_LOGIN)
+        if (isFirstTimeLogin == "0") {
+            openWelcomeDialog()
+        }
 
         //notification recycler view
     }
 
+    private fun openWelcomeDialog() {
+        val dialog = Dialog(requireContext(), R.style.full_screen_dialog)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.dialog_welcome)
+        dialog.setCancelable(false)
+        dialog.setCanceledOnTouchOutside(false)
+        val window: Window? = dialog.window
+        val wlp = window?.attributes
+
+        wlp?.gravity = Gravity.CENTER
+        window?.attributes = wlp
+        dialog.window?.setLayout(
+            ViewGroup.LayoutParams.MATCH_PARENT,
+            ViewGroup.LayoutParams.MATCH_PARENT
+        )
+        val btnSkip: TextView = dialog.findViewById(R.id.btnSkip)
+        val btnOk: TextView = dialog.findViewById(R.id.btnOk)
+
+        btnSkip.setOnClickListener {
+            dialog.dismiss()
+            homeViewModel.checkFirstTimeLoginApi(requireContext())
+        }
+
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+            homeViewModel.checkFirstTimeLoginApi(requireContext())
+            startActivity(Intent(requireContext(), EditProfileActivity::class.java))
+        }
+
+        dialog.show()
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     private fun mapTimeScrollOff() {
@@ -148,7 +192,7 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
 
     override fun onMapReady(p0: GoogleMap) {
         mMap = p0
-        if (homeViewModel.mList.isNotEmpty()){
+        if (homeViewModel.mList.isNotEmpty()) {
 
             //
             // create bounds that encompass every location we reference
@@ -166,9 +210,9 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
                 uiSettings!!.isZoomControlsEnabled = false
 
                 // Setting an info window adapter allows us to change the both the contents and
-               // setInfoWindowAdapter(ChildCareInfoWindowAdapter())
+                // setInfoWindowAdapter(ChildCareInfoWindowAdapter())
 
-             //   setOnInfoWindowClickListener(this@HomeFragment)
+                //   setOnInfoWindowClickListener(this@HomeFragment)
 
                 // Ideally this string would be localised.
                 setContentDescription("Map with lots of markers.")
@@ -182,12 +226,13 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
         }
 
         mMap.setOnMarkerClickListener { marker -> // on marker click we are getting the title of our marker
-                // which is clicked and displaying it in a toast message.
-                val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
-                startActivity(intent)
-                false
-            }
+            // which is clicked and displaying it in a toast message.
+            val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
+            startActivity(intent)
+            false
+        }
     }
+
     private fun addMarkersToMap() {
         // place markers for each of the defined locations
         (homeViewModel.mList.indices).map {
@@ -195,7 +240,7 @@ class HomeFragment : LocationUpdateUtilityFragment(),OnMapReadyCallback, GoogleM
                 MarkerOptions()
                     .position(homeViewModel.mList[it].latlng)
                     .title(homeViewModel.mList[it].name)
-                  //  .snippet(list[it].snippet + "###" + list[it].url)
+                    //  .snippet(list[it].snippet + "###" + list[it].url)
                     .icon(BitmapDescriptorFactory.defaultMarker())
                     .infoWindowAnchor(0.5F, 0F)
                     .draggable(false)

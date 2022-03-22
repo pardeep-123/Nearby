@@ -12,9 +12,11 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -29,6 +31,8 @@ import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.utils.ToastUtils
+import com.creation.nearby.viewmodel.HomeVM
+import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -43,6 +47,9 @@ class MyProfileActivity : ImagePickerUtility() {
 
     private var gallaryList = ArrayList<GallaryModel>()
     private lateinit var gallaryAdapter: GallaryAdapter
+
+    private val profileViewModel: ProfileVM by viewModels()
+
     override fun selectedImage(imagePath: String?) {
         Glide.with(this).load(imagePath).into(binding.userProfilePicMyProfile)
 
@@ -51,6 +58,7 @@ class MyProfileActivity : ImagePickerUtility() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
+        binding.profileVM = profileViewModel
 
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -78,6 +86,16 @@ class MyProfileActivity : ImagePickerUtility() {
 
         clickHandler()
 
+        //get profile api call
+        profileViewModel.getProfileApi(this)
+
+        //observe get profile response
+        profileViewModel.profileData.observeForever { response->
+            response?.let {
+                binding.tvUserName.text = it.body?.username
+                binding.tvBio.text = it.body?.biography
+            }
+        }
     }
 
     private fun clickHandler() {

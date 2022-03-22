@@ -28,6 +28,8 @@ object Constants {
     const val user_detail = "user_detail"
     const val swipeUser = "swipe_user"
     const val acceptRejectEvent = "accept_reject_event"
+    const val checkFirstTimeLoginStatus = "check_first_time_login_status"
+    const val getProfile = "profile"
 
 
     //preferences
@@ -37,5 +39,7 @@ object Constants {
     const val foreverPreferenceName = "Nearby"
     const val loginData = "loginData"
     const val AUTH_KEY = "AUTH_KEY"
+    const val USER_IMAGE = "USER_IMAGE"
+    const val IS_FIRST_LOGIN = "IS_FIRST_LOGIN"
     const val notifiactionBroadcase = "notificatiionCallChange"
 }

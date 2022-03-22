@@ -102,4 +102,12 @@ interface RetrofitInterface {
     @POST(Constants.acceptRejectEvent)
     suspend fun acceptRejectEvent(@Body hasmap : HashMap<String,String>) : Response<CommonModel>
 
+    @FormUrlEncoded
+    @POST(Constants.checkFirstTimeLoginStatus)
+    suspend fun checkFirstTimeLoginStatus(@Field("first_login") firstLogin : String) : Response<CommonModel>
+
+    // get swipe user list
+    @GET(Constants.getProfile)
+    suspend fun getProfile() : Response<GetProfileResponse>
+
 }

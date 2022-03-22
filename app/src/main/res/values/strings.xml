@@ -210,6 +210,8 @@
     <string name="address">Address</string>
     <string name="my_events">My Events</string>
     <string name="nodatafound">No Data found</string>
+    <string name="str_welcome">Welcome!</string>
+    <string name="str_skip">Skip</string>
 
 
 </resources>

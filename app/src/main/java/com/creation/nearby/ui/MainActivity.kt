@@ -1,10 +1,15 @@
 package com.creation.nearby.ui
 
 import android.app.Activity
+import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.Gravity
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
+import android.widget.Button
 import android.widget.FrameLayout
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,11 +25,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.ActivityAdapter
 import com.creation.nearby.animateFade
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivityMainBinding
 import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
 import com.creation.nearby.fragments.*
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.ActivitiesModel
+import com.creation.nearby.utils.Constants
 import com.google.android.libraries.places.api.Places
 import com.google.android.libraries.places.api.model.Place
 import com.google.android.libraries.places.widget.Autocomplete
@@ -117,6 +124,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         dialogBinding.selectLocation.setOnClickListener(this)
         dialogBinding.filterApplyBtn.setOnClickListener(this)
     }
+
     private fun initAdapter() {
 
         val onActionListener = object : OnActionListener<ActivitiesModel> {

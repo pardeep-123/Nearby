@@ -1,24 +1,15 @@
 package com.creation.nearby.ui
 
-import android.app.Activity
 import android.app.DatePickerDialog
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import android.view.Window
 import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListAdapter
 import android.widget.ListPopupWindow
-import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
-import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.adapter.ImageAdapter
 import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.adapter.ZodiacAdapter
@@ -26,15 +17,11 @@ import com.creation.nearby.databinding.ActivityEditProfileBinding
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.model.PopupModel
-import com.creation.nearby.utils.AppUtils
 import com.creation.nearby.utils.ImagePickerUtility
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.permissionx.guolindev.PermissionX
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {

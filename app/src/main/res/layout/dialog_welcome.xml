@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/white_background"
+        android:orientation="vertical"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="40dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/worksans_black"
+            android:gravity="center"
+            android:text="@string/str_welcome"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_17ssp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:fontFamily="@font/worksans_regular"
+            android:gravity="center"
+            android:text="Complete your profile"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_16ssp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+
+            <TextView
+                android:id="@+id/btnSkip"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:background="@drawable/bg_welcome_btn"
+                android:fontFamily="@font/worksans_medium"
+                android:gravity="center"
+                android:text="@string/str_skip"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_10sdp"/>
+
+            <TextView
+                android:id="@+id/btnOk"
+                android:layout_width="@dimen/_70sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/bg_welcome_btn"
+                android:fontFamily="@font/worksans_medium"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:paddingHorizontal="@dimen/_20sdp"
+                android:paddingVertical="@dimen/_10sdp"/>
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

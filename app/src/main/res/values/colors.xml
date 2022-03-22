@@ -33,6 +33,6 @@
     <color name="transparent_white">#4DFFFFFF</color>
     <color name="transparent_white1">#B3FFFFFF</color>
     <color name="call_background_color">#808080</color>
-
+    <color name="loaderColorBackground">#5F494747</color>
 
 </resources>
