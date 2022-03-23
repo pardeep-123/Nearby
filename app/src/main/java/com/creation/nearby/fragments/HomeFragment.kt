@@ -239,7 +239,7 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
             mMap.addMarker(
                 MarkerOptions()
                     .position(homeViewModel.mList[it].latlng)
-                    .title(homeViewModel.mList[it].name)
+                    .title("${homeViewModel.mList[it].firstName} ${homeViewModel.mList[it].lastName}")
                     //  .snippet(list[it].snippet + "###" + list[it].url)
                     .icon(BitmapDescriptorFactory.defaultMarker())
                     .infoWindowAnchor(0.5F, 0F)

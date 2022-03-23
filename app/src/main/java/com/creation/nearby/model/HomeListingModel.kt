@@ -131,8 +131,10 @@ data class HomeListingModel(
             val latitude: String, // 0.000000
             @SerializedName("longitude")
             val longitude: String, // 0.000000
-            @SerializedName("name")
-            val name: String // Ashu Kumar
+            @SerializedName("firstname")
+            val firstName: String, // Ashu Kumar
+            @SerializedName("lastname")
+            val lastName: String
         ): AbstractModel()
     }
 }

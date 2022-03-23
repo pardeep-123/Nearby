@@ -1,43 +1,25 @@
 package com.creation.nearby.ui
 
-import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import android.view.Window
-import android.widget.ImageView
-import android.widget.TextView
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
-import androidx.core.content.ContextCompat
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
-import com.creation.nearby.adapter.ImageAdapter
 import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.databinding.ActivityMyProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
-import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.utils.ImagePickerUtility
-import com.creation.nearby.utils.ToastUtils
-import com.creation.nearby.viewmodel.HomeVM
 import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
-import com.permissionx.guolindev.PermissionX
 
 class MyProfileActivity : ImagePickerUtility() {
 

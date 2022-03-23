@@ -37,6 +37,8 @@ data class GetProfileResponse(
         val facebookId: String?,
         @SerializedName("first_login")
         val firstLogin: Int?,
+        @SerializedName("firstname")
+        val firstname: String?,
         @SerializedName("forgotPasswordHash")
         val forgotPasswordHash: String?,
         @SerializedName("gender")
@@ -61,6 +63,8 @@ data class GetProfileResponse(
         val isSubscribed: Int?,
         @SerializedName("isVerified")
         val isVerified: Int?,
+        @SerializedName("lastname")
+        val lastname: String?,
         @SerializedName("latitude")
         val latitude: String?,
         @SerializedName("location")
@@ -102,7 +106,7 @@ data class GetProfileResponse(
         @SerializedName("userDetail")
         val userDetail: UserDetail?,
         @SerializedName("user_images")
-        val userImages: List<Any>?,
+        val userImages: List<UserImage>?,
         @SerializedName("username")
         val username: String?,
         @SerializedName("verified")
@@ -117,6 +121,24 @@ data class GetProfileResponse(
             val deviceType: Int?,
             @SerializedName("isNotification")
             val isNotification: Int?
+        )
+        data class UserImage(
+            @SerializedName("created")
+            val created: Int?,
+            @SerializedName("created_at")
+            val createdAt: String?,
+            @SerializedName("id")
+            val id: Int?,
+            @SerializedName("image")
+            val image: String?,
+            @SerializedName("thumbnail")
+            val thumbnail: String?,
+            @SerializedName("updated")
+            val updated: Int?,
+            @SerializedName("updated_at")
+            val updatedAt: String?,
+            @SerializedName("user_id")
+            val userId: Int?
         )
     }
 }

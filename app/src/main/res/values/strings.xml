@@ -212,6 +212,9 @@
     <string name="nodatafound">No Data found</string>
     <string name="str_welcome">Welcome!</string>
     <string name="str_skip">Skip</string>
+    <string name="str_add_image">Add Image</string>
+    <string name="str_male">Male</string>
+    <string name="str_female">Female</string>
 
 
 </resources>

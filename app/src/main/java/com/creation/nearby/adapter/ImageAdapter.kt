@@ -6,14 +6,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.creation.nearby.R
 import com.creation.nearby.databinding.ItemGallaryBinding
+import com.creation.nearby.model.FileUploadModel
 import com.creation.nearby.model.ImageModel
 import com.creation.nearby.ui.EditProfileActivity
+import com.creation.nearby.utils.Constants.IMAGE_BASE_URL
 
 
 class ImageAdapter(
     var context: Context,
-    var items: ArrayList<ImageModel>,
+    var imagesList: MutableList<FileUploadModel.Body>,
     var onActionListener: EditProfileActivity
 ) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
 
@@ -24,53 +27,14 @@ class ImageAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-
-        var model: ImageModel = items[position]
-
-        /* val model = if (items.size == position)
-            ImageModel()
-        else
-            items[position]
-*/
-        with(items[position])
-        {
-            with(holder.binding) {
-
-
-                holder.binding.closeImage.setOnClickListener {
-                    items[position].imagePath = ""
-                    items[position].isDeleteL = true
-                    notifyDataSetChanged()
-                }
-
-                holder.binding.layoutAdd.setOnClickListener {
-                    onActionListener.getPosition(position)
-                }
-                if (items[position].imagePath.isEmpty()) {
-
-                    layoutCard.visibility = View.GONE
-                    layoutAdd.visibility = View.VISIBLE
-
-
-                } else {
-                    layoutCard.visibility = View.VISIBLE
-                    layoutAdd.visibility = View.GONE
-
-                    Glide.with(context).load(items[position].imagePath).into(layoutImage)
-
-
-                }
-
-
-            }
-
-        }
-
-
+        Glide.with(context)
+            .load("${IMAGE_BASE_URL}${imagesList[position].image}")
+            .placeholder(R.drawable.placeholder)
+            .into(holder.binding.layoutImage)
     }
 
     override fun getItemCount(): Int {
-        return 6
+        return imagesList.size
     }
 
     class ViewHolder(var binding: ItemGallaryBinding) : RecyclerView.ViewHolder(binding.root)

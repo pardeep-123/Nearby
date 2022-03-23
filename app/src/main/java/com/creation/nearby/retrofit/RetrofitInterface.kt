@@ -106,8 +106,10 @@ interface RetrofitInterface {
     @POST(Constants.checkFirstTimeLoginStatus)
     suspend fun checkFirstTimeLoginStatus(@Field("first_login") firstLogin : String) : Response<CommonModel>
 
-    // get swipe user list
-    @GET(Constants.getProfile)
+    @GET(Constants.profile)
     suspend fun getProfile() : Response<GetProfileResponse>
+
+    @GET(Constants.interests)
+    suspend fun getInterests() : Response<InterestListResponse>
 
 }

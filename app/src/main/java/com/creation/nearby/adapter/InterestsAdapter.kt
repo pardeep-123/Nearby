@@ -8,6 +8,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.InterestsItemBinding
+import com.creation.nearby.model.GenericModel
 import com.creation.nearby.model.InterestedModel
 import com.creation.nearby.model.SuggestionsModel
 

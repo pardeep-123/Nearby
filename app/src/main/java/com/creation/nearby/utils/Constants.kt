@@ -29,7 +29,8 @@ object Constants {
     const val swipeUser = "swipe_user"
     const val acceptRejectEvent = "accept_reject_event"
     const val checkFirstTimeLoginStatus = "check_first_time_login_status"
-    const val getProfile = "profile"
+    const val profile = "profile"
+    const val interests = "interests"
 
 
     //preferences

@@ -5,7 +5,8 @@ import com.google.android.gms.maps.model.LatLng
 data class DataMap(
     val latlng : LatLng,
     val id : Int ,
-    val name : String,
+    val firstName : String,
+    val lastName : String
 //    val image : String,
 //    val distance : Int,
 //    "name": "gaurav sharma",

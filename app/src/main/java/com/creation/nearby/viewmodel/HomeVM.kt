@@ -137,24 +137,26 @@ class HomeVM : ViewModel() {
                                   feedList.add(feed)
                               }
 
-                            notificationList.addAll(response.body.notificationList)
                             // add data to map list
-                            for (i in 0 until response.body.userList.size) {
-                                response.body.userList.run {
-                                    mList.add(
-                                        DataMap(
-                                            LatLng(
-                                                this[i].latitude.toDouble(),
-                                                this[i].longitude.toDouble()
-                                            ), this[i].id, this[i].name
+                            if(response.body.userList.isNotEmpty()) {
+                                for (i in 0 until response.body.userList.size) {
+                                    response.body.userList.run {
+                                        mList.add(
+                                            DataMap(
+                                                LatLng(
+                                                    this[i].latitude.toDouble(),
+                                                    this[i].longitude.toDouble()
+                                                ), this[i].id, this[i].firstName,this[i].lastName
+                                            )
                                         )
-                                    )
-
+                                    }
                                 }
                             }
                             mapListData.value= mList
                             eventAdapter.addItems(eventList)
                             feedAdapter.addItems(feedList)
+
+                            notificationList.addAll(response.body.notificationList)
                             notificationAdapter.addItems(notificationList)
 
                         }

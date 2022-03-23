@@ -1,63 +1,88 @@
 package com.creation.nearby.ui
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.AdapterView.OnItemClickListener
 import android.widget.ListAdapter
 import android.widget.ListPopupWindow
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
+import com.creation.nearby.adapter.EditProfileInterestAdapter
 import com.creation.nearby.adapter.ImageAdapter
 import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.adapter.ZodiacAdapter
 import com.creation.nearby.databinding.ActivityEditProfileBinding
-import com.creation.nearby.model.ImageModel
-import com.creation.nearby.model.InterestedModel
-import com.creation.nearby.model.PopupModel
+import com.creation.nearby.model.*
 import com.creation.nearby.utils.ImagePickerUtility
+import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.gson.Gson
+import org.json.JSONArray
+import org.json.JSONException
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 
 
-class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
+class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
     private var images = ArrayList<ImageModel>()
     private lateinit var imageAdapter: ImageAdapter
 
-    private val popupList  = ArrayList<PopupModel>()
+    private val popupList = ArrayList<PopupModel>()
     var cal: Calendar = Calendar.getInstance()
 
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var popup: ListPopupWindow
     private lateinit var zodiacAdapter: ListAdapter
 
-    private var interestsList = ArrayList<InterestedModel>()
-    private lateinit var interestsAdapter: InterestsAdapter
+    private var interestsList = ArrayList<InterestListResponse.Body>()
+    private val interestGenericList = ArrayList<GenericModel>()
+    private lateinit var interestsAdapter: EditProfileInterestAdapter
+
+    private var responseImageList: MutableList<FileUploadModel.Body> = ArrayList()
+    private var imageArrString: String = ""
+    var jsonArr = JSONArray()
+    private var selectedImageList: ArrayList<String> = ArrayList()
 
     private var isMainPhoto: Boolean = false
 
+    private val profileViewModel: ProfileVM by viewModels()
+
     override fun selectedImage(imagePath: String?) {
 
-        if (isMainPhoto){
+        if (isMainPhoto) {
 
             isMainPhoto = false
             Glide.with(this).load(imagePath).into(binding.userProfilePic)
 
-        }else{
-            images[tempPos].imagePath=imagePath!!
-            images[tempPos].isDeleteL=false
-            imageAdapter.notifyDataSetChanged()
+        } else {
+
+            println("Image Path--$imagePath")
+            selectedImageList.clear()
+            selectedImageList.add(imagePath.toString())
+            //set image path
+            profileViewModel.image.set(imagePath)
+            //api call for upload image
+            profileViewModel.uploadGalleryImageApi(this)
+
+            /* images[tempPos].imagePath = imagePath!!
+             images[tempPos].isDeleteL = false
+             imageAdapter.notifyDataSetChanged()*/
         }
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
+        binding.profileVM = profileViewModel
         setContentView(binding.root)
 
 
@@ -79,25 +104,11 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         popup = ListPopupWindow(this)
         zodiacAdapter = ZodiacAdapter(popupList)
 
-        popup.setOnItemClickListener(OnItemClickListener { parent, view, position, id ->
+        popup.setOnItemClickListener { parent, view, position, id ->
             popup.dismiss()
-
             val name = parent.getItemAtPosition(position).toString()
-            binding.zodiacTv.text = name.substring(22,name.length-1)
-        })
-
-        interestsList.add(InterestedModel("Travel",false,false))
-        interestsList.add(InterestedModel("Chatting",false,false))
-        interestsList.add(InterestedModel("Athlete",true,false))
-        interestsList.add(InterestedModel("Music",false,false))
-        interestsList.add(InterestedModel("House Parties",true,false))
-        interestsList.add(InterestedModel("Astrology",true,false))
-
-        interestsAdapter = InterestsAdapter(interestsList)
-        binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this,FlexDirection.ROW)
-      //    binding.interestsRecyclerView.layoutManager = GridLayoutManager(this,3,RecyclerView.VERTICAL,false)
-
-        binding.interestsRecyclerView.adapter = interestsAdapter
+            binding.zodiacTv.text = name.substring(22, name.length - 1)
+        }
 
         binding.selectZodiacLayout.setOnClickListener(this)
         binding.maleGender.setOnClickListener(this)
@@ -111,158 +122,413 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
         binding.finishBtn.setOnClickListener(this)
         binding.cameraPictureBtn.setOnClickListener(this)
         binding.editTextDOB.setOnClickListener(this)
+        binding.ivAddImage.setOnClickListener(this)
 
-        images.add(ImageModel("",false))
-        images.add(ImageModel("",false))
-        images.add(ImageModel("",false))
-        images.add(ImageModel("",false))
-        images.add(ImageModel("",false))
-        images.add(ImageModel("",false))
+        /* images.add(ImageModel("", false))
+         images.add(ImageModel("", false))
+         images.add(ImageModel("", false))
+         images.add(ImageModel("", false))
+         images.add(ImageModel("", false))
+         images.add(ImageModel("", false))*/
+
+        //api call
+        profileViewModel.getInterests(this)
+
+
+        //observe api response
+        profileViewModel.getInterestListResponse.observeForever { response ->
+            response?.let {
+                interestsList.addAll(it)
+                //get profile detail api call
+                profileViewModel.getProfileApi(this)
+            }
+        }
+
+        profileViewModel.profileData.observeForever { response ->
+            response?.let { profileRes ->
+
+                binding.etFirstName.setText(profileRes.body?.firstname)
+                binding.etLastName.setText(profileRes.body?.lastname)
+                if(profileRes.body?.countryCode!!.isNotEmpty()) {
+                    binding.countryCodePicker.setCountryForPhoneCode(profileRes.body.countryCode!!.toInt())
+                }
+                binding.etPhoneNumber.setText(profileRes.body.phone)
+                binding.editTextDOB.setText(profileRes.body.dob)
+                binding.editTextDiscription.setText(profileRes.body.biography)
+                val zodiac = profileRes.body.zodiac
+                binding.zodiacTv.text = zodiac
+
+                when (profileRes.body.gender) {
+                    1 -> {
+                        binding.maleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
+                        binding.femaleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.femaleGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                        binding.otherGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.otherGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                    }
+                    2 -> {
+                        binding.maleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.femaleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.femaleGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.white
+                            )
+                        )
+                        binding.otherGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.otherGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                    }
+                    3 -> {
+                        binding.maleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.femaleGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.femaleGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                        binding.otherGender.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.otherGender.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.white
+                            )
+                        )
+                    }
+                }
+
+                when (profileRes.body.intrestedIn) {
+                    "Male" -> {
+                        binding.maleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.white))
+                        binding.femaleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.femaleTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                        binding.bothLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.bothTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                    }
+                    "Female" -> {
+                        binding.maleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.femaleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.femaleTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.white
+                            )
+                        )
+                        binding.bothLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.bothTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                    }
+                    "Both" -> {
+                        binding.maleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.femaleLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.edittext_grey)
+                        binding.femaleTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.black
+                            )
+                        )
+                        binding.bothLooking.backgroundTintList =
+                            ContextCompat.getColorStateList(this, R.color.sky_blue)
+                        binding.bothTv.setTextColor(
+                            ContextCompat.getColor(
+                                this,
+                                R.color.white
+                            )
+                        )
+                    }
+                }
+
+                /*set interests*/
+                val interests = profileRes.body.interests
+                val myList = interests?.split(",")
+                for (index in interestsList.indices) {
+                    if (myList!!.contains(interestsList[index].name)) {
+                        interestGenericList.add(
+                            GenericModel(
+                                interestsList[index].id,
+                                interestsList[index].name,
+                                1
+                            )
+                        )
+                    } else {
+                        interestGenericList.add(
+                            GenericModel(
+                                interestsList[index].id,
+                                interestsList[index].name,
+                                0
+                            )
+                        )
+                    }
+                }
+                interestsAdapter.notifyDataSetChanged()
+
+                /*gallery images parsing*/
+                val galleryImages: MutableList<GetProfileResponse.Body.UserImage> =
+                    ArrayList()
+                galleryImages.addAll(profileRes.body.userImages as MutableList<GetProfileResponse.Body.UserImage>)
+                responseImageList.clear()
+
+                for (i in galleryImages.indices) {
+
+                    val image = profileRes.body.userImages[i].image
+                    val str = image?.replace(".png", "")
+
+                    val fileUpload = FileUploadModel.Body(
+                        str.toString(),
+                        "image",
+                        "booking",
+                        profileRes.body.userImages[i].image.toString(),
+                        profileRes.body.userImages[i].image.toString()
+                    )
+                    responseImageList.add(fileUpload)
+                    val gson = Gson()
+                    val json = gson.toJson(fileUpload)
+                    try {
+                        val request = JSONObject(json)
+                        jsonArr.put(request)
+                    } catch (e: JSONException) {
+                        e.printStackTrace()
+                    }
+                }
+                imageAdapter.notifyDataSetChanged()
+            }
+        }
+
+        profileViewModel.imageUploadResponse.observeForever { response ->
+            response?.let {
+                responseImageList.addAll(it.body as MutableList<FileUploadModel.Body>)
+                binding.myGallaryRecyclerView.smoothScrollToPosition((responseImageList.size) - 1)
+                imageAdapter.notifyDataSetChanged()
+            }
+        }
     }
 
 
     private fun initAdapter() {
 
-       /* val onActionListener = object : OnActionListener<ImageModel> {
-            override fun notify(model: ImageModel, position: Int,view: View) {
+        /* val onActionListener = object : OnActionListener<ImageModel> {
+             override fun notify(model: ImageModel, position: Int,view: View) {
 
-                pos = position
-                when(view.id){
-                    R.id.layoutAdd->{
-                            optionsDialog()
+                 pos = position
+                 when(view.id){
+                     R.id.layoutAdd->{
+                             optionsDialog()
 
-                    }
-                    R.id.close_image->{
-                        images.removeAt(position)
-                        imageAdapter?.notifyDataSetChanged()
-                    }
-                }
+                     }
+                     R.id.close_image->{
+                         images.removeAt(position)
+                         imageAdapter?.notifyDataSetChanged()
+                     }
+                 }
 
-            }
-        }*/
+             }
+         }*/
 
-        imageAdapter = ImageAdapter(this, images,this@EditProfileActivity)
+        imageAdapter = ImageAdapter(this, responseImageList, this@EditProfileActivity)
         binding.myGallaryRecyclerView.adapter = imageAdapter
+
+        interestsAdapter = EditProfileInterestAdapter(this, interestGenericList)
+        binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+        binding.interestsRecyclerView.adapter = interestsAdapter
     }
 
-    var tempPos=0
+    var tempPos = 0
 
-    fun getPosition(pos:Int){
-        tempPos=pos
+    fun getPosition(pos: Int) {
+        tempPos = pos
         getImage(this, 0)
     }
+
     override fun onClick(v: View?) {
 
-        when(v){
-
-            binding.backBtn2->{
+        when (v) {
+            binding.backBtn2 -> {
                 onBackPressed()
             }
-
-            binding.finishBtn->{
+            binding.finishBtn -> {
                 onBackPressed()
             }
-
-            binding.userProfilePic->{
+            binding.userProfilePic -> {
                 isMainPhoto = true
-                getImage(this,0)
+                getImage(this, 0)
             }
-
-            binding.cameraPictureBtn->{
+            binding.cameraPictureBtn -> {
                 isMainPhoto = true
-                getImage(this,0)
+                getImage(this, 0)
             }
-            binding.editTextDOB->{
+            binding.editTextDOB -> {
                 datePickerDialog()
             }
-
-            binding.selectZodiacLayout->{
+            binding.selectZodiacLayout -> {
                 popup.anchorView = v
                 popup.isModal = true
                 popup.width = binding.selectZodiacLayout.width
                 popup.setAdapter(zodiacAdapter)
                 popup.show()
             }
+            binding.maleGender -> {
 
-            binding.maleGender->{
+                binding.maleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.sky_blue)
+                binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-                binding.maleGender.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-                binding.maleGender.setTextColor(ContextCompat.getColor(this,R.color.white))
+                binding.femaleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-                binding.femaleGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-                binding.femaleGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.otherGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-                binding.otherGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-                binding.otherGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+            }
+            binding.femaleGender -> {
 
-            } binding.femaleGender->{
+                binding.maleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-            binding.maleGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.maleGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.femaleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.sky_blue)
+                binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-            binding.femaleGender.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-            binding.femaleGender.setTextColor(ContextCompat.getColor(this,R.color.white))
+                binding.otherGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-            binding.otherGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.otherGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+            }
+            binding.otherGender -> {
 
-        }binding.otherGender->{
+                binding.maleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-            binding.maleGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.maleGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.femaleGender.backgroundTintList =
+                    resources.getColorStateList(R.color.edittext_grey)
+                binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
-            binding.femaleGender.backgroundTintList = resources.getColorStateList(R.color.edittext_grey)
-            binding.femaleGender.setTextColor(ContextCompat.getColor(this,R.color.black))
+                binding.otherGender.backgroundTintList =
+                    resources.getColorStateList(R.color.sky_blue)
+                binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
-            binding.otherGender.backgroundTintList = resources.getColorStateList(R.color.sky_blue)
-            binding.otherGender.setTextColor(ContextCompat.getColor(this,R.color.white))
+            }
+            binding.maleLooking -> {
 
-        }
-              binding.maleLooking->{
+                binding.maleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.sky_blue)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.white))
+                binding.maleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.white)
 
-                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-                  binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
+                binding.femaleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.femaleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.femaleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
-                  binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                  binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                  binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
-
-                  binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                  binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                  binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+                binding.bothLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.bothTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.bothColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
 
             }
-            binding.femaleLooking->{
+            binding.femaleLooking -> {
 
-                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+                binding.maleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.maleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
-                binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-                binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-                binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
+                binding.femaleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.sky_blue)
+                binding.femaleTv.setTextColor(ContextCompat.getColor(this, R.color.white))
+                binding.femaleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.white)
 
-                binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+                binding.bothLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.bothTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.bothColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
-        }
-            binding.bothLooking->{
+            }
+            binding.bothLooking -> {
 
-                binding.maleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                binding.maleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.maleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+                binding.maleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.maleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
-                binding.femaleLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.edittext_grey)
-                binding.femaleTv.setTextColor(ContextCompat.getColor(this,R.color.black))
-                binding.femaleColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.black)
+                binding.femaleLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.edittext_grey)
+                binding.femaleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                binding.femaleColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.black)
 
-                binding.bothLooking.backgroundTintList = ActivityCompat.getColorStateList(this,R.color.sky_blue)
-                binding.bothTv.setTextColor(ContextCompat.getColor(this,R.color.white))
-                binding.bothColor.imageTintList = ActivityCompat.getColorStateList(this,R.color.white)
-        }
+                binding.bothLooking.backgroundTintList =
+                    ActivityCompat.getColorStateList(this, R.color.sky_blue)
+                binding.bothTv.setTextColor(ContextCompat.getColor(this, R.color.white))
+                binding.bothColor.imageTintList =
+                    ActivityCompat.getColorStateList(this, R.color.white)
+            }
+            binding.ivAddImage -> {
+                getImage(this, 0)
+            }
 
         }
     }
@@ -277,7 +543,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             }
         binding.editTextDOB!!.setOnClickListener {
             DatePickerDialog(
-                this,R.style.DialogTimePicker,
+                this, R.style.DialogTimePicker,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
@@ -285,6 +551,7 @@ class EditProfileActivity : ImagePickerUtility(),View.OnClickListener {
             ).show()
         }
     }
+
     private fun updateDateInView() {
         val myFormat = "dd/MM/yyyy"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
