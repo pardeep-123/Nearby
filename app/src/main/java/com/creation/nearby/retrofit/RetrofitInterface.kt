@@ -64,6 +64,10 @@ interface RetrofitInterface {
     @GET(Constants.homeListing)
     suspend fun homeListing(@QueryMap haQueryMap: HashMap<String,String>) : Response<HomeListingModel>
 
+    // to get Notification Listing
+    @GET(Constants.notification_listing)
+    suspend fun notificationListing() : Response<NotificationModel>
+
     @Multipart
     // to upload file
     @POST(Constants.fileUpload)

@@ -38,7 +38,7 @@
         android:id="@+id/titleName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@{model.user.name}"
+        android:text="@{model.user.firstname+model.user.lastname}"
         android:textSize="12sp"
         android:textColor="@color/black"
         android:layout_marginStart="16dp"

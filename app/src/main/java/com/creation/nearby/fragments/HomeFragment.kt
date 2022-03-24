@@ -101,7 +101,6 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
             if (this::mMap.isInitialized) {
                 if (it.isNotEmpty()) {
 
-                    //
                     // create bounds that encompass every location we reference
                     val boundsBuilder = LatLngBounds.Builder()
                     // include all places we have markers for on the map

@@ -1,19 +1,12 @@
 package com.creation.nearby.adapter
 
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.*
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.creation.nearby.databinding.DiscoverItemBinding
 import com.creation.nearby.databinding.ItemNotificationBinding
-import com.creation.nearby.fragments.HomeFragment
-import com.creation.nearby.model.DiscoverModel
 import com.creation.nearby.model.NotificationModel
-import com.creation.nearby.ui.NotificationsActivity
-import com.zerobranch.layout.SwipeLayout
-import com.zerobranch.layout.SwipeLayout.SwipeActionsListener
 
 class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : RecyclerView.Adapter<NotificationAdapter.ViewHolder>() {
 
@@ -29,20 +22,20 @@ class NotificationAdapter(private val mList: ArrayList<NotificationModel>) : Rec
         with(holder){
 
             with(mList[position]){
-
-                binding.userPic.setImageResource(userPic)
-                binding.tvName.text = name
-                binding.tvMessage.text = message
-                binding.messageDay.text = day
-
-                if (isShown){
-
-                    binding.buttonContainer.visibility = View.VISIBLE
-                    binding.messageDay.visibility = View.GONE
-                }else{
-                    binding.messageDay.visibility = View.VISIBLE
-                    binding.buttonContainer.visibility = View.GONE
-                }
+//
+//                binding.userPic.setImageResource(userPic)
+//                binding.tvName.text = name
+//                binding.tvMessage.text = message
+//                binding.messageDay.text = day
+//
+//                if (isShown){
+//
+//                    binding.buttonContainer.visibility = View.VISIBLE
+//                    binding.messageDay.visibility = View.GONE
+//                }else{
+//                    binding.messageDay.visibility = View.VISIBLE
+//                    binding.buttonContainer.visibility = View.GONE
+//                }
 
 
               /*  binding.swipeLayout.setOnActionsListener(object : SwipeActionsListener {

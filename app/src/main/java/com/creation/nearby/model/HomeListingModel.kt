@@ -91,7 +91,12 @@ data class HomeListingModel(
                 @SerializedName("longitude")
                 val longitude: String, // 0.000000
                 @SerializedName("name")
-                val name: String // Mark
+                val name: String,
+                @SerializedName("firstname")
+                val firstname: String,
+                @SerializedName("lastname")
+                val lastname: String,
+                // Mark
             )
         }
 

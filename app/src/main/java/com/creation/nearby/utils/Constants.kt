@@ -31,6 +31,7 @@ object Constants {
     const val checkFirstTimeLoginStatus = "check_first_time_login_status"
     const val profile = "profile"
     const val interests = "interests"
+    const val notification_listing = "notification_listing"
 
 
     //preferences
