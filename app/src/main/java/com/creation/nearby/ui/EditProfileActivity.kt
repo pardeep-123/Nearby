@@ -12,10 +12,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
-import com.creation.nearby.adapter.EditProfileInterestAdapter
-import com.creation.nearby.adapter.ImageAdapter
-import com.creation.nearby.adapter.InterestsAdapter
-import com.creation.nearby.adapter.ZodiacAdapter
+import com.creation.nearby.adapter.*
 import com.creation.nearby.databinding.ActivityEditProfileBinding
 import com.creation.nearby.model.*
 import com.creation.nearby.utils.ImagePickerUtility
@@ -45,6 +42,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
     private var interestsList = ArrayList<InterestListResponse.Body>()
     private val interestGenericList = ArrayList<GenericModel>()
     private lateinit var interestsAdapter: EditProfileInterestAdapter
+    private val manualInterestList = ArrayList<ManualInterestModel>()
+    private lateinit var manualInterestAdapter: ManualInterestAdapter
 
     private var responseImageList: MutableList<FileUploadModel.Body> = ArrayList()
     private var imageArrString: String = ""
@@ -123,6 +122,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         binding.cameraPictureBtn.setOnClickListener(this)
         binding.editTextDOB.setOnClickListener(this)
         binding.ivAddImage.setOnClickListener(this)
+        binding.ivManualInterest.setOnClickListener(this)
 
         /* images.add(ImageModel("", false))
          images.add(ImageModel("", false))
@@ -382,6 +382,10 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         interestsAdapter = EditProfileInterestAdapter(this, interestGenericList)
         binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.interestsRecyclerView.adapter = interestsAdapter
+
+        manualInterestAdapter = ManualInterestAdapter(this, manualInterestList)
+        binding.manualInterestsRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+        binding.manualInterestsRecyclerView.adapter = manualInterestAdapter
     }
 
     var tempPos = 0
@@ -528,6 +532,14 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
             }
             binding.ivAddImage -> {
                 getImage(this, 0)
+            }
+            binding.ivManualInterest->{
+                val manualInterest = binding.etEnterInterests.text.toString()
+                if(manualInterest.isNotEmpty()){
+                    manualInterestList.add(ManualInterestModel(manualInterest,1))
+                    binding.etEnterInterests.setText("")
+                }
+                manualInterestAdapter.notifyDataSetChanged()
             }
 
         }

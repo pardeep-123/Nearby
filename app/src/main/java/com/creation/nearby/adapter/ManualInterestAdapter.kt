@@ -7,12 +7,12 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.InterestsItemBinding
-import com.creation.nearby.model.GenericModel
+import com.creation.nearby.model.ManualInterestModel
 
-class EditProfileInterestAdapter(
+class ManualInterestAdapter(
     private val mContext: Context,
-    private val interestList: MutableList<GenericModel>
-) : RecyclerView.Adapter<EditProfileInterestAdapter.MyViewHolder>() {
+    private val interestList: MutableList<ManualInterestModel>
+) : RecyclerView.Adapter<ManualInterestAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,12 +27,13 @@ class EditProfileInterestAdapter(
         holder.itemBinding.interest.text = interestList[position].itemTitle
 
         if (interestList[position].isSelected==1){
-
-            holder.itemBinding.interest.backgroundTintList = ContextCompat.getColorStateList(mContext,R.color.sky_blue)
+            holder.itemBinding.interest.backgroundTintList = ContextCompat.getColorStateList(mContext,
+                R.color.sky_blue)
             holder.itemBinding.interest.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
 
         }else{
-            holder.itemBinding.interest.backgroundTintList = ContextCompat.getColorStateList(mContext,R.color.edittext_grey)
+            holder.itemBinding.interest.backgroundTintList = ContextCompat.getColorStateList(mContext,
+                R.color.edittext_grey)
             holder.itemBinding.interest.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
         }
 
