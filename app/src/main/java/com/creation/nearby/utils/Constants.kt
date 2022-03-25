@@ -1,5 +1,8 @@
 package com.creation.nearby.utils
 
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+
 object Constants {
 
     val BASEURL = "http://202.164.42.227:9022/api/"
@@ -44,4 +47,18 @@ object Constants {
     const val USER_IMAGE = "USER_IMAGE"
     const val IS_FIRST_LOGIN = "IS_FIRST_LOGIN"
     const val notifiactionBroadcase = "notificatiionCallChange"
+
+
+
+
+    //convert a data class to a map
+    fun <T> T.serializeToMap(): Map<String, String> {
+        return convert()
+    }
+
+    //convert an object of type I to type O
+    inline fun <I, reified O> I.convert(): O {
+        val json = Gson().toJson(this)
+        return Gson().fromJson(json, object : TypeToken<O>() {}.type)
+    }
 }

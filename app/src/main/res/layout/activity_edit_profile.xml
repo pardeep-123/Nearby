@@ -67,7 +67,9 @@
                     android:src="@drawable/user"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#59A0CD">
 
                 </de.hdodenhof.circleimageview.CircleImageView>
 
@@ -258,6 +260,39 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/dob" />
 
+                <TextView
+                    android:id="@+id/location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/worksans_black"
+                    android:text="@string/str_address"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/editText_DOB" />
+
+                <EditText
+                    android:id="@+id/user_location"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/round_shape"
+                    android:backgroundTint="@color/edittext_grey"
+                    android:fontFamily="@font/worksans_regular"
+                    android:hint="@string/address"
+                    android:inputType="textEmailAddress"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="16dp"
+                    android:textColor="@color/black"
+                    android:textColorHint="@color/dark_grey"
+                    android:textSize="16sp"
+                    android:focusable="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/location"/>
 
                 <TextView
                     android:id="@+id/gender"
@@ -270,7 +305,7 @@
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/editText_DOB" />
+                    app:layout_constraintTop_toBottomOf="@+id/user_location" />
 
 
                 <TextView
