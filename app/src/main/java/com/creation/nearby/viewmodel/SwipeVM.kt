@@ -23,7 +23,7 @@ class SwipeVM : ViewModel() {
   // get event list
   fun swipeListApi(context: Context, currentLat: Double, currentLng: Double) {
     try {
-      var haQueryMap= HashMap<String,String>()
+      val haQueryMap= HashMap<String,String>()
       haQueryMap["page"]=""
       haQueryMap["is_online"]=""
       haQueryMap["gender"]=""

@@ -1,5 +1,6 @@
 package com.creation.nearby.fragments
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,10 +26,16 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(), CardStackListener, Vi
     var currentLat = 0.0
     var currentLng = 0.0
     private var userId = 0
+  private var ctx : Context?=null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ctx = context
+    }
     override fun updatedLatLng(lat: Double, lng: Double) {
         currentLat = lat
         currentLng = lng
-        swipeVM.swipeListApi(requireContext(), currentLat, currentLng)
+        swipeVM.swipeListApi(ctx!!, currentLat, currentLng)
     }
 
     override fun liveLatLng(lat: Double, lng: Double) {

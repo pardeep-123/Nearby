@@ -28,10 +28,13 @@ object Constants {
     const val user_detail = "user_detail"
     const val swipeUser = "swipe_user"
     const val acceptRejectEvent = "accept_reject_event"
+    const val acceptRejectFriend = "accept_reject_friend"
     const val checkFirstTimeLoginStatus = "check_first_time_login_status"
     const val profile = "profile"
     const val interests = "interests"
     const val notification_listing = "notification_listing"
+    const val contactUs = "contact_us"
+    const val feedback = "feedback"
 
 
     //preferences

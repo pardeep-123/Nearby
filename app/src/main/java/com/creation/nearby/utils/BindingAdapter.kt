@@ -97,7 +97,7 @@ object BindingAdapter {
     ) {
         try {
             Glide.with(ivImage.context)
-                .asBitmap().load("http://202.164.42.227:9022/$str")
+                .asBitmap().load("http://202.164.42.227:9022$str")
                 .apply(RequestOptions().override(600, 200))
                 .into(object : CustomTarget<Bitmap>() {
                     override fun onResourceReady(

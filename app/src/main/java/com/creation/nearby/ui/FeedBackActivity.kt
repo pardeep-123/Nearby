@@ -2,28 +2,32 @@ package com.creation.nearby.ui
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import com.creation.nearby.R
+import androidx.activity.viewModels
 import com.creation.nearby.databinding.ActivityFeedBackBinding
-import com.creation.nearby.model.ImageModel
-import com.creation.nearby.utils.AppUtils
+import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.utils.ToastUtils
+import com.creation.nearby.viewmodel.FeedBackVM
 import com.permissionx.guolindev.PermissionX
 
-class FeedBackActivity : AppCompatActivity(), View.OnClickListener {
+class FeedBackActivity : ImagePickerUtility(), View.OnClickListener {
 
     private lateinit var binding: ActivityFeedBackBinding
+    private val feedBackVM: FeedBackVM by viewModels()
+
+    override fun selectedImage(imagePath: String?) {
+        feedBackVM.image.set(imagePath)
+
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFeedBackBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        binding.feedbackVM = feedBackVM
+        binding.lifecycleOwner = this
         binding.uploadPicLayout.setOnClickListener(this)
         binding.goBack.setOnClickListener(this)
         binding.sendFeedback.setOnClickListener(this)
@@ -54,7 +58,7 @@ class FeedBackActivity : AppCompatActivity(), View.OnClickListener {
                 if (allGranted) {
                     getImageFromGallery()
                 } else
-                    ToastUtils.showToast(this,"Unable to perform action due to permissions")
+                    ToastUtils.showToast(this, "Unable to perform action due to permissions")
             }
 
     }
@@ -80,8 +84,8 @@ class FeedBackActivity : AppCompatActivity(), View.OnClickListener {
 
         when (v) {
             binding.uploadPicLayout -> {
+            getImage(this,0)
 
-                openResourceWithPermissionCheck()
 
             }
             binding.goBack -> {

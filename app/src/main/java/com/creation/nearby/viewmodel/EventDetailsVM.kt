@@ -9,4 +9,4 @@ class EventDetailsVM : ViewModel() {
 
     var detailsModel: ObservableField<GetEventModel.Body> = ObservableField()
 
-}
+   }

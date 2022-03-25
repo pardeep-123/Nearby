@@ -39,7 +39,8 @@ data class NotificationModel(
         @SerializedName("user2Id")
         val user2Id: Int, // 180
         @SerializedName("userId")
-        val userId: Int // 182
+        val userId: Int,
+        var isNewRequest : Boolean = false // 182
     ) : AbstractModel(){
         class Data()
 

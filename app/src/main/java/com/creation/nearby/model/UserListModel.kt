@@ -29,6 +29,8 @@ data class UserListModel(
             val location: String,
             val longitude: String,
             val name: String,
+            val firstname: String,
+            val lastname: String,
             val role: Int,
             val status: Int,
             val total_age: String,

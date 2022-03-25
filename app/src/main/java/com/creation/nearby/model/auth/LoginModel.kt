@@ -65,6 +65,10 @@ data class  LoginModel(
         val longitude: String, // 0.000000
         @SerializedName("name")
         val name: String, // jack smith
+        @SerializedName("firstname")
+        val firstname: String,
+        @SerializedName("lastname")
+        val lastname: String,
         @SerializedName("otp")
         val otp: Int, // 1111
         @SerializedName("password")

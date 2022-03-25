@@ -87,7 +87,7 @@ class LoginVm : ViewModel() {
                                 Intent(context, MainActivity::class.java))
                             animateSlide(context as Activity)
                             PreferenceFile.storeLoginData(context, response)
-                            PreferenceFile.storeKey(context,"username",response.body.name)
+                            PreferenceFile.storeKey(context,"username",response.body.firstname+" "+response.body.lastname)
                             PreferenceFile.storeKey(context,USER_IMAGE,response.body.image)
                             PreferenceFile.storeKey(context, IS_FIRST_LOGIN,response.body.firstLogin)
                             PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)

@@ -35,6 +35,32 @@ class Validator() {
         } else true
     }
 
+    // validation for conatct us
+    fun validateContact(message: String?): Boolean {
+        return if (TextUtils.isEmpty(message)) {
+            ErrorMessage =
+                AppController.mInstance.getString(R.string.enter_message)
+            false
+        } else true
+    }
+
+    // validation for conatct us
+    fun validateFeedBack(message: String?,image:String): Boolean {
+        return when {
+            TextUtils.isEmpty(message) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.enter_message)
+                false
+            }
+            TextUtils.isEmpty(image) -> {
+                ErrorMessage =
+                    AppController.mInstance.getString(R.string.chooseimage)
+                false
+            }
+            else -> true
+        }
+    }
+
     fun validateRegister(
         mfirstName: String,
         mlastName: String,

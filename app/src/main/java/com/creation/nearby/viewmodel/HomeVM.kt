@@ -1,7 +1,6 @@
 package com.creation.nearby.viewmodel
 
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -15,9 +14,7 @@ import com.creation.nearby.model.HomeListingModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
-import com.creation.nearby.ui.EventDetailsActivity
 import com.creation.nearby.ui.MainActivity
-import com.creation.nearby.ui.SplashActivity
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ToastUtils
 import com.google.android.gms.maps.model.LatLng
@@ -28,7 +25,6 @@ class HomeVM : ViewModel() {
     val eventList by lazy { ArrayList<HomeListingModel.Body.Event>() }
     val feedList by lazy { ArrayList<HomeListingModel.Body.Feed>() }
     val notificationList by lazy { ArrayList<HomeListingModel.Body.Notification>() }
-    val mapList by lazy { ArrayList<HomeListingModel.Body.User>() }
 
     val mapListData: MutableLiveData<ArrayList<DataMap>> = MutableLiveData()
 
@@ -90,8 +86,11 @@ class HomeVM : ViewModel() {
         notificationAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
                 if (type == "accept") {
-
-                 } else if (type == "reject"){
+                    acceptRejectEventApi(view.context,notificationList[position].sender.id.toString(),
+                        "2",notificationList[position].id.toString())
+                } else if (type == "reject"){
+                    acceptRejectEventApi(view.context,notificationList[position].sender.id.toString(),
+                        "3",notificationList[position].id.toString())
 
                 }
             }
@@ -146,7 +145,7 @@ class HomeVM : ViewModel() {
                                                 LatLng(
                                                     this[i].latitude.toDouble(),
                                                     this[i].longitude.toDouble()
-                                                ), this[i].id, this[i].firstName,this[i].lastName
+                                                ), this[i].id, this[i].firstname,this[i].lastname
                                             )
                                         )
                                     }
@@ -155,8 +154,11 @@ class HomeVM : ViewModel() {
                             mapListData.value= mList
                             eventAdapter.addItems(eventList)
                             feedAdapter.addItems(feedList)
-
+                            notificationList.clear()
                             notificationList.addAll(response.body.notificationList)
+                            notificationList.forEach {
+                                it.isNewRequest = it.notificationType==1
+                            }
                             notificationAdapter.addItems(notificationList)
 
                         }
@@ -199,4 +201,39 @@ class HomeVM : ViewModel() {
             e.printStackTrace()
         }
     }
+
+    fun acceptRejectEventApi(context: Context,userId:String,status:String,notificationId:String) {
+        try {
+            val hashMap= HashMap<String,String>()
+            hashMap["swipe_by"]=userId
+            hashMap["status"]=status
+            hashMap["notification_id"]=notificationId
+            CallApi().callService(
+                context,
+                true,
+
+                object : RequestProcessor<Response<CommonModel>> {
+                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<CommonModel> {
+
+                        return retrofitApi.acceptRejectFriend(hashMap)
+                    }
+
+                    override fun onResponse(res: Response<CommonModel>) {
+                        if (res.isSuccessful) {
+                            val response = res.body()!!
+                            ToastUtils.showToast(context,response.message)
+                            homeListingApi(context,0.0,0.0)
+                        }
+                    }
+
+                    override fun onException(message: String?) {
+                        Log.e("userException", "====$message")
+                    }
+                })
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
 }

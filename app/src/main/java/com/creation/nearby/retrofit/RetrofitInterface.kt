@@ -106,6 +106,9 @@ interface RetrofitInterface {
     @POST(Constants.acceptRejectEvent)
     suspend fun acceptRejectEvent(@Body hasmap : HashMap<String,String>) : Response<CommonModel>
 
+    // accept reject user requests
+    @POST(Constants.acceptRejectFriend)
+    suspend fun acceptRejectFriend(@Body hasmap: HashMap<String, String>) : Response<CommonModel>
     @FormUrlEncoded
     @POST(Constants.checkFirstTimeLoginStatus)
     suspend fun checkFirstTimeLoginStatus(@Field("first_login") firstLogin : String) : Response<CommonModel>
@@ -116,4 +119,10 @@ interface RetrofitInterface {
     @GET(Constants.interests)
     suspend fun getInterests() : Response<InterestListResponse>
 
+    @FormUrlEncoded
+    @POST(Constants.contactUs)
+    suspend fun contactUs(@Field("message")message: String): Response<CommonModel>
+
+    @POST(Constants.feedback)
+    suspend fun feedback(@Body hasmap: HashMap<String, String>): Response<CommonModel>
 }

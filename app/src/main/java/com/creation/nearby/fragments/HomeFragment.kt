@@ -55,8 +55,6 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
 
     lateinit var binding: FragmentHomeBinding
 
-    private var notificationList = ArrayList<NotificationModel>()
-
     private lateinit var mapFragment: SupportMapFragment
     var currentLat = 0.0
     var currentLng = 0.0

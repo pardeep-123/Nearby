@@ -215,6 +215,7 @@
     <string name="str_add_image">Add Image</string>
     <string name="str_male">Male</string>
     <string name="str_female">Female</string>
+    <string name="enter_message">Enter your Query..</string>
 
 
 </resources>
