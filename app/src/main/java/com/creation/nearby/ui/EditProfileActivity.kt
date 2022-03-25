@@ -1,24 +1,34 @@
 package com.creation.nearby.ui
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ListAdapter
 import android.widget.ListPopupWindow
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
-import com.creation.nearby.adapter.*
+import com.creation.nearby.adapter.EditProfileInterestAdapter
+import com.creation.nearby.adapter.ImageAdapter
+import com.creation.nearby.adapter.ManualInterestAdapter
+import com.creation.nearby.adapter.ZodiacAdapter
 import com.creation.nearby.databinding.ActivityEditProfileBinding
 import com.creation.nearby.model.*
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.libraries.places.api.Places
+import com.google.android.libraries.places.api.model.Place
+import com.google.android.libraries.places.widget.Autocomplete
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode
 import com.google.gson.Gson
 import org.json.JSONArray
 import org.json.JSONException
@@ -47,6 +57,12 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
     private var responseImageList: MutableList<FileUploadModel.Body> = ArrayList()
     private var imageArrString: String = ""
+    private var latitude: String = ""
+    private var longitude: String = ""
+    private var selectedGender: String = ""
+    private var selectedZodiac: String = ""
+    private var selectedInterestedIn: String = ""
+    private var profileImage: String = ""
     var jsonArr = JSONArray()
     private var selectedImageList: ArrayList<String> = ArrayList()
 
@@ -54,12 +70,30 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
     private val profileViewModel: ProfileVM by viewModels()
 
+    private val resultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data
+
+                data?.let {
+                    val place = Autocomplete.getPlaceFromIntent(result.data!!)
+                    latitude = place.latLng!!.latitude.toString()
+                    longitude = place.latLng!!.longitude.toString()
+                    binding.userLocation.setText(place.name.toString())
+                }
+            }
+        }
+
     override fun selectedImage(imagePath: String?) {
 
         if (isMainPhoto) {
 
             isMainPhoto = false
-            Glide.with(this).load(imagePath).into(binding.userProfilePic)
+//            Glide.with(this).load(imagePath).into(binding.userProfilePic)
+
+            profileViewModel.profileImage.set(imagePath)
+            //api call for upload image
+            profileViewModel.uploadProfileImageApi(this)
 
         } else {
 
@@ -83,7 +117,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
         binding.profileVM = profileViewModel
         setContentView(binding.root)
-
+        val apiKey = getString(R.string.map_key)
+        Places.initialize(this, apiKey)
 
         initAdapter()
 
@@ -107,6 +142,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
             popup.dismiss()
             val name = parent.getItemAtPosition(position).toString()
             binding.zodiacTv.text = name.substring(22, name.length - 1)
+            selectedZodiac = binding.zodiacTv.text.toString().trim()
         }
 
         binding.selectZodiacLayout.setOnClickListener(this)
@@ -123,6 +159,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         binding.editTextDOB.setOnClickListener(this)
         binding.ivAddImage.setOnClickListener(this)
         binding.ivManualInterest.setOnClickListener(this)
+        binding.userLocation.setOnClickListener(this)
 
         /* images.add(ImageModel("", false))
          images.add(ImageModel("", false))
@@ -147,9 +184,17 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         profileViewModel.profileData.observeForever { response ->
             response?.let { profileRes ->
 
+                val profileImage = profileRes.body?.image
+                if (profileImage?.isNotEmpty() == true) {
+                    Glide.with(this)
+                        .load("${Constants.IMAGE_BASE_URL}$profileImage")
+                        .placeholder(R.drawable.placeholder)
+                        .into(binding.userProfilePic)
+                }
+
                 binding.etFirstName.setText(profileRes.body?.firstname)
                 binding.etLastName.setText(profileRes.body?.lastname)
-                if(profileRes.body?.countryCode!!.isNotEmpty()) {
+                if (profileRes.body?.countryCode!!.isNotEmpty()) {
                     binding.countryCodePicker.setCountryForPhoneCode(profileRes.body.countryCode!!.toInt())
                 }
                 binding.etPhoneNumber.setText(profileRes.body.phone)
@@ -157,9 +202,14 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 binding.editTextDiscription.setText(profileRes.body.biography)
                 val zodiac = profileRes.body.zodiac
                 binding.zodiacTv.text = zodiac
+                selectedZodiac = zodiac.toString()
+                binding.userLocation.setText(profileRes.body.location)
+                latitude = profileRes.body.latitude.toString()
+                longitude = profileRes.body.longitude.toString()
 
                 when (profileRes.body.gender) {
                     1 -> {
+                        selectedGender = "1"
                         binding.maleGender.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.sky_blue)
                         binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -181,6 +231,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                         )
                     }
                     2 -> {
+                        selectedGender = "2"
                         binding.maleGender.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -202,6 +253,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                         )
                     }
                     3 -> {
+                        selectedGender = "3"
                         binding.maleGender.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -225,10 +277,13 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 }
 
                 when (profileRes.body.intrestedIn) {
-                    "Male" -> {
+                    "Men" -> {
+                        selectedInterestedIn = "Men"
                         binding.maleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.sky_blue)
                         binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.white))
+                        binding.maleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.white)
                         binding.femaleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.femaleTv.setTextColor(
@@ -237,6 +292,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.black
                             )
                         )
+                        binding.femaleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                         binding.bothLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.bothTv.setTextColor(
@@ -245,11 +302,16 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.black
                             )
                         )
+                        binding.bothColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                     }
-                    "Female" -> {
+                    "Women" -> {
+                        selectedInterestedIn = "Women"
                         binding.maleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.maleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                         binding.femaleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.sky_blue)
                         binding.femaleTv.setTextColor(
@@ -258,6 +320,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.white
                             )
                         )
+                        binding.femaleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.white)
                         binding.bothLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.bothTv.setTextColor(
@@ -266,11 +330,16 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.black
                             )
                         )
+                        binding.bothColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                     }
                     "Both" -> {
+                        selectedInterestedIn = "Both"
                         binding.maleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
+                        binding.maleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                         binding.femaleLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.edittext_grey)
                         binding.femaleTv.setTextColor(
@@ -279,6 +348,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.black
                             )
                         )
+                        binding.femaleColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.black)
                         binding.bothLooking.backgroundTintList =
                             ContextCompat.getColorStateList(this, R.color.sky_blue)
                         binding.bothTv.setTextColor(
@@ -287,6 +358,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                                 R.color.white
                             )
                         )
+                        binding.bothColor.imageTintList =
+                            ActivityCompat.getColorStateList(this, R.color.white)
                     }
                 }
 
@@ -313,6 +386,16 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                     }
                 }
                 interestsAdapter.notifyDataSetChanged()
+
+                /*set interests*/
+                val manualInterest = profileRes.body.manualInterest
+                if (manualInterest?.isNotEmpty() == true) {
+                    val myManualInterestList = manualInterest.split(",")
+                    for (i in myManualInterestList.indices) {
+                        manualInterestList.add(ManualInterestModel(myManualInterestList[i], 1))
+                    }
+                    manualInterestAdapter.notifyDataSetChanged()
+                }
 
                 /*gallery images parsing*/
                 val galleryImages: MutableList<GetProfileResponse.Body.UserImage> =
@@ -346,11 +429,22 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
             }
         }
 
-        profileViewModel.imageUploadResponse.observeForever { response ->
+        profileViewModel.galleryImageUploadResponse.observeForever { response ->
             response?.let {
                 responseImageList.addAll(it.body as MutableList<FileUploadModel.Body>)
                 binding.myGallaryRecyclerView.smoothScrollToPosition((responseImageList.size) - 1)
                 imageAdapter.notifyDataSetChanged()
+            }
+        }
+
+        profileViewModel.profileImageUploadResponse.observeForever { response ->
+            response?.let {
+                profileImage = it.body[0].image
+
+                Glide.with(this)
+                    .load("${Constants.IMAGE_BASE_URL}$profileImage")
+                    .placeholder(R.drawable.placeholder)
+                    .into(binding.userProfilePic)
             }
         }
     }
@@ -384,7 +478,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         binding.interestsRecyclerView.adapter = interestsAdapter
 
         manualInterestAdapter = ManualInterestAdapter(this, manualInterestList)
-        binding.manualInterestsRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+        binding.manualInterestsRecyclerView.layoutManager =
+            FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.manualInterestsRecyclerView.adapter = manualInterestAdapter
     }
 
@@ -402,7 +497,51 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 onBackPressed()
             }
             binding.finishBtn -> {
-                onBackPressed()
+
+                /**
+                 * converting model class response to json array (backend requirement)
+                 */
+
+                jsonArr = JSONArray()
+                imageArrString = if (responseImageList.isNotEmpty()) {
+                    for (i in responseImageList.indices) {
+                        val gson = Gson()
+                        val json = gson.toJson(responseImageList[i])
+                        try {
+                            val request = JSONObject(json)
+                            jsonArr.put(request)
+                        } catch (e: JSONException) {
+                            e.printStackTrace()
+                        }
+                    }
+                    jsonArr.toString()
+                } else {
+                    ""
+                }
+
+                val editProfileRequest = EditProfileRequest().also {
+                    it.firstname = binding.etFirstName.text.toString().trim()
+                    it.lastname = binding.etLastName.text.toString().trim()
+                    it.countryCode = binding.countryCodePicker.selectedCountryCodeWithPlus
+                    it.phone = binding.etPhoneNumber.text.toString().trim()
+                    it.dob = binding.editTextDOB.text.toString().trim()
+                    it.location = binding.userLocation.text.toString().trim()
+                    it.latitude = latitude
+                    it.longitude = longitude
+                    it.gender = selectedGender
+                    it.biography = binding.biograph.text.toString().trim()
+                    it.gallary_images = imageArrString
+                    it.zodiac = selectedZodiac
+                    it.intrested_in = selectedInterestedIn
+                    it.image = profileImage
+                }
+                //api call
+                profileViewModel.editProfileApi(
+                    this,
+                    editProfileRequest,
+                    interestGenericList,
+                    manualInterestList
+                )
             }
             binding.userProfilePic -> {
                 isMainPhoto = true
@@ -423,52 +562,52 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 popup.show()
             }
             binding.maleGender -> {
-
+                selectedGender = "1"
                 binding.maleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.sky_blue)
+                    ContextCompat.getColorStateList(this, R.color.sky_blue)
                 binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
                 binding.femaleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
                 binding.otherGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
             }
             binding.femaleGender -> {
-
+                selectedGender = "2"
                 binding.maleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
                 binding.femaleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.sky_blue)
+                    ContextCompat.getColorStateList(this, R.color.sky_blue)
                 binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
                 binding.otherGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
             }
             binding.otherGender -> {
-
+                selectedGender = "3"
                 binding.maleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.maleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
                 binding.femaleGender.backgroundTintList =
-                    resources.getColorStateList(R.color.edittext_grey)
+                    ContextCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.femaleGender.setTextColor(ContextCompat.getColor(this, R.color.black))
 
                 binding.otherGender.backgroundTintList =
-                    resources.getColorStateList(R.color.sky_blue)
+                    ContextCompat.getColorStateList(this, R.color.sky_blue)
                 binding.otherGender.setTextColor(ContextCompat.getColor(this, R.color.white))
 
             }
             binding.maleLooking -> {
-
+                selectedInterestedIn = "Men"
                 binding.maleLooking.backgroundTintList =
                     ActivityCompat.getColorStateList(this, R.color.sky_blue)
                 binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.white))
@@ -490,7 +629,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
             }
             binding.femaleLooking -> {
-
+                selectedInterestedIn = "Women"
                 binding.maleLooking.backgroundTintList =
                     ActivityCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -511,7 +650,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
             }
             binding.bothLooking -> {
-
+                selectedInterestedIn = "Both"
                 binding.maleLooking.backgroundTintList =
                     ActivityCompat.getColorStateList(this, R.color.edittext_grey)
                 binding.maleTv.setTextColor(ContextCompat.getColor(this, R.color.black))
@@ -533,15 +672,27 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
             binding.ivAddImage -> {
                 getImage(this, 0)
             }
-            binding.ivManualInterest->{
+            binding.ivManualInterest -> {
                 val manualInterest = binding.etEnterInterests.text.toString()
-                if(manualInterest.isNotEmpty()){
-                    manualInterestList.add(ManualInterestModel(manualInterest,1))
+                if (manualInterest.isNotEmpty()) {
+                    manualInterestList.add(ManualInterestModel(manualInterest, 1))
                     binding.etEnterInterests.setText("")
                 }
                 manualInterestAdapter.notifyDataSetChanged()
             }
+            binding.userLocation -> {
+                val fields = listOf(
+                    Place.Field.ID,
+                    Place.Field.NAME,
+                    Place.Field.LAT_LNG,
+                    Place.Field.ADDRESS_COMPONENTS,
+                    Place.Field.ADDRESS
+                )
 
+                val intent = Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                    .build(this)
+                resultLauncher.launch(intent)
+            }
         }
     }
 

@@ -20,13 +20,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@drawable/dash_gallary_stroke">
 
 
             <ImageView
                 android:id="@+id/layoutImage"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="89dp"
+                android:layout_height="89dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/rounded_image_1"
                 app:layout_constraintBottom_toBottomOf="parent"

@@ -5,12 +5,12 @@
     <solid android:color="@color/edittext_grey">
     </solid>
     <stroke android:color="@color/sky_blue"
-        android:width="0.6dp"
+        android:width="1dp"
         android:dashGap="2dp"
         android:dashWidth="3dp">
 
     </stroke>
 
-    <corners android:radius="16dp"></corners>
+    <corners android:radius="16dp"/>
 
 </shape>
