@@ -1,5 +1,6 @@
 package com.creation.nearby.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -15,6 +16,7 @@ import com.creation.nearby.databinding.ActivityMyProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
 import com.creation.nearby.model.InterestedModel
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
@@ -34,9 +36,8 @@ class MyProfileActivity : ImagePickerUtility() {
 
     override fun selectedImage(imagePath: String?) {
         Glide.with(this).load(imagePath).into(binding.userProfilePicMyProfile)
-
     }
-
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMyProfileBinding.inflate(layoutInflater)
@@ -56,7 +57,6 @@ class MyProfileActivity : ImagePickerUtility() {
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
-     //   binding.profileInterestRecView.layoutManager = GridLayoutManager(this, 3,RecyclerView.VERTICAL,false)
         binding.profileInterestRecView.adapter = interestsAdapter
         interestsAdapter.notifyDataSetChanged()
 
@@ -73,9 +73,16 @@ class MyProfileActivity : ImagePickerUtility() {
 
         //observe get profile response
         profileViewModel.profileData.observeForever { response->
-            response?.let {
-                binding.tvUserName.text = it.body?.username
-                binding.tvBio.text = it.body?.biography
+            response?.let {profileRes->
+                val profileImage = profileRes.body?.image
+                if (profileImage?.isNotEmpty() == true) {
+                    Glide.with(this)
+                        .load("${Constants.IMAGE_BASE_URL}$profileImage")
+                        .placeholder(R.drawable.placeholder)
+                        .into(binding.userProfilePicMyProfile)
+                }
+                binding.tvUserName.text = "${profileRes.body?.firstname} ${profileRes.body?.lastname}"
+                binding.tvBio.text = profileRes.body?.biography
             }
         }
     }

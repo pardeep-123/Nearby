@@ -13,7 +13,6 @@ class EditProfileInterestAdapter(
     private val mContext: Context,
     private val interestList: MutableList<GenericModel>
 ) : RecyclerView.Adapter<EditProfileInterestAdapter.MyViewHolder>() {
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -43,11 +42,14 @@ class EditProfileInterestAdapter(
                     R.color.edittext_grey)
                 holder.itemBinding.interest.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.black))
 
+               // onItemClickListener.onInterestRemove(position,1,interestList[position])
             }else{
                 interestList[position].isSelected = 1
                 holder.itemBinding.interest.backgroundTintList = ContextCompat.getColorStateList(mContext,
                     R.color.sky_blue)
                 holder.itemBinding.interest.setTextColor(ContextCompat.getColor(holder.itemView.context, R.color.white))
+
+               // onItemClickListener.onInterestRemove(position,0,interestList[position])
             }
         }
 

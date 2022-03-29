@@ -17,8 +17,12 @@ import com.creation.nearby.utils.Constants.IMAGE_BASE_URL
 class ImageAdapter(
     var context: Context,
     var imagesList: MutableList<FileUploadModel.Body>,
-    var onActionListener: EditProfileActivity
+    var onItemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<ImageAdapter.ViewHolder>() {
+
+    interface OnItemClickListener{
+        fun onRemoveImage(position:Int)
+    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +35,10 @@ class ImageAdapter(
             .load("${IMAGE_BASE_URL}${imagesList[position].image}")
             .placeholder(R.drawable.placeholder)
             .into(holder.binding.layoutImage)
+
+        holder.binding.closeImage.setOnClickListener {
+            onItemClickListener.onRemoveImage(position)
+        }
     }
 
     override fun getItemCount(): Int {

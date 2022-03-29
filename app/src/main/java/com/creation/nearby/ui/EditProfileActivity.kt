@@ -20,6 +20,7 @@ import com.creation.nearby.adapter.ManualInterestAdapter
 import com.creation.nearby.adapter.ZodiacAdapter
 import com.creation.nearby.databinding.ActivityEditProfileBinding
 import com.creation.nearby.model.*
+import com.creation.nearby.showToast
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ImagePickerUtility
 import com.creation.nearby.viewmodel.ProfileVM
@@ -87,27 +88,18 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
     override fun selectedImage(imagePath: String?) {
 
         if (isMainPhoto) {
-
             isMainPhoto = false
-//            Glide.with(this).load(imagePath).into(binding.userProfilePic)
-
             profileViewModel.profileImage.set(imagePath)
             //api call for upload image
             profileViewModel.uploadProfileImageApi(this)
 
         } else {
-
-            println("Image Path--$imagePath")
             selectedImageList.clear()
             selectedImageList.add(imagePath.toString())
             //set image path
             profileViewModel.image.set(imagePath)
             //api call for upload image
             profileViewModel.uploadGalleryImageApi(this)
-
-            /* images[tempPos].imagePath = imagePath!!
-             images[tempPos].isDeleteL = false
-             imageAdapter.notifyDataSetChanged()*/
         }
     }
 
@@ -161,13 +153,6 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
         binding.ivManualInterest.setOnClickListener(this)
         binding.userLocation.setOnClickListener(this)
 
-        /* images.add(ImageModel("", false))
-         images.add(ImageModel("", false))
-         images.add(ImageModel("", false))
-         images.add(ImageModel("", false))
-         images.add(ImageModel("", false))
-         images.add(ImageModel("", false))*/
-
         //api call
         profileViewModel.getInterests(this)
 
@@ -195,13 +180,15 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 binding.etFirstName.setText(profileRes.body?.firstname)
                 binding.etLastName.setText(profileRes.body?.lastname)
                 if (profileRes.body?.countryCode!!.isNotEmpty()) {
-                    binding.countryCodePicker.setCountryForPhoneCode(profileRes.body.countryCode!!.toInt())
+                    binding.countryCodePicker.setCountryForPhoneCode(profileRes.body.countryCode.toInt())
                 }
                 binding.etPhoneNumber.setText(profileRes.body.phone)
                 binding.editTextDOB.setText(profileRes.body.dob)
                 binding.editTextDiscription.setText(profileRes.body.biography)
                 val zodiac = profileRes.body.zodiac
-                binding.zodiacTv.text = zodiac
+                if (zodiac?.isNotEmpty() == true) {
+                    binding.zodiacTv.text = zodiac
+                }
                 selectedZodiac = zodiac.toString()
                 binding.userLocation.setText(profileRes.body.location)
                 latitude = profileRes.body.latitude.toString()
@@ -364,35 +351,49 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 }
 
                 /*set interests*/
+                interestGenericList.clear()
                 val interests = profileRes.body.interests
-                val myList = interests?.split(",")
-                for (index in interestsList.indices) {
-                    if (myList!!.contains(interestsList[index].name)) {
-                        interestGenericList.add(
-                            GenericModel(
-                                interestsList[index].id,
-                                interestsList[index].name,
-                                1
+                if (interests?.isNotEmpty() == true) {
+                    val myList = interests.split(",")
+                    for (index in interestsList.indices) {
+                        if (myList.contains(interestsList[index].name)) {
+                            interestGenericList.add(
+                                GenericModel(
+                                    interestsList[index].id,
+                                    interestsList[index].name,
+                                    1
+                                )
                             )
-                        )
-                    } else {
-                        interestGenericList.add(
-                            GenericModel(
-                                interestsList[index].id,
-                                interestsList[index].name,
-                                0
+                        } else {
+                            interestGenericList.add(
+                                GenericModel(
+                                    interestsList[index].id,
+                                    interestsList[index].name,
+                                    0
+                                )
                             )
-                        )
+                        }
                     }
+                    interestsAdapter.notifyDataSetChanged()
                 }
-                interestsAdapter.notifyDataSetChanged()
 
                 /*set interests*/
                 val manualInterest = profileRes.body.manualInterest
+                manualInterestList.clear()
                 if (manualInterest?.isNotEmpty() == true) {
                     val myManualInterestList = manualInterest.split(",")
-                    for (i in myManualInterestList.indices) {
-                        manualInterestList.add(ManualInterestModel(myManualInterestList[i], 1))
+                    if (myManualInterestList.isNotEmpty()) {
+                        //for multiple value
+                        for (i in myManualInterestList.indices) {
+                            manualInterestList.add(ManualInterestModel(myManualInterestList[i], 1))
+                        }
+                    } else {
+                        manualInterestList.add(
+                            ManualInterestModel(
+                                manualInterest,
+                                1
+                            )
+                        )  //for single value
                     }
                     manualInterestAdapter.notifyDataSetChanged()
                 }
@@ -416,14 +417,6 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                         profileRes.body.userImages[i].image.toString()
                     )
                     responseImageList.add(fileUpload)
-                    val gson = Gson()
-                    val json = gson.toJson(fileUpload)
-                    try {
-                        val request = JSONObject(json)
-                        jsonArr.put(request)
-                    } catch (e: JSONException) {
-                        e.printStackTrace()
-                    }
                 }
                 imageAdapter.notifyDataSetChanged()
             }
@@ -447,8 +440,12 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                     .into(binding.userProfilePic)
             }
         }
-    }
 
+        profileViewModel.editProfileResponse.observeForever { response ->
+            showToast(response.message.toString())
+            finish()
+        }
+    }
 
     private fun initAdapter() {
 
@@ -470,26 +467,31 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
              }
          }*/
 
-        imageAdapter = ImageAdapter(this, responseImageList, this@EditProfileActivity)
+        imageAdapter =
+            ImageAdapter(this, responseImageList, object : ImageAdapter.OnItemClickListener {
+                @SuppressLint("NotifyDataSetChanged")
+                override fun onRemoveImage(position: Int) {
+                    responseImageList.removeAt(position)
+                    imageAdapter.notifyDataSetChanged()
+                }
+            })
         binding.myGallaryRecyclerView.adapter = imageAdapter
 
-        interestsAdapter = EditProfileInterestAdapter(this, interestGenericList)
+        interestsAdapter = EditProfileInterestAdapter(
+            this,
+            interestGenericList)
         binding.interestsRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.interestsRecyclerView.adapter = interestsAdapter
 
-        manualInterestAdapter = ManualInterestAdapter(this, manualInterestList)
+        manualInterestAdapter = ManualInterestAdapter(
+            this,
+            manualInterestList)
         binding.manualInterestsRecyclerView.layoutManager =
             FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.manualInterestsRecyclerView.adapter = manualInterestAdapter
     }
 
-    var tempPos = 0
-
-    fun getPosition(pos: Int) {
-        tempPos = pos
-        getImage(this, 0)
-    }
-
+    @SuppressLint("NotifyDataSetChanged")
     override fun onClick(v: View?) {
 
         when (v) {
