@@ -25,6 +25,7 @@ class ProfileVM: ViewModel() {
     val getInterestListResponse: MutableLiveData<ArrayList<InterestListResponse.Body>> = MutableLiveData()
     val galleryImageUploadResponse: MutableLiveData<FileUploadModel> = MutableLiveData()
     val profileImageUploadResponse: MutableLiveData<FileUploadModel> = MutableLiveData()
+    val editProfileResponse: MutableLiveData<EditProfileResponse> = MutableLiveData()
     val image : ObservableField<String> = ObservableField("")
     val profileImage : ObservableField<String> = ObservableField("")
     var imagefile : MultipartBody.Part?=null
@@ -196,12 +197,16 @@ class ProfileVM: ViewModel() {
         editProfileRequest.interests = interestsStr
 
         val manualInterestTitleList=ArrayList<String>()
-        for(i in manualInterestTitleList.indices){
+        for(i in manualInterestList.indices){
             manualInterestTitleList.add(manualInterestList[i].itemTitle.toString())
         }
 
-        val manualInterestsStr = TextUtils.join(",",manualInterestTitleList)
-        editProfileRequest.manual_interest = manualInterestsStr
+        if(manualInterestTitleList.size==1){
+            editProfileRequest.manual_interest = manualInterestTitleList[0]
+        }else{
+            val manualInterestsStr = TextUtils.join(",",manualInterestTitleList)
+            editProfileRequest.manual_interest = manualInterestsStr
+        }
 
         val builder = MultipartBody.Builder().setType(MultipartBody.FORM)
         val map = editProfileRequest.serializeToMap()
@@ -224,7 +229,7 @@ class ProfileVM: ViewModel() {
                     override fun onResponse(res: Response<EditProfileResponse>) {
                         if (res.isSuccessful) {
                             val response = res.body()!!
-
+                            editProfileResponse.value = response
                         }
                     }
 
