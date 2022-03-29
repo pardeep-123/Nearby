@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="loginVM"
+            type="com.creation.nearby.viewmodel.LoginVm" />
+
+    </data>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.authentication.NewLoginActivity">
+
+    <ImageView
+        android:id="@+id/colorImage"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:src="@drawable/congratulation_background"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/tvHello"
+        android:layout_width="@dimen/_200sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25sp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/worksans_semibold"
+        android:src="@drawable/hellothere"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        app:layout_constraintBottom_toBottomOf="@id/colorImage"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25sp"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/loginwithphone"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvHello" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/emailLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvLogin"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="32dp"
+        android:background="@drawable/round_shape"
+        android:backgroundTint="@color/edittext_grey">
+
+        <com.rilixtech.widget.countrycodepicker.CountryCodePicker
+            android:id="@+id/ccp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:ccp_showNameCode="false"
+            android:focusable="false"
+            android:paddingLeft="5dp"
+            android:layout_marginStart="@dimen/_5sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/phone_login"
+            app:layout_constraintBottom_toBottomOf="@+id/phone_login"
+            app:ccp_keyboardAutoPopOnSearch="false"
+            app:ccp_showFlag="false"
+            app:ccp_textColor="@color/black"
+            app:ccp_textSize="16sp" />
+
+    <EditText
+        android:id="@+id/phone_login"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:background="@drawable/round_shape"
+        android:backgroundTint="@color/edittext_grey"
+        android:fontFamily="@font/worksans_regular"
+        android:hint="@string/number"
+        android:padding="1dp"
+        android:singleLine="true"
+        android:text="@={loginVM.email}"
+        android:textColor="@color/black"
+        android:textColorHint="@color/dark_grey"
+        android:textSize="16sp"
+        android:inputType="phone"
+        app:layout_constraintEnd_toStartOf="@+id/sendCircle"
+       app:layout_constraintStart_toEndOf="@+id/ccp"
+       app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:id="@+id/sendCircle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_greenbox"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:onClick="@{(v)->loginVM.onClick(v,`login`)}"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/phone_login"
+        app:layout_constraintBottom_toBottomOf="@id/phone_login"/>
+
+    <ImageView
+        android:id="@+id/sendIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_send"
+        android:layout_marginEnd="@dimen/_3sdp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:onClick="@{(v)->loginVM.onClick(v,`login`)}"
+        app:layout_constraintStart_toStartOf="@id/sendCircle"
+        app:layout_constraintEnd_toEndOf="@id/sendCircle"
+        app:layout_constraintTop_toTopOf="@id/sendCircle"
+        app:layout_constraintBottom_toBottomOf="@id/sendCircle"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <View
+        android:id="@+id/viewOne"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toTopOf="@id/tvSignupText"
+        app:layout_constraintBottom_toBottomOf="@id/tvSignupText"
+        app:layout_constraintEnd_toStartOf="@id/tvSignupText"
+        android:background="@color/loaderColorBackground"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvSignupText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/signupwith"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/viewOne"
+        app:layout_constraintEnd_toStartOf="@id/viewTwo"
+        app:layout_constraintTop_toBottomOf="@id/emailLayout"  />
+
+    <View
+        android:id="@+id/viewTwo"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="@dimen/_15sdp"
+        android:background="@color/loaderColorBackground"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/tvSignupText"
+        app:layout_constraintTop_toTopOf="@id/viewOne" />
+
+    <ImageView
+        android:id="@+id/fbIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/facebook_icon"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_25sdp"
+        app:layout_constraintStart_toStartOf="@id/viewTwo"
+        app:layout_constraintEnd_toEndOf="@id/viewTwo"
+        app:layout_constraintTop_toBottomOf="@+id/viewTwo"/>
+
+    <ImageView
+        android:id="@+id/googleIcon"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@drawable/google"
+        android:layout_marginTop="@dimen/_30sdp"
+        app:layout_constraintStart_toStartOf="@id/viewOne"
+        android:layout_marginStart="@dimen/_25sdp"
+        app:layout_constraintEnd_toEndOf="@id/viewOne"
+        app:layout_constraintTop_toBottomOf="@+id/viewOne"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

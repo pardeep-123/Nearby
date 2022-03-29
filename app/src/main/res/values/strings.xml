@@ -172,6 +172,7 @@
     <string name="txt_validate_upload_your_image">Please upload your profile image</string>
 
     <string name="msg_email_address">Please enter email</string>
+    <string name="msg_phone_address">Please enter Phone Number</string>
     <string name="msg_valid_email_address">Please enter valid email</string>
     <string name="msg_enter_password">Please enter password</string>
     <string name="msg_enter_experience">Please enter experience</string>
@@ -217,6 +218,12 @@
     <string name="str_female">Female</string>
     <string name="enter_message">Enter your Query..</string>
     <string name="str_address">Address</string>
+    <string name="hellothere">Hello there!</string>
+    <string name="loginwithphone">Login with your phone</string>
+    <string name="signupwith">or sign up with</string>
+    <string name="number">12456789</string>
+    <string name="smsCode">Your SMS Code</string>
+    <string name="otptext">Write in the code you got from the SMS</string>
 
 
 </resources>

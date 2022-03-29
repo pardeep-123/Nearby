@@ -12,9 +12,8 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AlertDialogLayout
 import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
-import com.creation.nearby.ui.authentication.LoginActivity
+import com.creation.nearby.ui.authentication.NewLoginActivity
 import com.creation.nearby.utils.Constants
-import com.creation.nearby.utils.ToastUtils
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
@@ -149,7 +148,7 @@ class CallApi {
                                     mContext.startActivity(
                                         Intent(
                                             mContext,
-                                            LoginActivity::class.java
+                                            NewLoginActivity::class.java
                                         )
                                     )
                                 }

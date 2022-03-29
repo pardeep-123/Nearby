@@ -1,16 +1,12 @@
 package com.creation.nearby.ui
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.appcompat.app.AlertDialog
 import com.bumptech.glide.Glide
-import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivitySideBarMenuBinding
-import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.Constants.IMAGE_BASE_URL
 import com.creation.nearby.utils.Constants.USER_IMAGE
 import com.creation.nearby.utils.ImagePickerUtility

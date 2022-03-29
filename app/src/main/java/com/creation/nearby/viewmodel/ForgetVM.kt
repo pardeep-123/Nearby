@@ -2,18 +2,15 @@ package com.creation.nearby.viewmodel
 
 import android.app.Activity
 import android.content.Context
-import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.creation.nearby.confirmationDialog
 import com.creation.nearby.model.CommonModel
-import com.creation.nearby.model.auth.LoginModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
-import com.creation.nearby.ui.authentication.LoginActivity
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.utils.Validator
 import retrofit2.Response

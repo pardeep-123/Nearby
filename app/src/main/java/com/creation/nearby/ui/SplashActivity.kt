@@ -9,6 +9,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
+import com.creation.nearby.ui.authentication.NewLoginActivity
 import com.creation.nearby.ui.authentication.WelcomeActivity
 import com.creation.nearby.utils.Constants
 import com.google.android.gms.tasks.OnCompleteListener
@@ -64,7 +65,7 @@ class SplashActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }else{
-            val intent = Intent(this, WelcomeActivity::class.java)
+            val intent = Intent(this, NewLoginActivity::class.java)
             startActivity(intent)
             finish()
         }

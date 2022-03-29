@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.MyEventActivity"></activity>
+        <activity android:name=".ui.authentication.OtpActivity"></activity>
+        <activity android:name=".ui.authentication.NewLoginActivity" />
+        <activity android:name=".ui.MyEventActivity" />
         <activity
             android:name=".ui.CallingVideoActivity"
             android:screenOrientation="portrait"

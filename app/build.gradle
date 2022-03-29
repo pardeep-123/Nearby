@@ -125,4 +125,9 @@ dependencies {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
     }
+
+    // country picker
+
+    implementation 'com.github.joielechong:countrycodepicker:2.4.2'
+
 }

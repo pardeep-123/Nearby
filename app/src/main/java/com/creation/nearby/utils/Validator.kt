@@ -35,6 +35,15 @@ class Validator() {
         } else true
     }
 
+
+    fun validateLogin(phone: String?): Boolean {
+        return if (TextUtils.isEmpty(phone)) {
+            ErrorMessage =
+                AppController.mInstance.getString(R.string.msg_phone_address)
+            false
+        }  else true
+    }
+
     // validation for conatct us
     fun validateContact(message: String?): Boolean {
         return if (TextUtils.isEmpty(message)) {

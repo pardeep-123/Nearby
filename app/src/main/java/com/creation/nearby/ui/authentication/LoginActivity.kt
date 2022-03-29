@@ -190,7 +190,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener,  FacebookHelper
         }
         socialId = bundle.getString(FacebookHelper.FACEBOOK_ID)!!
         socialImage = bundle.getString(FacebookHelper.PROFILE_PIC)!!
-        socialtype = "2"
+         socialtype = "2"
 
         loginVm.socialLoginApi(this,firstName+lastName,socialEmail,socialId,socialtype)
     }

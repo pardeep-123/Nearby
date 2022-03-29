@@ -17,6 +17,7 @@ import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.ui.PersonalInfoActivity
 import com.creation.nearby.ui.authentication.ChangePasswordActivity
 import com.creation.nearby.ui.authentication.LoginActivity
+import com.creation.nearby.ui.authentication.NewLoginActivity
 import retrofit2.Response
 
 class SettingVM : ViewModel() {
@@ -68,7 +69,7 @@ class SettingVM : ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             Log.e("isSuccess", "====$response")
-                            context.startActivity(Intent(context, LoginActivity::class.java))
+                            context.startActivity(Intent(context, NewLoginActivity::class.java))
                             (context as Activity).finishAffinity()
                             PreferenceFile.clearPreference(context)
                         }

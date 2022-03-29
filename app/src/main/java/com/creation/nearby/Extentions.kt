@@ -21,15 +21,13 @@ import android.view.Window
 import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.annotation.StringRes
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.creation.nearby.ui.authentication.LoginActivity
+import com.creation.nearby.ui.authentication.NewLoginActivity
 import com.github.chrisbanes.photoview.PhotoView
 import com.google.android.material.snackbar.Snackbar
 import java.text.ParseException
@@ -326,7 +324,7 @@ fun animateSlide(activity: Activity) {
 
     ok?.setOnClickListener {
         dialog.dismiss()
-        context.startActivity(Intent(context, LoginActivity::class.java))
+        context.startActivity(Intent(context, NewLoginActivity::class.java))
         (context as Activity).finish()
     }
 

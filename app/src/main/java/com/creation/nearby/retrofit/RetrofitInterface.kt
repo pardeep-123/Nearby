@@ -21,6 +21,11 @@ interface RetrofitInterface {
         @Body map: HashMap<String, String>
     ): Response<LoginModel>
 
+    // login api
+    @POST(Constants.SIGNUP)
+    suspend fun loginApiNew(
+        @Body map: HashMap<String, String>
+    ): Response<LoginModel>
 
     // social login api
     @POST(Constants.socialLogin)

@@ -3,6 +3,7 @@ package com.creation.nearby.viewmodel
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.core.content.ContextCompat.startActivity
@@ -23,6 +24,12 @@ import com.creation.nearby.utils.Constants.IS_FIRST_LOGIN
 import com.creation.nearby.utils.Constants.USER_IMAGE
 import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.utils.Validator
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.GraphRequest
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
+import com.facebook.login.widget.LoginButton
 import retrofit2.Response
 
 class LoginVm : ViewModel() {
@@ -34,7 +41,7 @@ class LoginVm : ViewModel() {
     fun onClick(v: View, s: String) {
         when (s) {
             "login" -> {
-                validateLogin(v.context)
+                validatePhoneLogin(v.context)
             }
             "forget" -> {
                 v.context.startActivity(Intent(v.context, ForgotPasswordActivity::class.java))
@@ -63,6 +70,17 @@ class LoginVm : ViewModel() {
             ToastUtils.showToast((context as Activity), Validator.ErrorMessage)
         }
     }
+    // function for validation check
+    private fun validatePhoneLogin(context: Context) {
+        if (Validator().validateLogin(
+                email.get()!!)) {
+
+            loginApi(context)
+
+        } else {
+            ToastUtils.showToast((context as Activity), Validator.ErrorMessage)
+        }
+    }
 
     private fun loginApi(context: Context) {
         try {
@@ -74,7 +92,7 @@ class LoginVm : ViewModel() {
                 object : RequestProcessor<Response<LoginModel>> {
                     override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<LoginModel> {
 
-                        return retrofitApi.loginApi(
+                        return retrofitApi.loginApiNew(
                             mapValues(context)
                         )
                     }
@@ -154,8 +172,8 @@ class LoginVm : ViewModel() {
 
         val hashMap = HashMap<String, String>()
 
-        hashMap["email"] = email.get()!!
-        hashMap["password"] = password.get()!!
+        hashMap["phone"] = email.get()!!
+        hashMap["countryCode"] = password.get()!!
         hashMap["deviceToken"] = PreferenceFile.retrieveKey(context,Constants.FIREBASE_FCM_TOKEN).toString()
         // hashMap["deviceToken"] = PreferenceFile.retrieveFcmDeviceId(context)
         hashMap["deviceType"] = "1"
@@ -178,4 +196,5 @@ class LoginVm : ViewModel() {
 
         return hashMap
     }
+
 }
