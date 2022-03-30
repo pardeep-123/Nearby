@@ -224,6 +224,9 @@
     <string name="number">12456789</string>
     <string name="smsCode">Your SMS Code</string>
     <string name="otptext">Write in the code you got from the SMS</string>
+    <string name="confirmCode">Confirm Code</string>
+    <string name="resendCode">Resend Code?</string>
+    <string name="go_to_home">Go to Home</string>
 
 
 </resources>

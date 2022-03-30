@@ -22,8 +22,8 @@ import retrofit2.Response
 
 class HomeVM : ViewModel() {
 
-    val eventList by lazy { ArrayList<HomeListingModel.Body.Event>() }
-    val feedList by lazy { ArrayList<HomeListingModel.Body.Feed>() }
+    val eventList by lazy { ArrayList<HomeListingModel.Body.User>() }
+    val feedList by lazy { ArrayList<HomeListingModel.Body.Event>() }
     val notificationList by lazy { ArrayList<HomeListingModel.Body.Notification>() }
 
     val mapListData: MutableLiveData<ArrayList<DataMap>> = MutableLiveData()
@@ -32,8 +32,8 @@ class HomeVM : ViewModel() {
     val mList = ArrayList<DataMap>()
 
     // initialze adapters
-    val eventAdapter by lazy { RecyclerAdapter<HomeListingModel.Body.Event>(R.layout.discover_item) }
-    val feedAdapter by lazy { RecyclerAdapter<HomeListingModel.Body.Feed>(R.layout.items_feeds) }
+    val eventAdapter by lazy { RecyclerAdapter<HomeListingModel.Body.User>(R.layout.new_discover_item) }
+    val feedAdapter by lazy { RecyclerAdapter<HomeListingModel.Body.Event>(R.layout.items_new_events) }
     val notificationAdapter by lazy { RecyclerAdapter<HomeListingModel.Body.Notification>(R.layout.item_notification) }
 
     // set api and create set adapter method
@@ -126,32 +126,32 @@ class HomeVM : ViewModel() {
                             val response = res.body()!!
 
                             // show max 5 events on the page
-                            response.body.eventList.forEachIndexed { index, it ->
-                                if (index<5){
+                            response.body.userList.forEachIndexed { index, it ->
+                              //  if (index<5){
                                     eventList.add(it)
-                                }
+                               // }
                             }
-                              response.body.feedList.forEachIndexed { index, feed ->
-                                  if (index<5)
+                              response.body.eventList.forEachIndexed { index, feed ->
+                               //   if (index<5)
                                   feedList.add(feed)
                               }
 
                             // add data to map list
-                            if(response.body.userList.isNotEmpty()) {
-                                for (i in 0 until response.body.userList.size) {
-                                    response.body.userList.run {
-                                        mList.add(
-                                            DataMap(
-                                                LatLng(
-                                                    this[i].latitude.toDouble(),
-                                                    this[i].longitude.toDouble()
-                                                ), this[i].id, this[i].firstname,this[i].lastname
-                                            )
-                                        )
-                                    }
-                                }
-                            }
-                            mapListData.value= mList
+//                            if(response.body.userList.isNotEmpty()) {
+//                                for (i in 0 until response.body.userList.size) {
+//                                    response.body.userList.run {
+//                                        mList.add(
+//                                            DataMap(
+//                                                LatLng(
+//                                                    this[i].latitude.toDouble(),
+//                                                    this[i].longitude.toDouble()
+//                                                ), this[i].id, this[i].firstname,this[i].lastname
+//                                            )
+//                                        )
+//                                    }
+//                                }
+//                            }
+                          //  mapListData.value= mList
                             eventAdapter.addItems(eventList)
                             feedAdapter.addItems(feedList)
                             notificationList.clear()

@@ -245,5 +245,6 @@
     <orderEntry type="library" name="Gradle: com.yanzhenjie:mediascanner:1.0.3@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.zxy.android:tiny:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.installreferrer:installreferrer:1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: io.github.chaosleung:pinview:1.4.4@aar" level="project" />
   </component>
 </module>

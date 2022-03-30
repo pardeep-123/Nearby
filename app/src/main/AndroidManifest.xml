@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.authentication.OtpActivity"></activity>
+        <activity android:name=".ui.authentication.ThankYouActivity"></activity>
+        <activity android:name=".ui.authentication.OtpActivity" />
         <activity android:name=".ui.authentication.NewLoginActivity" />
         <activity android:name=".ui.MyEventActivity" />
         <activity

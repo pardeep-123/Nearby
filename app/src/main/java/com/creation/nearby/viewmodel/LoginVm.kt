@@ -18,6 +18,7 @@ import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.ui.MainActivity
 import com.creation.nearby.ui.authentication.ForgotPasswordActivity
+import com.creation.nearby.ui.authentication.OtpActivity
 import com.creation.nearby.ui.authentication.SignUpActivity
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.Constants.IS_FIRST_LOGIN
@@ -101,15 +102,12 @@ class LoginVm : ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             Log.e("isSuccess", "====$response")
-                            context.startActivity(
-                                Intent(context, MainActivity::class.java))
+                            val intent = Intent(context,OtpActivity::class.java)
+                             intent.putExtra("data",response)
+                            context.startActivity(intent)
+//                            context.startActivity(Intent(context, OtpActivity::class.java).putExtra("data"),response.body)
                             animateSlide(context as Activity)
-                            PreferenceFile.storeLoginData(context, response)
-                            PreferenceFile.storeKey(context,"username",response.body.firstname+" "+response.body.lastname)
-                            PreferenceFile.storeKey(context,USER_IMAGE,response.body.image)
-                            PreferenceFile.storeKey(context, IS_FIRST_LOGIN,response.body.firstLogin)
-                            PreferenceFile.storeKey(context,Constants.AUTH_KEY,"Bearer "+response.body.token)
-                            PreferenceFile.storeUserId(context,response.body.id.toString())
+
                             context.finishAffinity()
                         }
                     }

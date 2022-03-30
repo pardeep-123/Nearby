@@ -22,7 +22,7 @@
         android:id="@+id/tvSms"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="60dp"
         android:fontFamily="@font/worksans_black"
         android:text="@string/smsCode"
         android:textColor="@color/black"
@@ -45,5 +45,59 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvSms" />
 
+    <com.chaos.view.PinView
+        android:id="@+id/pinViewOtp"
+        style="@style/PinWidget.PinView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_60sdp"
+        android:fontFamily="@font/worksans_medium"
+        android:gravity="center"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:textColorHint="@color/grey"
+        android:textSelectHandle="@drawable/grey_background"
+        android:textSize="@dimen/_18ssp"
+        app:itemCount="4"
+        app:itemHeight="52dp"
+        app:itemRadius="0dp"
+        app:itemSpacing="@dimen/_10sdp"
+        app:itemWidth="@dimen/_56sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvOtp"
+        app:lineWidth="@dimen/_1sdp"
+        app:viewType="rectangle" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/confirmCodeBtn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/round_edittext_background"
+        android:backgroundTint="@color/newgreen"
+        android:fontFamily="@font/worksans_semibold"
+        android:paddingVertical="12dp"
+        android:text="@string/confirmCode"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="@+id/pinViewOtp"
+        app:layout_constraintStart_toStartOf="@+id/pinViewOtp"
+        app:layout_constraintTop_toBottomOf="@+id/pinViewOtp" />
+
+    <TextView
+        android:id="@+id/tvResend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/worksans_medium"
+        android:text="@string/resendCode"
+        android:textColor="@color/black"
+        android:textSize="12sp"
+        android:layout_marginTop="@dimen/_10sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/confirmCodeBtn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

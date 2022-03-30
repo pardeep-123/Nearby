@@ -1,7 +1,10 @@
 package com.creation.nearby.model.auth
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class  LoginModel(
     @SerializedName("body")
     val body: Body,
@@ -11,7 +14,8 @@ data class  LoginModel(
     val message: String, // Signup successfully.
     @SerializedName("success")
     val success: Boolean // true
-) {
+): Parcelable {
+    @Parcelize
     data class Body(
         @SerializedName("age")
         val age: Int, // 0
@@ -107,30 +111,31 @@ data class  LoginModel(
         val verified: Int, // 0
         @SerializedName("zodiac")
         val zodiac: String
-    ) {
+    ): Parcelable {
+        @Parcelize
         data class UserDetail(
             @SerializedName("created")
             val created: Int, // 1644919020
             @SerializedName("createdAt")
-            val createdAt: String, // 2022-02-15T09:56:59.000Z
+            val createdAt: String?, // 2022-02-15T09:56:59.000Z
             @SerializedName("deviceToken")
-            val deviceToken: String, // 23
+            val deviceToken: String?, // 23
             @SerializedName("deviceType")
             val deviceType: Int, // 23
             @SerializedName("id")
             val id: Int, // 20
             @SerializedName("image")
-            val image: String,
+            val image: String?,
             @SerializedName("isNotification")
             val isNotification: Int, // 0
             @SerializedName("name")
-            val name: String,
+            val name: String?,
             @SerializedName("updated")
             val updated: Int, // 1644919020
             @SerializedName("updatedAt")
-            val updatedAt: String, // 2022-02-15T09:56:59.000Z
+            val updatedAt: String?, // 2022-02-15T09:56:59.000Z
             @SerializedName("userId")
             val userId: Int // 149
-        )
+        ) : Parcelable
     }
 }

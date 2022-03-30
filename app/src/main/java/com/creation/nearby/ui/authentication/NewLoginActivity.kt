@@ -58,6 +58,7 @@ class NewLoginActivity : AppCompatActivity(),GraphRequest.GraphJSONObjectCallbac
         binding.lifecycleOwner = this
         mCallbackManager = CallbackManager.Factory.create()
 
+        loginVm.password.set("+1")
         fbIcon?.setOnClickListener {
             LoginManager.getInstance().logOut()
             fbLogin()
