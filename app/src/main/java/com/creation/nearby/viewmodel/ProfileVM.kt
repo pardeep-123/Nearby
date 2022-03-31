@@ -48,6 +48,7 @@ class ProfileVM: ViewModel() {
                         if (res.isSuccessful) {
                             val response = res.body()!!
                             profileData.value = response
+
                         }
                     }
 
@@ -56,9 +57,7 @@ class ProfileVM: ViewModel() {
                     }
                 })
 
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
+        } catch (e: Exception) {e.printStackTrace()}
     }
 
     fun getInterests(context: Context) {
@@ -91,8 +90,8 @@ class ProfileVM: ViewModel() {
     }
 
     fun uploadGalleryImageApi(context: Context) {
-        try {
 
+        try {
             CallApi().callService(
                 context,
                 true,
@@ -129,13 +128,12 @@ class ProfileVM: ViewModel() {
         val hashMap = HashMap<String, RequestBody>()
         hashMap["type"] = "image".toRequestBody("text/plain".toMediaTypeOrNull())
         hashMap["folder"] = "gallary".toRequestBody("text/plain".toMediaTypeOrNull())
-
         return hashMap
+
     }
 
     fun uploadProfileImageApi(context: Context) {
         try {
-
             CallApi().callService(
                 context,
                 true,
@@ -180,16 +178,14 @@ class ProfileVM: ViewModel() {
         context: Context,
         editProfileRequest: EditProfileRequest,
         interestList: ArrayList<GenericModel>,
-        manualInterestList: java.util.ArrayList<ManualInterestModel>
-    ){
+        manualInterestList: java.util.ArrayList<ManualInterestModel>){
 
         val interestTitleList=ArrayList<String>()
 
-        if(interestList.isNotEmpty())
-        {
+        if(interestList.isNotEmpty()) {
             val filteredList = interestList.filter { it.isSelected == 1 }
             for(i in filteredList.indices){
-                interestTitleList.add(interestList[i].itemTitle.toString())
+                interestTitleList.add(filteredList[i].itemTitle.toString())
             }
         }
 

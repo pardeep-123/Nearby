@@ -17,10 +17,12 @@ import com.creation.nearby.databinding.ItemMyGallaryBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
 import com.creation.nearby.model.ImageModel
+import com.creation.nearby.openImagePopUp
 import com.creation.nearby.ui.FullPictureActivity
+import com.creation.nearby.utils.Constants
 
 
-class GallaryAdapter(var context: Context, var items: ArrayList<GallaryModel>, var onActionListener: OnActionListener<GallaryModel>) : RecyclerView.Adapter<GallaryAdapter.ViewHolder>(){
+class GallaryAdapter(var context: Context, var items: ArrayList<String>, var onActionListener: OnActionListener<GallaryModel>) : RecyclerView.Adapter<GallaryAdapter.ViewHolder>(){
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,22 +32,20 @@ class GallaryAdapter(var context: Context, var items: ArrayList<GallaryModel>, v
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        var item: GallaryModel = items[position]
+
         with(holder.binding){
 
-            with(items[position]){
-
-                Glide.with(context).load(items[position].imageUrl).placeholder(R.drawable.placeholder).error(R.drawable.placeholder)
+                Glide.with(context).load(Constants.IMAGE_BASE_URL+items[position]).placeholder(R.drawable.placeholder).error(R.drawable.placeholder)
                     .into(layoutImage)
-
 
                 layoutImage.setOnClickListener{
 
-                    onActionListener.notify(item,position,holder.itemView)
+                    openImagePopUp(Constants.IMAGE_BASE_URL+items[position],context)
+//                    onActionListener.notify(item,position,holder.itemView)
 
                 }
 
-            }
+
 
         }
 

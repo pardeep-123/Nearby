@@ -15,6 +15,8 @@ data class GetProfileResponse(
     data class Body(
         @SerializedName("age")
         val age: Int?,
+        @SerializedName("total_age")
+        val total_age: String?,
         @SerializedName("biography")
         val biography: String?,
         @SerializedName("countryCode")
@@ -106,7 +108,7 @@ data class GetProfileResponse(
         @SerializedName("userDetail")
         val userDetail: UserDetail?,
         @SerializedName("user_images")
-        val userImages: List<UserImage>?,
+        val userImages: ArrayList<UserImage>?,
         @SerializedName("username")
         val username: String?,
         @SerializedName("verified")

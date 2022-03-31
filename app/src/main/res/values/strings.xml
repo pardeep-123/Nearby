@@ -227,6 +227,8 @@
     <string name="confirmCode">Confirm Code</string>
     <string name="resendCode">Resend Code?</string>
     <string name="go_to_home">Go to Home</string>
+    <string name="your_full_name">Your Full Name</string>
+    <string name="enter_full_name">Logan Smith</string>
 
 
 </resources>

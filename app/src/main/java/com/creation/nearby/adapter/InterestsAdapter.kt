@@ -1,16 +1,13 @@
 package com.creation.nearby.adapter
 
 
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.databinding.InterestsItemBinding
-import com.creation.nearby.model.GenericModel
 import com.creation.nearby.model.InterestedModel
-import com.creation.nearby.model.SuggestionsModel
 
 class InterestsAdapter(private val mList: ArrayList<InterestedModel>) : RecyclerView.Adapter<InterestsAdapter.ViewHolder>() {
 
@@ -34,7 +31,6 @@ class InterestsAdapter(private val mList: ArrayList<InterestedModel>) : Recycler
                     interest.background = holder.itemView.resources.getDrawable(R.drawable.round_background_with_transparent)
                     interest.setTextColor(holder.itemView.resources.getColorStateList(R.color.white))
                 }else{
-
 
                     if (isSelected){
 

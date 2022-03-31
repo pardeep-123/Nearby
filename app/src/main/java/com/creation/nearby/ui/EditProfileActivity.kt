@@ -19,6 +19,7 @@ import com.creation.nearby.adapter.ImageAdapter
 import com.creation.nearby.adapter.ManualInterestAdapter
 import com.creation.nearby.adapter.ZodiacAdapter
 import com.creation.nearby.databinding.ActivityEditProfileBinding
+import com.creation.nearby.getZodiac
 import com.creation.nearby.model.*
 import com.creation.nearby.showToast
 import com.creation.nearby.utils.Constants
@@ -40,11 +41,10 @@ import java.util.*
 
 class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
-    private var images = ArrayList<ImageModel>()
     private lateinit var imageAdapter: ImageAdapter
 
     private val popupList = ArrayList<PopupModel>()
-    var cal: Calendar = Calendar.getInstance()
+    private var cal: Calendar = Calendar.getInstance()
 
     private lateinit var binding: ActivityEditProfileBinding
     private lateinit var popup: ListPopupWindow
@@ -64,7 +64,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
     private var selectedZodiac: String = ""
     private var selectedInterestedIn: String = ""
     private var profileImage: String = ""
-    var jsonArr = JSONArray()
+    private var jsonArr = JSONArray()
     private var selectedImageList: ArrayList<String> = ArrayList()
 
     private var isMainPhoto: Boolean = false
@@ -89,6 +89,8 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
         if (isMainPhoto) {
             isMainPhoto = false
+            Glide.with(this).load(imagePath).into(binding.userProfilePic)
+
             profileViewModel.profileImage.set(imagePath)
             //api call for upload image
             profileViewModel.uploadProfileImageApi(this)
@@ -376,27 +378,43 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                     }
                     interestsAdapter.notifyDataSetChanged()
                 }
+                /**
+                 * @author Pardeep Sharma
+                 * send list , if there is no interests
+                 */
+                else{
+                     for (i in interestsList.indices){
+                         interestGenericList.add(
+                             GenericModel(
+                                 interestsList[i].id,
+                                 interestsList[i].name,
+                                 0
+                             )
+                         )
+                     }
+                    interestsAdapter.notifyDataSetChanged()
+                }
 
                 /*set interests*/
-                val manualInterest = profileRes.body.manualInterest
-                manualInterestList.clear()
-                if (manualInterest?.isNotEmpty() == true) {
-                    val myManualInterestList = manualInterest.split(",")
-                    if (myManualInterestList.isNotEmpty()) {
-                        //for multiple value
-                        for (i in myManualInterestList.indices) {
-                            manualInterestList.add(ManualInterestModel(myManualInterestList[i], 1))
-                        }
-                    } else {
-                        manualInterestList.add(
-                            ManualInterestModel(
-                                manualInterest,
-                                1
-                            )
-                        )  //for single value
-                    }
-                    manualInterestAdapter.notifyDataSetChanged()
-                }
+//                val manualInterest = profileRes.body.manualInterest
+//                manualInterestList.clear()
+//                if (manualInterest?.isNotEmpty() == true) {
+//                    val myManualInterestList = manualInterest.split(",")
+//                    if (myManualInterestList.isNotEmpty()) {
+//                        //for multiple value
+//                        for (i in myManualInterestList.indices) {
+//                            manualInterestList.add(ManualInterestModel(myManualInterestList[i], 1))
+//                        }
+//                    } else {
+//                        manualInterestList.add(
+//                            ManualInterestModel(
+//                                manualInterest,
+//                                1
+//                            )
+//                        )  //for single value
+//                    }
+//                    manualInterestAdapter.notifyDataSetChanged()
+//                }
 
                 /*gallery images parsing*/
                 val galleryImages: MutableList<GetProfileResponse.Body.UserImage> =
@@ -523,7 +541,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
 
                 val editProfileRequest = EditProfileRequest().also {
                     it.firstname = binding.etFirstName.text.toString().trim()
-                    it.lastname = binding.etLastName.text.toString().trim()
+                  //  it.lastname = binding.etLastName.text.toString().trim()
                     it.countryCode = binding.countryCodePicker.selectedCountryCodeWithPlus
                     it.phone = binding.etPhoneNumber.text.toString().trim()
                     it.dob = binding.editTextDOB.text.toString().trim()
@@ -535,6 +553,7 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                     it.gallary_images = imageArrString
                     it.zodiac = selectedZodiac
                     it.intrested_in = selectedInterestedIn
+                    if (profileImage!="")
                     it.image = profileImage
                 }
                 //api call
@@ -704,22 +723,35 @@ class EditProfileActivity : ImagePickerUtility(), View.OnClickListener {
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+
                 updateDateInView()
             }
-        binding.editTextDOB!!.setOnClickListener {
-            DatePickerDialog(
+        binding.editTextDOB.setOnClickListener {
+          val picker =  DatePickerDialog(
                 this, R.style.DialogTimePicker,
                 dateSetListener,
                 cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),
                 cal.get(Calendar.DAY_OF_MONTH)
-            ).show()
+            )
+            picker.datePicker.maxDate = System.currentTimeMillis()
+            picker.show()
         }
+
     }
 
     private fun updateDateInView() {
-        val myFormat = "dd/MM/yyyy"
+        val myFormat = "yyyy-MM-dd"
         val sdf = SimpleDateFormat(myFormat, Locale.US)
         binding.editTextDOB.setText(sdf.format(cal.time))
+
+        /**
+         * Set Zodiac According to Date of Birth
+         */
+        val day = sdf.format(cal.time).split("-")[2]
+        val month = sdf.format(cal.time).split("-")[1]
+
+        binding.zodiacTv.text = getZodiac(day.toInt(),month.toInt())
+        selectedZodiac = binding.zodiacTv.text.toString().trim()
     }
 }

@@ -436,3 +436,24 @@ fun time_to_timestamp(str_date: String?, pattren: String?): Long {
     time_stamp /= 1000
     return time_stamp
 }
+
+// Months are in ints - January is 1, February 2, etc.
+fun getZodiac(day: Int, month: Int): String {
+    return when (month) {
+        1 ->                 // if the day int is higher or equal to 20, return Aquarius,
+            // otherwise Capricorn
+            if (day >= 20) "Aquarius" else "Capricorn"
+        2 -> if (day >= 19) "Pisces" else "Aquarius"
+        3 -> if (day >= 21) "Aries" else "Pisces"
+        4 -> if (day >= 20) "Taurus" else "Aries"
+        5 -> if (day >= 21) "Gemini" else "Taurus"
+        6 -> if (day >= 21) "Cancer" else "Gemini"
+        7 -> if (day >= 23) "Leo" else "Cancer"
+        8 -> if (day >= 23) "Virgo" else "Leo"
+        9 -> if (day >= 23) "Libra" else "Virgo"
+        10 -> if (day >= 23) "Scorpio" else "Libra"
+        11 -> if (day >= 22) "Sagittarius" else "Scorpio"
+        12 -> if (day >= 22) "Capricorn" else "Sagittarius"
+        else -> "Error"
+    }
+}

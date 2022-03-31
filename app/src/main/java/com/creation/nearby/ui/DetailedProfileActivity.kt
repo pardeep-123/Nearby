@@ -1,25 +1,21 @@
 package com.creation.nearby.ui
 
 import android.content.Intent
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.view.Window
-import android.view.WindowManager
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
-import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.adapter.OtherProfileInterestAdapter
 import com.creation.nearby.databinding.ActivityDetailedProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
-import com.creation.nearby.model.ImageModel
 import com.creation.nearby.model.InterestedModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -81,8 +77,8 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
             }
         }
         binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-        gallaryAdapter = GallaryAdapter(this, gallaryList, onActionListener)
-        binding.gallaryRecyclerView.adapter = gallaryAdapter
+//        gallaryAdapter = GallaryAdapter(this, gallaryList, onActionListener)
+//        binding.gallaryRecyclerView.adapter = gallaryAdapter
         gallaryAdapter.notifyDataSetChanged()
     }
 

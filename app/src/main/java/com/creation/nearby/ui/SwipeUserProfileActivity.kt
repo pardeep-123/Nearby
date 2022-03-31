@@ -78,8 +78,8 @@ class SwipeUserProfileActivity : AppCompatActivity(),View.OnClickListener{
             }
         }
         binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-        galleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
-        binding.gallaryRecyclerView.adapter = galleryAdapter
+//        galleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
+//        binding.gallaryRecyclerView.adapter = galleryAdapter
         galleryAdapter.notifyDataSetChanged()
     }
 

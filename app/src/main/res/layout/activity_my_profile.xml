@@ -42,10 +42,16 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        </ImageView>
-
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#60000000"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
@@ -94,13 +100,13 @@
                         android:background="@drawable/circle_background"
                         android:backgroundTint="@color/transparent_white"
                         android:padding="10dp"
+                        android:visibility="gone"
                         android:src="@drawable/my_profile_camera_icon"
                         app:layout_constraintBottom_toBottomOf="@+id/edit_profile_iv"
                         app:layout_constraintEnd_toStartOf="@+id/edit_profile_iv"
                         app:layout_constraintTop_toTopOf="@+id/edit_profile_iv"
-                        app:tint="@color/white">
+                        app:tint="@color/white"/>
 
-                    </ImageView>
 
                     <ImageView
                         android:id="@+id/edit_profile_iv"
@@ -181,7 +187,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="24dp"
                         android:fontFamily="@font/worksans_regular"
-                        android:text="Buffett has been the chairman and largest shareholder of Berkshire Hathaway since 1970"
+                        android:text=""
                         android:textColor="@color/transparent_white1"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -239,7 +245,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="24dp"
                         android:fontFamily="@font/worksans_regular"
-                        android:text="Women"
+                        android:text=""
                         android:textColor="@color/transparent_white1"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="parent"

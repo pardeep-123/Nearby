@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.databinding.SwipeCardItemBinding
 import com.creation.nearby.model.SwipeCardModel
-import com.creation.nearby.ui.DetailedProfileActivity
 import com.creation.nearby.ui.OtherUserProfileActivity
 
 class SwipeCardAdapter(val context: Context,var swipeList: ArrayList<SwipeCardModel> ):RecyclerView.Adapter<SwipeCardAdapter.ViewHolder>(){

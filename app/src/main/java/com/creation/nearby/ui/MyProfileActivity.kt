@@ -1,8 +1,10 @@
 package com.creation.nearby.ui
 
+import android.R.string
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils.split
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -12,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
 import com.creation.nearby.adapter.InterestsAdapter
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivityMyProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
@@ -22,6 +25,9 @@ import com.creation.nearby.viewmodel.ProfileVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.card.MaterialCardView
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class MyProfileActivity : ImagePickerUtility() {
 
@@ -29,7 +35,7 @@ class MyProfileActivity : ImagePickerUtility() {
     private  var interestsList = ArrayList<InterestedModel>()
     private lateinit var  interestsAdapter: InterestsAdapter
 
-    private var gallaryList = ArrayList<GallaryModel>()
+    private var gallaryList = ArrayList<String>()
     private lateinit var gallaryAdapter: GallaryAdapter
 
     private val profileViewModel: ProfileVM by viewModels()
@@ -49,27 +55,8 @@ class MyProfileActivity : ImagePickerUtility() {
 
         initAdapter()
 
-        interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
-
-        interestsAdapter = InterestsAdapter(interestsList)
-        binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
-        binding.profileInterestRecView.adapter = interestsAdapter
-        interestsAdapter.notifyDataSetChanged()
-
-        gallaryList.add(GallaryModel(""))
-        gallaryList.add(GallaryModel(""))
-        gallaryList.add(GallaryModel(""))
-        gallaryList.add(GallaryModel(""))
-
-
         clickHandler()
 
-        //get profile api call
-        profileViewModel.getProfileApi(this)
 
         //observe get profile response
         profileViewModel.profileData.observeForever { response->
@@ -81,12 +68,44 @@ class MyProfileActivity : ImagePickerUtility() {
                         .placeholder(R.drawable.placeholder)
                         .into(binding.userProfilePicMyProfile)
                 }
+                /**
+                 * Add Images in gallary list
+                 */
+                gallaryList.clear()
+                profileRes.body?.userImages?.forEach {
+                    gallaryList.add(it.image!!)
+                }
+                gallaryAdapter.notifyDataSetChanged()
+                /**
+                 * Add Interests in Array List
+                 */
+
+                val intersetList = profileRes.body?.interests?.split(",")?.toList()
+                interestsList.clear()
+                intersetList?.forEach {
+                    interestsList.add(InterestedModel(it,isSelected = false,isProfile = true))
+                }
+                interestsAdapter.notifyDataSetChanged()
                 binding.tvUserName.text = "${profileRes.body?.firstname} ${profileRes.body?.lastname}"
                 binding.tvBio.text = profileRes.body?.biography
+                binding.myZodiacSignTv.text = profileRes.body?.zodiac
+                binding.interestedInTv.text = profileRes.body?.intrestedIn
+                binding.userDescription.text = "based in"+ profileRes.body?.location
+
+                /**
+                 * save image and name in shared preference
+                 */
+                PreferenceFile.storeKey(this,"username",profileRes.body?.firstname!!)
+                PreferenceFile.storeKey(this, Constants.USER_IMAGE,profileRes.body.image!!)
             }
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        //get profile api call
+        profileViewModel.getProfileApi(this)
+    }
     private fun clickHandler() {
 
         binding.backbtn1.setOnClickListener{
@@ -124,7 +143,14 @@ class MyProfileActivity : ImagePickerUtility() {
         binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
         gallaryAdapter = GallaryAdapter(this, gallaryList, onActionListener)
         binding.gallaryRecyclerView.adapter = gallaryAdapter
-        gallaryAdapter.notifyDataSetChanged()
+
+
+
+        interestsAdapter = InterestsAdapter(interestsList)
+        binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+        binding.profileInterestRecView.adapter = interestsAdapter
+
+
     }
 
 }

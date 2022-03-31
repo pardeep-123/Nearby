@@ -335,7 +335,9 @@ data class HomeListingModel(
             @SerializedName("status")
             val status: Int, // 1
             @SerializedName("total_age")
-            val totalAge: String, // 34
+            val totalAge: String,
+            @SerializedName("image")
+            val image: String,// 34
             @SerializedName("verified")
             val verified: Int // 0
         ): AbstractModel()

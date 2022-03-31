@@ -162,8 +162,8 @@ class OtherUserProfileActivity : AppCompatActivity() {
             }
         }
         dialogBinding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-        galleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
-        dialogBinding.gallaryRecyclerView.adapter = galleryAdapter
+//        galleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
+//        dialogBinding.gallaryRecyclerView.adapter = galleryAdapter
 
 
         if (!response.body.interests.isNullOrBlank()) {
@@ -236,8 +236,8 @@ class OtherUserProfileActivity : AppCompatActivity() {
             }
         }
         binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-        mainGalleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
-        binding.gallaryRecyclerView.adapter = mainGalleryAdapter
+//        mainGalleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
+//        binding.gallaryRecyclerView.adapter = mainGalleryAdapter
         mainGalleryAdapter.notifyDataSetChanged()
     }
 
