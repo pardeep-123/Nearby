@@ -18,6 +18,7 @@ data class UserDetailResponse(
         val email: String,
         val end_date: String,
         val facebookId: String,
+        val firstname: String,
         val forgotPasswordHash: String,
         val gender: Int,
         val googleId: String,

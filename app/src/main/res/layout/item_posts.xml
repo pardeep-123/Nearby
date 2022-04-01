@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="16dp"
-            android:background="@color/teal"
+
             app:cardCornerRadius="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,9 +33,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/post_main_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/teal">
-
+                android:layout_height="match_parent">
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/post_image_view"
@@ -101,9 +99,8 @@
                     android:scaleType="centerCrop"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/post_message_tv">
+                    app:layout_constraintTop_toBottomOf="@+id/post_message_tv"/>
 
-                </ImageView>
 
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/post_message_btn"

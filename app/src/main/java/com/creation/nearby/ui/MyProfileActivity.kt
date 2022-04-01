@@ -1,10 +1,8 @@
 package com.creation.nearby.ui
 
-import android.R.string
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.text.TextUtils.split
 import android.view.View
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -90,7 +88,7 @@ class MyProfileActivity : ImagePickerUtility() {
                 binding.tvBio.text = profileRes.body?.biography
                 binding.myZodiacSignTv.text = profileRes.body?.zodiac
                 binding.interestedInTv.text = profileRes.body?.intrestedIn
-                binding.userDescription.text = "based in"+ profileRes.body?.location
+                binding.userDescription.text = profileRes.body?.total_age+" years old,"+" based in "+ profileRes.body?.location
 
                 /**
                  * save image and name in shared preference

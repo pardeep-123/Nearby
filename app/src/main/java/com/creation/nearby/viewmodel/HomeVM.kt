@@ -1,6 +1,7 @@
 package com.creation.nearby.viewmodel
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.lifecycle.MutableLiveData
@@ -14,7 +15,10 @@ import com.creation.nearby.model.HomeListingModel
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
+import com.creation.nearby.ui.DetailedProfileActivity
 import com.creation.nearby.ui.MainActivity
+import com.creation.nearby.ui.OtherUserProfileActivity
+import com.creation.nearby.ui.authentication.OtpActivity
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ToastUtils
 import com.google.android.gms.maps.model.LatLng
@@ -22,8 +26,8 @@ import retrofit2.Response
 
 class HomeVM : ViewModel() {
 
-    val eventList by lazy { ArrayList<HomeListingModel.Body.User>() }
-    val feedList by lazy { ArrayList<HomeListingModel.Body.Event>() }
+    val userList by lazy { ArrayList<HomeListingModel.Body.User>() }
+    val eventList by lazy { ArrayList<HomeListingModel.Body.Event>() }
     val notificationList by lazy { ArrayList<HomeListingModel.Body.Notification>() }
 
     val mapListData: MutableLiveData<ArrayList<DataMap>> = MutableLiveData()
@@ -41,20 +45,10 @@ class HomeVM : ViewModel() {
 
         eventAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
-                if (type == "eventClick") {
-                    MainActivity.binding.sectionRecyclerView.postDelayed({
-
-                        MainActivity.binding.sectionRecyclerView.scrollToPosition(3)
-
-                        MainActivity.binding.sectionRecyclerView.postDelayed({
-                            MainActivity.binding.sectionRecyclerView.findViewHolderForAdapterPosition(
-                                3
-                            )?.itemView?.performClick()
-
-
-                        }, 10)
-
-                    }, 50)
+                if (type == "userClick") {
+                    val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+                    intent.putExtra("userId",userList[position].id.toString())
+                    view.context.startActivity(intent)
 
                 }
 
@@ -63,14 +57,14 @@ class HomeVM : ViewModel() {
         // set click on feed adapter
         feedAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
-                if (type == "feedClick") {
+                if (type == "eventClick") {
                     MainActivity.binding.sectionRecyclerView.postDelayed({
 
-                        MainActivity.binding.sectionRecyclerView.scrollToPosition(4)
+                        MainActivity.binding.sectionRecyclerView.scrollToPosition(3)
 
                         MainActivity.binding.sectionRecyclerView.postDelayed({
                             MainActivity.binding.sectionRecyclerView.findViewHolderForAdapterPosition(
-                                4
+                                3
                             )?.itemView?.performClick()
 
 
@@ -128,12 +122,12 @@ class HomeVM : ViewModel() {
                             // show max 5 events on the page
                             response.body.userList.forEachIndexed { index, it ->
                               //  if (index<5){
-                                    eventList.add(it)
+                                userList.add(it)
                                // }
                             }
                               response.body.eventList.forEachIndexed { index, feed ->
                                //   if (index<5)
-                                  feedList.add(feed)
+                                  eventList.add(feed)
                               }
 
                             // add data to map list
@@ -152,8 +146,8 @@ class HomeVM : ViewModel() {
 //                                }
 //                            }
                           //  mapListData.value= mList
-                            eventAdapter.addItems(eventList)
-                            feedAdapter.addItems(feedList)
+                            eventAdapter.addItems(userList)
+                            feedAdapter.addItems(eventList)
                             notificationList.clear()
                             notificationList.addAll(response.body.notificationList)
                             notificationList.forEach {

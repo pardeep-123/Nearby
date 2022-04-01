@@ -1,152 +1,150 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".ui.OtherUserProfileActivity">
+<layout>
 
-    <ImageView
-        android:id="@+id/backbtn1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        app:tint="@color/white"
-        android:elevation="3dp"
-        android:padding="2dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginStart="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/back_arrow" />
+    <data>
 
-    <ImageView
-        android:id="@+id/user_profile_pic_my_profile"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/placeholder"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <import type="android.view.View" />
 
-    </ImageView>
-    <View
+        <variable
+            name="otherUserVM"
+            type="com.creation.nearby.viewmodel.OtherUserVM" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#50000000"/>
+        android:background="@color/white"
+        tools:context=".ui.DetailedProfileActivity">
+
+        <ImageView
+            android:id="@+id/goBack"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="60dp"
+            android:elevation="3dp"
+            android:padding="2dp"
+            android:src="@drawable/back_arrow"
+            android:tint="@color/white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/otherUserScrollView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:fillViewport="true"
-        android:layout_marginTop="60dp"
-        android:overScrollMode="never"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/user_profile_pic_my_profile"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backbtn1">
+        <TextView
+            android:id="@+id/block_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/round_shape_large1"
+            android:backgroundTint="@color/red"
+            android:elevation="3dp"
+            android:fontFamily="@font/worksans_regular"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="8dp"
+            android:text="@string/block"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/goBack"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/goBack" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <ImageView
+            android:id="@+id/userPic"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="230dp"
+            android:scaleType="centerCrop"
+            setImageSrcWithUrl="@{otherUserVM.userData.Body.image}"
+            android:src="@drawable/detailed_user_pic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userPic"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/showLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="220dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                 <TextView
-                    android:id="@+id/textView66"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:fontFamily="@font/worksans_black"
-                     android:textColor="@color/white"
-                    android:textSize="30sp"
-
-                    android:text="sgsdfgsdfkgksdaghkdjsfghjkdsfghjksdfhgjksdf"
-                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </TextView>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/dislike_btn"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_marginEnd="16dp"
-                    android:background="@drawable/round_shape_small1"
-                    android:backgroundTint="@color/grey"
-                    app:layout_constraintBottom_toBottomOf="@+id/liked_btn1"
-                    app:layout_constraintEnd_toStartOf="@+id/liked_btn1"
-                    app:layout_constraintTop_toTopOf="@+id/liked_btn1">
-
-                    <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
-                        android:src="@drawable/cross_icon"
-                        app:tint="@color/black"
-                        android:padding="2dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </ImageView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/liked_btn1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView66"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintTop_toTopOf="@+id/textView66">
-
-
-                    <ImageView
-                        android:id="@+id/liked_btn"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:src="@drawable/liked_btn1"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </ImageView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-                <TextView
-                    android:id="@+id/user_description"
+                    android:id="@+id/userName"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/worksans_regular"
-                    android:text="18 years old, based in New York"
-                    android:textColor="@color/transparent_white1"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/worksans_black"
+                    android:text="@{otherUserVM.userData.Body.firstname}"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    app:layout_constraintEnd_toStartOf="@+id/eventsCross"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView66">
+                    app:layout_constraintTop_toTopOf="parent" />
 
-                </TextView>
+                <ImageView
+                    android:id="@+id/chat"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginBottom="16dp"
+                    android:padding="14dp"
+                    android:src="@drawable/chat_icon"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/userName"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/userName" />
+
+                <ImageView
+                    android:id="@+id/eventsCross"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="16dp"
+
+                    android:src="@drawable/ic_button_cancel"
+                    app:layout_constraintEnd_toStartOf="@+id/sendRequest"
+                    app:layout_constraintStart_toEndOf="@id/userName"
+                    app:layout_constraintTop_toTopOf="@+id/sendRequest" />
+
+                <ImageView
+                    android:id="@+id/sendRequest"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:src="@drawable/ic_button"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/userName" />
+
+
+                <TextView
+                    android:id="@+id/userLocation"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="24dp"
+                    android:fontFamily="@font/worksans_regular"
+                    android:text="@{otherUserVM.userData.Body.location}"
+                    android:textColor="@color/dark_grey"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/userName"
+                    app:layout_constraintTop_toBottomOf="@+id/userName" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/profile_interest_rec_view"
@@ -155,147 +153,77 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="8dp"
                     android:overScrollMode="never"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/user_description">
-
-                </androidx.recyclerview.widget.RecyclerView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/hideLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/showLayout"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
-
+                    app:layout_constraintTop_toBottomOf="@+id/userLocation" />
 
                 <TextView
-                    android:id="@+id/textView67"
+                    android:id="@+id/tvAboutMe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/worksans_black"
-                    android:text="@string/biography"
-                    android:textColor="@color/white"
+                    android:text="@string/aboutMe"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintStart_toStartOf="@+id/userName"
+                    app:layout_constraintTop_toBottomOf="@+id/profile_interest_rec_view" />
 
                 <TextView
-                    android:id="@+id/textView68"
+                    android:id="@+id/etAboutMe"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:fontFamily="@font/worksans_regular"
-                    android:text="Buffett has been the chairman and largest shareholder of Berkshire Hathaway since 1970"
-                    android:textColor="@color/transparent_white1"
+                    android:text="@{otherUserVM.userData.Body.biography}"
+
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView67" />
-
+                    app:layout_constraintStart_toStartOf="@+id/userName"
+                    app:layout_constraintTop_toBottomOf="@+id/tvAboutMe" />
 
                 <TextView
-                    android:id="@+id/my_zodiac_sign"
+                    android:id="@+id/zodiac_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/worksans_black"
-                    android:text="@string/my_zodiac_sign"
-                    android:textColor="@color/white"
+                    android:text="@string/zodiac_sign"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView68" />
+                    app:layout_constraintStart_toStartOf="@+id/userName"
+                    app:layout_constraintTop_toBottomOf="@+id/etAboutMe" />
 
                 <TextView
-                    android:id="@+id/my_zodiac_sign_tv"
+                    android:id="@+id/discount_detail"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginEnd="24dp"
                     android:fontFamily="@font/worksans_regular"
-                    android:text="Libra"
-                    android:textColor="@color/transparent_white1"
+                    android:text="@{otherUserVM.userData.Body.zodiac}"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_zodiac_sign" />
-
-
-                <TextView
-                    android:id="@+id/interested_in_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/worksans_black"
-                    android:text="@string/interested_in"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_zodiac_sign_tv" />
-
-                <TextView
-                    android:id="@+id/interested_in_tv"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="24dp"
-                    android:fontFamily="@font/worksans_regular"
-                    android:text="Women"
-                    android:textColor="@color/transparent_white1"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/interested_in_title" />
-
-                <TextView
-                    android:id="@+id/my_gallary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
-                    android:fontFamily="@font/worksans_black"
-                    android:text="@string/my_gallary"
-                    android:textColor="@color/white"
-                    android:textSize="20sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/interested_in_tv" />
+                    app:layout_constraintStart_toStartOf="@+id/userName"
+                    app:layout_constraintTop_toBottomOf="@+id/zodiac_title" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/gallary_recycler_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="8dp"
-                    android:paddingBottom="24dp"
+                    android:layout_marginTop="16dp"
                     android:overScrollMode="never"
+                    android:paddingBottom="24dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_gallary">
-
-                </androidx.recyclerview.widget.RecyclerView>
+                    app:layout_constraintTop_toBottomOf="@+id/discount_detail" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-    </androidx.core.widget.NestedScrollView>
-
-
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -16,6 +16,7 @@ import com.creation.nearby.adapter.OtherProfileInterestAdapter
 import com.creation.nearby.databinding.ActivityDetailedProfileBinding
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.GallaryModel
+import com.creation.nearby.model.HomeListingModel
 import com.creation.nearby.model.InterestedModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -31,6 +32,8 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
 
     private var gallaryList = ArrayList<GallaryModel>()
     private lateinit var gallaryAdapter: GallaryAdapter
+
+    private var userList : HomeListingModel.Body.User?=null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -114,7 +117,7 @@ class DetailedProfileActivity : AppCompatActivity(),View.OnClickListener {
         val tvDetail: TextView? = dialog.findViewById(R.id.select_camera)
         val tvNo: TextView? = dialog.findViewById(R.id.cancel)
 
-        tvDetail?.text = "Are you sure you want to block?"
+        tvDetail?.text = getString(R.string.blockText)
 
         tvYes?.setOnClickListener {
             dialog.dismiss()

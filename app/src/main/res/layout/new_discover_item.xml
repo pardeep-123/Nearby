@@ -11,7 +11,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="1dp"
-    android:onClick="@{(v)->model.onItemClick.onClick(v,model.adapterPosition,`eventClick`)}"
+    android:onClick="@{(v)->model.onItemClick.onClick(v,model.adapterPosition,`userClick`)}"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -19,6 +19,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:src="@drawable/swipe_image2"
+        setImageSrcWithUrl="@{model.image}"
         app:civ_border_color="@color/newgreen"
         app:civ_border_width="4dp"
         android:layout_marginStart="10dp"

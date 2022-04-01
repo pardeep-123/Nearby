@@ -14,6 +14,7 @@ import android.view.Window
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
@@ -35,6 +36,7 @@ import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.ToastUtils
+import com.creation.nearby.viewmodel.OtherUserVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -49,15 +51,14 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private  var interestsList = ArrayList<InterestedModel>()
     private lateinit var  interestsAdapter: InterestsAdapter
 
-   // var onSwipeTouchListener: OnSwipeTouchListener? = null
+   val otherUserVM : OtherUserVM by viewModels()
 
     lateinit var dialogBinding: ActivitySwipeUserProfileBinding
     lateinit var fullProfileDialog: BottomSheetDialog
 
-    private  var swipeInterestsList = ArrayList<InterestedModel>()
     private lateinit var  swipeInterestsAdapter: OtherProfileInterestAdapter
 
-    private var galleryList = ArrayList<GallaryModel>()
+    private var galleryList = ArrayList<String>()
     private lateinit var galleryAdapter: GallaryAdapter
     private lateinit var mainGalleryAdapter: GallaryAdapter
 
@@ -65,6 +66,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtherUserProfileBinding.inflate(layoutInflater)
+
+        binding.otherUserVM = otherUserVM
+        binding.lifecycleOwner = this
 
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -74,12 +78,13 @@ class OtherUserProfileActivity : AppCompatActivity() {
         }else{
             ""
         }
-
-        interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
-        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
+       otherUserVM.userId.set(userId)
+        otherUserVM.userDetailApi(this)
+//        interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
+//        interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
+//        interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
+//        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
+//        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
@@ -101,56 +106,26 @@ class OtherUserProfileActivity : AppCompatActivity() {
     //    onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.showLayout))
 
 
-
-
-
-
-        initAdapter2()
-
         //full profile dialog
 
         clickHandler()
 
-
-        userDetailApi()
     }
 
-    private fun userDetailApi() {
-
-        try {
-            CallApi().callService(
-                this,
-                true,
-                object : RequestProcessor<Response<UserDetailResponse>> {
-                    override suspend fun sendRequest(retrofitApi: RetrofitInterface): Response<UserDetailResponse> {
-                        return retrofitApi.userDetail(userId)
-                    }
-
-                    override fun onResponse(res: Response<UserDetailResponse>) {
-                        if (res.isSuccessful) {
-                            val response = res.body()!!
-                            Log.e("isSuccess", "====$response")
-                            setData(response)
-                        }
-                    }
-
-                    override fun onException(message: String?) {
-                        Log.e("userException", "====$message")
-                    }
-                })
-
-        } catch (e: Exception) {
-            e.printStackTrace()
+    override fun onResume() {
+        super.onResume()
+        otherUserVM.userData.observeForever { response->
+            setData(response)
         }
     }
 
     private fun setData(response: UserDetailResponse) {
 
-        binding.textView66.text=response.body.name
-        response.body.user_images.forEachIndexed { index, it ->
-            galleryList.add(GallaryModel(Constants.IMAGE_BASE_URL+it.image))
-
-        }
+        binding.userName.text=response.body.name
+//        response.body.user_images.forEachIndexed { index, it ->
+//            galleryList.add(Constants.IMAGE_BASE_URL+it.image)
+//
+//        }
         val onActionListener = object : OnActionListener<GallaryModel> {
             override fun notify(model: GallaryModel, position: Int, view: View) {
 
@@ -166,32 +141,43 @@ class OtherUserProfileActivity : AppCompatActivity() {
 //        dialogBinding.gallaryRecyclerView.adapter = galleryAdapter
 
 
-        if (!response.body.interests.isNullOrBlank()) {
-            val specialisationList: MutableList<String> = response.body.interests.split(",").toList() as MutableList<String>
+//        if (!response.body.interests.isNullOrBlank()) {
+//            val specialisationList: MutableList<String> = response.body.interests.split(",").toList() as MutableList<String>
+//
+//            specialisationList.forEach {
+//                swipeInterestsList.add(InterestedModel(it,isSelected = false,isProfile = true))
+//
+//            }
+//
+//        }
+        /**
+         * Add Interests in Array List
+         */
 
-            specialisationList.forEach {
-                swipeInterestsList.add(InterestedModel(it,isSelected = false,isProfile = true))
-
-            }
-
+        val intersetList = response.body.interests.split(",").toList()
+        interestsList.clear()
+        intersetList.forEach {
+            interestsList.add(InterestedModel(it,isSelected = false,isProfile = true))
         }
 
+        /**
+         *
+         */
+        response.body.user_images.forEach {
+            galleryList.add(it.image)
+        }
 
+        initAdapter2()
 
-//        swipeInterestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
-//        swipeInterestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-//        swipeInterestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
-//        swipeInterestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
-
-        swipeInterestsAdapter = OtherProfileInterestAdapter(swipeInterestsList)
-        dialogBinding.interestRecyclerView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
-        dialogBinding.interestRecyclerView.adapter = swipeInterestsAdapter
-        swipeInterestsAdapter.notifyDataSetChanged()
+        swipeInterestsAdapter = OtherProfileInterestAdapter(interestsList)
+        binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
+        binding.profileInterestRecView.adapter = swipeInterestsAdapter
+       // swipeInterestsAdapter.notifyDataSetChanged()
     }
 
     private fun clickHandler() {
 
-        binding.backbtn1.setOnClickListener{
+        binding.goBack.setOnClickListener{
 
             onBackPressed()
 
@@ -209,13 +195,13 @@ class OtherUserProfileActivity : AppCompatActivity() {
             fullProfileDialog.dismiss()
         }
 
-        binding.dislikeBtn.setOnClickListener{
-
-            onBackPressed()
-        }
-        binding.likedBtn1.setOnClickListener{
-            fullProfileDialog.show()
-        }
+//        binding..setOnClickListener{
+//
+//            onBackPressed()
+//        }
+//        binding.likedBtn1.setOnClickListener{
+//            fullProfileDialog.show()
+//        }
 
     }
 
@@ -236,9 +222,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
             }
         }
         binding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-//        mainGalleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
-//        binding.gallaryRecyclerView.adapter = mainGalleryAdapter
-        mainGalleryAdapter.notifyDataSetChanged()
+        mainGalleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
+        binding.gallaryRecyclerView.adapter = mainGalleryAdapter
+       // mainGalleryAdapter.notifyDataSetChanged()
     }
 
     private fun optionsDialog() {

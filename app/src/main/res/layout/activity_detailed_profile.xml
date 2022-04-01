@@ -37,7 +37,7 @@
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="@+id/goBack"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/goBack"></TextView>
+        app:layout_constraintTop_toTopOf="@+id/goBack"/>
 
     <ImageView
         android:id="@+id/imageView3"
@@ -66,7 +66,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/textView69"
@@ -81,7 +81,7 @@
                 android:textSize="30sp"
                 app:layout_constraintEnd_toStartOf="@+id/chat"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></TextView>
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <ImageView
                 android:id="@+id/chat"
@@ -107,7 +107,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView69"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView69"/>
 
             <TextView
                 android:id="@+id/textView72"
@@ -119,7 +119,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView71"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView71"/>
 
             <TextView
                 android:id="@+id/textView73"
@@ -128,12 +128,12 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:fontFamily="@font/worksans_regular"
-                android:text="I love clothing, I am a influencer looking to create a friend circle."
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView72"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView72"/>
 
             <TextView
                 android:id="@+id/discount_title"
@@ -145,7 +145,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/textView73"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/textView73"/>
 
             <TextView
                 android:id="@+id/discount_detail"
@@ -159,7 +159,7 @@
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/discount_title"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/discount_title"/>
 
             <TextView
                 android:id="@+id/host_title"
@@ -171,7 +171,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/discount_detail"></TextView>
+                app:layout_constraintTop_toBottomOf="@+id/discount_detail"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/interest_recycler_view"
@@ -194,9 +194,7 @@
                 android:textColor="@color/black"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="@+id/textView69"
-                app:layout_constraintTop_toBottomOf="@+id/interest_recycler_view">
-
-            </TextView>
+                app:layout_constraintTop_toBottomOf="@+id/interest_recycler_view"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/gallary_recycler_view"

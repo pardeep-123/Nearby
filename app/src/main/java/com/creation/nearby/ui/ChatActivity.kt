@@ -1,21 +1,16 @@
 package com.creation.nearby.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
-import com.creation.nearby.adapter.ActivityAdapter
 import com.creation.nearby.adapter.ChatsAdapter
 import com.creation.nearby.adapter.OnlineUserChatAdapter
 import com.creation.nearby.databinding.ActivityChatBinding
-import com.creation.nearby.databinding.ActivityMainBinding
-import com.creation.nearby.model.ActivitiesModel
 import com.creation.nearby.model.ChatModel
-import com.creation.nearby.model.FriendsModel
 import com.creation.nearby.model.OnlineUserChatModel
-import com.creation.nearby.utils.AppUtils
 
 class ChatActivity : AppCompatActivity() {
 

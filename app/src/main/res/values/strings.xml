@@ -229,6 +229,8 @@
     <string name="go_to_home">Go to Home</string>
     <string name="your_full_name">Your Full Name</string>
     <string name="enter_full_name">Logan Smith</string>
+    <string name="blockText">Are you sure you want to block?</string>
+    <string name="aboutMe">About me</string>
 
 
 </resources>

@@ -110,8 +110,8 @@ data class GetEventModel(
             val latitude: String, // 0.000000
             @SerializedName("longitude")
             val longitude: String, // 0.000000
-            @SerializedName("name")
-            val name: String // new User
+            @SerializedName("firstname")
+            val firstname: String // new User
         ): AbstractModel(),Parcelable
     }
 }

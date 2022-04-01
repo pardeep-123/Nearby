@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModel
 import com.creation.nearby.R
 import com.creation.nearby.adapter.RecyclerAdapter
 import com.creation.nearby.base.PreferenceFile
-import com.creation.nearby.model.AddEventModel
 import com.creation.nearby.model.CommonModel
 import com.creation.nearby.model.FileUploadModel
 import com.creation.nearby.model.GetFeedModel
@@ -18,8 +17,6 @@ import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.ui.MainActivity
 import com.creation.nearby.utils.ToastUtils
-import com.creation.nearby.utils.Validator
-import com.zxy.tiny.Tiny
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
