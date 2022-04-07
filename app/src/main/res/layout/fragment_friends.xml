@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="friendListVM"
+            type="com.creation.nearby.viewmodel.FriendListVM" />
+
+    </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -42,6 +53,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                setRecyclerAdapter="@{friendListVM.onlineAdapter}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
@@ -69,6 +81,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
+                setRecyclerAdapter="@{friendListVM.allFriendListAdapter}"
                 app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,3 +92,4 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

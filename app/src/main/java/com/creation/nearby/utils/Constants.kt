@@ -38,6 +38,7 @@ object Constants {
     const val notification_listing = "notification_listing"
     const val contactUs = "contact_us"
     const val feedback = "feedback"
+    const val friendList = "friend_list"
 
 
     //preferences

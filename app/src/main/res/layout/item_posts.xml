@@ -37,7 +37,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/post_image_view"
-                    setImageSrc="@{model.user.image}"
+                    setImageSrcWithUrl="@{model.user.image}"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -53,8 +53,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/worksans_regular"
-                    android:text="@{model.user.name}"
-                    android:textColor="@color/white"
+                    android:text="@{model.user.firstname+model.user.lastname}"
+                    android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="@+id/post_image_view"
                     app:layout_constraintStart_toEndOf="@+id/post_image_view"
@@ -68,7 +68,7 @@
                     android:layout_marginEnd="24dp"
                     android:fontFamily="@font/worksans_regular"
                     timeStampToTime="@{model.createdAt}"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="14sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/post_image_view"
@@ -83,7 +83,7 @@
                     android:fontFamily="@font/worksans_regular"
                     android:maxLines="2"
                     android:text="@{model.description}"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/post_time_tv"
@@ -134,7 +134,8 @@
             android:layout_height="24dp"
             android:elevation="10dp"
             android:src="@drawable/report"
-            android:visibility="@{model.myfeed?View.GONE:View.VISIBLE}"
+
+            android:visibility="@{model.myfeed?View.GONE:View.GONE}"
             app:layout_constraintBottom_toTopOf="@+id/materialCardView"
             app:layout_constraintEnd_toEndOf="@+id/materialCardView"
             app:layout_constraintTop_toTopOf="@+id/materialCardView"/>

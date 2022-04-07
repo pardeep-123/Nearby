@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/grey_background"
         android:text="@{model.firstname+model.lastname}"
-        android:textSize="16sp"
+        android:textSize="12sp"
         app:layout_constraintStart_toStartOf="@id/circleImageView"
         app:layout_constraintEnd_toEndOf="@id/circleImageView"
         app:layout_constraintBottom_toBottomOf="@id/circleImageView"

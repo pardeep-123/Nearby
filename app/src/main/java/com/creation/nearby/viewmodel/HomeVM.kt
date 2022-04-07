@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.View
+import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.creation.nearby.R
@@ -29,7 +30,13 @@ class HomeVM : ViewModel() {
     val userList by lazy { ArrayList<HomeListingModel.Body.User>() }
     val eventList by lazy { ArrayList<HomeListingModel.Body.Event>() }
     val notificationList by lazy { ArrayList<HomeListingModel.Body.Notification>() }
-
+    val latitude: ObservableField<String> = ObservableField("")
+    val longitude: ObservableField<String> = ObservableField("")
+    val gender: ObservableField<String> = ObservableField("")
+    val filterBy: ObservableField<String> = ObservableField("")
+    val distance: ObservableField<String> = ObservableField("")
+    val minAge: ObservableField<String> = ObservableField("")
+    val maxAge: ObservableField<String> = ObservableField("")
     val mapListData: MutableLiveData<ArrayList<DataMap>> = MutableLiveData()
 
     // list of lat long
@@ -47,7 +54,7 @@ class HomeVM : ViewModel() {
             override fun onClick(view: View, position: Int, type: String) {
                 if (type == "userClick") {
                     val intent = Intent(view.context, OtherUserProfileActivity::class.java)
-                    intent.putExtra("userId",userList[position].id.toString())
+                    intent.putExtra("userId", userList[position].id.toString())
                     view.context.startActivity(intent)
 
                 }
@@ -64,9 +71,7 @@ class HomeVM : ViewModel() {
 
                         MainActivity.binding.sectionRecyclerView.postDelayed({
                             MainActivity.binding.sectionRecyclerView.findViewHolderForAdapterPosition(
-                                3
-                            )?.itemView?.performClick()
-
+                                3)?.itemView?.performClick()
 
                         }, 10)
 
@@ -80,11 +85,15 @@ class HomeVM : ViewModel() {
         notificationAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
                 if (type == "accept") {
-                    acceptRejectEventApi(view.context,notificationList[position].sender.id.toString(),
-                        "2",notificationList[position].id.toString())
-                } else if (type == "reject"){
-                    acceptRejectEventApi(view.context,notificationList[position].sender.id.toString(),
-                        "3",notificationList[position].id.toString())
+                    acceptRejectEventApi(
+                        view.context, notificationList[position].sender.id.toString(),
+                        "2", notificationList[position].id.toString()
+                    )
+                } else if (type == "reject") {
+                    acceptRejectEventApi(
+                        view.context, notificationList[position].sender.id.toString(),
+                        "3", notificationList[position].id.toString()
+                    )
 
                 }
             }
@@ -93,17 +102,20 @@ class HomeVM : ViewModel() {
     }
 
     // get event list
-    fun homeListingApi(context: Context, currentLat: Double, currentLng: Double) {
+    fun homeListingApi(
+        context: Context, currentLat: String, currentLng: String,
+        filterBy: String, gender: String, distance: String, minAge: String, maxAge: String
+    ) {
         try {
-            val haQueryMap=HashMap<String,String>()
+            val haQueryMap = HashMap<String, String>()
 
-            haQueryMap["is_online"]=""
-            haQueryMap["gender"]=""
-            haQueryMap["latitude"]=""
-            haQueryMap["longitude"]=""
-            haQueryMap["radius"]=""
-            haQueryMap["min_age"]=""
-            haQueryMap["max_age"]=""
+            haQueryMap["is_online"] = filterBy
+            haQueryMap["gender"] = gender
+            haQueryMap["latitude"] = currentLat
+            haQueryMap["longitude"] = currentLng
+            haQueryMap["radius"] = distance
+            haQueryMap["min_age"] = minAge
+            haQueryMap["max_age"] = maxAge
 
             CallApi().callService(
                 context,
@@ -118,17 +130,19 @@ class HomeVM : ViewModel() {
                     override fun onResponse(res: Response<HomeListingModel>) {
                         if (res.isSuccessful) {
                             val response = res.body()!!
-
+                            userList.clear()
+                            eventList.clear()
                             // show max 5 events on the page
                             response.body.userList.forEachIndexed { index, it ->
-                              //  if (index<5){
+                                //  if (index<5){
+
                                 userList.add(it)
-                               // }
+                                // }
                             }
-                              response.body.eventList.forEachIndexed { index, feed ->
-                               //   if (index<5)
-                                  eventList.add(feed)
-                              }
+                            response.body.eventList.forEachIndexed { index, feed ->
+                                //   if (index<5)
+                                eventList.add(feed)
+                            }
 
                             // add data to map list
 //                            if(response.body.userList.isNotEmpty()) {
@@ -145,13 +159,13 @@ class HomeVM : ViewModel() {
 //                                    }
 //                                }
 //                            }
-                          //  mapListData.value= mList
+                            //  mapListData.value= mList
                             eventAdapter.addItems(userList)
                             feedAdapter.addItems(eventList)
                             notificationList.clear()
                             notificationList.addAll(response.body.notificationList)
                             notificationList.forEach {
-                                it.isNewRequest = it.notificationType==1
+                                it.isNewRequest = it.notificationType == 1
                             }
                             notificationAdapter.addItems(notificationList)
 
@@ -182,7 +196,7 @@ class HomeVM : ViewModel() {
 
                     override fun onResponse(res: Response<CommonModel>) {
                         if (res.isSuccessful) {
-                            PreferenceFile.storeKey(context, Constants.IS_FIRST_LOGIN,"1")
+                            PreferenceFile.storeKey(context, Constants.IS_FIRST_LOGIN, "1")
                         }
                     }
 
@@ -196,12 +210,17 @@ class HomeVM : ViewModel() {
         }
     }
 
-    fun acceptRejectEventApi(context: Context,userId:String,status:String,notificationId:String) {
+    fun acceptRejectEventApi(
+        context: Context,
+        userId: String,
+        status: String,
+        notificationId: String
+    ) {
         try {
-            val hashMap= HashMap<String,String>()
-            hashMap["swipe_by"]=userId
-            hashMap["status"]=status
-            hashMap["notification_id"]=notificationId
+            val hashMap = HashMap<String, String>()
+            hashMap["swipe_by"] = userId
+            hashMap["status"] = status
+            hashMap["notification_id"] = notificationId
             CallApi().callService(
                 context,
                 true,
@@ -215,8 +234,18 @@ class HomeVM : ViewModel() {
                     override fun onResponse(res: Response<CommonModel>) {
                         if (res.isSuccessful) {
                             val response = res.body()!!
-                            ToastUtils.showToast(context,response.message)
-                            homeListingApi(context,0.0,0.0)
+                            ToastUtils.showToast(context, response.message)
+                            homeListingApi(
+                                context,
+                                latitude.get()!!,
+                                longitude.get()!!,
+                                filterBy.get()!!,
+                                gender.get()!!,
+                                distance.get()!!,
+                                minAge.get()!!,
+                                maxAge.get()!!
+                            )
+                            notificationAdapter.notifyDataSetChanged()
                         }
                     }
 

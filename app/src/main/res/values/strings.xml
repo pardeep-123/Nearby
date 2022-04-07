@@ -107,7 +107,7 @@
     <string name="for_taking_and_sending_pictures">For taking and sending pictures</string>
     <string name="voice">Voice</string>
     <string name="for_calling_and_video_calling">For calling and video calling</string>
-    <string name="set_your_filter">Set Your Filter</string>
+    <string name="set_your_filter">Apply Your Filter</string>
     <string name="both">Both</string>
     <string name="all">All</string>
     <string name="online">Online</string>
@@ -161,6 +161,7 @@
     <string name="it_is_empty_here">It is empty here...</string>
     <string name="enter_your_email">Enter your Email</string>
     <string name="wave_and_say_hi">👋 Wave and say Hi!</string>
+    <string name="start_chat">Start a chat</string>
     <string name="continue_to_swipe">Continue to Swipe</string>
     <string name="reset_account_password">Reset Account\nPassword</string>
     <string name="your_password_must_have_at_least_6_characters_and_one_capitalized_letter">Your password must have at least 6 characters and one capitalized letter.</string>
@@ -231,6 +232,7 @@
     <string name="enter_full_name">Logan Smith</string>
     <string name="blockText">Are you sure you want to block?</string>
     <string name="aboutMe">About me</string>
+    <string name="lookingfor">Looking for</string>
 
 
 </resources>

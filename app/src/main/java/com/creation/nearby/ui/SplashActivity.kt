@@ -22,11 +22,11 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         fullScreen()
         setContentView(R.layout.activity_splash)
-
         // check the conditions to open the screens after splash screen
         /**
          * @author Pardeep Sharma
          */
+
         Handler(Looper.getMainLooper()).postDelayed({
            callNextScreen()
         }, 3000) // 3000 is the delayed time in milliseconds.
@@ -70,4 +70,5 @@ class SplashActivity : AppCompatActivity() {
             finish()
         }
     }
+
 }

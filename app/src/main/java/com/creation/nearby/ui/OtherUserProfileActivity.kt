@@ -1,49 +1,31 @@
 package com.creation.nearby.ui
 
-import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.GestureDetector
-import android.view.MotionEvent
 import android.view.View
 import android.view.Window
-import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.creation.nearby.R
 import com.creation.nearby.adapter.GallaryAdapter
 import com.creation.nearby.adapter.InterestsAdapter
 import com.creation.nearby.adapter.OtherProfileInterestAdapter
-import com.creation.nearby.databinding.ActivityMyProfileBinding
 import com.creation.nearby.databinding.ActivityOtherUserProfileBinding
 import com.creation.nearby.databinding.ActivitySwipeUserProfileBinding
-import com.creation.nearby.databinding.FilterBottomSheetDialogBinding
-import com.creation.nearby.fragments.SwipeUserProfileBottomFragment
 import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.*
-import com.creation.nearby.retrofit.CallApi
-import com.creation.nearby.retrofit.RequestProcessor
-import com.creation.nearby.retrofit.RetrofitInterface
-import com.creation.nearby.utils.Constants
-import com.creation.nearby.utils.ToastUtils
 import com.creation.nearby.viewmodel.OtherUserVM
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.card.MaterialCardView
-import retrofit2.Response
-import java.lang.Math.abs
 
 class OtherUserProfileActivity : AppCompatActivity() {
 
@@ -51,7 +33,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private  var interestsList = ArrayList<InterestedModel>()
     private lateinit var  interestsAdapter: InterestsAdapter
 
-   val otherUserVM : OtherUserVM by viewModels()
+   private val otherUserVM : OtherUserVM by viewModels()
 
     lateinit var dialogBinding: ActivitySwipeUserProfileBinding
     lateinit var fullProfileDialog: BottomSheetDialog
@@ -59,7 +41,6 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private lateinit var  swipeInterestsAdapter: OtherProfileInterestAdapter
 
     private var galleryList = ArrayList<String>()
-    private lateinit var galleryAdapter: GallaryAdapter
     private lateinit var mainGalleryAdapter: GallaryAdapter
 
     var userId=""
@@ -80,11 +61,6 @@ class OtherUserProfileActivity : AppCompatActivity() {
         }
        otherUserVM.userId.set(userId)
         otherUserVM.userDetailApi(this)
-//        interestsList.add(InterestedModel("Travel",isSelected = false,isProfile = true))
-//        interestsList.add(InterestedModel("Chatting",isSelected = false,isProfile = true))
-//        interestsList.add(InterestedModel("Athlete",isSelected = false,isProfile = true))
-//        interestsList.add(InterestedModel("House Parties",isSelected = false,isProfile = true))
-//        interestsList.add(InterestedModel("Cricket",isSelected = false,isProfile = true))
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
@@ -102,11 +78,6 @@ class OtherUserProfileActivity : AppCompatActivity() {
         fullProfileDialog.behavior.state = BottomSheetBehavior.STATE_EXPANDED
         fullProfileDialog.behavior.skipCollapsed = true
 
-    //    onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.otherUserMainLayout))
-    //    onSwipeTouchListener = OnSwipeTouchListener(this,fullProfileDialog,this, findViewById(R.id.showLayout))
-
-
-        //full profile dialog
 
         clickHandler()
 
@@ -122,34 +93,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private fun setData(response: UserDetailResponse) {
 
         binding.userName.text=response.body.name
-//        response.body.user_images.forEachIndexed { index, it ->
-//            galleryList.add(Constants.IMAGE_BASE_URL+it.image)
-//
-//        }
-        val onActionListener = object : OnActionListener<GallaryModel> {
-            override fun notify(model: GallaryModel, position: Int, view: View) {
 
-                val intent  = Intent(this@OtherUserProfileActivity,FullPictureActivity::class.java)
-                val transitionName: String = getString(R.string.open_with_animation)
-                val viewImage: MaterialCardView = view.findViewById(R.id.layoutCard)
-                val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this@OtherUserProfileActivity,viewImage,transitionName)
-                ActivityCompat.startActivity(this@OtherUserProfileActivity,intent,options.toBundle())
-            }
-        }
         dialogBinding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
-//        galleryAdapter = GallaryAdapter(this, galleryList, onActionListener)
-//        dialogBinding.gallaryRecyclerView.adapter = galleryAdapter
 
-
-//        if (!response.body.interests.isNullOrBlank()) {
-//            val specialisationList: MutableList<String> = response.body.interests.split(",").toList() as MutableList<String>
-//
-//            specialisationList.forEach {
-//                swipeInterestsList.add(InterestedModel(it,isSelected = false,isProfile = true))
-//
-//            }
-//
-//        }
         /**
          * Add Interests in Array List
          */
@@ -172,7 +118,6 @@ class OtherUserProfileActivity : AppCompatActivity() {
         swipeInterestsAdapter = OtherProfileInterestAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
         binding.profileInterestRecView.adapter = swipeInterestsAdapter
-       // swipeInterestsAdapter.notifyDataSetChanged()
     }
 
     private fun clickHandler() {

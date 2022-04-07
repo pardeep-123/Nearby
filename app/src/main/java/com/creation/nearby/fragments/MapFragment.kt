@@ -83,7 +83,7 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
         mMap.uiSettings.isMapToolbarEnabled = false
         mMap.uiSettings.isCompassEnabled = false
         mMap.uiSettings.isMyLocationButtonEnabled = false
-        mapFragment.view?.isClickable = false;
+        mapFragment.view?.isClickable = false
         //  30.7333° N, 76.7794° E
 
         if (requireActivity() != null) {
@@ -180,14 +180,14 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
                         override fun onResponse(res: Response<UserListModel>) {
                             if (res.isSuccessful) {
                                 val response = res.body()!!
-                                var list = response.body.user_list
+                                val list = response.body.user_list
                                 val builder = ArrayList<LatLng>()
                                 if (mMap != null) {
                                     list.forEachIndexed { index, it ->
                                         if (it.latitude.isNotEmpty() && it.latitude != "0.0"&&!it.latitude.contains("0.0")) {
 
                                             body.add(it)
-                                            var latLng = LatLng(
+                                            val latLng = LatLng(
                                                 it.latitude.toDouble(),
                                                 it.longitude.toDouble()
                                             )
@@ -206,11 +206,41 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
                                         }
 
                                     }
+/*
+if (list.isNotEmpty()) {
+            // create bounds that encompass every location we reference
+            val boundsBuilder = LatLngBounds.Builder()
+            // include all places we have markers for on the map
 
+            (list.indices).map {
+                boundsBuilder.include(list[it].position)
+            }
+
+            val bounds = boundsBuilder.build()
+
+            with(mMap!!) {
+                // Hide the zoom controls as the button panel will cover it.
+                uiSettings!!.isZoomControlsEnabled = false
+
+                // Setting an info window adapter allows us to change the both the contents and
+                setInfoWindowAdapter(CustomInfoWindowAdapter())
+
+                setOnInfoWindowClickListener(this@ActivitiesOnMapActivity)
+
+                // Ideally this string would be localised.
+                setContentDescription("markers")
+
+                moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, 30))
+            }
+
+            // Add lots of markers to the googleMap.
+            addMarkersToMap()
+        }
+ */
 
 
                                     if (list.isEmpty()) {
-                                        var latLng = LatLng(currentLat, currentLng)
+                                        val latLng = LatLng(currentLat, currentLng)
 
                                         builder.add(latLng)
                                     }

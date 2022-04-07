@@ -135,4 +135,7 @@ interface RetrofitInterface {
 
     @POST(Constants.feedback)
     suspend fun feedback(@Body hasmap: HashMap<String, String>): Response<CommonModel>
+
+    @GET(Constants.friendList)
+    suspend fun friendList():Response<FriendListModel>
 }

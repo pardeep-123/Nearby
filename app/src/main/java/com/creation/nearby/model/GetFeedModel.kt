@@ -54,8 +54,10 @@ data class GetFeedModel(
             val location: String, // chandigarh
             @SerializedName("longitude")
             val longitude: String, // 0.000000
-            @SerializedName("name")
-            val name: String // Mark
+            @SerializedName("firstname")
+            val firstname: String, // Mark
+            @SerializedName("lastname")
+            val lastname: String
         ): AbstractModel()
     }
 }

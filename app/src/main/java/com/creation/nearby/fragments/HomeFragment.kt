@@ -22,8 +22,10 @@ import com.creation.nearby.R
 import com.creation.nearby.adapter.NotificationAdapter
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.FragmentHomeBinding
+import com.creation.nearby.interfaces.FilterInterface
 import com.creation.nearby.model.NotificationModel
 import com.creation.nearby.ui.EditProfileActivity
+import com.creation.nearby.ui.MainActivity
 import com.creation.nearby.ui.OtherUserProfileActivity
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.LocationUpdateUtilityFragment
@@ -32,15 +34,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLngBounds
-import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.gms.maps.model.*
 import io.socket.client.IO
 import kotlinx.coroutines.*
 
 class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
-    GoogleMap.OnInfoWindowClickListener {
+    GoogleMap.OnInfoWindowClickListener, FilterInterface {
 
 
     private lateinit var mMap: GoogleMap
@@ -56,18 +55,27 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
     lateinit var binding: FragmentHomeBinding
 
     private lateinit var mapFragment: SupportMapFragment
-    var currentLat = 0.0
-    var currentLng = 0.0
+    var currentLat = ""
+    var currentLng = ""
+    var ctx: Context? = null
+
     override fun updatedLatLng(lat: Double, lng: Double) {
 
-        currentLat = lat
-        currentLng = lng
-        homeViewModel.homeListingApi(requireContext(), currentLat, currentLng)
+        currentLat = lat.toString()
+        currentLng = lng.toString()
+        homeViewModel.homeListingApi(requireContext(), "", ""
+        ,"","","","","")
     }
 
     override fun liveLatLng(lat: Double, lng: Double) {
 
 
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        ctx = context
+        (ctx as MainActivity).initInterface(this)
     }
 
     override fun onCreateView(
@@ -191,7 +199,6 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
         mMap = p0
         if (homeViewModel.mList.isNotEmpty()) {
 
-            //
             // create bounds that encompass every location we reference
             val boundsBuilder = LatLngBounds.Builder()
             // include all places we have markers for on the map
@@ -202,9 +209,9 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
 
             val bounds = boundsBuilder.build()
 
-            with(mMap!!) {
+            with(mMap) {
                 // Hide the zoom controls as the button panel will cover it.
-                uiSettings!!.isZoomControlsEnabled = false
+                uiSettings.isZoomControlsEnabled = false
 
                 // Setting an info window adapter allows us to change the both the contents and
                 // setInfoWindowAdapter(ChildCareInfoWindowAdapter())
@@ -285,5 +292,29 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
 
     override fun onInfoWindowClick(p0: Marker) {
 
+    }
+
+    override fun sendData(
+        location: String,
+        latitude: String,
+        longitude : String,
+        distance: String,
+        gender: String,
+        filterBy: String,
+        minAge: String,
+        maxAge: String
+    ) {
+        /**
+         * set values to viewmodel
+         */
+        homeViewModel.latitude.set(latitude)
+        homeViewModel.longitude.set(longitude)
+        homeViewModel.distance.set(distance)
+        homeViewModel.gender.set(gender)
+        homeViewModel.filterBy.set(filterBy)
+        homeViewModel.minAge.set(minAge)
+        homeViewModel.maxAge.set(maxAge)
+        homeViewModel.homeListingApi(requireContext(), latitude, longitude
+            ,filterBy,gender,distance,minAge,maxAge)
     }
 }
