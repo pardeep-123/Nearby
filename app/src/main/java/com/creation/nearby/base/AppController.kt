@@ -1,8 +1,10 @@
 package com.creation.nearby.base
 
 import android.app.Application
+import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.creation.nearby.R
+import com.creation.nearby.utils.SocketManager
 import com.google.android.libraries.places.api.Places
 import com.yanzhenjie.album.Album
 import com.yanzhenjie.album.AlbumConfig
@@ -14,9 +16,12 @@ class AppController : Application(), AppLifecycleHandler.AppLifecycleDelegates {
 
     private var lifecycleHandler: AppLifecycleHandler? = null
 
+
     override fun onCreate() {
         super.onCreate()
         mInstance = this
+        getSocketManager()
+        initializeSocket()
         if (PreferenceFile.retrieveLoginData(this) != null) {
           //  getSocketManager()
         }
@@ -39,34 +44,34 @@ class AppController : Application(), AppLifecycleHandler.AppLifecycleDelegates {
 
 
     companion object {
+        fun getSocketManager(): SocketManager? {
+            return mSocket
+        }
 
+
+        private fun initializeSocket() {
+            mSocket = SocketManager()
+            mSocket!!.init()
+        }
 
         lateinit var mInstance: AppController
-
-        var mSocketManager: SocketManager? = null
+        var mSocket : SocketManager?=null
+      //  var mSocketManager: SocketManager? = null
         fun getInstance(): AppController {
             return mInstance
         }
 
     }
 
-
-    private fun getSocketManager(): SocketManager {
-        if (mSocketManager == null) {
-          //  mSocketManager = socket
-        }
-        return mSocketManager!!
+    override fun onAppBackgrounded() {
+        Log.e("DisconnectSocket", "Disconnect")
+        mSocket!!.disconnectAll()
     }
 
     override fun onAppForegrounded() {
-        if (mSocketManager != null && !mSocketManager!!.isConnected()) {
-            mSocketManager!!.onConnect()
-        }
-    }
-
-    override fun onAppBackgrounded() {
-        if (mSocketManager != null && mSocketManager!!.isConnected()) {
-            mSocketManager!!.onDisconnect()
+        Log.e("ConnectSocket", "Connect")
+        if (!mSocket!!.isConnected() || mSocket!!.getmSocket() == null) {
+            mSocket!!.init()
         }
     }
 

@@ -5,8 +5,9 @@ import com.google.gson.reflect.TypeToken
 
 object Constants {
 
-    val BASEURL = "http://202.164.42.227:9022/api/"
-    val IMAGE_BASE_URL = "http://202.164.42.227:9022"
+    const val BASEURL = "http://202.164.42.227:9022/api/"
+    const val SOCKET_URL = "http://202.164.42.227:9022/"
+    const val IMAGE_BASE_URL = "http://202.164.42.227:9022"
   //  val BASEURL = "http://192.168.1.96:9022/api/"
 
     const val SIGNUP = "signup"

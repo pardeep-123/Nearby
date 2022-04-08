@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+ <data>
+     <import type="android.view.View"/>
+     <variable
+         name="chatVM"
+         type="com.creation.nearby.viewmodel.MessageListVM" />
+
+ </data>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -87,6 +96,7 @@
                 android:fontFamily="@font/worksans_semibold"
                 android:textColor="@color/black"
                 android:textSize="16sp"
+                android:visibility="@{chatVM.onlineValue?View.GONE:View.VISIBLE}"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +108,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/view_more"
                 android:textSize="12sp"
+                android:visibility="gone"
                 android:textColor="@color/black"
                 android:fontFamily="@font/worksans_black"
                 android:layout_marginTop="16dp"
@@ -110,6 +121,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
+                setRecyclerAdapter="@{chatVM.onlineAdapter}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView20" />
@@ -122,6 +134,7 @@
                 android:layout_marginTop="16dp"
                 android:background="@drawable/round_small_with_border"
                 android:paddingVertical="16dp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/online_chats_recy_view">
@@ -200,3 +213,5 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
