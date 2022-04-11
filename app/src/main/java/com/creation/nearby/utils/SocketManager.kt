@@ -23,13 +23,13 @@ class SocketManager {
         private const val connectUser = "connect_user"
         const val get_chat_list = "get_chat_list"
         const val get_chat = "get_chat"
-        const val send_message = "send_messages"
+        const val send_message = "send_message"
         const val read_unread_emitter = "read_unread"
 
         const val call_socket_disconnect_emitter = "socket_disconnect"
 
         /*listener*/
-        const val send_message_listener = "send_message_listner"
+        const val send_message_listener = "send_message_listener"
         private const val connect_listener = "connect_listener"
         private const val get_list = "get_list"
         const val my_chat = "my_chat"
@@ -140,7 +140,7 @@ class SocketManager {
 
                     val userid = PreferenceFile.retrieveUserId()
                     if (userid != "0") {
-                        jsonObject.put("user_id", userid)
+                        jsonObject.put("userId", userid)
                         mSocket!!.off(connect_listener, onConnectListener)
                         mSocket!!.on(connect_listener, onConnectListener)
                         mSocket!!.emit(connectUser, jsonObject)
@@ -347,6 +347,7 @@ class SocketManager {
 
 
     private val chatListListener = Emitter.Listener { args ->
+
         try {
             val data = args[0] as JSONArray
             Log.e("Socket", "chatList :::$data")
