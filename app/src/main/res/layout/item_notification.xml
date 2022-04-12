@@ -58,7 +58,7 @@
             android:text="@{model.message}"
             android:textColor="@color/black"
             android:textSize="12sp"
-            android:maxLength="35"
+            android:maxLength="50"
             app:layout_constraintEnd_toStartOf="@+id/button_container"
             app:layout_constraintStart_toEndOf="@+id/user_pic"
             app:layout_constraintTop_toTopOf="@+id/user_pic" />

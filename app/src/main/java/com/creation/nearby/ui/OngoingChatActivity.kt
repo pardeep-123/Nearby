@@ -56,6 +56,7 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
             this,
             RecyclerView.VERTICAL, false
         )
+        setAdapter()
         socketManager = AppController.getSocketManager()
         socketManager?.init()
 //        suggestionList.add(SuggestionsModel("Hi \uD83D\uDE4C"))
@@ -76,11 +77,12 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
         super.onResume()
         socketManager?.unRegister(this)
         socketManager?.onRegister(this)
-        setAdapter()
+
         socketManager?.getFriendChat(getOneToOneChatList())
     }
 
     private fun setAdapter() {
+
          adapter  = OnlineUserChatAdapter(chatList)
         binding.chatRecyclerView.adapter = adapter
     }
@@ -173,7 +175,8 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
         val gson = GsonBuilder().create()
         val list = gson.fromJson(args.toString(),OneToOneChatListModel.OneToOneChatListModelItem::class.java)
         chatList.add(list)
-        adapter?.notifyDataSetChanged()
+
+         adapter?.notifyDataSetChanged()
 
     }
 

@@ -71,4 +71,12 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    fun checkValue(){
+        val stringValue = "My name is khan and my"
+        val list = stringValue.split(" ")
+        val hashmap = HashMap<Int,String>()
+        for (words in list){
+         //   val Integer = hashmap.get(words)
+        }
+    }
 }
