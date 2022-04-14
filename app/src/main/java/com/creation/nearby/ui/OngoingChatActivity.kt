@@ -22,6 +22,9 @@ import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.SocketManager
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonObject
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import org.json.JSONObject
 
@@ -34,7 +37,9 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
 
     private var user2Id = ""
     private var adapter : OnlineUserChatAdapter?=null
+    var linearLayoutManager:LinearLayoutManager?=null
     private var chatList : ArrayList<OneToOneChatListModel.OneToOneChatListModelItem> = ArrayList()
+    private var activityScope = CoroutineScope(Dispatchers.Main)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOngoingChatBinding.inflate(layoutInflater)
@@ -50,11 +55,7 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
         AppUtils.hideKeyboard(this)
         binding.suggestionRecyclerView.layoutManager = LinearLayoutManager(
             this,
-            RecyclerView.HORIZONTAL, false
-        )
-        binding.chatRecyclerView.layoutManager = LinearLayoutManager(
-            this,
-            RecyclerView.VERTICAL, false
+            LinearLayoutManager.HORIZONTAL, false
         )
         setAdapter()
         socketManager = AppController.getSocketManager()
@@ -83,7 +84,10 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
 
     private fun setAdapter() {
 
-         adapter  = OnlineUserChatAdapter(chatList)
+        linearLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        adapter = OnlineUserChatAdapter(chatList)
+        binding.chatRecyclerView.layoutManager = linearLayoutManager
         binding.chatRecyclerView.adapter = adapter
     }
 
@@ -160,27 +164,41 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
 
     override fun onResponseArray(event: String, args: JSONArray) {
         Log.d("event",args.toString())
+        activityScope.launch {
         if (event == "get_chat") {
             val gson = GsonBuilder().create()
-            val list = gson.fromJson(args.toString(),Array<OneToOneChatListModel.OneToOneChatListModelItem>::class.java)
+            val list = gson.fromJson(
+                args.toString(),
+                Array<OneToOneChatListModel.OneToOneChatListModelItem>::class.java
+            )
                 .toList()
             chatList.addAll(list)
             adapter?.notifyDataSetChanged()
-
+            scrollToBottom()
+        }
         }
     }
 
     override fun onResponse(event: String, args: JSONObject) {
         Log.d("event",args.toString())
-        val gson = GsonBuilder().create()
-        val list = gson.fromJson(args.toString(),OneToOneChatListModel.OneToOneChatListModelItem::class.java)
-        chatList.add(list)
+        activityScope.launch {
+            val gson = GsonBuilder().create()
+            val list = gson.fromJson(
+                args.toString(),
+                OneToOneChatListModel.OneToOneChatListModelItem::class.java
+            )
+            chatList.add(list)
+            adapter?.notifyDataSetChanged()
+            binding.chatRecyclerView.scrollToPosition(chatList.size - 1)
 
-         adapter?.notifyDataSetChanged()
-
+        }
     }
 
     override fun onError(event: String, vararg args: Array<*>) {
 
+    }
+
+    fun scrollToBottom(){
+        linearLayoutManager?.scrollToPosition(chatList.size-1)
     }
 }

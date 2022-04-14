@@ -31,6 +31,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
+import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Response
 
 
@@ -41,7 +42,6 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
 
 
     private lateinit var mapFragment: SupportMapFragment
-    private var list = ArrayList<LatLng>()
     override fun updatedLatLng(latitude: Double, longitude: Double) {
         currentLat = latitude
         currentLng = longitude
@@ -146,9 +146,10 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
             // which is clicked and displaying it in a toast message.
 
             val intent = Intent(requireContext(), OtherUserProfileActivity::class.java)
-            val pos=marker.tag.toString().toInt()
+            val pos=marker.tag.toString()
 
-            intent.putExtra("userId", body[pos].id.toString())
+            intent.putExtra("userId", pos)
+            intent.putExtra("from", "mapList")
             startActivity(intent)
             false
         }
@@ -196,11 +197,8 @@ class MapFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback {
                                                     BitmapDescriptorFactory.fromBitmap(
                                                         createCustomMarker(
                                                             requireContext(),
-                                                            Constants.IMAGE_BASE_URL+it.image
-                                                        )
-                                                    )
-                                                )
-                                            )!!.tag = index.toString()
+                                                            Constants.IMAGE_BASE_URL+it.image)))
+                                            )!!.tag = it.id.toString()
                                             builder.add(latLng) //Taking Point A (First LatLng)
 
                                         }
@@ -300,7 +298,7 @@ if (list.isNotEmpty()) {
                 R.layout.map_marker,
                 null
             )
-        val markerImage = marker.findViewById(R.id.markerImage) as ImageView
+        val markerImage = marker.findViewById(R.id.markerImage) as CircleImageView
         Glide.with(requireActivity()).load(imageUser).placeholder(R.drawable.placeholder)
             .error(R.drawable.placeholder).into(markerImage)
 

@@ -53,10 +53,10 @@
 
         <ImageView
             android:id="@+id/userPic"
+            setImageSrcWithUrl="@{otherUserVM.userData.Body.image}"
             android:layout_width="match_parent"
             android:layout_height="230dp"
             android:scaleType="centerCrop"
-            setImageSrcWithUrl="@{otherUserVM.userData.Body.image}"
             android:src="@drawable/detailed_user_pic"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +104,8 @@
                     android:layout_marginBottom="16dp"
                     android:padding="14dp"
                     android:src="@drawable/chat_icon"
-                    android:visibility="gone"
+                    android:onClick="@{(v)->otherUserVM.onClick(v,`chat`)}"
+                    android:visibility="@{otherUserVM.from?View.VISIBLE:View.GONE}"
                     app:layout_constraintBottom_toBottomOf="@+id/userName"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/userName" />
@@ -114,8 +115,9 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginEnd="16dp"
-                   android:onClick="@{(v)->otherUserVM.onClick(v,`cancel`)}"
+                    android:onClick="@{(v)->otherUserVM.onClick(v,`cancel`)}"
                     android:src="@drawable/ic_button_cancel"
+                    android:visibility="@{otherUserVM.from?View.GONE:View.VISIBLE}"
                     app:layout_constraintEnd_toStartOf="@+id/sendRequest"
                     app:layout_constraintStart_toEndOf="@id/userName"
                     app:layout_constraintTop_toTopOf="@+id/sendRequest" />
@@ -128,8 +130,9 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
                     android:onClick="@{(v)->otherUserVM.onClick(v,`accept`)}"
-
                     android:src="@drawable/ic_button"
+
+                    android:visibility="@{otherUserVM.from?View.GONE:View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/userName" />
 
@@ -143,7 +146,9 @@
                     android:fontFamily="@font/worksans_regular"
                     android:text="@{otherUserVM.userData.Body.location}"
                     android:textColor="@color/dark_grey"
+
                     android:textSize="16sp"
+                    android:visibility="@{otherUserVM.from?View.GONE:View.VISIBLE}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/userName"
                     app:layout_constraintTop_toBottomOf="@+id/userName" />

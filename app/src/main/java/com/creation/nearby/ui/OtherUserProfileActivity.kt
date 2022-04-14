@@ -44,6 +44,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
     private lateinit var mainGalleryAdapter: GallaryAdapter
 
     var userId=""
+    var from = ""
+    var image = ""
+    var name = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityOtherUserProfileBinding.inflate(layoutInflater)
@@ -59,8 +62,19 @@ class OtherUserProfileActivity : AppCompatActivity() {
         }else{
             ""
         }
+        /**
+         * check that from where we are coming
+         */
+        if (intent?.getStringExtra("from")!=null)
+        if (intent?.getStringExtra("from") == "friendList"){
+            otherUserVM.from.set(true)
+            otherUserVM.userImage.set(intent?.getStringExtra("image")!!)
+            otherUserVM.userName.set(intent?.getStringExtra("name")!!)
+        }else{
+            otherUserVM.from.set(false)
+        }
        otherUserVM.userId.set(userId)
-        otherUserVM.userDetailApi(this)
+
 
         interestsAdapter = InterestsAdapter(interestsList)
         binding.profileInterestRecView.layoutManager = FlexboxLayoutManager(this, FlexDirection.ROW)
@@ -85,6 +99,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        otherUserVM.userDetailApi(this)
         otherUserVM.userData.observeForever { response->
             setData(response)
         }
@@ -92,7 +107,7 @@ class OtherUserProfileActivity : AppCompatActivity() {
 
     private fun setData(response: UserDetailResponse) {
 
-        binding.userName.text=response.body.name
+       // binding.userName.text=response.body.name
 
         dialogBinding.gallaryRecyclerView.layoutManager = GridLayoutManager(this,3)
 
@@ -107,8 +122,9 @@ class OtherUserProfileActivity : AppCompatActivity() {
         }
 
         /**
-         *
+         * Add Galary list
          */
+        galleryList.clear()
         response.body.user_images.forEach {
             galleryList.add(it.image)
         }
@@ -127,18 +143,18 @@ class OtherUserProfileActivity : AppCompatActivity() {
             onBackPressed()
 
         }
-        dialogBinding.goBack.setOnClickListener{
-            fullProfileDialog.dismiss()
-        }
-        dialogBinding.blockTv.setOnClickListener{
-            optionsDialog()
-        }
-        dialogBinding.eventsCheck.setOnClickListener{
-            fullProfileDialog.dismiss()
-        }
-        dialogBinding.eventsCross.setOnClickListener{
-            fullProfileDialog.dismiss()
-        }
+//        dialogBinding.goBack.setOnClickListener{
+//            fullProfileDialog.dismiss()
+//        }
+//        dialogBinding.blockTv.setOnClickListener{
+//            optionsDialog()
+//        }
+//        dialogBinding.eventsCheck.setOnClickListener{
+//            fullProfileDialog.dismiss()
+//        }
+//        dialogBinding.eventsCross.setOnClickListener{
+//            fullProfileDialog.dismiss()
+//        }
 
 //        binding..setOnClickListener{
 //

@@ -10,12 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.creation.nearby.R
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.ui.authentication.NewLoginActivity
-import com.creation.nearby.ui.authentication.WelcomeActivity
 import com.creation.nearby.utils.Constants
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.google.zxing.common.StringUtils
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +24,7 @@ class SplashActivity : AppCompatActivity() {
         /**
          * @author Pardeep Sharma
          */
-
+  checkValue()
         Handler(Looper.getMainLooper()).postDelayed({
            callNextScreen()
         }, 3000) // 3000 is the delayed time in milliseconds.
@@ -72,11 +70,12 @@ class SplashActivity : AppCompatActivity() {
     }
 
     fun checkValue(){
+        var count = 0
         val stringValue = "My name is khan and my"
         val list = stringValue.split(" ")
-        val hashmap = HashMap<Int,String>()
-        for (words in list){
-         //   val Integer = hashmap.get(words)
-        }
+
+
+
+        Log.d("count is ", count.toString())
     }
 }

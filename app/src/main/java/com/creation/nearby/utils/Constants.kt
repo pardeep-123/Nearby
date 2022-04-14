@@ -40,6 +40,7 @@ object Constants {
     const val contactUs = "contact_us"
     const val feedback = "feedback"
     const val friendList = "friend_list"
+    const val delete_account = "delete_account"
 
 
     //preferences

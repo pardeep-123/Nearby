@@ -138,4 +138,7 @@ interface RetrofitInterface {
 
     @GET(Constants.friendList)
     suspend fun friendList():Response<FriendListModel>
+
+    @POST(Constants.delete_account)
+    suspend fun deleteAccount(): Response<CommonModel>
 }

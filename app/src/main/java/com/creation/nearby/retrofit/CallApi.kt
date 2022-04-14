@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.Retrofit
@@ -46,6 +47,7 @@ class CallApi {
                     OkHttpClient.Builder()
                         .readTimeout(10, TimeUnit.MINUTES)
                         .connectTimeout(10, TimeUnit.MINUTES)
+                        .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                         .addInterceptor { chain ->
                             val original = chain.request()
 

@@ -256,30 +256,6 @@ class HomeFragment : LocationUpdateUtilityFragment(), OnMapReadyCallback,
     }
 
 
-    private fun createCustomMarker(context: Context, @DrawableRes resource: Int): Bitmap {
-        val marker: View =
-            (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(
-                R.layout.map_marker,
-                null
-            )
-        val markerImage = marker.findViewById(R.id.markerImage) as ImageView
-        markerImage.setImageResource(resource)
-
-        val displayMetrics = DisplayMetrics()
-        (context as Activity).windowManager.defaultDisplay.getMetrics(displayMetrics)
-        marker.layoutParams = ViewGroup.LayoutParams(52, ViewGroup.LayoutParams.WRAP_CONTENT)
-        marker.measure(displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels)
-        marker.buildDrawingCache()
-        val bitmap = Bitmap.createBitmap(
-            marker.measuredWidth,
-            marker.measuredHeight,
-            Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        marker.draw(canvas)
-        return bitmap
-    }
 
     override fun onResume() {
         super.onResume()

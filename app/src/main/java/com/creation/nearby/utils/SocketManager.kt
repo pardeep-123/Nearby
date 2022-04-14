@@ -29,7 +29,7 @@ class SocketManager {
         const val call_socket_disconnect_emitter = "socket_disconnect"
 
         /*listener*/
-        const val send_message_listener = "send_message_listener"
+        const val send_message_listener = "send_message_listner"
         private const val connect_listener = "connect_listener"
         private const val get_list = "get_list"
         const val my_chat = "my_chat"
@@ -347,7 +347,6 @@ class SocketManager {
 
 
     private val chatListListener = Emitter.Listener { args ->
-
         try {
             val data = args[0] as JSONArray
             Log.e("Socket", "chatList :::$data")

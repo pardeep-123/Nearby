@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.creation.nearby.R
-import com.creation.nearby.adapter.PostAdapter
 import com.creation.nearby.adapter.SuggestionAdapter
 import com.creation.nearby.databinding.FragmentFeedBinding
 import com.creation.nearby.listeners.OnActionListener
@@ -31,7 +30,6 @@ class FeedFragment : ImagePickerFragmentUtility() {
 
     lateinit var binding: FragmentFeedBinding
 
-    private lateinit var postAdapter: PostAdapter
     private lateinit var suggestionAdapter: SuggestionAdapter
     private  var suggestionList = ArrayList<SuggestionsModel>()
 

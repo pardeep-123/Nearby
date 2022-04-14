@@ -1,16 +1,19 @@
 package com.creation.nearby.viewmodel
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.View
 import androidx.databinding.ObservableField
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.model.CommonModel
 import com.creation.nearby.model.UserDetailResponse
 import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
+import com.creation.nearby.ui.OngoingChatActivity
 import com.creation.nearby.ui.OtherUserProfileActivity
 import com.creation.nearby.utils.ToastUtils
 import retrofit2.Response
@@ -18,8 +21,10 @@ import retrofit2.Response
 class OtherUserVM : ViewModel() {
 
     val userId: ObservableField<String> = ObservableField("")
+    val userImage: ObservableField<String> = ObservableField("")
+    val userName: ObservableField<String> = ObservableField("")
     val userData: MutableLiveData<UserDetailResponse> = MutableLiveData()
-
+    val from : ObservableField<Boolean> = ObservableField(false)
 
     fun onClick(v: View, s: String) {
         when (s) {
@@ -28,6 +33,14 @@ class OtherUserVM : ViewModel() {
             }
             "accept" -> {
                 swipeUserApi(v.context, userId.get()!!, "1")
+            }
+            "chat" ->{
+                val intent = Intent(v.context, OngoingChatActivity::class.java)
+                intent.putExtra("name",userName.get()!!)
+                intent.putExtra("image",userImage.get()!!)
+                    intent.putExtra("user2Id",userId.get()!!)
+
+                v.context.startActivity(intent)
             }
         }
     }

@@ -191,7 +191,6 @@ class Validator() {
     fun validateAddEvent(
         title: String,
         details: String,
-        discount: String,
         time: String,
         location: String,
         image: String): Boolean {
@@ -206,11 +205,7 @@ class Validator() {
                     AppController.mInstance.getString(R.string.details_empty)
                 false
             }
-            TextUtils.isEmpty(discount) -> {
-                ErrorMessage =
-                    AppController.mInstance.getString(R.string.discount_empty)
-                false
-            }
+
             TextUtils.isEmpty(time) -> {
                 ErrorMessage =
                     AppController.mInstance.getString(R.string.time_empty)

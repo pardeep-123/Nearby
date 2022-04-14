@@ -45,7 +45,6 @@ class AddEventVm : ViewModel() {
         if (Validator().validateAddEvent(
                 title.get()!!,
                 details.get()!!,
-                discount.get()!!,
                 time.get()!!,
                 location.get()!!,
                 image.get()!!

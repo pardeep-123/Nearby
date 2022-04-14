@@ -14,6 +14,7 @@ import com.creation.nearby.retrofit.CallApi
 import com.creation.nearby.retrofit.RequestProcessor
 import com.creation.nearby.retrofit.RetrofitInterface
 import com.creation.nearby.ui.OngoingChatActivity
+import com.creation.nearby.ui.OtherUserProfileActivity
 import retrofit2.Response
 
 class FriendListVM : ViewModel() {
@@ -27,13 +28,16 @@ class FriendListVM : ViewModel() {
     init {
         onlineAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
-                val intent = Intent(view.context, OngoingChatActivity::class.java)
-                intent.putExtra("name", onlineList[position].firstName)
-                intent.putExtra("image", onlineList[position].image)
-                if (PreferenceFile.retrieveUserId() != allFriendList[position].swipeTo.toString())
-                    intent.putExtra("user2Id", onlineList[position].swipeTo.toString())
+                val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+                if (PreferenceFile.retrieveUserId() != onlineList[position].swipeTo.toString())
+                    intent.putExtra("userId", onlineList[position].swipeTo.toString())
                 else
-                    intent.putExtra("user2Id", onlineList[position].swipeBy.toString())
+                    intent.putExtra("userId", onlineList[position].swipeBy.toString())
+                    intent.putExtra("name", onlineList[position].firstName)
+                    intent.putExtra("image", onlineList[position].image)
+                intent.putExtra("from", "friendList")
+
+
                 view.context.startActivity(intent)
             }
 
@@ -44,14 +48,16 @@ class FriendListVM : ViewModel() {
          */
         allFriendListAdapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
             override fun onClick(view: View, position: Int, type: String) {
-                val intent = Intent(view.context, OngoingChatActivity::class.java)
+                val intent = Intent(view.context, OtherUserProfileActivity::class.java)
+                if (PreferenceFile.retrieveUserId() != allFriendList[position].swipeTo.toString())
+                    intent.putExtra("userId", allFriendList[position].swipeTo.toString())
+                else
+                    intent.putExtra("userId", allFriendList[position].swipeBy.toString())
                 intent.putExtra("name", allFriendList[position].firstName)
                 intent.putExtra("image", allFriendList[position].image)
-                if (PreferenceFile.retrieveUserId() != allFriendList[position].swipeTo.toString())
-                    intent.putExtra("user2Id", allFriendList[position].swipeTo.toString())
-                else
-                    intent.putExtra("user2Id", allFriendList[position].swipeBy.toString())
+                intent.putExtra("from", "friendList")
                 view.context.startActivity(intent)
+
             }
 
         })

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ItemChatBinding
 import com.creation.nearby.model.ChatListModel
 
@@ -49,8 +50,11 @@ class ChatsAdapter(private val mList: List<ChatListModel.ChatListModelItem>) : R
                     val intent = Intent(itemView.context,OngoingChatActivity::class.java)
                     intent.putExtra("name",mList[position].FirstName+mList[position].LastName)
                     intent.putExtra("image",mList[position].userImage)
+                         if (PreferenceFile.retrieveUserId() == mList[position].user2id.toString())
+                    intent.putExtra("user2Id",mList[position].userid.toString())
+                    else
+                             intent.putExtra("user2Id",mList[position].user2id.toString())
 
-                    intent.putExtra("user2Id",mList[position].user2id.toString())
                     itemView.context.startActivity(intent)
 //                    itemView.context.startActivity(Intent(itemView.context,OngoingChatActivity::class.java))
                 }

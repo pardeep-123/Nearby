@@ -106,7 +106,7 @@ class LoginVm : ViewModel() {
                              intent.putExtra("data",response)
                             context.startActivity(intent)
 //                            context.startActivity(Intent(context, OtpActivity::class.java).putExtra("data"),response.body)
-                            animateSlide(context as Activity)
+                            animateFade(context as Activity)
 
                             context.finishAffinity()
                         }
@@ -185,7 +185,7 @@ class LoginVm : ViewModel() {
         val hashMap = HashMap<String, String>()
 
         hashMap["email"] = email
-        hashMap["name"] = name
+        hashMap["firstname"] = name
         hashMap["social_id"] = socialId
         hashMap["socialType"] = socialType
         hashMap["deviceToken"] = PreferenceFile.retrieveKey(context,Constants.FIREBASE_FCM_TOKEN).toString()

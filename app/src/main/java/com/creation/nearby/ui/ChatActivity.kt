@@ -51,13 +51,6 @@ class ChatActivity : AppCompatActivity(), SocketManager.Observer {
             RecyclerView.VERTICAL, false
         )
 
-        CoroutineScope(Dispatchers.Main).launch {
-            messageListVM.getFriendApi(this@ChatActivity)
-        }
-
-        CoroutineScope(Dispatchers.Main).launch {
-            getMessageList()
-        }
 
 
 //        chatList.add(ChatModel(R.drawable.chat_pic_1,"Juliana Watson","Typing...","30s ago",true))
@@ -109,6 +102,14 @@ class ChatActivity : AppCompatActivity(), SocketManager.Observer {
         super.onResume()
         socketManager?.unRegister(this)
         socketManager?.onRegister(this)
+        CoroutineScope(Dispatchers.Main).launch {
+            messageListVM.getFriendApi(this@ChatActivity)
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+            getMessageList()
+        }
+
     }
 
     override fun onResponse(event: String, args: JSONObject) {
