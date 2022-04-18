@@ -74,8 +74,10 @@
     <string name="type_here">Type here...</string>
     <string name="details">Details</string>
     <string name="time">Time</string>
+    <string name="timedate">Time and Date</string>
     <string name="select_time">Select Time</string>
     <string name="location">Location</string>
+    <string name="locationevent">Location of Event</string>
     <string name="new_event">New Event</string>
     <string name="finish">Finish</string>
     <string name="select_source">Select Source</string>
@@ -233,6 +235,10 @@
     <string name="blockText">Are you sure you want to block?</string>
     <string name="aboutMe">About me</string>
     <string name="lookingfor">Looking for</string>
+    <string name="eventTitle">Title of Event</string>
+    <string name="agora_app_id">9558982960ce4e939544c38977d7d1d1</string>
 
 
 </resources>
+
+    <!-- //6efabe6fc53f43358025d072b779094b-  certificate->

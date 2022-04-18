@@ -23,7 +23,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.authentication.NewSplashActivity"></activity>
+        <activity android:name=".ui.call.IncomingCallActivity"></activity>
+        <activity android:name=".ui.call.VoiceChatViewActivity" />
+        <activity android:name=".ui.authentication.NewSplashActivity" />
         <activity android:name=".ui.authentication.ThankYouActivity" />
         <activity android:name=".ui.authentication.OtpActivity" />
         <activity android:name=".ui.authentication.NewLoginActivity" />
@@ -209,7 +211,8 @@
             </intent-filter>
         </activity>
 
-        <service android:name=".utils.MyFirebaseMessagingService"
+        <service
+            android:name=".utils.MyFirebaseMessagingService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
@@ -222,9 +225,6 @@
         <meta-data
             android:name="com.google.firebase.messaging.default_notification_color"
             android:resource="@color/albumColorPrimary" />
-<!--        <meta-data-->
-<!--            android:name="com.google.firebase.messaging.default_notification_channel_id"-->
-<!--            android:value="@string/default_notification_channel_id" />-->
     </application>
 
 </manifest>

@@ -77,11 +77,11 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="24dp"
                         android:fontFamily="@font/worksans_semibold"
-                        android:text="Title"
+                        android:text="@string/eventTitle"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/select_image_rv" />
+                        app:layout_constraintTop_toBottomOf="@+id/time_picker" />
 
                     <EditText
                         android:id="@+id/editTextTextPersonName2"
@@ -182,11 +182,11 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/worksans_semibold"
-                        android:text="@string/time"
+                        android:text="@string/timedate"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName4" />
+                        app:layout_constraintTop_toBottomOf="@+id/select_image_rv" />
 
                     <TextView
                         android:id="@+id/time_picker"
@@ -199,7 +199,7 @@
                         android:focusableInTouchMode="false"
                         android:hint="@string/select_time"
                         android:text="@={addEventVM.time}"
-                        android:inputType="textPersonName"
+                        android:focusable="false"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="16dp"
                         android:paddingStart="16dp"
@@ -217,11 +217,11 @@
                         android:layout_marginStart="24dp"
                         android:layout_marginTop="16dp"
                         android:fontFamily="@font/worksans_semibold"
-                        android:text="@string/location"
+                        android:text="@string/locationevent"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/time_picker" />
+                        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName3" />
 
                     <EditText
                         android:id="@+id/location"
@@ -254,7 +254,7 @@
                         android:layout_marginTop="12dp"
                         android:layout_marginBottom="32dp"
                         android:background="@drawable/round_edittext_background"
-                        android:backgroundTint="@color/sky_blue"
+                        android:backgroundTint="@color/newgreen"
                         android:fontFamily="@font/worksans_semibold"
                         android:paddingVertical="12dp"
                         android:text="@string/finish"

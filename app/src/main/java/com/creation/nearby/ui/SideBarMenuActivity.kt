@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.bumptech.glide.Glide
 import com.creation.nearby.base.PreferenceFile
 import com.creation.nearby.databinding.ActivitySideBarMenuBinding
+import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.Constants.IMAGE_BASE_URL
 import com.creation.nearby.utils.Constants.USER_IMAGE
 import com.creation.nearby.utils.ImagePickerUtility

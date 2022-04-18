@@ -17,7 +17,7 @@ class SocketManager {
     private val errorMessage = "error_message"
 
     companion object {
-        //for chat
+        //for chat //
         //emitter
         // sockets events
         private const val connectUser = "connect_user"

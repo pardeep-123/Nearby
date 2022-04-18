@@ -5,6 +5,7 @@ import android.content.Intent
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import com.creation.nearby.R
 import com.creation.nearby.adapter.RecyclerAdapter
@@ -24,6 +25,7 @@ class SwipeVM : ViewModel() {
 
     val adapter by lazy { RecyclerAdapter<UserListModel.Body.User>(R.layout.swipe_card_item) }
 
+    var listSize : ObservableField<Boolean> = ObservableField(false)
     init {
 
         adapter.setOnItemClick(object : RecyclerAdapter.OnItemClick {
@@ -67,9 +69,12 @@ class SwipeVM : ViewModel() {
                     override fun onResponse(res: Response<UserListModel>) {
                         if (res.isSuccessful) {
                             val response = res.body()!!
-                            getSwipeList.addAll(response.body.user_list)
-                            adapter.addItems(getSwipeList)
-                            setVisibility()
+                            if (response.body.user_list.isNotEmpty()) {
+                                getSwipeList.addAll(response.body.user_list)
+                                adapter.addItems(getSwipeList)
+                               listSize.set(true)
+                            }else
+                                listSize.set(false)
                         }
                     }
 
@@ -117,10 +122,5 @@ class SwipeVM : ViewModel() {
             e.printStackTrace()
         }
     }
-
-    fun setVisibility(): Boolean {
-        return getSwipeList.size == 0
-    }
-
 
 }

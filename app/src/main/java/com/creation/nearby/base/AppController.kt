@@ -1,6 +1,8 @@
 package com.creation.nearby.base
 
 import android.app.Application
+import android.content.Context
+import android.net.ConnectivityManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatDelegate
 import com.creation.nearby.R
@@ -79,6 +81,16 @@ class AppController : Application(), AppLifecycleHandler.AppLifecycleDelegates {
     private fun registerLifeCycleHandler(lifeCycleHandler: AppLifecycleHandler?) {
         registerActivityLifecycleCallbacks(lifeCycleHandler)
         registerComponentCallbacks(lifeCycleHandler)
+    }
+
+    fun hasNetwork(): Boolean {
+        return mInstance.checkIfHasNetwork()
+    }
+
+    private fun checkIfHasNetwork(): Boolean {
+        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val networkInfo = cm.activeNetworkInfo
+        return networkInfo != null && networkInfo.isConnected
     }
 
 

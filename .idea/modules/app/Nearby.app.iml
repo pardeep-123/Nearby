@@ -246,5 +246,7 @@
     <orderEntry type="library" name="Gradle: com.zxy.android:tiny:1.1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: com.android.installreferrer:installreferrer:1.0@aar" level="project" />
     <orderEntry type="library" name="Gradle: io.github.chaosleung:pinview:1.4.4@aar" level="project" />
+    <orderEntry type="library" name="Gradle: io.agora.rtc:full-sdk:3.1.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: io.agora.rtm:rtm-sdk:1.2.2@aar" level="project" />
   </component>
 </module>

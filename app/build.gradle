@@ -133,4 +133,8 @@ dependencies {
     //for OTP set
     implementation 'io.github.chaosleung:pinview:1.4.4'
 
+    // agora dependencies
+    implementation 'io.agora.rtc:full-sdk:3.1.0'
+    implementation 'io.agora.rtm:rtm-sdk:1.2.2'
+
 }

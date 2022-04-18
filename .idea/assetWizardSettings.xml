@@ -18,7 +18,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/home/cqlphp2/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/add/baseline_add_24.xml" />
+                                      <entry key="url" value="jar:file:/home/cqlphp2/android-studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/close/baseline_close_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -28,7 +28,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_baseline_add" />
+                            <entry key="color" value="e56953" />
+                            <entry key="outputName" value="ic_baseline_close_24" />
                             <entry key="sourceFile" value="$PROJECT_DIR$/../../Downloads/Button (1).svg" />
                           </map>
                         </option>

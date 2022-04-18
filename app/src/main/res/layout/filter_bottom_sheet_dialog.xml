@@ -111,8 +111,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView59"
-        app:thumbColor="@color/sky_blue"
-        app:trackColorActive="@color/sky_blue"
+        app:thumbColor="@color/white"
+        app:trackColorActive="@color/newgreen"
         app:trackColorInactive="@color/track_inactive" />
 
     <TextView
@@ -415,8 +415,8 @@
         app:layout_constraintEnd_toEndOf="@+id/filter_age_txt"
         app:layout_constraintStart_toStartOf="@+id/filter_age"
         app:layout_constraintTop_toBottomOf="@+id/filter_age"
-        app:thumbColor="@color/track_active"
-        app:trackColorActive="@color/track_active"
+        app:thumbColor="@color/white"
+        app:trackColorActive="@color/newgreen"
         app:trackColorInactive="@color/track_inactive"
         app:values="@array/initial_slider_values" />
 

@@ -1,12 +1,11 @@
 package com.creation.nearby.utils
 
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Build
+import android.provider.Settings
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.lifecycle.LiveData
@@ -42,7 +41,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService(), CoroutineScope {
 
     override fun onNewToken(refreshedToken: String) {
         super.onNewToken(refreshedToken)
-        Log.d(TAG, "Refreshed token: $refreshedToken")
         Log.d("fcm_token", "-----$refreshedToken")
 
     }
@@ -50,109 +48,82 @@ class MyFirebaseMessagingService : FirebaseMessagingService(), CoroutineScope {
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
         super.onMessageReceived(remoteMessage)
         Log.e("new_message", "=======${remoteMessage.data}")
-        val myId = ""
-        val data1 = remoteMessage.data
-
-
-        val senderID=""
-        val name =""
-        var image =""
-        var userId=""
-        var groupId=1
-        var type=""
-     //   type = data1["type"].toString()
-
-        var intent1 = Intent()
-        if(!senderID.equals(""))
-        {
-            intent1 = Intent(this, OngoingChatActivity::class.java)
-                .putExtra("senderID", senderID)
-                .putExtra("senderName", name)
-                .putExtra("senderImage", image)
-                .putExtra("userId", userId)
-                .putExtra("disconnect", userId)
+        if (remoteMessage.data.isNotEmpty()) {
+            try {
+                val json = JSONObject(remoteMessage.data["body"]!!)
+                sendNotification(json)
+            } catch (e: Exception) {
+                Log.e("TAG", "Exception: " + e.message)
+            }
+            //JSONObject(remoteMessage.data.get("body")).get("name")
         }
-        else
-        {
+    }
 
-            intent1 = Intent(this, MainActivity::class.java)
-                .putExtra("eventfragment", "EventFragment")
+
+    fun sendNotification(json: JSONObject) {
+        val intent: Intent
+        if (json.getString("type")=="4"){
+            intent = Intent(this, OngoingChatActivity::class.java)
+            intent.putExtra("name",json.getString("name"))
+            intent.putExtra("image",json.getString("sender_image"))
+            intent.putExtra("user2Id",json.getString("id"))
+        }else{
+            intent = Intent(this, MainActivity::class.java)
+
         }
 
-        intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK)
 
-        val pendingIntent = PendingIntent.getActivity(this, 0, if (groupId == 0) { intent1
-            }
-        else {
-            var intent = Intent()
-            if(type.equals("1"))
-            {
-                intent = Intent(this, MainActivity::class.java)
-                    .putExtra("eventfragment", "EventFragment")
-            }
-            else
-            {
-                intent = Intent(this, MainActivity::class.java)
-                    .putExtra("groupChat", "groupChat")
-            }
+        val notificationId = 1
+        val channelId = "channel-01"
+        val channelName = "Channel Name"
+        val importance = NotificationManager.IMPORTANCE_HIGH
 
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            }, PendingIntent.FLAG_ONE_SHOT
-        )
-
-
-        val channelId = applicationContext.packageName
-        var numMessages = 0;
-
-        val builder = NotificationCompat.Builder(this, channelId)
-        val icon = BitmapFactory.decodeResource(resources, R.drawable.logo)
-
-
-        builder.setSmallIcon(notificationIcon)
-            builder.setLargeIcon(icon)
-            .setColor(resources.getColor(R.color.black))
-                .setContentTitle(getString(R.string.app_name))
-                .setContentText(data1["body"]!!).setAutoCancel(true)
-                .setContentIntent(pendingIntent)
-
-
-//        builder.setContentText(currentText).setNumber(++numMessages);
-
-        val manager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(
-                channelId,
-                "Default channel",
-                NotificationManager.IMPORTANCE_HIGH
+            val mNotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            val mChannel = NotificationChannel(channelId, channelName, importance)
+            mChannel.enableVibration(true)
+            mNotificationManager.createNotificationChannel(mChannel)
+            val mBuilder = NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(notificationIcon).setLargeIcon(
+                    BitmapFactory.decodeResource(
+                        resources,
+                        notificationIcon
+                    )
+                )
+                .setAutoCancel(true)
+                .setContentTitle(json.getString("title")).setContentText(json.getString("message"))
+            val stackBuilder = TaskStackBuilder.create(this)
+            stackBuilder.addNextIntent(intent)
+            val resultPendingIntent = stackBuilder.getPendingIntent(
+                0,
+                PendingIntent.FLAG_UPDATE_CURRENT
             )
-            manager.createNotificationChannel(channel)
-
+            mBuilder.setContentIntent(resultPendingIntent)
+            mNotificationManager.notify(notificationId, mBuilder.build())
+        } else {
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            val pendingIntent = PendingIntent.getActivity(
+                this,
+                0,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT
+            )
+            val context = baseContext
+            val mBuilder = NotificationCompat.Builder(context).setContentTitle(json.getString("title"))
+                .setContentText(json.getString("message")).setSmallIcon(notificationIcon).setLargeIcon(
+                    BitmapFactory.decodeResource(
+                        context.resources,
+                        notificationIcon
+                    )
+                )
+                .setPriority(Notification.PRIORITY_HIGH)
+            mBuilder.setSound(Settings.System.DEFAULT_NOTIFICATION_URI)
+            mBuilder.setAutoCancel(true)
+            mBuilder.setContentIntent(pendingIntent)
+            val mNotificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            mNotificationManager.notify(0, mBuilder.build())
         }
-        manager.notify(((Date().time / 1000L % Int.MAX_VALUE).toInt()), builder.build())
-        Log.e("new_message", "==212=222====${myId}")
-
-
     }
-
-    private val manager: NotificationManager?
-        get() {
-            if (notificationManager == null) {
-                notificationManager =
-                    getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            }
-
-            return notificationManager
-        }
-
-    companion object {
-        private const val TAG = "MyFirebaseMsgService"
-        var myChatVisible = true
-        var currentChatUser = ""
-        var chatNotification: MutableLiveData<String> = MutableLiveData()
-        var chatNotifyLive: LiveData<String> = chatNotification
-
-    }
-
     private val notificationIcon: Int
         get() {
             val useWhiteIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP

@@ -299,7 +299,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             }
             binding.userProfileIv -> {
 
-                startActivity(Intent(this, MyProfileActivity::class.java))
+                startActivity(Intent(this, SideBarMenuActivity::class.java))
                 animateFade(this)
             }
             binding.filterImageView -> {

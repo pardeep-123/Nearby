@@ -103,8 +103,8 @@ class SwipeCardFragment : LocationUpdateUtilityFragment(), CardStackListener, Vi
     override fun onCardAppeared(view: View?, position: Int) {
         userId = swipeVM.getSwipeList[position].id
 
-        val visibility = swipeVM.setVisibility()
-        if(visibility){
+        val visibility = swipeVM.listSize.get()!!
+        if(!visibility){
             binding.constButton.visibility = View.GONE
             binding.noDataFound.visibility = View.VISIBLE
         }else{

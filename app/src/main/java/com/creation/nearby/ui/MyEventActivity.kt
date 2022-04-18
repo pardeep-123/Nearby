@@ -16,6 +16,9 @@ class MyEventActivity : AppCompatActivity() {
         binding = ActivityMyEventBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.myEventVM = myEventVM
+        binding.backBtn.setOnClickListener {
+            finish()
+        }
     }
 
     override fun onResume() {
