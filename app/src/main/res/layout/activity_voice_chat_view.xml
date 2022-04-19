@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/calling_background_img"
-    tools:context=".ui.CallingActivity">
+    >
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/circleImageView4"
@@ -21,7 +21,7 @@
     </de.hdodenhof.circleimageview.CircleImageView>
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tvUserName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -46,7 +46,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12">
+        app:layout_constraintTop_toBottomOf="@+id/tvUserName">
 
     </TextView>
 
@@ -69,6 +69,7 @@
         android:layout_height="56dp"
         android:layout_marginBottom="50dp"
         android:src="@drawable/audio_mute_btn"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/cancel_call_btn"
         app:layout_constraintHorizontal_chainStyle="spread"
@@ -77,11 +78,12 @@
     </ImageView>
 
     <ImageView
-        android:id="@+id/video_btn"
+        android:id="@+id/speakerBtn"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginBottom="50dp"
-        android:src="@drawable/video_btn"
+        android:src="@drawable/btnspeaker"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="spread"

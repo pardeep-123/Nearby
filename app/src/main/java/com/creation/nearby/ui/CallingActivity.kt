@@ -28,4 +28,6 @@ class CallingActivity : AppCompatActivity() {
             startActivity(Intent(this,CallingVideoActivity::class.java))
         }
     }
+
+
 }

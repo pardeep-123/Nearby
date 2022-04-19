@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
 
     <queries>
         <intent>
@@ -23,7 +24,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Nearby.White"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.call.IncomingCallActivity"></activity>
+        <activity android:name=".ui.call.VideoCallActivity"/>
+        <activity android:name=".ui.call.IncomingCallActivity" />
         <activity android:name=".ui.call.VoiceChatViewActivity" />
         <activity android:name=".ui.authentication.NewSplashActivity" />
         <activity android:name=".ui.authentication.ThankYouActivity" />

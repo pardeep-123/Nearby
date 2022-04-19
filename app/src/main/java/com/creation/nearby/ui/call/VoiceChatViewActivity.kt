@@ -39,7 +39,7 @@ import org.json.JSONException
 import org.json.JSONObject
 import java.util.*
 import kotlin.jvm.Throws
-
+ //6efabe6fc53f43358025d072b779094b-  certificate
 class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
     private var mChannel: String? = null
     private var receiverId=""
@@ -204,14 +204,20 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
         initialiseSocket()
         timer = Timer()
 
-        peerImage = findViewById<View>(R.id.circleImageView4) as ImageView
-        usernameText = findViewById<View>(R.id.textView12) as TextView
+        peerImage = findViewById<ImageView>(R.id.circleImageView4)
+        usernameText = findViewById<TextView>(R.id.textView12)
 //        call_role = findViewById<View>(R.id.call_role) as TextView
         activateReceiverListenerSocket()
         if (checkSelfPermission(Manifest.permission.RECORD_AUDIO, PERMISSION_REQ_ID_RECORD_AUDIO)) {
             initAgoraEngineAndJoinChannel()
         }
 
+        /**
+         * set name and image from previous screen
+         */
+        tvUserName.text = intent.getStringExtra("name")
+        Glide.with(this).load(IMAGE_BASE_URL + intent.getStringExtra("image"))
+            .into(circleImageView4)
         /*  preference =  BaseApplication.instance.getSharedPreferences("GapHealth", 0);
 
         if(preference.getString("otherUserName","").equals(""))
@@ -228,17 +234,23 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
 
         startTimer()
 
-        var callerName = intent.getStringExtra("callerName").toString()
-        var callerImage = intent.getStringExtra("callerImage").toString()
-
-        Glide.with(this).load(IMAGE_BASE_URL+callerImage).into(circleImageView4)
-        usernameText!!.setText(callerName)
 //        mAnimator = PortraitAnimator(
 //            findViewById(R.id.anim_layer_1),
 //            findViewById(R.id.anim_layer_2),
 //            findViewById(R.id.anim_layer_3)
 //        )
 
+        mute_btn?.setOnClickListener {
+            onLocalAudioMuteClicked(it)
+        }
+
+        cancel_call_btn?.setOnClickListener {
+           // endCallAgora()
+            gotoHome()
+        }
+        speakerBtn?.setOnClickListener {
+            onSwitchSpeakerphoneClicked(it)
+        }
 
     }
 
@@ -283,7 +295,7 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
         joinChannel() // Tutorial Step 2
     }
 
-    fun checkSelfPermission(permission: String, requestCode: Int): Boolean {
+    private fun checkSelfPermission(permission: String, requestCode: Int): Boolean {
         Log.i(LOG_TAG, "checkSelfPermission $permission $requestCode")
         if (ContextCompat.checkSelfPermission(
                 this,
@@ -375,7 +387,6 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
     }
 
     // Tutorial Step 3
-    @Throws(JSONException::class)
     fun onEncCallClicked(view: View?) {
         //   callDisconnect()
         gotoHome()
@@ -412,16 +423,17 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
             Toast.makeText(this, R.string.message_wrong_number, Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }*/
-        var accessToken = intent.getStringExtra("agoraToken")
+//        var accessToken = intent.getStringExtra("agoraToken")
+        var accessToken = "0069558982960ce4e939544c38977d7d1d1IAAfXr89IczGSzkLE3Xg0Sc8cBEpdGFsTOjfRywdCvua81HbE3gAAAAAEAAQvmMD2ZBfYgEAAQDZkF9i"
         if (TextUtils.equals(accessToken, "") || TextUtils.equals(
                 accessToken,
                 "<#YOUR ACCESS TOKEN#>"
             )
         ) {
-            accessToken = null
+//            accessToken = null
         }
         mRtcEngine!!.setChannelProfile(Constants.CHANNEL_PROFILE_COMMUNICATION)
-        mRtcEngine!!.joinChannel(accessToken, "Hello Cghaneel", "",  0)
+        mRtcEngine!!.joinChannel(accessToken, "nearby", "",  0)
         if (timer != null) {
             timer!!.scheduleAtFixedRate(object : TimerTask() {
                 override fun run() {
@@ -498,13 +510,6 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
 
     var onPause=false
 
-    override fun onPause() {
-        super.onPause()
-
-
-
-    }
-
     override fun onRestart() {
         super.onRestart()
         Log.e("onrestart","true")
@@ -513,7 +518,7 @@ class VoiceChatViewActivity : AppCompatActivity(), SocketManager.Observer {
 
 
     override fun onResponseArray(event: String, args: JSONArray) {
-        TODO("Not yet implemented")
+
     }
 
     override fun onResponse(event: String, args: JSONObject) {

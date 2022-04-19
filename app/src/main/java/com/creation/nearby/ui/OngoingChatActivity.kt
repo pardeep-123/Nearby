@@ -17,6 +17,8 @@ import com.creation.nearby.listeners.OnActionListener
 import com.creation.nearby.model.OneToOneChatListModel
 import com.creation.nearby.model.SuggestionsModel
 import com.creation.nearby.showToast
+import com.creation.nearby.ui.call.VideoCallActivity
+import com.creation.nearby.ui.call.VoiceChatViewActivity
 import com.creation.nearby.utils.AppUtils
 import com.creation.nearby.utils.Constants
 import com.creation.nearby.utils.SocketManager
@@ -129,10 +131,13 @@ class OngoingChatActivity : AppCompatActivity(), View.OnClickListener, SocketMan
                     sendChatList()
             }
             binding.phoneIv -> {
-                startActivity(Intent(this, AudioActivity::class.java))
+                val intent = Intent(this, VoiceChatViewActivity::class.java)
+                intent.putExtra("name",intent.getStringExtra("name"))
+                intent.putExtra("image",intent.getStringExtra("image"))
+                startActivity(intent)
             }
             binding.videoIv -> {
-                startActivity(Intent(this, VideoActivity::class.java))
+                startActivity(Intent(this, VideoCallActivity::class.java))
             }
 
         }
